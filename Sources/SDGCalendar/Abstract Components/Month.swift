@@ -24,10 +24,21 @@ public protocol Month: TextualPlaygroundDisplay {
   /// Returns the English name.
   func inEnglish() -> StrictString
 
-  func _aufDeutsch() -> StrictString
-  func _enFrançais(_ majuscules: Casing) -> StrictString
-  func _σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString
-  func _בעברית() -> StrictString
+  // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+  /// Gibt den Deutschen Namen zurück.
+  func aufDeutsch() -> StrictString
+
+  // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+  /// Renvoie le nom français.
+  func enFrançais(_ majuscules: Casing) -> StrictString
+
+  // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+  /// Επιστρέφει το ελληνικό όνομα.
+  func σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString
+
+  // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+  /// משיבה את השם העברי.
+  func בעברית() -> StrictString
 }
 
 extension Month {
@@ -41,13 +52,13 @@ extension Month {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
           return self.inEnglish()
         case .deutschDeutschland:
-          return self._aufDeutsch()
+          return self.aufDeutsch()
         case .françaisFrance:
-          return self._enFrançais(.sentenceMedial)
+          return self.enFrançais(.sentenceMedial)
         case .ελληνικάΕλλάδα:
-          return self._σεΕλληνικά(.ονομαστική)
+          return self.σεΕλληνικά(.ονομαστική)
         case .עברית־ישראל:
-          return self._בעברית()
+          return self.בעברית()
         }
       }).resolved()
     )

@@ -32,23 +32,31 @@ extension Day {
     return ordinal.inDigits()
   }
 
-  internal func inDeutschenZiffern() -> StrictString {
-    return ordinal._verkürzteDeutscheOrdnungszahl()
+  // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+  /// Gibt den Tag in deutschen Ziffern zurück. („1.“, „2.“, „3.“, usw.)
+  public func inDeutschenZiffern() -> StrictString {
+    return ordinal.abgekürzteDeutscheOrdnungszahl()
   }
 
-  internal func enChiffresFrançais() -> SemanticMarkup {
+  // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+  /// Renvoie le jour en chiffres français. (« 1er », « 2 », « 3 », etc.)
+  public func enChiffresFrançais() -> SemanticMarkup {
     if ordinal == 1 {
-      return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
+      return ordinal.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
     } else {
       return SemanticMarkup(ordinal.inDigits())
     }
   }
 
-  internal func σεΕλληνικάΨηφία() -> StrictString {
+  // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+  /// Επιστρέφει την ημέρα σε ελλνηικά ψηφία. («1», «2», «3», κ.τ.λ.)
+  public func σεΕλληνικάΨηφία() -> StrictString {
     return ordinal.inDigits()
   }
 
-  internal func בעברית־בספרות() -> StrictString {
+  // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+  /// משיבה את היום בספרות עבריות. (”1“, ”2“, ”3“, וכו׳)
+  public func בעברית־בספרות() -> StrictString {
     return ordinal.inDigits()
   }
 

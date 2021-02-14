@@ -118,19 +118,19 @@ public struct HebrewYear: CardinalCalendarComponent, CodableViaRawRepresentableC
     return inDigits()
   }
 
-  public func _inDeutschenZiffern() -> StrictString {
+  public func inDeutschenZiffern() -> StrictString {
     return inDigits()
   }
 
-  public func _enChiffresFrançais() -> StrictString {
+  public func enChiffresFrançais() -> StrictString {
     return inDigits()
   }
 
-  public func _σεΕλληνικάΨηφία() -> StrictString {
+  public func σεΕλληνικάΨηφία() -> StrictString {
     return inDigits()
   }
 
-  public func _בעברית־בספרות() -> StrictString {
+  public func בעברית־בספרות() -> StrictString {
     return inDigits()
   }
 }

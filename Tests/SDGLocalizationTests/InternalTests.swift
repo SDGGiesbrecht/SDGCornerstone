@@ -150,9 +150,17 @@ class InternalTests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       var list = ""
       for number in 1...2 {
+        XCTAssertEqual(
+          number.abgekürzteDeutscheOrdnungszahl(),
+          UInt(number).abgekürzteDeutscheOrdnungszahl()
+        )
         for genre in [.masculin, .féminin] as [GenreGrammatical] {
           for nombre in [.singular, .plural] as [GrammaticalNumber] {
-            print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
+            XCTAssertEqual(
+              number.ordinalFrançaisAbrégé(genre: genre, nombre: nombre),
+              UInt(number).ordinalFrançaisAbrégé(genre: genre, nombre: nombre)
+            )
+            print(number.ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
           }
         }
       }
@@ -163,11 +171,25 @@ class InternalTests: TestCase {
       )
       var numerals = ""
       for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
+
+        XCTAssertEqual(number.inDigits(), UInt(number).inDigits())
         print(number.inDigits(), to: &numerals)
-        print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
-        print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
-        print(number._בספרות־עבריות(), to: &numerals)
+
+        XCTAssertEqual(number.σεΕλληνικούςΑριθμούς(), UInt(number).σεΕλληνικούςΑριθμούς())
+        print(number.σεΕλληνικούςΑριθμούς(), to: &numerals)
+
+        XCTAssertEqual(
+          number.σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false),
+          UInt(number).σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false)
+        )
+        print(number.σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
+
+        XCTAssertEqual(number.בספרות־עבריות(), UInt(number).בספרות־עבריות())
+        print(number.בספרות־עבריות(), to: &numerals)
+
+        XCTAssertEqual(number.ספרות־עבריות(גרשיים: false), UInt(number).ספרות־עבריות(גרשיים: false))
         print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
+
         print("", to: &numerals)
       }
       compare(

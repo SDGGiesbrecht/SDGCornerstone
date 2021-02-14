@@ -174,9 +174,9 @@ extension DescribableDate {
     mitJahr: Bool,
     mitWochentag: Bool
   ) -> StrictString {
-    var ergebnis = tag.inDeutschenZiffern() + " " + monat._aufDeutsch()
+    var ergebnis = tag.inDeutschenZiffern() + " " + monat.aufDeutsch()
     if mitJahr {
-      ergebnis += " " + jahr._inDeutschenZiffern()
+      ergebnis += " " + jahr.inDeutschenZiffern()
     }
     if mitWochentag {
       ergebnis.prepend(contentsOf: wochentag.aufDeutsch() + ", ")
@@ -235,10 +235,10 @@ extension DescribableDate {
       avecJourDeSemaine
       ? "le" : SemanticMarkup(majuscules.apply(to: "le"))  // @exempt(from: tests) Unused so far.
     résultat += " " + jour.enChiffresFrançais()
-    résultat += " " + SemanticMarkup(mois._enFrançais(.sentenceMedial))
+    résultat += " " + SemanticMarkup(mois.enFrançais(.sentenceMedial))
 
     if avecAn {
-      résultat += " " + SemanticMarkup(an._enChiffresFrançais())
+      résultat += " " + SemanticMarkup(an.enChiffresFrançais())
     }
     if avecJourDeSemaine {
       résultat.prepend(contentsOf: SemanticMarkup(jourDeSemaine.enFrançais(majuscules)) + ", ")
@@ -247,7 +247,7 @@ extension DescribableDate {
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
-  /// Retourne la date hébraïque en français.
+  /// Renvoie la date hébraïque en français.
   ///
   /// - Parameters:
   ///     - majuscules: La mode d’utilisation des majuscules.
@@ -270,7 +270,7 @@ extension DescribableDate {
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
-  /// Retourne la date grégorienne en français.
+  /// Renvoie la date grégorienne en français.
   ///
   /// - Parameters:
   ///     - majuscules: La mode d’utilisation des majuscules.
@@ -300,9 +300,9 @@ extension DescribableDate {
     μεΧρόνο: Bool,
     μεΗμέραΤηςΕβδομάδας: Bool
   ) -> StrictString {
-    var αποτέλεσμα = ημέρα.σεΕλληνικάΨηφία() + " " + μήνας._σεΕλληνικά(.γενική)
+    var αποτέλεσμα = ημέρα.σεΕλληνικάΨηφία() + " " + μήνας.σεΕλληνικά(.γενική)
     if μεΧρόνο {
-      αποτέλεσμα += " " + χρόνος._σεΕλληνικάΨηφία()
+      αποτέλεσμα += " " + χρόνος.σεΕλληνικάΨηφία()
     }
     if μεΗμέραΤηςΕβδομάδας {
       αποτέλεσμα.prepend(contentsOf: ημέραΤηςΕβδομάδας.σεΕλληνικά() + ", ")
@@ -357,9 +357,9 @@ extension DescribableDate {
     עם־שנה: Bool,
     עם־יום־שבוע: Bool
   ) -> StrictString {
-    var תוצאה = יום.בעברית־בספרות() + " ב" + חודש._בעברית()
+    var תוצאה = יום.בעברית־בספרות() + " ב" + חודש.בעברית()
     if עם־שנה {
-      תוצאה += " " + שנה._בעברית־בספרות()
+      תוצאה += " " + שנה.בעברית־בספרות()
     }
     if עם־יום־שבוע {
       תוצאה.prepend(contentsOf: יום־שבוע.בעברית() + ", ")
@@ -368,7 +368,7 @@ extension DescribableDate {
   }
 
   // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
-  /// משיבה את התאריך עברי בעברית.
+  /// משיבה את התאריך העברי בעברית.
   ///
   /// - Parameters:
   ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
@@ -385,7 +385,7 @@ extension DescribableDate {
   }
 
   // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
-  /// משיבה את התאריך גרגוריאני בעברית.
+  /// משיבה את התאריך הגרגוריאני בעברית.
   ///
   /// - Parameters:
   ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
@@ -421,7 +421,7 @@ extension DescribableDate {
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
-  /// Retourne l’heure en français.
+  /// Renvoie l’heure en français.
   public func heureEnFrançais() -> StrictString {
     return gregorianHour.inDigitsInTwentyFourHourFormat() + " h " + gregorianMinute.inDigits()
   }

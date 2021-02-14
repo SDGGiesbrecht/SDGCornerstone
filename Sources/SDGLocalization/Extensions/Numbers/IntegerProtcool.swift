@@ -24,9 +24,9 @@ extension IntegerProtocol {
   ///
   /// - Parameters:
   ///     - tausendertrennzeichen: Das Tausendertrennzeichen. (Ein Leerzeichen, wenn nicht angegeben.)
-  @inlinable public func inZahlzeichen(tausendertrennzeichen: Unicode.Skalar = " ")
-    -> StrengeZeichenkette
-  {
+  @inlinable public func inZahlzeichen(
+    tausendertrennzeichen: Unicode.Skalar = " "
+  ) -> StrengeZeichenkette {
     return inDigits(thousandsSeparator: tausendertrennzeichen)
   }
   // @localization(🇨🇦EN) @crossReference(IntegerProtocol.inDigits(thousandsSeparator:))
@@ -45,12 +45,17 @@ extension IntegerProtocol {
     return generateAbbreviatedEnglishOrdinal()
   }
 
-  public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
-    // Public for SDGCalendar.
-    return verkürzteDeutscheOrdnungszahlErzeugen()
+  // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+  // #documentation(SDGCornerstone.WholeNumberProtocol.abgekürzteDeutscheOrdnungszahl())
+  /// Gibt die Ordnungszahl in deutscher abgekürzter Form zurück. („1.“, „2.“, „3.“, usw.)
+  public func abgekürzteDeutscheOrdnungszahl() -> StrictString {
+    return abgekürzteDeutscheOrdnungszahlErzeugen()
   }
 
-  public func _ordinalFrançaisAbrégé(
+  // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+  // #documentation(SDGCornerstone.WholeNumberProtocol.ordinalFrançaisAbrégé())
+  /// Renvoie l’ordinal dans la forme abrégée française. (« 1er », « 2e », « 3e », etc.)
+  public func ordinalFrançaisAbrégé(
     genre: GenreGrammatical,
     nombre: GrammaticalNumber
   ) -> SemanticMarkup {
@@ -63,9 +68,9 @@ extension IntegerProtocol {
   ///
   /// - Parameters:
   ///     - kleinbuchstaben: Ob Kleinbuchstaben verwendet werden sollen. (`falsch` wenn nicht angegeben.)
-  @inlinable public func inRömischerZahlschrift(kleinbuchstaben: Bool = falsch)
-    -> StrengeZeichenkette
-  {
+  @inlinable public func inRömischerZahlschrift(
+    kleinbuchstaben: Bool = falsch
+  ) -> StrengeZeichenkette {
     return inRomanNumerals(lowercase: kleinbuchstaben)
   }
   // @localization(🇨🇦EN) @crossReference(IntegerProtocol.inRomanNumerals(lowercase:))
@@ -78,15 +83,20 @@ extension IntegerProtocol {
     return romanNumerals(lowercase: lowercase)
   }
 
-  public func _σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true)
-    -> StrictString
-  {
-    // Public for SDGCalendar
+  // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+  // #documentation(SDGCornerstone.WholeNumberProtocol.σεΕλληνικούςΑριθμούς())
+  /// Επιστρέφει τον αριθμός σε ελληνικούς αριθμούς.
+  public func σεΕλληνικούςΑριθμούς(
+    μικράΓράμματα: Bool = false,
+    κεραία: Bool = true
+  ) -> StrictString {
     return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
   }
 
-  public func _בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
-    // Public for SDGCalendar
+  // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+  // #documentation(SDGCornerstone.WholeNumberProtocol.בספרות־עבריות())
+  /// משיבה את המספר בספרות עבריות.
+  public func בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
     return ספרות־עבריות(גרשיים: גרשיים)
   }
 }

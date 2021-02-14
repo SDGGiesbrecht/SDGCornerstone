@@ -92,7 +92,7 @@ extension WholeArithmetic {
     }
   }
 
-  internal func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
+  internal func abgekürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
     return wholeDigits() + "."
   }
 
