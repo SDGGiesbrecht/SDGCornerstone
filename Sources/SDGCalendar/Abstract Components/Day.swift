@@ -27,19 +27,25 @@ extension Day {
 
   // MARK: - Text Representations
 
-  /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
+  /// Returns the day in English digits.
+  ///
+  /// i.e. “1”, “2”, “3”...
   public func inEnglishDigits() -> StrictString {
     return ordinal.inDigits()
   }
 
   // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
-  /// Gibt den Tag in deutschen Ziffern zurück. („1.“, „2.“, „3.“, usw.)
+  /// Gibt den Tag in deutschen Ziffern zurück.
+  ///
+  /// d. h. „1.“, „2.“, „3.“ ...
   public func inDeutschenZiffern() -> StrictString {
     return ordinal.abgekürzteDeutscheOrdnungszahl()
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
-  /// Renvoie le jour en chiffres français. (« 1er », « 2 », « 3 », etc.)
+  /// Renvoie le jour en chiffres français.
+  ///
+  /// c.‐à‐d. « 1er », « 2 », « 3 »...
   public func enChiffresFrançais() -> SemanticMarkup {
     if ordinal == 1 {
       return ordinal.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
@@ -49,13 +55,17 @@ extension Day {
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
-  /// Επιστρέφει την ημέρα σε ελλνηικά ψηφία. («1», «2», «3», κ.τ.λ.)
+  /// Επιστρέφει την ημέρα σε ελλνηικά ψηφία.
+  ///
+  /// δηλ. «1», «2», «3»...
   public func σεΕλληνικάΨηφία() -> StrictString {
     return ordinal.inDigits()
   }
 
   // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
-  /// משיבה את היום בספרות עבריות. (”1“, ”2“, ”3“, וכו׳)
+  /// משיבה את היום בספרות עבריות.
+  ///
+  /// היינו ”1“, ”2“, ”3“...
   public func בעברית־בספרות() -> StrictString {
     return ordinal.inDigits()
   }

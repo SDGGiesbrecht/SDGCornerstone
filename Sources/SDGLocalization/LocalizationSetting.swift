@@ -86,7 +86,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(WASI)
 
-      // #workaround(Not sure where this should come from yet.)
+      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
       preferences = Shared(Preference.mock())
       preferences.value.set(to: nil)
 
@@ -153,7 +153,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(WASI)
 
-      // #workaround(Not sure where this should come from yet.)
+      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
       preferences = Shared(Preference.mock())
       preferences.value.set(to: nil)
 
