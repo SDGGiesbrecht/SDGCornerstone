@@ -40,21 +40,27 @@ extension IntegerProtocol {
   }
 
   // #documentation(SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal())
-  /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
+  /// Returns the ordinal in its abbreviated English form.
+  ///
+  /// i.e. “1st”, “2nd”, “3rd”...
   public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
     return generateAbbreviatedEnglishOrdinal()
   }
 
   // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
   // #documentation(SDGCornerstone.WholeNumberProtocol.abgekürzteDeutscheOrdnungszahl())
-  /// Gibt die Ordnungszahl in deutscher abgekürzter Form zurück. („1.“, „2.“, „3.“, usw.)
+  /// Gibt die Ordnungszahl in deutscher abgekürzter Form zurück.
+  ///
+  /// d. h. „1.“, „2.“, „3.“ ...
   public func abgekürzteDeutscheOrdnungszahl() -> StrictString {
     return abgekürzteDeutscheOrdnungszahlErzeugen()
   }
 
   // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
   // #documentation(SDGCornerstone.WholeNumberProtocol.ordinalFrançaisAbrégé())
-  /// Renvoie l’ordinal dans la forme abrégée française. (« 1er », « 2e », « 3e », etc.)
+  /// Renvoie l’ordinal dans la forme abrégée française.
+  ///
+  /// c.‐à‐d. « 1er », « 2e », « 3e »...
   public func ordinalFrançaisAbrégé(
     genre: GenreGrammatical,
     nombre: GrammaticalNumber
