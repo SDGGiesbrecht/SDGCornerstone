@@ -157,6 +157,7 @@ import PackageDescription
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 /// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
@@ -787,15 +788,16 @@ for target in package.targets {
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
     // #workaround(workspace version 0.36.1, Bug prevents centralization of windows conditions.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.3.2, Web lacks FoundationXML.)
-    // #workaround(Swift 5.3.2, macOS lacks Swift.Float16.)
-    // #workaround(Swift 5.3.2, watchOS lacks XCTest.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.ProcessInfo.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.3.3, Web lacks FoundationXML.)
+    // #workaround(Swift 5.3.3, Web lacks FoundationXML.XMLDocument.)
+    // #workaround(Swift 5.3.3, macOS lacks Swift.Float16.)
+    // #workaround(Swift 5.3.3, watchOS lacks XCTest.)
     // @example(conditions)
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
@@ -804,25 +806,29 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
+    .define(
+      "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
+      .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+    ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+    // #workaround(Swift 5.3.3, Web lacks Dispatch.)
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Web lacks Foundation.Thread.)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Web lacks Foundation.TimeZone.init(identifier:).)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.TimeZone.init(identifier:).)
     .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
+    // #workaround(Swift 5.3.3, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Web lacks XCTest.XCTestExpectation.)
+    // #workaround(Swift 5.3.3, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.2, Android emulator lacks Git.)
+    // #workaround(Swift 5.3.3, Android emulator lacks Git.)
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
       "PLATFORM_LACKS_SWIFT_COMPILER",
