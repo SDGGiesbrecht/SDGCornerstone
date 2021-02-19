@@ -1011,7 +1011,7 @@ class APITests: TestCase {
     #endif
   }
 
-  func testXMLDocument() {
+  func testXMLDocument() throws {
     #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       testCustomStringConvertibleConformance(
         of: XML.Document(rootElement: XML.Element(name: "root")),
@@ -1034,6 +1034,12 @@ class APITests: TestCase {
             rootElement: XML.Element(name: "document")
           ),
           uniqueTestName: "DTD"
+        )
+      #endif
+      #if !PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT
+        XCTAssertNil(
+          try? XML.Document(dtd: .system("no such DTD"), rootElement: XML.Element(name: "document"))
+            .validate()
         )
       #endif
     #endif

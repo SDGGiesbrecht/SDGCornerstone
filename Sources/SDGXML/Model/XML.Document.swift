@@ -13,6 +13,9 @@
  */
 
 import Foundation
+#if canImport(FoundationXML)
+  import FoundationXML
+#endif
 
 import SDGText
 import SDGPersistence
@@ -65,6 +68,16 @@ extension XML {
       result.append(rootElement.source())
       return result.joined(separator: "\n")
     }
+
+    // MARK: - Validation
+
+    #if !PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT
+      /// Validates the document according its schema.
+      public func validate() throws {
+        let foundation = try XMLDocument(xmlString: String(source()))
+        try foundation.validate()
+      }
+    #endif
 
     // MARK: - CustomStringConvertible
 
