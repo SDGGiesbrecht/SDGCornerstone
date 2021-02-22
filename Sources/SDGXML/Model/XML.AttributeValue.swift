@@ -24,7 +24,7 @@ extension XML {
     TransparentWrapper
   {
 
-    private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "\u{27}", "<"]
+    private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "\u{22}", "<"]
 
     // MARK: - Initialization
 
