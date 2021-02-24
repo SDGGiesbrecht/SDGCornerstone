@@ -268,7 +268,7 @@ let package = Package(
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 0, 8)))
+    .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 1, 0)))
   ],
   targets: [
 
