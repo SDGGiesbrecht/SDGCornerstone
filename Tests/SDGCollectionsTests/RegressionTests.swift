@@ -29,6 +29,18 @@ class RegressionTests: TestCase {
     )
   }
 
+  func testContextualMappingRetainsPartialMatches() {
+    // Untracked
+
+    let mapping = ContextualMapping<String, String>(
+      mapping: [
+        "ABC": "Z"
+      ],
+      fallbackAlgorithm: { String($0) }
+    )
+    XCTAssertEqual(mapping.map("AB"), "AB")
+  }
+
   func testContextualMappingUsesFallbackOnPartialMatch() {
     // Untracked
 
