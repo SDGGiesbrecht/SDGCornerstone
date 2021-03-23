@@ -119,7 +119,7 @@ where
     fallbackAlgorithm: @escaping (Input.Element) -> Output
   ) {
 
-    self.simpleOutput = simpleOutput ?? fallbackAlgorithm(input)
+    self.simpleOutput = simpleOutput
     self.complexMapping = ContextualMapping.generate(
       mapping: complexMapping,
       fallbackAlgorithm: fallbackAlgorithm
