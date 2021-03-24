@@ -119,7 +119,7 @@ where
     fallbackAlgorithm: @escaping (Input.Element) -> Output
   ) {
 
-    self.simpleOutput = simpleOutput ?? fallbackAlgorithm(input)
+    self.simpleOutput = simpleOutput
     self.complexMapping = ContextualMapping.generate(
       mapping: complexMapping,
       fallbackAlgorithm: fallbackAlgorithm
@@ -140,32 +140,62 @@ where
   /// - Parameters:
   ///     - input: The input.
   @inlinable public func map(_ input: Input) -> Output {
-    var remainder = input[input.bounds]
     var output = Output()
-    while ¬remainder.isEmpty {
-      mapNext(&remainder, output: &output)
+    var pendingIndex: Input.Index = input.startIndex
+    var currentIndex: Input.Index = input.startIndex
+
+    while pendingIndex ≠ input.endIndex {
+      mapNext(
+        input: input,
+        pendingIndex: &pendingIndex,
+        currentIndex: &currentIndex,
+        output: &output
+      )
     }
+
     return output
   }
-
-  @inlinable internal func mapNext(_ remainder: inout Input.SubSequence, output: inout Output) {
-    guard let first = remainder.first else {
-      // End
-
-      // Only sub‐mappings (with simple output) reach this code. See “map” above.
-      output += simpleOutput!
+  @inlinable internal func mapNext(
+    input: Input,
+    pendingIndex: inout Input.Index,
+    currentIndex: inout Input.Index,
+    output: inout Output
+  ) {
+    guard currentIndex ≠ input.endIndex else {
+      if let simple = simpleOutput {
+        output.append(contentsOf: simple)
+      } else {
+        catchUp(from: pendingIndex, to: currentIndex, input: input, output: &output)
+      }
+      pendingIndex = currentIndex
       return
     }
 
-    if let rule = complexMapping[first] {
-      remainder = remainder.dropFirst()
-      rule.mapNext(&remainder, output: &output)
+    if let rule = complexMapping[input[currentIndex]] {
+      currentIndex = input.index(after: currentIndex)
+      rule.mapNext(
+        input: input,
+        pendingIndex: &pendingIndex,
+        currentIndex: &currentIndex,
+        output: &output
+      )
     } else if let simple = simpleOutput {
       output += simple
+      pendingIndex = currentIndex
     } else {
-      let outputElements = fallbackAlgorithm(first)
-      remainder = remainder.dropFirst()
-      output += outputElements
+      currentIndex = input.index(after: currentIndex)
+      catchUp(from: pendingIndex, to: currentIndex, input: input, output: &output)
+      pendingIndex = currentIndex
+    }
+  }
+  @inlinable internal func catchUp(
+    from currentIndex: Input.Index,
+    to newIndex: Input.Index,
+    input: Input,
+    output: inout Output
+  ) {
+    for element in input[currentIndex..<newIndex] {
+      output += fallbackAlgorithm(element)
     }
   }
 }
