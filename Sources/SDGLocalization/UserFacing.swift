@@ -21,12 +21,40 @@ public struct UserFacing<Element, Localization: SDGLocalization.Localization>: T
 
   // MARK: - Initialization
 
+  // @documentation(UserFacing.init(_:))
   /// Creates a user‐facing element from a closure that resolves the element for a specified localization.
   ///
   /// - Parameters:
   ///     - localize: A closure that resolves the element based on a requested localization.
   ///     - localization: The requested localization.
   public init(_ localize: @escaping (_ localization: Localization) -> Element) {
+
+    #if DEBUG
+      // Eager execution makes test coverage easier to achieve.
+      _ = localize(Localization.fallbackLocalization)
+    #endif
+
+    self.init(_localize: localize)
+  }
+  // #documentation(UserFacing.init(_:))
+  /// Creates a user‐facing element from a closure that resolves the element for a specified localization.
+  ///
+  /// - Parameters:
+  ///     - localize: A closure that resolves the element based on a requested localization.
+  ///     - localization: The requested localization.
+  public init(_ localize: @escaping (_ localization: Localization) -> Element)
+  where Localization: InputLocalization {
+
+    #if DEBUG
+      // Eager execution makes test coverage easier to achieve.
+      for localization in Localization.allCases {
+        _ = localize(localization)
+      }
+    #endif
+
+    self.init(_localize: localize)
+  }
+  private init(_localize localize: @escaping (_ localization: Localization) -> Element) {
     self.dynamic = UserFacingDynamic<Element, Localization, Void>({ (localization, _) in
       return localize(localization)
     })
