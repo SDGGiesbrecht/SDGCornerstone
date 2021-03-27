@@ -49,5 +49,5 @@ configuration.documentation.api.ignoredDependencies = [
   "RealModule",
 ]
 
-// #workaround(workspace version 0.36.1, False positives.)
+// #workaround(workspace version 0.36.3, False positives.)
 configuration.proofreading.swiftFormatConfiguration?.rules["UseLetInEveryBoundCaseVariable"] = false
