@@ -37,6 +37,8 @@ configuration.continuousIntegration.skipSimulatorOutsideContinuousIntegration = 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
 
+configuration.testing.exemptPaths.insert("Sources/SDGCollections/Deprecated")
+
 configuration.documentation.api.ignoredDependencies = [
 
   // Swift
