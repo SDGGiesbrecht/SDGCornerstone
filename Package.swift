@@ -644,6 +644,7 @@ let package = Package(
         "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
+        .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
       ]
     ),
     .testTarget(

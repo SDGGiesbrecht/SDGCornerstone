@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import OrderedCollections
+
 import SDGLogic
 import SDGMathematics
 import SDGCollections
@@ -923,7 +925,7 @@ class APITests: TestCase {
   }
 
   func testOrderedSet() {
-    var set = OrderedSet(["a", "b", "c"])
+    var set = SDGCollections.OrderedSet(["a", "b", "c"])
     testComparableSetConformance(
       of: set,
       member: "a",
