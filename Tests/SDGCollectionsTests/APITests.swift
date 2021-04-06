@@ -955,8 +955,6 @@ class APITests: TestCase {
     testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
     testComparableConformance(less: set, greater: ["m", "n", "o"])
     _ = set.wrappedInstance
-
-    let x = set.overlaps(set)
   }
 
   struct CustomPattern: SDGCollections.Pattern {
