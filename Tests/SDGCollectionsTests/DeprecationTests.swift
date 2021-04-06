@@ -56,5 +56,7 @@ final class DeprecationTests: TestCase {
     testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
     testComparableConformance(less: set, greater: ["m", "n", "o"])
     _ = set.wrappedInstance
+    set = SDGCollections.OrderedSet()
+    XCTAssert(set.isEmpty)
   }
 }
