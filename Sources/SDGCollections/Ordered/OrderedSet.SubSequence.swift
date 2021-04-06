@@ -15,6 +15,6 @@
 import OrderedCollections
 
 #warning("More conformances?")
-extension OrderedCollections.OrderedSet.SubSequence: Pattern, SearchableCollection {
+extension OrderedCollections.OrderedSet.SubSequence: SearchableBidirectionalCollection {
 
 }
