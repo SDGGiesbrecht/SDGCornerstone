@@ -268,7 +268,8 @@ let package = Package(
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 1, 0)))
+    .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 1, 0))),
+    .package(url: "https://github.com/apple/swift\u{2D}collections", .upToNextMinor(from: Version(0, 0, 1)))
   ],
   targets: [
 
@@ -314,6 +315,7 @@ let package = Package(
         "SDGControlFlow",
         "SDGLogic",
         "SDGMathematics",
+        .product(name: "OrderedCollections", package: "swift\u{2D}collections")
       ]
     ),
     // @documentation(SDGCollectionsTestUtilities)
