@@ -925,7 +925,7 @@ class APITests: TestCase {
   }
 
   func testOrderedSet() {
-    var set = SDGCollections.OrderedSet(["a", "b", "c"])
+    var set = OrderedCollections.OrderedSet(["a", "b", "c"])
     testComparableSetConformance(
       of: set,
       member: "a",
@@ -934,7 +934,7 @@ class APITests: TestCase {
       overlapping: ["a", "d"],
       disjoint: ["d", "e"]
     )
-    XCTAssert(set.contents.elementsEqual(["a", "b", "c"]))
+    XCTAssert(set.elements.elementsEqual(["a", "b", "c"]))
     set.removeFirst()
     XCTAssertEqual(set, ["b", "c"])
     set.removeLast()
@@ -955,8 +955,10 @@ class APITests: TestCase {
     XCTAssertEqual(set, ["g", "i"])
     testRandomAccessCollectionConformance(of: set)
     testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
-    testComparableConformance(less: set, greater: ["m", "n", "o"])
-    _ = set.wrappedInstance
+    testComparableConformance(
+      less: LexicographicalComparison(set),
+      greater: LexicographicalComparison(["m", "n", "o"])
+    )
   }
 
   struct CustomPattern: SDGCollections.Pattern {
