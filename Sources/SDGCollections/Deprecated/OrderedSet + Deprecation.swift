@@ -167,7 +167,7 @@ where Element: Hashable {
   // MARK: - SetDefinition
 
   @inlinable public static func ∋ (precedingValue: Self, followingValue: Element) -> Bool {
-    return precedingValue.implementation.contains(followingValue)
+    return precedingValue.implementation ∋ followingValue
   }
 
   // MARK: - TransparentWrapper
