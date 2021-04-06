@@ -118,25 +118,23 @@ where Element: Hashable {
   // MARK: - ComparableSet
 
   @inlinable public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.implementation.isSubset(of: followingValue.implementation)
+    return precedingValue.implementation ⊆ followingValue.implementation
   }
 
   @inlinable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.implementation.isSuperset(of: followingValue.implementation)
+    return precedingValue.implementation ⊇ followingValue.implementation
   }
 
   @inlinable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.implementation.unordered
-      .isStrictSubset(of: followingValue.implementation.unordered)
+    return precedingValue.implementation ⊊ followingValue.implementation
   }
 
   @inlinable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.implementation.unordered
-      .isStrictSuperset(of: followingValue.implementation.unordered)
+    return precedingValue.implementation ⊋ followingValue.implementation
   }
 
   @inlinable public func overlaps(_ other: Self) -> Bool {
-    return ¬implementation.isDisjoint(with: other.implementation)
+    return implementation.overlaps(other.implementation)
   }
 
   @inlinable public func isDisjoint(with other: Self) -> Bool {

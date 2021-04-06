@@ -14,7 +14,45 @@
 
 import OrderedCollections
 
-extension OrderedCollections.OrderedSet: SetDefinition {
+import SDGLogic
+
+extension OrderedCollections.OrderedSet: ComparableSet, SetDefinition {
+
+  // MARK: - ComparableSet
+
+  @inlinable public static func ⊆ (
+    precedingValue: OrderedCollections.OrderedSet<Element>,
+    followingValue: OrderedCollections.OrderedSet<Element>
+  ) -> Bool {
+    return precedingValue.isSubset(of: followingValue)
+  }
+
+  @inlinable public static func ⊇ (
+    precedingValue: OrderedCollections.OrderedSet<Element>,
+    followingValue: OrderedCollections.OrderedSet<Element>
+  ) -> Bool {
+    return precedingValue.isSuperset(of: followingValue)
+  }
+
+  @inlinable public static func ⊊ (
+    precedingValue: OrderedCollections.OrderedSet<Element>,
+    followingValue: OrderedCollections.OrderedSet<Element>
+  ) -> Bool {
+    return precedingValue.unordered
+      .isStrictSubset(of: followingValue.unordered)
+  }
+
+  @inlinable public static func ⊋ (
+    precedingValue: OrderedCollections.OrderedSet<Element>,
+    followingValue: OrderedCollections.OrderedSet<Element>
+  ) -> Bool {
+    return precedingValue.unordered
+      .isStrictSuperset(of: followingValue.unordered)
+  }
+
+  @inlinable public func overlaps(_ other: OrderedCollections.OrderedSet<Element>) -> Bool {
+    return ¬isDisjoint(with: other)
+  }
 
   // MARK: - SetDefinition
 
