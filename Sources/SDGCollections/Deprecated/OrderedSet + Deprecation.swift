@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import OrderedCollections
+
 import SDGControlFlow
+import SDGLogic
 
 /// An ordered collection of elements that guarantees the uniqueness of its elements.
 @available(
@@ -28,8 +31,7 @@ where Element: Hashable {
 
   /// Creates an empty set.
   @inlinable public init() {
-    array = []
-    set = []
+    implementation = OrderedCollections.OrderedSet()
   }
 
   /// Creates an ordered set from the contents of a sequence.
@@ -39,20 +41,18 @@ where Element: Hashable {
   /// - Parameters:
   ///   - elements: The elements to include.
   @inlinable public init<S>(_ elements: S) where S: Sequence, S.Element == Element {
-    self.init()
-    self.append(contentsOf: elements)
+    implementation = OrderedCollections.OrderedSet(elements)
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal var array: [Element]
-  @usableFromInline internal var set: Set<Element>
+  @usableFromInline internal var implementation: OrderedCollections.OrderedSet<Element>
 
   // MARK: - Usage
 
   /// The contents of the set as an array.
   @inlinable public var contents: [Element] {
-    return array
+    return implementation.elements
   }
 
   /// Appends a new element to the set if it is not already present.
@@ -62,11 +62,7 @@ where Element: Hashable {
   ///
   /// - Returns: Whether or not the element was appended.
   @inlinable @discardableResult public mutating func append(_ newElement: Element) -> Bool {
-    let inserted = set.insert(newElement).inserted
-    if inserted {
-      array.append(newElement)
-    }
-    return inserted
+    return implementation.append(newElement).inserted
   }
 
   /// Appends new elements to the set if they are not already present.
@@ -76,23 +72,17 @@ where Element: Hashable {
   @inlinable public mutating func append<S>(
     contentsOf newElements: S
   ) where S: Sequence, S.Element == Element {
-    for element in newElements {
-      self.append(element)
-    }
+    implementation.append(contentsOf: newElements)
   }
 
   /// Removes and returns the first element.
   @inlinable @discardableResult public mutating func removeFirst() -> Element {
-    let first = array.removeFirst()
-    set.remove(first)
-    return first
+    return implementation.removeFirst()
   }
 
   /// Removes and returns the last element.
   @inlinable @discardableResult public mutating func removeLast() -> Element {
-    let last = array.removeLast()
-    set.remove(last)
-    return last
+    return implementation.removeLast()
   }
 
   /// Removes all elements.
@@ -100,8 +90,7 @@ where Element: Hashable {
   /// - Parameters:
   ///   - keepCapacity: Whether or not to keep the memory capacity.
   @inlinable public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
-    array.removeAll(keepingCapacity: keepCapacity)
-    set.removeAll(keepingCapacity: keepCapacity)
+    implementation.removeAll(keepingCapacity: keepCapacity)
   }
 
   /// Removes and returns a particular element.
@@ -109,59 +98,58 @@ where Element: Hashable {
   /// - Parameters:
   ///   - element: The element to remove.
   @inlinable @discardableResult public mutating func remove(_ element: Element) -> Element? {
-    guard let removed = set.remove(element) else {
-      return nil
-    }
-    let index = array.firstIndex(of: removed)!
-    array.remove(at: index)
-    return removed
+    return implementation.remove(element)
   }
 
   // MARK: - Collection
 
   @inlinable public var startIndex: Array<Element>.Index {
-    return array.startIndex
+    return implementation.startIndex
   }
 
   @inlinable public var endIndex: Array<Element>.Index {
-    return array.endIndex
+    return implementation.endIndex
   }
 
   @inlinable public subscript(position: Array<Element>.Index) -> Element {
-    return array[position]
+    return implementation[position]
   }
 
   // MARK: - ComparableSet
 
   @inlinable public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.set ⊆ followingValue.set
+    return precedingValue.implementation.isSubset(of: followingValue.implementation)
   }
 
   @inlinable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.set ⊇ followingValue.set
+    return precedingValue.implementation.isSuperset(of: followingValue.implementation)
   }
 
   @inlinable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.set ⊊ followingValue.set
+    return precedingValue.implementation.unordered
+      .isStrictSubset(of: followingValue.implementation.unordered)
   }
 
   @inlinable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.set ⊋ followingValue.set
+    return precedingValue.implementation.unordered
+      .isStrictSuperset(of: followingValue.implementation.unordered)
   }
 
   @inlinable public func overlaps(_ other: Self) -> Bool {
-    return set.overlaps(other.set)
+    return ¬implementation.isDisjoint(with: other.implementation)
   }
 
   @inlinable public func isDisjoint(with other: Self) -> Bool {
-    return set.isDisjoint(with: other.set)
+    return implementation.isDisjoint(with: other.implementation)
   }
 
   // MARK: - Equatable
 
-  @inlinable public static func == (precedingValue: OrderedSet, followingValue: OrderedSet) -> Bool
-  {
-    return precedingValue.array == followingValue.array
+  @inlinable public static func == (
+    precedingValue: OrderedSet,
+    followingValue: OrderedSet
+  ) -> Bool {
+    return precedingValue.implementation == followingValue.implementation
   }
 
   // MARK: - ExpressibleByArrayLiteral
@@ -173,27 +161,33 @@ where Element: Hashable {
   // MARK: - Hashable
 
   @inlinable public func hash(into hasher: inout Hasher) {
-    hasher.combine(array)
+    hasher.combine(implementation)
   }
 
   // MARK: - SetDefinition
 
   @inlinable public static func ∋ (precedingValue: Self, followingValue: Element) -> Bool {
-    return precedingValue.set ∋ followingValue
+    return precedingValue.implementation.contains(followingValue)
   }
 
   // MARK: - TransparentWrapper
 
   @inlinable public var wrappedInstance: Any {
-    return contents
+    return implementation
   }
 }
 
+@available(
+  *,
+  deprecated,
+  message: "Use OrderedCollections.OrderedSet from the swift‐collections package instead."
+)
 extension OrderedSet: Comparable where Element: Comparable {
 
   // MARK: - Comparable
 
   @inlinable public static func < (precedingValue: OrderedSet, followingValue: OrderedSet) -> Bool {
-    return precedingValue.array.lexicographicallyPrecedes(followingValue.array)
+    return precedingValue.implementation.elements
+      .lexicographicallyPrecedes(followingValue.implementation.elements)
   }
 }
