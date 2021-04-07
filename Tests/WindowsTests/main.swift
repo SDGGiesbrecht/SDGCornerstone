@@ -156,6 +156,14 @@ extension SDGCollectionsTests.APITests {
   ]
 }
 
+extension SDGCollectionsTests.DeprecationTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testOrderedSet", testOrderedSet)
+    ])
+  ]
+}
+
 extension SDGCollectionsTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -560,6 +568,7 @@ tests += SDGCalendarTests.RegressionTests.windowsTests
 tests += SDGCollationTests.APITests.windowsTests
 tests += SDGCollationTests.LanguageTests.windowsTests
 tests += SDGCollectionsTests.APITests.windowsTests
+tests += SDGCollectionsTests.DeprecationTests.windowsTests
 tests += SDGCollectionsTests.RegressionTests.windowsTests
 tests += SDGConcurrencyTests.APITests.windowsTests
 tests += SDGControlFlowTests.APITests.windowsTests
