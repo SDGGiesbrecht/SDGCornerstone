@@ -271,7 +271,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 1, 0))),
     .package(
       url: "https://github.com/apple/swift\u{2D}collections",
-      .upToNextMinor(from: Version(0, 0, 1))
+      .upToNextMinor(from: Version(0, 0, 2))
     ),
   ],
   targets: [
