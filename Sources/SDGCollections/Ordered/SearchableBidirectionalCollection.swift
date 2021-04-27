@@ -151,17 +151,17 @@ extension SearchableBidirectionalCollection {
     return _hasSuffix(pattern)
   }
 
-  @inlinable internal func _commonSuffix<C: SearchableBidirectionalCollection>(with other: C)
-    -> PatternMatch<Self> where C.Element == Self.Element
-  {
+  @inlinable internal func _commonSuffix<C: SearchableBidirectionalCollection>(
+    with other: C
+  ) -> PatternMatch<Self> where C.Element == Self.Element {
     return PatternMatch(
       range: forward(reversed().commonPrefix(with: other.reversed()).range),
       in: self
     )
   }
-  @inlinable public func commonSuffix<C: SearchableBidirectionalCollection>(with other: C)
-    -> PatternMatch<Self> where C.Element == Self.Element
-  {
+  @inlinable public func commonSuffix<C: SearchableBidirectionalCollection>(
+    with other: C
+  ) -> PatternMatch<Self> where C.Element == Self.Element {
     return _commonSuffix(with: other)
   }
   @inlinable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
