@@ -68,4 +68,12 @@ class RegressionTests: TestCase {
     var array = string.split { $0.isNewline }
     array = array.filter { $0.contains("...") }
   }
+
+  func testSuffixUnambiguous() {
+    // Untracked
+
+    let subsequence: String.SubSequence = "abc"[...]
+    let other: String = "bc"
+    XCTAssert(subsequence.hasSuffix(other))
+  }
 }

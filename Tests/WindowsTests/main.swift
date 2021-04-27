@@ -175,6 +175,7 @@ extension SDGCollectionsTests.RegressionTests {
       ),
       ("testTrailingConditionSearch", testTrailingConditionSearch),
       ("testSubstringContainmentIsUnambiguous", testSubstringContainmentIsUnambiguous),
+      ("testSuffixUnambiguous", testSuffixUnambiguous),
     ])
   ]
 }
