@@ -21,7 +21,7 @@ extension StringProtocol {
   }
 }
 
-extension StringProtocol where Self: SearchableBidirectionalCollection {
+extension SearchableBidirectionalCollection where Self: StringProtocol {
 
   // Disambiguate between StringProtocol and SearchableBidirectionalCollection.
   @inlinable public func hasSuffix<Suffix>(
