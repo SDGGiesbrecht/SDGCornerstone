@@ -44,6 +44,9 @@ configuration.documentation.api.ignoredDependencies = [
   "Foundation",
   "XCTest",
 
+  // swift‐collections
+  "OrderedCollections",
+
   // swift‐numerics
   "_NumericsShims",
   "RealModule",
