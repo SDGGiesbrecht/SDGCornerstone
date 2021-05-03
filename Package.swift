@@ -846,6 +846,30 @@ for target in package.targets {
   ])
 }
 
+#if os(Windows)
+  let impossibleDependencies: [String] = [
+    // #workaround(swift-collections 0.0.2, Contains invalid paths.) @exempt(from: unicode)
+    "swift\u{2D}collections"
+  ]
+  package.dependencies.removeAll(where: { dependency in
+    return impossibleDependencies.contains(where: { impossible in
+      return (dependency.name ?? dependency.url).contains(impossible)
+    })
+  })
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      return impossibleDependencies.contains(where: { impossible in
+        return "\(dependency)".contains(impossible)
+      })
+    })
+    var swiftSettings = target.swiftSettings ?? []
+    defer { target.swiftSettings = swiftSettings }
+    swiftSettings.append(contentsOf: [
+      .define("PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS")
+    ])
+  }
+#endif
+
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.4, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
