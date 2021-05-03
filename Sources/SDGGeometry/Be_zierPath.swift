@@ -1,5 +1,5 @@
 /*
- BézierPath.swift
+ Be_zierPath.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -11,6 +11,8 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
+
+// #workaround(Swift 5.4, Should be “BézierPath.swift” but for Windows bug.)
 
 #if canImport(AppKit) || canImport(UIKit)
   #if canImport(AppKit)
