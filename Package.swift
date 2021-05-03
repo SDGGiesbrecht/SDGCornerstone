@@ -867,6 +867,9 @@ for target in package.targets {
     swiftSettings.append(contentsOf: [
       .define("PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS")
     ])
+
+    // #workaround(Swift 5.4.0, Unable to build from Windows.)
+    package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
   }
 #endif
 
