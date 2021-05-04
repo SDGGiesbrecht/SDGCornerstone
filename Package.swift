@@ -844,7 +844,45 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
   ])
+
+  // #workaround(Swift 5.3.3, Only broken in Swift 5.4.)
+  #if compiler(>=5.4)
+    swiftSettings.append(contentsOf: [
+      .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows])),
+      .define(
+        "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
+        .when(platforms: [.windows])
+      ),
+    ])
+  #endif
 }
+
+#if os(Windows)
+  let impossibleDependencies: [String] = [
+    // #workaround(swift-collections 0.0.2, Contains invalid paths.) @exempt(from: unicode)
+    "swift\u{2D}collections"
+  ]
+  package.dependencies.removeAll(where: { dependency in
+    return impossibleDependencies.contains(where: { impossible in
+      return (dependency.name ?? dependency.url).contains(impossible)
+    })
+  })
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      return impossibleDependencies.contains(where: { impossible in
+        return "\(dependency)".contains(impossible)
+      })
+    })
+    var swiftSettings = target.swiftSettings ?? []
+    defer { target.swiftSettings = swiftSettings }
+    swiftSettings.append(contentsOf: [
+      .define("PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS")
+    ])
+
+    // #workaround(Swift 5.4.0, Unable to build from Windows.)
+    package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+  }
+#endif
 
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.4, Tool targets don’t work on tvOS.) @exempt(from: unicode)

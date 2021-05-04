@@ -13,8 +13,10 @@
  */
 
 import Foundation
-#if canImport(FoundationXML)
-  import FoundationXML
+#if !PLATFORM_LACKS_FOUNDATION_XML
+  #if canImport(FoundationXML)
+    import FoundationXML
+  #endif
 #endif
 
 import SDGCollections
