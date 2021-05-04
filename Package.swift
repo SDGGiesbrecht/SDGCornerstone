@@ -844,6 +844,17 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
   ])
+
+  // #workaround(Swift 5.3.3, Only broken in Swift 5.4.)
+  #if compiler(>=5.4)
+    swiftSettings.append(contentsOf: [
+      .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows])),
+      .define(
+        "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
+        .when(platforms: [.windows])
+      ),
+    ])
+  #endif
 }
 
 #if os(Windows)
