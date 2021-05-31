@@ -24,41 +24,39 @@ final class DeprecationTests: TestCase {
 
   @available(*, deprecated)
   func testOrderedSet() {
-    #if !PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS
-      var set = SDGCollections.OrderedSet(["a", "b", "c"])
-      testComparableSetConformance(
-        of: set,
-        member: "a",
-        nonmember: "d",
-        superset: ["a", "b", "c", "d"],
-        overlapping: ["a", "d"],
-        disjoint: ["d", "e"]
-      )
-      XCTAssert(set.contents.elementsEqual(["a", "b", "c"]))
-      set.removeFirst()
-      XCTAssertEqual(set, ["b", "c"])
-      set.removeLast()
-      XCTAssertEqual(set, ["b"])
-      set.append("d")
-      XCTAssertEqual(set, ["b", "d"])
-      set.append("b")
-      XCTAssertEqual(set, ["b", "d"])
-      set.append(contentsOf: ["e", "b", "f"])
-      XCTAssertEqual(set, ["b", "d", "e", "f"])
-      set.removeAll()
-      XCTAssertEqual(set, [])
-      set.append(contentsOf: ["g", "h", "i"])
-      XCTAssertEqual(set, ["g", "h", "i"])
-      set.remove("h")
-      XCTAssertEqual(set, ["g", "i"])
-      set.remove("h")
-      XCTAssertEqual(set, ["g", "i"])
-      testRandomAccessCollectionConformance(of: set)
-      testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
-      testComparableConformance(less: set, greater: ["m", "n", "o"])
-      _ = set.wrappedInstance
-      set = SDGCollections.OrderedSet()
-      XCTAssert(set.isEmpty)
-    #endif
+    var set = SDGCollections.OrderedSet(["a", "b", "c"])
+    testComparableSetConformance(
+      of: set,
+      member: "a",
+      nonmember: "d",
+      superset: ["a", "b", "c", "d"],
+      overlapping: ["a", "d"],
+      disjoint: ["d", "e"]
+    )
+    XCTAssert(set.contents.elementsEqual(["a", "b", "c"]))
+    set.removeFirst()
+    XCTAssertEqual(set, ["b", "c"])
+    set.removeLast()
+    XCTAssertEqual(set, ["b"])
+    set.append("d")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append("b")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append(contentsOf: ["e", "b", "f"])
+    XCTAssertEqual(set, ["b", "d", "e", "f"])
+    set.removeAll()
+    XCTAssertEqual(set, [])
+    set.append(contentsOf: ["g", "h", "i"])
+    XCTAssertEqual(set, ["g", "h", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    testRandomAccessCollectionConformance(of: set)
+    testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
+    testComparableConformance(less: set, greater: ["m", "n", "o"])
+    _ = set.wrappedInstance
+    set = SDGCollections.OrderedSet()
+    XCTAssert(set.isEmpty)
   }
 }
