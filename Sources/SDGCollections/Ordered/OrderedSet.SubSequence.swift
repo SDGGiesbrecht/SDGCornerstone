@@ -12,10 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS
-  import OrderedCollections
-#endif
+import OrderedCollections
 
-#if !PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS
-  extension OrderedCollections.OrderedSet.SubSequence: SearchableBidirectionalCollection {}
-#endif
+extension OrderedCollections.OrderedSet.SubSequence: SearchableBidirectionalCollection {}

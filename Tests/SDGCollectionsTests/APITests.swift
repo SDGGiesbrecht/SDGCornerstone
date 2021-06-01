@@ -12,9 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS
-  import OrderedCollections
-#endif
+import OrderedCollections
 
 import SDGLogic
 import SDGMathematics
@@ -927,42 +925,40 @@ class APITests: TestCase {
   }
 
   func testOrderedSet() {
-    #if !PLATFORM_CANNOT_FETCH_SWIFT_COLLECTIONS
-      var set = OrderedCollections.OrderedSet(["a", "b", "c"])
-      testComparableSetConformance(
-        of: set,
-        member: "a",
-        nonmember: "d",
-        superset: ["a", "b", "c", "d"],
-        overlapping: ["a", "d"],
-        disjoint: ["d", "e"]
-      )
-      XCTAssert(set.elements.elementsEqual(["a", "b", "c"]))
-      set.removeFirst()
-      XCTAssertEqual(set, ["b", "c"])
-      set.removeLast()
-      XCTAssertEqual(set, ["b"])
-      set.append("d")
-      XCTAssertEqual(set, ["b", "d"])
-      set.append("b")
-      XCTAssertEqual(set, ["b", "d"])
-      set.append(contentsOf: ["e", "b", "f"])
-      XCTAssertEqual(set, ["b", "d", "e", "f"])
-      set.removeAll()
-      XCTAssertEqual(set, [])
-      set.append(contentsOf: ["g", "h", "i"])
-      XCTAssertEqual(set, ["g", "h", "i"])
-      set.remove("h")
-      XCTAssertEqual(set, ["g", "i"])
-      set.remove("h")
-      XCTAssertEqual(set, ["g", "i"])
-      testRandomAccessCollectionConformance(of: set)
-      testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
-      testComparableConformance(
-        less: LexicographicalComparison(set),
-        greater: LexicographicalComparison(["m", "n", "o"])
-      )
-    #endif
+    var set = OrderedCollections.OrderedSet(["a", "b", "c"])
+    testComparableSetConformance(
+      of: set,
+      member: "a",
+      nonmember: "d",
+      superset: ["a", "b", "c", "d"],
+      overlapping: ["a", "d"],
+      disjoint: ["d", "e"]
+    )
+    XCTAssert(set.elements.elementsEqual(["a", "b", "c"]))
+    set.removeFirst()
+    XCTAssertEqual(set, ["b", "c"])
+    set.removeLast()
+    XCTAssertEqual(set, ["b"])
+    set.append("d")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append("b")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append(contentsOf: ["e", "b", "f"])
+    XCTAssertEqual(set, ["b", "d", "e", "f"])
+    set.removeAll()
+    XCTAssertEqual(set, [])
+    set.append(contentsOf: ["g", "h", "i"])
+    XCTAssertEqual(set, ["g", "h", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    testRandomAccessCollectionConformance(of: set)
+    testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
+    testComparableConformance(
+      less: LexicographicalComparison(set),
+      greater: LexicographicalComparison(["m", "n", "o"])
+    )
   }
 
   struct CustomPattern: SDGCollections.Pattern {
