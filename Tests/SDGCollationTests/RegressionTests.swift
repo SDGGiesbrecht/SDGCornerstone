@@ -21,6 +21,8 @@ import SDGXCTestUtilities
 class RegressionTests: TestCase {
 
   func testוEquivalentToF() {
+    // Untracked
+
     let strings = ["ה", "הה", "ו", "וו", "ז", "זז"]
     XCTAssertEqual(CollationOrder.root.collate(strings), strings)
   }
