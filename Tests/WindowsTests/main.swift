@@ -117,6 +117,14 @@ extension SDGCollationTests.LanguageTests {
   ]
 }
 
+extension SDGCollationTests.RegressionTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testוEquivalentToF", testוEquivalentToF)
+    ])
+  ]
+}
+
 extension SDGCollectionsTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -568,6 +576,7 @@ tests += SDGCalendarTests.InternalTests.windowsTests
 tests += SDGCalendarTests.RegressionTests.windowsTests
 tests += SDGCollationTests.APITests.windowsTests
 tests += SDGCollationTests.LanguageTests.windowsTests
+tests += SDGCollationTests.RegressionTests.windowsTests
 tests += SDGCollectionsTests.APITests.windowsTests
 tests += SDGCollectionsTests.DeprecationTests.windowsTests
 tests += SDGCollectionsTests.RegressionTests.windowsTests
