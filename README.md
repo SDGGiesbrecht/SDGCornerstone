@@ -163,7 +163,6 @@ Some platforms lack certain features. The compilation conditions which appear th
   .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
 ),
 .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
-.define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 ```
 
 ## Importing

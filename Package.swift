@@ -162,7 +162,6 @@ import PackageDescription
 ///   .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
 /// ),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
-/// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
 let package = Package(
   name: "SDGCornerstone",
@@ -820,7 +819,6 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
-    .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
 
     // Internal‐only:
@@ -873,8 +871,6 @@ if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 12.4, Test targets don’t work on watchOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.isTest })
   // #workaround(xcodebuild -version 12.4, Tool targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
