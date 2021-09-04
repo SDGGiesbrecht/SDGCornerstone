@@ -106,6 +106,12 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
             return
           }
         }
+      } else if let name = commandName {
+        #warning("Debugging...")
+        print("error:", Shell.default.run(command: [searchCommand, name]))
+      } else {
+        #warning("Debugging...")
+        print("No name.")
       }
     #endif
 
