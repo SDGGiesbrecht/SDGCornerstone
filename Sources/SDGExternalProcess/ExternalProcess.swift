@@ -44,6 +44,8 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
     commandName: String?,
     validate: (_ process: ExternalProcess) -> Bool
   ) where S: Sequence, S.Element == URL {
+    #warning("Debugging...")
+    print("searching:", locations, "commandName:", commandName)
     let adjustedLocations = locations
       .lazy.map { location -> URL in
         #if PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
