@@ -90,6 +90,8 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       if let name = commandName,
         let searchResult = try? Shell.default.run(command: [searchCommand, name]).get()
       {  // @exempt(from: tests) Unreachable from CentOS.
+        #warning("Debugging...")
+        print("searchResult:", searchResult)
         let locations: [String]
         #if os(Windows)
           // “where” reports several paths; newlines are invalid
