@@ -616,9 +616,9 @@ class APITests: TestCase {
     #endif
     #if !PLATFORM_LACKS_FOUNDATION_XML
       _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
-    #endif
-    #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
-      wait(for: [tested], timeout: 0.1)
+      #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+        wait(for: [tested], timeout: 0.1)
+      #endif
     #endif
   }
 
