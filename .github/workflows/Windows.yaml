@@ -48,6 +48,12 @@ jobs:
         set Path=C:\Library\Developer\Platforms\Windows.platform\Developer\Library\XCTest-development\usr\bin;%Path%
         echo Path=%Path%>>%GITHUB_ENV%
         swift --version
+    - name: Experiment
+      shell: cmd
+      run: |
+        echo on
+        where swift
+        cmd /c "where swift"
     - name: Test
       shell: cmd
       run: |
