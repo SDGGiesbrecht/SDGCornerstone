@@ -170,6 +170,9 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       with environment: [String: String]? = nil,
       reportProgress: (_ line: String) -> Void = { _ in }
     ) -> Result<String, ExternalProcess.Error> {
+      #warning("Debugging...")
+      print("process:", executable)
+      print("arguments:", arguments)
 
       let process = Process()
 
