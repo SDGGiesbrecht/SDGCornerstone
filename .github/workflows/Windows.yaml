@@ -55,6 +55,7 @@ jobs:
         where swift
         cmd /c "where swift"
         C:\Windows\System32\cmd.exe /c "where swift"
+        C:/Windows/System32/cmd.exe /c "where swift"
     - name: Test
       shell: cmd
       run: |
