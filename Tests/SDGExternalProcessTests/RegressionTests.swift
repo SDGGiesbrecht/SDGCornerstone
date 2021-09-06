@@ -25,11 +25,9 @@ class RegressionTests: TestCase {
     // Untracked.
 
     #if os(Windows)
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Shell misbehaves.)
         let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
         let help = try process.run(["/?"]).get()
         XCTAssert(¬help.contains("MKDIR"), "Wrong command:\n\(help)")
-      #endif
     #endif
   }
 
