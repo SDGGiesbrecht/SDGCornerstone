@@ -231,7 +231,7 @@ class APITests: TestCase {
     _ = String(reflecting: Shared(1))
 
     #if canImport(Combine)
-      if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 9, *) {
+      if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *) {
         var changed = false
         let subscriber = shared?.objectWillChange.sink(receiveValue: {
           changed = true

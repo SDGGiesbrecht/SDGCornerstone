@@ -38,7 +38,7 @@ public final class Shared<Value>: TransparentWrapper {
   public var value: Value {
     willSet {
       #if canImport(Combine)
-        if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 9, *) {
+        if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *) {
           objectWillChange.send()
         }
       #endif
