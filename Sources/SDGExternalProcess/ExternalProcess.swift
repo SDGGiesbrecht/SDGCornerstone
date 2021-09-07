@@ -182,10 +182,10 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
         {
           process.executableURL = executable
         } else {
-          process.launchPath = executable.path.replacingMatches(for: "/", with: #"\"#)
+          process.launchPath = executable.path
         }
       #elseif os(Windows)
-        process.launchPath = executable.path
+        process.launchPath = executable.path.replacingMatches(for: "/", with: #"\"#)
         #warning("Debugging...")
         print("executableURL:", process.executableURL)
         print("executablePath", process.launchPath)
