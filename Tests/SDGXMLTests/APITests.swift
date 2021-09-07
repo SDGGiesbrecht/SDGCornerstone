@@ -610,16 +610,14 @@ class APITests: TestCase {
         #endif
       }
     }
-    #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
-      let tested = expectation(description: "init(from:) called")
-      APITests.expectationStorage1 = tested
-    #endif
     #if !PLATFORM_LACKS_FOUNDATION_XML
+      #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+        let tested = expectation(description: "init(from:) called")
+        APITests.expectationStorage1 = tested
+      #endif
       _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
       #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
-        #if !os(Windows)  // #workaround(Fails and needs debugging.)
-          wait(for: [tested], timeout: 0.1)
-        #endif
+        wait(for: [tested], timeout: 0.1)
       #endif
     #endif
   }
