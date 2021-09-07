@@ -44,8 +44,6 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
     commandName: String?,
     validate: (_ process: ExternalProcess) -> Bool
   ) where S: Sequence, S.Element == URL {
-    #warning("Debugging...")
-    print("searching:", locations, "commandName:", commandName)
     let adjustedLocations = locations
       .lazy.map { location -> URL in
         #if PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
@@ -92,8 +90,6 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       if let name = commandName,
         let searchResult = try? Shell.default.run(command: [searchCommand, name]).get()
       {  // @exempt(from: tests) Unreachable from CentOS.
-        #warning("Debugging...")
-        print("searchResult:", searchResult)
         let locations: [String]
         #if os(Windows)
           // “where” reports several paths; newlines are invalid
@@ -108,13 +104,6 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
             return
           }
         }
-      } else if let name = commandName {
-        #warning("Debugging...")
-        print("error:", Shell.default.run(command: [searchCommand, name]))
-        print("searchCommand:", [searchCommand, name])
-      } else {
-        #warning("Debugging...")
-        print("No name.")
       }
     #endif
 
@@ -170,9 +159,6 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       with environment: [String: String]? = nil,
       reportProgress: (_ line: String) -> Void = { _ in }
     ) -> Result<String, ExternalProcess.Error> {
-      #warning("Debugging...")
-      print("process:", executable)
-      print("arguments:", arguments)
 
       let process = Process()
 
