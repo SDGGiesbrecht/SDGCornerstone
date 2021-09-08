@@ -162,7 +162,6 @@ import PackageDescription
 ///   .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
 /// ),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
-/// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
 let package = Package(
   name: "SDGCornerstone",
@@ -820,7 +819,6 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
-    .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
 
     // Internal‐only:
@@ -862,6 +860,7 @@ for target in package.targets {
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 #endif
 
+import Foundation
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.4, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
@@ -872,47 +871,6 @@ if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 12.4, Test targets don’t work on watchOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.isTest })
   // #workaround(xcodebuild -version 12.4, Tool targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
-
-// Windows Tests (Generated automatically by Workspace.)
-import Foundation
-if ProcessInfo.processInfo.environment["TARGETING_WINDOWS"] == "true" {
-  var tests: [Target] = []
-  var other: [Target] = []
-  for target in package.targets {
-    if target.type == .test {
-      tests.append(target)
-    } else {
-      other.append(target)
-    }
-  }
-  package.targets = other
-  package.targets.append(
-    contentsOf: tests.map({ test in
-      return .target(
-        name: test.name,
-        dependencies: test.dependencies,
-        path: test.path ?? "Tests/\(test.name)",
-        exclude: test.exclude,
-        sources: test.sources,
-        publicHeadersPath: test.publicHeadersPath,
-        cSettings: test.cSettings,
-        cxxSettings: test.cxxSettings,
-        swiftSettings: test.swiftSettings,
-        linkerSettings: test.linkerSettings
-      )
-    })
-  )
-  package.targets.append(
-    .target(
-      name: "WindowsTests",
-      dependencies: tests.map({ Target.Dependency.target(name: $0.name) }),
-      path: "Tests/WindowsTests"
-    )
-  )
-}
-// End Windows Tests

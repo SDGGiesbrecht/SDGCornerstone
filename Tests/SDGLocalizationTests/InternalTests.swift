@@ -109,7 +109,7 @@ class InternalTests: TestCase {
         expectOperatingSystemLanguage = false
       }
     #endif
-    #if targetEnvironment(simulator) && (os(tvOS) || os(iOS))
+    #if targetEnvironment(simulator) && (os(tvOS) || os(iOS) || os(watchOS))
       // Default simulator state has no language set.
       expectOperatingSystemLanguage = false
     #endif

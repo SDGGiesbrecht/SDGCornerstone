@@ -25,7 +25,7 @@ import SDGXCTestUtilities
 
 class APITests: TestCase {
 
-  @available(macOS 10.12, iOS 10, tvOS 10, *)  // @exempt(from: unicode)
+  @available(macOS 10.12, iOS 10, tvOS 10, watchOS 3, *)  // @exempt(from: unicode)
   func testRunLoop() {
     #if !PLATFORM_LACKS_FOUNDATION_RUN_LOOP
       var driver: RunLoop.Driver?
