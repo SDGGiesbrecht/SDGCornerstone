@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 
 /*
  Package.swift
@@ -585,7 +585,7 @@ let package = Package(
 
     // Internal utilities.
 
-    .target(
+    .executableTarget(
       name: "generate‐root‐collation",
       dependencies: [
         "SDGLogic",
