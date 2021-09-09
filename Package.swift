@@ -156,10 +156,10 @@ import PackageDescription
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi])),
 /// .define(
 ///   "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-///   .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+///   .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
 /// ),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 /// ```
@@ -796,16 +796,17 @@ for target in package.targets {
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
     // #workaround(workspace version 0.36.3, Bug prevents centralization of windows conditions.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.3.3, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.3.3, Web lacks FoundationXML.)
-    // #workaround(Swift 5.3.3, Web lacks FoundationXML.XMLDocument.)
-    // #workaround(Swift 5.3.3, macOS lacks Swift.Float16.)
-    // #workaround(Swift 5.3.3, watchOS lacks XCTest.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.ProcessInfo.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.4.2, FoundationXML is broken on Windows.)
+    // #workaround(Swift 5.4.2, Web lacks FoundationXML.)
+    // #workaround(Swift 5.4.2, Web lacks FoundationXML.XMLDocument.)
+    // #workaround(Swift 5.4.2, FoundationXML.XMLDocument is broken on Windows.)
+    // #workaround(Swift 5.4.2, macOS lacks Swift.Float16.)
     // @example(conditions)
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
@@ -813,64 +814,53 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-      .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+      .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     // @endExample
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.3.3, Web lacks Dispatch.)
+    // #workaround(Swift 5.4.2, Web lacks Dispatch.)
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Web lacks Foundation.Thread.)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Web lacks Foundation.TimeZone.init(identifier:).)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.TimeZone.init(identifier:).)
     .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Web lacks Foundation.URL.init(fileURLWithPath:).)
+    // #workaround(Swift 5.4.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Web lacks XCTest.XCTestExpectation.)
+    // #workaround(Swift 5.4.2, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.3.3, Android emulator lacks Git.)
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
       "PLATFORM_LACKS_SWIFT_COMPILER",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
   ])
-
-  // #workaround(Swift 5.3.3, Only broken in Swift 5.4.)
-  #if compiler(>=5.4)
-    swiftSettings.append(contentsOf: [
-      .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows])),
-      .define(
-        "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-        .when(platforms: [.windows])
-      ),
-    ])
-  #endif
 }
-
-#if os(Windows)
-  // #workaround(Swift 5.4.0, Unable to build from Windows.)
-  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
-#endif
 
 import Foundation
-if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
-  // #workaround(xcodebuild -version 12.4, Tool targets don’t work on tvOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+if ProcessInfo.processInfo.environment["TARGETING_WINDOWS"] == "true" {
+  // #workaround(Swift 5.4.2, Unable to build from Windows.)
+  package.targets.removeAll(where: { $0.name.hasPrefix("generate‐") })
 }
+
+if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
+  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on tvOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.type == .executable })
+}
+
 if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
-  // #workaround(xcodebuild -version 12.4, Tool targets don’t work on iOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on iOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.type == .executable })
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 12.4, Tool targets don’t work on watchOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on watchOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.type == .executable })
 }
