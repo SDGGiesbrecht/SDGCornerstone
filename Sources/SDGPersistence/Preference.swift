@@ -41,14 +41,14 @@ public struct Preference: Equatable, TransparentWrapper {
 
   internal var propertyListObject: NSObject? {
     didSet {
-        cache = Cache()
+      cache = Cache()
     }
   }
-    private class Cache {
-      fileprivate init() {}
-      fileprivate var types: [ObjectIdentifier: Any?] = [:]
-    }
-    private var cache: Cache = Cache()
+  private class Cache {
+    fileprivate init() {}
+    fileprivate var types: [ObjectIdentifier: Any?] = [:]
+  }
+  private var cache: Cache = Cache()
 
   // MARK: - Usage
 
@@ -182,7 +182,7 @@ public struct Preference: Equatable, TransparentWrapper {
         }
       }
       let converted: Any?
-        converted = cached(in: &cache.types[ObjectIdentifier(type)]) { convert() }
+      converted = cached(in: &cache.types[ObjectIdentifier(type)]) { convert() }
       return converted as! T?
     }
 

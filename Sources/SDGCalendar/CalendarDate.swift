@@ -175,18 +175,18 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   private var definition: DateDefinition {
     willSet {
-        cache = Cache()
+      cache = Cache()
     }
     didSet {
-        cache.conversions[ObjectIdentifier(type(of: definition))] = definition
+      cache.conversions[ObjectIdentifier(type(of: definition))] = definition
     }
   }
 
-    private class Cache {
-      fileprivate init() {}
-      fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
-    }
-    private var cache = Cache()
+  private class Cache {
+    fileprivate init() {}
+    fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
+  }
+  private var cache = Cache()
 
   private var intervalSinceEpoch: CalendarInterval<FloatMax> {
     if let hebrew = definition as? HebrewDate {
@@ -217,11 +217,11 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - Returns: The converted definition.
   public func converted<D: DateDefinition>(to type: D.Type) -> D {
 
-      let cachedDefinition: DateDefinition = cached(
-        in: &cache.conversions[ObjectIdentifier(D.self)]
-      ) {
-        return recomputeDefinition(as: D.self)
-      }
+    let cachedDefinition: DateDefinition = cached(
+      in: &cache.conversions[ObjectIdentifier(D.self)]
+    ) {
+      return recomputeDefinition(as: D.self)
+    }
 
     if let result = cachedDefinition as? D {
       return result
