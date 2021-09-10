@@ -175,24 +175,18 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   private var definition: DateDefinition {
     willSet {
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Declaration may not be in a Comdat!)
-        cache = Cache()
-      #endif
+      cache = Cache()
     }
     didSet {
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Declaration may not be in a Comdat!)
-        cache.conversions[ObjectIdentifier(type(of: definition))] = definition
-      #endif
+      cache.conversions[ObjectIdentifier(type(of: definition))] = definition
     }
   }
 
-  #if !os(Windows)  // #workaround(Swift 5.3.2, Declaration may not be in a Comdat!)
-    private class Cache {
-      fileprivate init() {}
-      fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
-    }
-    private var cache = Cache()
-  #endif
+  private class Cache {
+    fileprivate init() {}
+    fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
+  }
+  private var cache = Cache()
 
   private var intervalSinceEpoch: CalendarInterval<FloatMax> {
     if let hebrew = definition as? HebrewDate {
@@ -223,15 +217,11 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - Returns: The converted definition.
   public func converted<D: DateDefinition>(to type: D.Type) -> D {
 
-    #if os(Windows)  // #workaround(Swift 5.3.2, Declaration may not be in a Comdat!)
-      let cachedDefinition: DateDefinition = recomputeDefinition(as: D.self)
-    #else
-      let cachedDefinition: DateDefinition = cached(
-        in: &cache.conversions[ObjectIdentifier(D.self)]
-      ) {
-        return recomputeDefinition(as: D.self)
-      }
-    #endif
+    let cachedDefinition: DateDefinition = cached(
+      in: &cache.conversions[ObjectIdentifier(D.self)]
+    ) {
+      return recomputeDefinition(as: D.self)
+    }
 
     if let result = cachedDefinition as? D {
       return result
