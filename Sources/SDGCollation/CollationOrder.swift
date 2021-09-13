@@ -62,21 +62,15 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
 
   internal var rules: [StrictString: [CollationElement]] {
     didSet {
-      #if !os(Windows)
-        // #workaround(Swift 5.3.2, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
-        cache = Cache()
-      #endif
+      cache = Cache()
     }
   }
 
-  #if !os(Windows)
-    // #workaround(Swift 5.3.2, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
-    private class Cache {
-      fileprivate init() {}
-      fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
-    }
-    private var cache = Cache()
-  #endif
+  private class Cache {
+    fileprivate init() {}
+    fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
+  }
+  private var cache = Cache()
 
   internal let beforeIndex: CollationIndex
   private let endOfStringIndex: CollationIndex
@@ -102,12 +96,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
         )
       )
     }
-    #if os(Windows)
-      // #workaround(Swift 5.3.2, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
-      return create()
-    #else
-      return cached(in: &cache.contextualMapping) { create() }
-    #endif
+    return cached(in: &cache.contextualMapping) { create() }
   }
 
   // MARK: - Fallback
