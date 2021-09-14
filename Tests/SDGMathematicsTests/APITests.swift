@@ -98,7 +98,7 @@ class APITests: TestCase {
   }
 
   func testAngle() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testMeasurementConformance(of: Angle<Double>.self)
 
       let _1: Double = 1
@@ -178,11 +178,11 @@ class APITests: TestCase {
   }
 
   func testFloat() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testRealArithmeticConformance(of: Double.self)
       testRealArithmeticConformance(of: FloatMax.self)
       testRealArithmeticConformance(of: CGFloat.self)
-      #if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
         testRealArithmeticConformance(of: Float80.self)
       #endif
       testRealArithmeticConformance(of: Float.self)
@@ -202,7 +202,7 @@ class APITests: TestCase {
   }
 
   func testFunctionAnalysis() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let negativeQuatratic = { (input: Int) -> Int in
         return −(input ↑ 2)
       }
@@ -242,7 +242,7 @@ class APITests: TestCase {
   }
 
   func testInt() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testIntegralArithmeticConformance(of: Int.self)
       testIntegralArithmeticConformance(of: IntMax.self)
       testIntegralArithmeticConformance(of: Int64.self)
@@ -295,7 +295,7 @@ class APITests: TestCase {
     }
   }
   func testNegatable() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testNegatableConformance(
         minuend: NegatableSignedNumeric(5),
         subtrahend: NegatableSignedNumeric(3),
@@ -305,7 +305,7 @@ class APITests: TestCase {
   }
 
   func testOneDimensionalPoint() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var x = 1
       x.decrement()
       XCTAssertEqual(0, x)
@@ -406,7 +406,7 @@ class APITests: TestCase {
     }
   }
   func testPointProtocol() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testPointProtocolConformance(
         departure: PointProtocolVectorSelfExample(8),
         vector: PointProtocolVectorSelfExample(1),
@@ -488,7 +488,7 @@ class APITests: TestCase {
     init(_ int: SDGMathematics.IntMax) {
       value = Double(int)
     }
-    #if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+    #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
       init(_ floatingPoint: FloatMax) {
         value = Double(floatingPoint)
       }
@@ -515,7 +515,7 @@ class APITests: TestCase {
     }
   }
   func testRealArithmetic() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(0.π, Double.π)
       XCTAssertEqual(0.τ, Double.τ)
       XCTAssertEqual(e(), Double.e)
@@ -530,7 +530,7 @@ class APITests: TestCase {
   }
 
   func testSequence() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(∑[1, 2, 3, 4], 10)
       XCTAssertEqual(∏[1, 2, 3, 4], 24)
 
@@ -661,7 +661,7 @@ class APITests: TestCase {
     }
   }
   func testSubtractable() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
         SubtractableNumericExample(1)
@@ -724,7 +724,7 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
       testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
       testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
@@ -772,7 +772,7 @@ class APITests: TestCase {
     }
   }
   func testVectorProtocol() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testRationalVectorConformance(
         augend: VectorProtocolExample(1),
         addend: VectorProtocolExample(2),

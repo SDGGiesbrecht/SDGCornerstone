@@ -19,7 +19,7 @@ import Foundation
 
 import RealModule
 
-#if (os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
+#if PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64))
   // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
@@ -290,7 +290,7 @@ extension CGFloat: FloatFamily {
   }
 }
 
-#if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+#if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
   extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable

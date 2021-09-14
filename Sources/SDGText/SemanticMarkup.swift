@@ -152,7 +152,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
     return StrictString(html)
   }
 
-  #if canImport(AppKit) || canImport(UIKit)
+  #if PLATFORM_HAS_COCOA
 
     // Exposed for use by SDGInterface.
     public static func _attributedString(
@@ -161,16 +161,14 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
     ) throws -> NSAttributedString {
       var adjustedFontName = font.fontName
 
-      #if canImport(AppKit) || canImport(UIKit)
-        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
-          // Older platforms do not support this CSS, but can use the name directly.
-          if adjustedFontName == Font.system.fontName
-            ∨ adjustedFontName == Font.system.resized(to: font.size).fontName
-          {
-            adjustedFontName = "\u{2D}apple\u{2D}system"
-          }
+      if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
+        // Older platforms do not support this CSS, but can use the name directly.
+        if adjustedFontName == Font.system.fontName
+          ∨ adjustedFontName == Font.system.resized(to: font.size).fontName
+        {
+          adjustedFontName = "\u{2D}apple\u{2D}system"
         }
-      #endif
+      }
 
       var modified = "<span style=\u{22}"
 
@@ -257,7 +255,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
   // MARK: - CustomPlaygroundDisplayConvertible
 
   public var playgroundDescription: Any {
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
       return richText(font: Font.system)
     #else
       return rawTextApproximation()

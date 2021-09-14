@@ -55,7 +55,7 @@ class APITests: TestCase {
   }
 
   func testXMLAttribute() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       struct XMLAttributeDemonstration: Codable, Equatable {
         init() {
           child = 1
@@ -87,7 +87,7 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         testCodableConformance(
           of: XML.AttributeValue(text: "value"),
           uniqueTestName: "Value"
@@ -97,7 +97,7 @@ class APITests: TestCase {
   }
 
   func testXMLCharacterData() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: "attribute text, 0 < 1" as XML.CharacterData,
         localizations: InterfaceLocalization.self,
@@ -114,7 +114,7 @@ class APITests: TestCase {
   }
 
   func testXMLCoderArray() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try SDGXMLTests.testXML(
         of: ["A", "B", "C"],
         specification: "Array",
@@ -193,7 +193,7 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClassUnkeyed() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try SDGXMLTests.testXML(
         of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
         specification: "Unkeyed Class",
@@ -258,7 +258,7 @@ class APITests: TestCase {
         _ = unkeyed.codingPath
       }
     }
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try SDGXMLTests.testXML(
         of: Customized(),
         specification: "Customized",
@@ -344,7 +344,7 @@ class APITests: TestCase {
         try container.encode("non‐nil")
       }
     }
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try SDGXMLTests.testXML(
         of: WithNil(a: "A", b: nil, c: "C"),
         specification: "With Nil",
@@ -477,7 +477,7 @@ class APITests: TestCase {
         try container.encode(nested)
       }
     }
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try SDGXMLTests.testXML(
         of: Unkeyed(),
         specification: "Unkeyed",
@@ -515,7 +515,7 @@ class APITests: TestCase {
   }
 
   func testXMLCoderXMLUnkeyed() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       #if !PLATFORM_LACKS_FOUNDATION_XML
         struct XMLPropertyUnkeyed: Codable, Equatable {
           var properties: [XML.Element]
@@ -695,7 +695,7 @@ class APITests: TestCase {
   }
 
   func testXMLDecoderTypeMismatch() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       struct Nested: Decodable {
         var property: Int
       }
@@ -816,7 +816,7 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         try testErrorDecsription(
           triggerError: { () -> String in
             var caughtError: String = ""
@@ -936,7 +936,7 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         try testErrorDecsription(
           triggerError: { () -> String in
             var caughtError: String = ""
@@ -980,7 +980,7 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         try testErrorDecsription(
           triggerError: { () -> String in
             var caughtError: String = ""
@@ -1012,7 +1012,7 @@ class APITests: TestCase {
   }
 
   func testXMLDocument() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: XML.Document(rootElement: XML.Element(name: "root")),
         localizations: InterfaceLocalization.self,
@@ -1046,7 +1046,7 @@ class APITests: TestCase {
   }
 
   func testXMLElement() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       #if !PLATFORM_LACKS_FOUNDATION_XML
         XCTAssertNil(try? XML.Element(source: "<element>"))
         XCTAssertEqual(

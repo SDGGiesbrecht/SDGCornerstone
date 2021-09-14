@@ -28,7 +28,7 @@ extension Angle: CustomPlaygroundDisplayConvertible {
   // MARK: - CustomPlaygroundDisplayConvertible
 
   public var playgroundDescription: Any {
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
 
       let floatAngle: Angle<Double> = Double(self.inRadians.floatingPointApproximation).radians
 

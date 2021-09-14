@@ -29,7 +29,7 @@ class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
     // #workaround(Swift 5.3.2, Segmentation fault.)
-    #if !(os(Windows) || PLATFORM_LACKS_FOUNDATION_FILE_MANAGER)
+    #if !(PLATFORM_SUFFERS_SEGMENTATION_FAULTS || PLATFORM_LACKS_FOUNDATION_FILE_MANAGER)
       LocalizationSetting(orderOfPrecedence: ["en"]).do {
         // @example(readMe🇨🇦EN)
         // ••••••• Localization •••••••

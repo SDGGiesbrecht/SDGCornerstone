@@ -26,7 +26,7 @@
       switch font.definition {
       case .identifier(let name, let size):
         self = SwiftUI.Font.custom(name, size: CGFloat(size))
-      #if canImport(AppKit) || canImport(UIKit)
+      #if PLATFORM_HAS_COCOA
         case .cocoa(let font):
           self = SwiftUI.Font(font)
       #endif
