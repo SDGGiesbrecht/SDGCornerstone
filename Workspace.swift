@@ -51,6 +51,3 @@ configuration.documentation.api.ignoredDependencies = [
   "_NumericsShims",
   "RealModule",
 ]
-
-// #workaround(workspace version 0.36.3, False positives.)
-configuration.proofreading.swiftFormatConfiguration?.rules["UseLetInEveryBoundCaseVariable"] = false
