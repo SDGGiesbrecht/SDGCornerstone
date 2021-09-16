@@ -14,42 +14,22 @@
 
 import SDGMathematics
 
-#if compiler(>=5.3)
-  // #workaround(Swift 5.3.2, Compiler crashes on generic version.)
+// #workaround(Swift 5.4.2, Should be “Element: StringFamily” but for compiler crash.)
 
-  extension Collection where Element == StrictString {
+extension Collection where Element == StrictString {
 
-    // #documentation(Array<StringFamily>.joined(separator:))
-    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
-    ///
-    /// - Parameters:
-    ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @inlinable public func joined(separator: Element = "") -> Element {
-      guard var result = self.first else {
-        return ""
-      }
-      for line in self.dropFirst() {
-        result += separator + line
-      }
-      return result
+  // #documentation(Array<StringFamily>.joined(separator:))
+  /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
+  ///
+  /// - Parameters:
+  ///     - separator: A sequence to insert between each of this sequence’s elements.
+  @inlinable public func joined(separator: Element = "") -> Element {
+    guard var result = self.first else {
+      return ""
     }
-  }
-#else
-  extension Collection where Element: StringFamily {
-
-    // @documentation(Array<StringFamily>.joined(separator:))
-    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
-    ///
-    /// - Parameters:
-    ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @inlinable public func joined(separator: Element = "") -> Element {
-      guard var result = self.first else {
-        return ""
-      }
-      for line in self.dropFirst() {
-        result += separator + line
-      }
-      return result
+    for line in self.dropFirst() {
+      result += separator + line
     }
+    return result
   }
-#endif
+}
