@@ -150,6 +150,7 @@ import PackageDescription
 /// Some platforms lack certain features. The compilation conditions which appear throughout the documentation are defined as follows:
 ///
 /// ```swift
+/// .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
@@ -162,6 +163,10 @@ import PackageDescription
 ///   .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
 /// ),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
+/// .define(
+///   "PLATFORM_LACKS_SWIFT_FLOAT_80",
+///   .when(platforms: [.windows, .wasi, .tvOS, .iOS, .android, .watchOS])
+/// ),
 /// ```
 let package = Package(
   name: "SDGCornerstone",
@@ -795,7 +800,6 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(workspace version 0.36.3, Bug prevents centralization of windows conditions.)
     // #workaround(Swift 5.4.2, Web lacks Foundation.FileManager.)
     // #workaround(Swift 5.4.2, Web lacks Foundation.Process.)
     // #workaround(Swift 5.4.2, Web lacks Foundation.ProcessInfo.)
@@ -808,6 +812,7 @@ for target in package.targets {
     // #workaround(Swift 5.4.2, FoundationXML.XMLDocument is broken on Windows.)
     // #workaround(Swift 5.4.2, macOS lacks Swift.Float16.)
     // @example(conditions)
+    .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
@@ -820,6 +825,10 @@ for target in package.targets {
       .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
+    .define(
+      "PLATFORM_LACKS_SWIFT_FLOAT_80",
+      .when(platforms: [.windows, .wasi, .tvOS, .iOS, .android, .watchOS])
+    ),
     // @endExample
 
     // Internal‐only:
@@ -841,6 +850,8 @@ for target in package.targets {
       "PLATFORM_LACKS_SWIFT_COMPILER",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
+    // #workaround(Windows suffers unexplained segmentation faults.)
+    .define("PLATFORM_SUFFERS_SEGMENTATION_FAULTS", .when(platforms: [.windows])),
   ])
 }
 

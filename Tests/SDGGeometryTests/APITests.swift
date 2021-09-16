@@ -26,20 +26,20 @@ import SDGGeometryTestUtilities
 class APITests: TestCase {
 
   func testAngle() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       _ = 0°.playgroundDescription
       _ = (−90)°.playgroundDescription
     #endif
   }
 
   func testBézierPath() {
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
       _ = BézierPath().playgroundDescription
     #endif
   }
 
   func testPoint() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
       #if canImport(CoreGraphics)
         testTwoDimensionalPointProtocolConformance(CGPoint.self)
@@ -60,7 +60,7 @@ class APITests: TestCase {
   }
 
   func testVector() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
       #if canImport(CoreGraphics)
         testTwoDimensionalVectorProtocolConformance(CGVector.self)

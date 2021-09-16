@@ -101,7 +101,7 @@ public struct Font {
       switch definition {
       case .identifier(let name, _):
         return name
-      #if canImport(AppKit) || canImport(UIKit)
+      #if PLATFORM_HAS_COCOA
         case .cocoa(let font):
           return font.fontName
       #endif
@@ -111,7 +111,7 @@ public struct Font {
       switch definition {
       case .identifier(_, let size):
         definition = .identifier(name: newValue, size: size)
-      #if canImport(AppKit) || canImport(UIKit)
+      #if PLATFORM_HAS_COCOA
         case .cocoa(let font):
           definition = .identifier(name: newValue, size: Double(font.pointSize))
       #endif
@@ -125,7 +125,7 @@ public struct Font {
       switch definition {
       case .identifier(_, let size):
         return size
-      #if canImport(AppKit) || canImport(UIKit)
+      #if PLATFORM_HAS_COCOA
         case .cocoa(let font):
           return Double(font.pointSize)
       #endif
@@ -146,7 +146,7 @@ public struct Font {
     switch definition {
     case .identifier(let name, _):
       return Font(definition: .identifier(name: name, size: size))
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
       case .cocoa(let font):
         #if canImport(AppKit)
           return Font(definition: .cocoa(NSFontManager.shared.convert(font, toSize: CGFloat(size))))

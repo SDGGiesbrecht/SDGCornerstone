@@ -50,7 +50,7 @@ class RegressionTests: TestCase {
   func testNestingLevelLocation() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let nestString = StrictString("%{1~a~a^a|^}")
       let open: StrictString = "{"
       let close: StrictString = "}"
@@ -77,7 +77,7 @@ class RegressionTests: TestCase {
   func testSemanticMarkupToAttributedStringPreservesFont() {
     // Untracked
 
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
       #if canImport(UIKit)
         typealias NSFont = UIFont
       #endif

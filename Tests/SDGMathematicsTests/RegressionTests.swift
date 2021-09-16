@@ -23,7 +23,7 @@ class RegressionTests: TestCase {
   func testAddAndSetIsUnambiguous() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       func runTests<N: IntegralArithmetic>(_ type: N.Type) {
         var x: N = 0
         let _1: N = 1
@@ -81,7 +81,7 @@ class RegressionTests: TestCase {
   func testDivisionOfNegatives() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let negativeThree = −3
       XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by: 1), −3)
       let negativeEighteen = −18
@@ -99,7 +99,7 @@ class RegressionTests: TestCase {
   func testSubtraction() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       func runTests<N: WholeArithmetic>(_ type: N.Type) {
         let five: N = 10 − 5
         XCTAssertEqual(five, 5)
@@ -122,7 +122,7 @@ class RegressionTests: TestCase {
   func testSubtractionIsUnambiguous() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let _: UInt = 3 − 2
       let _: UInt64 = 3 − 2
       let _: UInt32 = 3 − 2
@@ -134,7 +134,7 @@ class RegressionTests: TestCase {
       let _: Int16 = 3 − 2
       let _: Int8 = 3 − 2
       let _: Double = 3 − 2
-      #if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
         let _: Float80 = 3 − 2
       #endif
       let _: Float = 3 − 2

@@ -14,7 +14,7 @@
 
 // #workaround(Swift 5.4, Should be “BézierPath.swift” but for Windows bug.)
 
-#if canImport(AppKit) || canImport(UIKit)
+#if PLATFORM_HAS_COCOA
   #if canImport(AppKit)
     import AppKit
   #elseif canImport(UIKit)

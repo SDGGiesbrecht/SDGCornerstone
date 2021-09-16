@@ -55,7 +55,7 @@ class APITests: TestCase {
     XCTAssertEqual(font.fontName, "Some Font")
     XCTAssertEqual(font.size, 8)
 
-    #if canImport(AppKit) || canImport(UIKit)
+    #if PLATFORM_HAS_COCOA
       #if canImport(AppKit)
         _ = NSFont.from(font)
       #elseif canImport(UIKit)
@@ -83,7 +83,7 @@ class APITests: TestCase {
   }
 
   func testLineView() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
       testCustomStringConvertibleConformance(
         of: "A\nB\nC".lines,
@@ -187,7 +187,7 @@ class APITests: TestCase {
   }
 
   func testRange() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var string = "á\nb̂\nc̀"
       XCTAssertEqual(string.lines.bounds.sameRange(in: string.scalars), string.scalars.bounds)
       var strict = StrictString(string)
@@ -277,7 +277,7 @@ class APITests: TestCase {
   }
 
   func testNewlinePattern() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testPattern(CharacterSet.newlinePattern, match: "\n".scalars)
       testPattern(CharacterSet.newlinePattern, match: "\u{D}\u{A}".scalars)
       XCTAssert(CharacterSet.newlinePattern.matches(in: ["a", "b", "c"], at: 0).isEmpty)
@@ -309,7 +309,7 @@ class APITests: TestCase {
   }
 
   func testSemanticMarkup() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
       testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
       testCodableConformance(
@@ -366,7 +366,7 @@ class APITests: TestCase {
   }
 
   func testStrictString() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testBidirectionalCollectionConformance(of: StrictString("ABC"))
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
       testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
@@ -549,7 +549,7 @@ class APITests: TestCase {
   }
 
   func testString() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testBidirectionalCollectionConformance(of: "ABC")
       testRangeReplaceableCollectionConformance(of: String.self, element: "A")
 
@@ -598,7 +598,7 @@ class APITests: TestCase {
   }
 
   func testStringClusterIndex() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let strict = StrictString("français")
       let string = String(strict)
       let index = string.clusters.index(string.clusters.startIndex, offsetBy: 7)

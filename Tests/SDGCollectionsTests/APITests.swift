@@ -94,7 +94,7 @@ class APITests: TestCase {
   }
 
   func testBidirectionalCollection() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let collection = [1, 2, 3, 4, 5, 4, 5, 6]
       let match = collection.lastMatch(for: [4, 5])
       XCTAssertEqual(match?.range, 5..<7)
@@ -212,7 +212,7 @@ class APITests: TestCase {
   }
 
   func testCollection() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       forAllLegacyModes {
         let collection = [1, 2, 3, 4, 5, 4, 5, 6]
         let match = collection.firstMatch(for: [2, 3])
@@ -455,7 +455,7 @@ class APITests: TestCase {
   }
 
   func testCollectionDifference() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try forAllLegacyModes {
         let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
         let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
@@ -569,7 +569,7 @@ class APITests: TestCase {
   }
 
   func testCollectionDifferenceChange() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       try forAllLegacyModes {
         let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
           .remove(offset: 10, element: "removed element", associatedWith: 20),
@@ -1195,7 +1195,7 @@ class APITests: TestCase {
   }
 
   func testRepetitionPattern() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
     #endif
   }
@@ -1272,7 +1272,7 @@ class APITests: TestCase {
   }
 
   func testSymmetricDifference() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testSetDefinitionConformance(
         of: IntensionalSet(where: { $0.isEven }) ∆ (1...100),
         member: 1,

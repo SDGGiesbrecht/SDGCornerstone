@@ -160,7 +160,7 @@ class APITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCodableConformance(
         of: LosslessStirngConvertibleExample("Example"),
         uniqueTestName: "Example"
@@ -249,7 +249,7 @@ class APITests: TestCase {
   }
 
   func testSpecification() {
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
       let new = specifications.appendingPathComponent("New.txt")
