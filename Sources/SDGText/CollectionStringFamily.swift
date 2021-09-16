@@ -18,7 +18,6 @@ import SDGMathematics
 
 extension Collection where Element == StrictString {
 
-  // #documentation(Array<StringFamily>.joined(separator:))
   /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
   ///
   /// - Parameters:
