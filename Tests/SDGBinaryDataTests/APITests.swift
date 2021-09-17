@@ -28,7 +28,6 @@ import SDGLocalizationTestUtilities
 class APITests: TestCase {
 
   func testData() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testBitFieldConformance(
         start: Data([0b0101_0110]),
         not: Data([0b1010_1001]),
@@ -62,7 +61,6 @@ class APITests: TestCase {
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
   }
 
   func testDataStream() {
