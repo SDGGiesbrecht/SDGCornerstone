@@ -41,9 +41,9 @@ class APITests: TestCase {
 
       #warning("Debugging...")
       print("B")
+      let data = Data([UInt8.max])
     #warning("Debugging...")
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let data = Data([UInt8.max])
       XCTAssertEqual(data.binary.count, 8)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
     #endif
