@@ -28,48 +28,32 @@ import SDGLocalizationTestUtilities
 class APITests: TestCase {
 
   func testData() {
-    #warning("Debugging...")
-    print("A")
-      testBitFieldConformance(
-        start: Data([0b0101_0110]),
-        not: Data([0b1010_1001]),
-        other: Data([0b1101_0010]),
-        and: Data([0b0101_0010]),
-        or: Data([0b1101_0110]),
-        exclusiveOr: Data([0b1000_0100])
-      )
+    testBitFieldConformance(
+      start: Data([0b0101_0110]),
+      not: Data([0b1010_1001]),
+      other: Data([0b1101_0010]),
+      and: Data([0b0101_0010]),
+      or: Data([0b1101_0110]),
+      exclusiveOr: Data([0b1000_0100])
+    )
 
-      #warning("Debugging...")
-      print("B")
-      let data = Data([UInt8.max])
-    #warning("Debugging...")
+    let data = Data([UInt8.max])
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(data.binary.count, 8)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
-    #endif
 
-      #warning("Debugging...")
-      print("C")
-    #warning("Debugging...")
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var toReverse = Data([0b11110000, 0b00000000])
       toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
 
-      #warning("Debugging...")
-      print("D")
       let alternating = Data([0b01010101, 0b01010101])
       let sorted = Data([0b00000000, 0b11111111])
 
-      #warning("Debugging...")
-      print("E")
       XCTAssertEqual(alternating.bitwiseNot(), Data([0b10101010, 0b10101010]))
       XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data([0b00000000, 0b01010101]))
       XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data([0b01010101, 0b11111111]))
       XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
 
-      #warning("Debugging...")
-      print("F")
       var forDescription = Data([0, 0])
       forDescription.binary[11] = true
       testCustomStringConvertibleConformance(
@@ -78,8 +62,6 @@ class APITests: TestCase {
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #warning("Debugging...")
-    print("G")
     #endif
   }
 
