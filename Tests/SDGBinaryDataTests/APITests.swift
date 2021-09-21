@@ -28,17 +28,17 @@ import SDGLocalizationTestUtilities
 class APITests: TestCase {
 
   func testData() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testBitFieldConformance(
-        start: Data([0b0101_0110]),
-        not: Data([0b1010_1001]),
-        other: Data([0b1101_0010]),
-        and: Data([0b0101_0010]),
-        or: Data([0b1101_0110]),
-        exclusiveOr: Data([0b1000_0100])
-      )
+    testBitFieldConformance(
+      start: Data([0b0101_0110]),
+      not: Data([0b1010_1001]),
+      other: Data([0b1101_0010]),
+      and: Data([0b0101_0010]),
+      or: Data([0b1101_0110]),
+      exclusiveOr: Data([0b1000_0100])
+    )
 
-      let data = Data([UInt8.max])
+    let data = Data([UInt8.max])
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(data.binary.count, 8)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
