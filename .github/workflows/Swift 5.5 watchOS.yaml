@@ -37,4 +37,5 @@ jobs:
       shell: bash
       run: |
         set -x
+        export TARGETING_WATCHOS=true
         xcodebuild test -destination 'Apple Watch Series 6 - 40mm' -scheme SDGCornerstone-Package
