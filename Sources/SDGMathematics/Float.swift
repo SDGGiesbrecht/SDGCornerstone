@@ -284,10 +284,6 @@ extension CGFloat: FloatFamily {
   @inlinable public init(_ uInt: UIntMax) {
     self = CGFloat(NativeType(uInt))
   }
-
-  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    return CGFloat(NativeType(precedingValue) ↑ NativeType(followingValue))
-  }
 }
 
 #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
