@@ -285,6 +285,7 @@ extension CGFloat: FloatFamily {
     self = CGFloat(NativeType(uInt))
   }
 
+  // #workaround(Swift 5.4.3, Became recursive in Swift 5.5.)
   #if swift(<5.5)
     @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
       return CGFloat(NativeType(precedingValue) ↑ NativeType(followingValue))
