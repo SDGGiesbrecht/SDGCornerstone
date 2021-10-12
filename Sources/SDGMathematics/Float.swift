@@ -177,7 +177,7 @@ extension FloatFamily where Self: ElementaryFunctions {
   ) -> Self {
     #if PLATFORM_SUFFERS_SEGMENTATION_FAULTS
     // #warning(Mathematically incorrect.)
-    return self
+    return precedingValue
     #else
     if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
       return Self.pow(precedingValue, followingValue)
