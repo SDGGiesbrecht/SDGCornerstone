@@ -175,6 +175,10 @@ extension FloatFamily where Self: ElementaryFunctions {
     precedingValue: Self,
     followingValue: Self
   ) -> Self {
+    #if PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    // #warning(Mathematically incorrect.)
+    return self
+    #else
     if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
       return Self.pow(precedingValue, followingValue)
     } else if let integer = Int(exactly: followingValue) {
@@ -184,6 +188,7 @@ extension FloatFamily where Self: ElementaryFunctions {
       // Allow SwiftNumerics to decide on the error:
       return Self.pow(precedingValue, followingValue)
     }
+    #endif
   }
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
     return unifiedSwiftNumericsPower(precedingValue: precedingValue, followingValue: followingValue)
