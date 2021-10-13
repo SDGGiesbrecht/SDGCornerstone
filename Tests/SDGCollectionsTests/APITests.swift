@@ -628,14 +628,16 @@ class APITests: TestCase {
     }
   }
   func testComparableSet() {
-    testComparableSetConformance(
-      of: ComparableSetExample([1, 2, 3]),
-      member: 1,
-      nonmember: 10,
-      superset: ComparableSetExample([0, 1, 2, 3]),
-      overlapping: ComparableSetExample([2, 4]),
-      disjoint: ComparableSetExample([−1, −2, −3])
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      testComparableSetConformance(
+        of: ComparableSetExample([1, 2, 3]),
+        member: 1,
+        nonmember: 10,
+        superset: ComparableSetExample([0, 1, 2, 3]),
+        overlapping: ComparableSetExample([2, 4]),
+        disjoint: ComparableSetExample([−1, −2, −3])
+      )
+    #endif
   }
 
   func testConcatenatedPatterns() {
