@@ -35,13 +35,8 @@ extension IntFamily {
   // MARK: - Negatable
 
   @inlinable public static prefix func − (operand: Self) -> Self {
-    #if PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-    // #warning(Mathematically incorrect.)
-    return operand
-    #else
     // #workaround(Swift 5.5, Should just be negative instead of minus, but for compiler bug.)
     return 0 - operand  // @exempt(from: unicode)
-    #endif
   }
 
   // MARK: - NumericAdditiveArithmetic
