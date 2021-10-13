@@ -161,11 +161,13 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClass() throws {
-    try SDGXMLTests.testXML(
-      of: Subclass(a: "A", b: "B", c: "C", d: "D"),
-      specification: "Class",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: Subclass(a: "A", b: "B", c: "C", d: "D"),
+        specification: "Class",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   final class UnkeyedSubclass: Superclass, Equatable {
