@@ -270,15 +270,17 @@ class APITests: TestCase {
   }
 
   func testXMLCoderDictionary() throws {
-    try SDGXMLTests.testXML(
-      of: [
-        "key": "value",
-        "Schlüssel": "Wert",
-        "clef": "valeur",
-      ],
-      specification: "Dictionary",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: [
+          "key": "value",
+          "Schlüssel": "Wert",
+          "clef": "valeur",
+        ],
+        specification: "Dictionary",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderKeyedNil() throws {
