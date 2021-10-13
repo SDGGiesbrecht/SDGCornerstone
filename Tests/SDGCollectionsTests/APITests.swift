@@ -203,12 +203,14 @@ class APITests: TestCase {
   }
 
   func testClosedRange() {
-    let range = 1...10
-    XCTAssertEqual(range.map({ Double($0) }), 1...10)
-    XCTAssertEqual(range.map({ Double($0) as Double? }), 1...10)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      let range = 1...10
+      XCTAssertEqual(range.map({ Double($0) }), 1...10)
+      XCTAssertEqual(range.map({ Double($0) as Double? }), 1...10)
 
-    let closure: (Int) -> Double? = { −Double($0) }
-    XCTAssertNil(range.map(closure))
+      let closure: (Int) -> Double? = { −Double($0) }
+      XCTAssertNil(range.map(closure))
+    #endif
   }
 
   func testCollection() {
