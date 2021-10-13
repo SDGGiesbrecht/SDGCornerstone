@@ -314,11 +314,13 @@ class APITests: TestCase {
         try container.encodeNil(forKey: .d)
       }
     }
-    try SDGXMLTests.testXML(
-      of: WithNil(a: "A", b: nil, c: "C"),
-      specification: "With Keyed Nil",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: WithNil(a: "A", b: nil, c: "C"),
+        specification: "With Keyed Nil",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderNil() throws {
