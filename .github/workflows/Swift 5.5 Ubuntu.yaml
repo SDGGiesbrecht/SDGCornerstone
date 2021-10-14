@@ -15,7 +15,7 @@ name: Swift 5.5 Ubuntu
 on: [push, pull_request]
 
 jobs:
-  Swift_5_5_ Ubuntu:
+  Swift_5_5_Ubuntu:
     name: Swift 5.5 Ubuntu
     runs-on: ubuntu-20.04
     container: swift:5.5.0-focal
