@@ -161,11 +161,13 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClass() throws {
-    try SDGXMLTests.testXML(
-      of: Subclass(a: "A", b: "B", c: "C", d: "D"),
-      specification: "Class",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: Subclass(a: "A", b: "B", c: "C", d: "D"),
+        specification: "Class",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   final class UnkeyedSubclass: Superclass, Equatable {
@@ -268,15 +270,17 @@ class APITests: TestCase {
   }
 
   func testXMLCoderDictionary() throws {
-    try SDGXMLTests.testXML(
-      of: [
-        "key": "value",
-        "Schlüssel": "Wert",
-        "clef": "valeur",
-      ],
-      specification: "Dictionary",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: [
+          "key": "value",
+          "Schlüssel": "Wert",
+          "clef": "valeur",
+        ],
+        specification: "Dictionary",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderKeyedNil() throws {
@@ -310,11 +314,13 @@ class APITests: TestCase {
         try container.encodeNil(forKey: .d)
       }
     }
-    try SDGXMLTests.testXML(
-      of: WithNil(a: "A", b: nil, c: "C"),
-      specification: "With Keyed Nil",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: WithNil(a: "A", b: nil, c: "C"),
+        specification: "With Keyed Nil",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderNil() throws {
@@ -374,11 +380,13 @@ class APITests: TestCase {
         _ = container.codingPath
       }
     }
-    try SDGXMLTests.testXML(
-      of: SingleValue(value: Nested()),
-      specification: "Single Value",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: SingleValue(value: Nested()),
+        specification: "Single Value",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderString() throws {
@@ -411,11 +419,13 @@ class APITests: TestCase {
       var float: Float = 0
       var nested: Nested = Nested()
     }
-    try SDGXMLTests.testXML(
-      of: Structure(),
-      specification: "Structure",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: Structure(),
+        specification: "Structure",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderUnkeyed() throws {

@@ -150,31 +150,33 @@ class APITests: TestCase {
   }
 
   func testComparable() {
-    test(operator: (≤, "≤"), on: (0, 1), returns: true)
-    test(operator: (≤, "≤"), on: (0, 0), returns: true)
-    test(operator: (≤, "≤"), on: (0, −1), returns: false)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      test(operator: (≤, "≤"), on: (0, 1), returns: true)
+      test(operator: (≤, "≤"), on: (0, 0), returns: true)
+      test(operator: (≤, "≤"), on: (0, −1), returns: false)
 
-    test(operator: (≥, "≥"), on: (0, 1), returns: false)
-    test(operator: (≥, "≥"), on: (0, 0), returns: true)
-    test(operator: (≥, "≥"), on: (0, −1), returns: true)
+      test(operator: (≥, "≥"), on: (0, 1), returns: false)
+      test(operator: (≥, "≥"), on: (0, 0), returns: true)
+      test(operator: (≥, "≥"), on: (0, −1), returns: true)
 
-    let list = [1, 4, 1, 5]
-    var value = 3
+      let list = [1, 4, 1, 5]
+      var value = 3
 
-    for entry in list {
-      value.decrease(to: entry)
-    }
-    XCTAssertEqual(value, 1)
+      for entry in list {
+        value.decrease(to: entry)
+      }
+      XCTAssertEqual(value, 1)
 
-    for entry in list {
-      value.increase(to: entry)
-    }
-    XCTAssertEqual(value, 5)
+      for entry in list {
+        value.increase(to: entry)
+      }
+      XCTAssertEqual(value, 5)
 
-    XCTAssert(1 ≈ (0, 2))
+      XCTAssert(1 ≈ (0, 2))
 
-    XCTAssert(compare(0, 1, by: { _ in 0 }, { _ in 0 }, { _ in 0 }, { $0 }))
-    XCTAssertFalse(compare(0, 0, by: { $0 }, { $0 }, { $0 }, { $0 }))
+      XCTAssert(compare(0, 1, by: { _ in 0 }, { _ in 0 }, { _ in 0 }, { $0 }))
+      XCTAssertFalse(compare(0, 0, by: { $0 }, { $0 }, { $0 }, { $0 }))
+    #endif
   }
 
   func testFloat() {

@@ -171,7 +171,10 @@ extension FloatFamily where Self: ElementaryFunctions {
 
   // MARK: - WholeArithmetic
 
-  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+  @inlinable internal static func unifiedSwiftNumericsPower(
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
     if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
       return Self.pow(precedingValue, followingValue)
     } else if let integer = Int(exactly: followingValue) {
@@ -181,6 +184,9 @@ extension FloatFamily where Self: ElementaryFunctions {
       // Allow SwiftNumerics to decide on the error:
       return Self.pow(precedingValue, followingValue)
     }
+  }
+  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+    return unifiedSwiftNumericsPower(precedingValue: precedingValue, followingValue: followingValue)
   }
 }
 
@@ -286,7 +292,12 @@ extension CGFloat: FloatFamily {
   }
 
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    return CGFloat(NativeType(precedingValue) ↑ NativeType(followingValue))
+    return CGFloat(
+      NativeType.unifiedSwiftNumericsPower(
+        precedingValue: NativeType(precedingValue),
+        followingValue: NativeType(followingValue)
+      )
+    )
   }
 }
 

@@ -203,12 +203,14 @@ class APITests: TestCase {
   }
 
   func testClosedRange() {
-    let range = 1...10
-    XCTAssertEqual(range.map({ Double($0) }), 1...10)
-    XCTAssertEqual(range.map({ Double($0) as Double? }), 1...10)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      let range = 1...10
+      XCTAssertEqual(range.map({ Double($0) }), 1...10)
+      XCTAssertEqual(range.map({ Double($0) as Double? }), 1...10)
 
-    let closure: (Int) -> Double? = { −Double($0) }
-    XCTAssertNil(range.map(closure))
+      let closure: (Int) -> Double? = { −Double($0) }
+      XCTAssertNil(range.map(closure))
+    #endif
   }
 
   func testCollection() {
@@ -626,14 +628,16 @@ class APITests: TestCase {
     }
   }
   func testComparableSet() {
-    testComparableSetConformance(
-      of: ComparableSetExample([1, 2, 3]),
-      member: 1,
-      nonmember: 10,
-      superset: ComparableSetExample([0, 1, 2, 3]),
-      overlapping: ComparableSetExample([2, 4]),
-      disjoint: ComparableSetExample([−1, −2, −3])
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      testComparableSetConformance(
+        of: ComparableSetExample([1, 2, 3]),
+        member: 1,
+        nonmember: 10,
+        superset: ComparableSetExample([0, 1, 2, 3]),
+        overlapping: ComparableSetExample([2, 4]),
+        disjoint: ComparableSetExample([−1, −2, −3])
+      )
+    #endif
   }
 
   func testConcatenatedPatterns() {
@@ -771,14 +775,16 @@ class APITests: TestCase {
     }
   }
   func testFiniteSet() {
-    testFiniteSetConformance(
-      of: FiniteSetExample([1, 2, 3]),
-      member: 1,
-      nonmember: 10,
-      superset: FiniteSetExample([0, 1, 2, 3]),
-      overlapping: FiniteSetExample([2, 4]),
-      disjoint: FiniteSetExample([−1, −2, −3])
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      testFiniteSetConformance(
+        of: FiniteSetExample([1, 2, 3]),
+        member: 1,
+        nonmember: 10,
+        superset: FiniteSetExample([0, 1, 2, 3]),
+        overlapping: FiniteSetExample([2, 4]),
+        disjoint: FiniteSetExample([−1, −2, −3])
+      )
+    #endif
   }
 
   func testIntensionalSet() {

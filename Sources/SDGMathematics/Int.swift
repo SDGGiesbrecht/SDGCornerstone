@@ -35,7 +35,8 @@ extension IntFamily {
   // MARK: - Negatable
 
   @inlinable public static prefix func − (operand: Self) -> Self {
-    return -operand  // @exempt(from: unicode)
+    // #workaround(Swift 5.5, Should just be negative instead of minus, but for compiler bug.)
+    return 0 - operand  // @exempt(from: unicode)
   }
 
   // MARK: - NumericAdditiveArithmetic
