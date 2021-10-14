@@ -380,11 +380,13 @@ class APITests: TestCase {
         _ = container.codingPath
       }
     }
-    try SDGXMLTests.testXML(
-      of: SingleValue(value: Nested()),
-      specification: "Single Value",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: SingleValue(value: Nested()),
+        specification: "Single Value",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderString() throws {
