@@ -419,11 +419,13 @@ class APITests: TestCase {
       var float: Float = 0
       var nested: Nested = Nested()
     }
-    try SDGXMLTests.testXML(
-      of: Structure(),
-      specification: "Structure",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      try SDGXMLTests.testXML(
+        of: Structure(),
+        specification: "Structure",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderUnkeyed() throws {
