@@ -10,13 +10,13 @@
 # Licensed under the Apache Licence, Version 2.0.
 # See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
 
-name: Android
+name: Swift 5.4 Android
 
 on: [push, pull_request]
 
 jobs:
-  Android:
-    name: Android
+  Swift_5_4_Android:
+    name: Swift 5.4 Android
     runs-on: ubuntu-20.04
     steps:
     - name: Check out
@@ -89,19 +89,19 @@ jobs:
     - name: Upload tests
       uses: actions/upload-artifact@v1
       with:
-        name: tests
+        name: swift_5_4_tests
         path: .build/x86_64-unknown-linux-android/debug
-  Android_II:
-    name: Android II
+  Swift_5_4_Android_II:
+    name: Swift 5.4 Android II
     runs-on: macos-11
-    needs: Android
+    needs: Swift_5_4_Android
     steps:
     - name: Check out
       uses: actions/checkout@v1
     - name: Download tests
       uses: actions/download-artifact@v1
       with:
-        name: tests
+        name: swift_5_4_tests
         path: .build/x86_64-unknown-linux-android/debug
     - name: Prepare script
       shell: bash
