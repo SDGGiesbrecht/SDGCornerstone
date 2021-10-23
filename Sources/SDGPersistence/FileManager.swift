@@ -72,8 +72,8 @@ import SDGLogic
             appropriateFor: nil,
             create: true
           )
-        } catch {
-          do {  // @exempt(from: tests)
+        } catch {  // @exempt(from: tests)
+          do {
             // Enable read queries even if directories could not be created, such as on a read‐only file system.
             return try url(
               for: searchPath,
@@ -302,8 +302,7 @@ import SDGLogic
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
       do {
         return try _deepFileEnumeration(in: directory)
-      } catch {
-        // @exempt(from: tests)
+      } catch {  // @exempt(from: tests)
         // Fallback for Windows, which errors if the URL wasn’t marked as a directory.
         let originalError = error
         let asDirectory = directory.deletingLastPathComponent().appendingPathComponent(
@@ -338,8 +337,8 @@ import SDGLogic
 
       var result: [URL] = []
       for object in enumerator {
-        guard let url = object as? URL else {
-          throw FileManager.unknownFileReadingError  // @exempt(from: tests)
+        guard let url = object as? URL else {  // @exempt(from: tests)
+          throw FileManager.unknownFileReadingError
           //It is unknown why something other than a URL would be returned.
         }
 
