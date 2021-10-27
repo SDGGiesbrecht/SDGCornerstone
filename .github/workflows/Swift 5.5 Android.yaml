@@ -15,8 +15,8 @@ name: Experimental Android
 on: [push, pull_request]
 
 jobs:
-  Experimental Android:
-    name: Experimental_Android
+  Experimental_Android:
+    name: Experimental Android
     runs-on: ubuntu-20.04
     steps:
     - name: Check out
