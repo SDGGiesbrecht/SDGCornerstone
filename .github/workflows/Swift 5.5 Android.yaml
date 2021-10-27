@@ -10,13 +10,13 @@
 # Licensed under the Apache Licence, Version 2.0.
 # See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
 
-name: Swift 5.5 Android
+name: Experimental Android
 
 on: [push, pull_request]
 
 jobs:
-  Swift_5_5_Android:
-    name: Swift 5.5 Android
+  Experimental Android:
+    name: Experimental_Android
     runs-on: ubuntu-20.04
     steps:
     - name: Check out
@@ -102,19 +102,19 @@ jobs:
     - name: Upload tests
       uses: actions/upload-artifact@v1
       with:
-        name: swift_5_5_tests
+        name: experimental_tests
         path: .build/x86_64-unknown-linux-android/debug
-  Swift_5_5_Android_II:
-    name: Swift 5.5 Android II
+  Experimental_Android_II:
+    name: Experimental Android II
     runs-on: macos-11
-    needs: Android
+    needs: Experimental_Android
     steps:
     - name: Check out
       uses: actions/checkout@v1
     - name: Download tests
       uses: actions/download-artifact@v1
       with:
-        name: swift_5_5_tests
+        name: experimental_tests
         path: .build/x86_64-unknown-linux-android/debug
     - name: Test
       uses: reactivecircus/android-emulator-runner@v2
