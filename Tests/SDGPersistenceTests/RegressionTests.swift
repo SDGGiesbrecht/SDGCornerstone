@@ -15,7 +15,7 @@
 import Foundation
 #if !PLATFORM_LACKS_FOUNDATION_NETWORKING
   #if canImport(FoundationNetworking)
-  import FoundationNetworking
+    import FoundationNetworking
   #endif
 #endif
 
