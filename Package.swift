@@ -823,7 +823,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi, .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-      .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
+      .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS, .android])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define(
