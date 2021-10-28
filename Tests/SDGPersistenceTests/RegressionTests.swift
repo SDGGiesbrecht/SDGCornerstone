@@ -13,8 +13,10 @@
  */
 
 import Foundation
-#if canImport(FoundationNetworking)
+#if !PLATFORM_LACKS_FOUNDATION_NETWORKING
+  #if canImport(FoundationNetworking)
   import FoundationNetworking
+  #endif
 #endif
 
 import SDGPersistence

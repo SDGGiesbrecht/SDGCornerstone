@@ -808,6 +808,7 @@ for target in package.targets {
     // #workaround(Swift 5.4.2, Web lacks Foundation.PropertyListEncoder.)
     // #workaround(Swift 5.4.2, FoundationXML is broken on Windows.)
     // #workaround(Swift 5.4.2, Web lacks FoundationXML.)
+    // #workaround(Swift 5.5.1, Android lacks FoundationXML.)
     // #workaround(Swift 5.4.2, Web lacks FoundationXML.XMLDocument.)
     // #workaround(Swift 5.4.2, FoundationXML.XMLDocument is broken on Windows.)
     // #workaround(Swift 5.4.2, macOS lacks Swift.Float16.)
@@ -819,7 +820,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi, .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
       .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
@@ -843,6 +844,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.4.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.5.1, Android lacks FoundationNetworking.)
+    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
     // #workaround(Swift 5.4.2, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
