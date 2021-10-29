@@ -90,6 +90,15 @@ class APITests: TestCase {
   }
 
   func testShell() throws {
+    func cleanUpSystemWarningsInEchoOutput(_ output: String) -> String {
+      var output = output
+      let androidSystemWarning = "WARNING: linker: Warning: unable to normalize \u{22}\u{22}\n"
+      if output.hasPrefix(androidSystemWarning) {
+        output.removeFirst(androidSystemWarning.count)
+      }
+      return output
+    }
+
     // #workaround(Swift 5.3.2, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
@@ -118,7 +127,12 @@ class APITests: TestCase {
 
         let message = "Hello, world!"
         #if !PLATFORM_LACKS_FOUNDATION_PROCESS
-          XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
+          XCTAssertEqual(
+            cleanUpSystemWarningsInEchoOutput(
+              try Shell.default.run(command: ["echo", message]).get()
+            ),
+            message
+          )
         #endif
 
         let nonexistentCommand = "no‐such‐command"
@@ -144,14 +158,18 @@ class APITests: TestCase {
           #if !PLATFORM_LACKS_FOUNDATION_PROCESS
             let metacharacters = "(...)"
             XCTAssertEqual(
-              try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
+              cleanUpSystemWarningsInEchoOutput(
+                try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get()
+              ),
               metacharacters
             )
             XCTAssert(
-              ¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
-                .contains(
-                  "\u{22}"
-                ))
+              ¬(cleanUpSystemWarningsInEchoOutput(
+                try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
+              )
+              .contains(
+                "\u{22}"
+              ))
             )
           #endif
         #endif
