@@ -142,7 +142,7 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 
 #if !PLATFORM_LACKS_FOUNDATION_PROCESS
   XCTAssertEqual(
-    try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
+    try? Shell.default.run(command: ["echo", "Hello, world!"]).get().suffix(13),
     "Hello, world!"
   )
 #endif
