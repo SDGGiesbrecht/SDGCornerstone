@@ -142,7 +142,7 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 
 #if !PLATFORM_LACKS_FOUNDATION_PROCESS
   XCTAssertEqual(
-    try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
+    try? Shell.default.run(command: ["echo", "Hello, world!"]).get().suffix(13),
     "Hello, world!"
   )
 #endif
@@ -158,10 +158,10 @@ Some platforms lack certain features. The compilation conditions which appear th
 .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-.define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi])),
+.define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi, .android])),
 .define(
   "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-  .when(platforms: [.windows, .wasi, .tvOS, .iOS, .watchOS])
+  .when(platforms: [.windows, .wasi, .tvOS, .iOS, .android, .watchOS])
 ),
 .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 .define(
