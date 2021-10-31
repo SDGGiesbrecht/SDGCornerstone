@@ -17,7 +17,7 @@ import WorkspaceConfiguration
 let configuration = WorkspaceConfiguration()
 configuration._applySDGDefaults()
 
-configuration.documentation.currentVersion = Version(8, 0, 0)  // Deprecations in SDGCollections.
+configuration.documentation.currentVersion = Version(8, 0, 0)
 
 configuration.documentation.projectWebsite = URL(
   string: "https://sdggiesbrecht.github.io/SDGCornerstone"
