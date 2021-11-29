@@ -301,7 +301,7 @@ extension CGFloat: FloatFamily {
   }
 }
 
-#if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
+#if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
   extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable

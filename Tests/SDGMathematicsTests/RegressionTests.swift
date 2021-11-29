@@ -134,7 +134,7 @@ class RegressionTests: TestCase {
       let _: Int16 = 3 − 2
       let _: Int8 = 3 − 2
       let _: Double = 3 − 2
-      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
+      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
         let _: Float80 = 3 − 2
       #endif
       let _: Float = 3 − 2

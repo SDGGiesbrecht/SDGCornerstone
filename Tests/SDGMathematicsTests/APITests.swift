@@ -184,7 +184,7 @@ class APITests: TestCase {
       testRealArithmeticConformance(of: Double.self)
       testRealArithmeticConformance(of: FloatMax.self)
       testRealArithmeticConformance(of: CGFloat.self)
-      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
+      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
         testRealArithmeticConformance(of: Float80.self)
       #endif
       testRealArithmeticConformance(of: Float.self)
@@ -490,7 +490,7 @@ class APITests: TestCase {
     init(_ int: SDGMathematics.IntMax) {
       value = Double(int)
     }
-    #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
+    #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
       init(_ floatingPoint: FloatMax) {
         value = Double(floatingPoint)
       }
