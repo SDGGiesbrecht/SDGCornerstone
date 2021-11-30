@@ -19,7 +19,7 @@ import Foundation
 
 extension Double: TextConvertibleNumber {}
 extension CGFloat: TextConvertibleNumber {}
-#if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64)))
+#if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
   extension Float80: TextConvertibleNumber {}
 #endif
 extension Float: TextConvertibleNumber {}
