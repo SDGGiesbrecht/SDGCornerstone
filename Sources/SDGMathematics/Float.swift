@@ -19,7 +19,7 @@ import Foundation
 
 import RealModule
 
-#if PLATFORM_LACKS_SWIFT_FLOAT_80 || (os(macOS) && arch(arm64))
+#if PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64))
   // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
