@@ -497,30 +497,34 @@ class APITests: TestCase {
   }
 
   func testXMLCoderXML() throws {
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      struct XMLProperty: Codable, Equatable {
-        var element: XML.Element
-      }
-      let xml = XML.Element(
-        name: "element",
-        attributes: [
-          "attribute": "value",
-          "Eigenschaft": "Wert",
-          "attribut": "valeur",
-          "ιδιότητα": "τιμή",
-        ],
-        content: [
-          .characterData(XML.CharacterData(text: "A mix of text ")),
-          .element(XML.Element(name: "and")),
-          .element(XML.Element(name: "elements")),
-          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
-        ]
-      )
-      try SDGXMLTests.testXML(
-        of: XMLProperty(element: xml),
-        specification: "XML",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        struct XMLProperty: Codable, Equatable {
+          var element: XML.Element
+        }
+        let xml = XML.Element(
+          name: "element",
+          attributes: [
+            "attribute": "value",
+            "Eigenschaft": "Wert",
+            "attribut": "valeur",
+            "ιδιότητα": "τιμή",
+          ],
+          content: [
+            .characterData(XML.CharacterData(text: "A mix of text ")),
+            .element(XML.Element(name: "and")),
+            .element(XML.Element(name: "elements")),
+            .characterData(
+              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+            ),
+          ]
+        )
+        try SDGXMLTests.testXML(
+          of: XMLProperty(element: xml),
+          specification: "XML",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
