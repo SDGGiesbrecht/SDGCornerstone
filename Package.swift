@@ -831,20 +831,20 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.4.2, Web lacks Dispatch.)
-    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.4.2, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #warning(Swift 5.4.2, Web lacks Dispatch.)
+    //.define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.5.1, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.4.2, Web lacks Foundation.Thread.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.4.2, Web lacks Foundation.TimeZone.init(identifier:).)
-    .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.4.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
+    // #warning(Swift 5.4.2, Web lacks Foundation.TimeZone.init(identifier:).)
+    //.define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.5.1, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
-    // #workaround(Swift 5.4.2, Web lacks XCTest.XCTestExpectation.)
-    .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
+    // #warning(Swift 5.4.2, Web lacks XCTest.XCTestExpectation.)
+    //.define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
       "PLATFORM_LACKS_SWIFT_COMPILER",
@@ -857,21 +857,21 @@ for target in package.targets {
 
 import Foundation
 if ProcessInfo.processInfo.environment["TARGETING_WINDOWS"] == "true" {
-  // #workaround(Swift 5.4.2, Unable to build from Windows.)
+  // #workaround(Swift 5.5.1, Unable to build from Windows.)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate‐") })
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
-  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on tvOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 13.1, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.type == .executable })
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
-  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on iOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 13.1, Tool targets don’t work on iOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.type == .executable })
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 12.5.1, Tool targets don’t work on watchOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 13.1, Tool targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.type == .executable })
 }
