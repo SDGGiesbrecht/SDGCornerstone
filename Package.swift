@@ -831,8 +831,8 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #warning(Swift 5.4.2, Web lacks Dispatch.)
-    //.define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.5.1, Web lacks Dispatch.)
+    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Web lacks Foundation.Thread.)
