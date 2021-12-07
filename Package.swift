@@ -837,8 +837,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #warning(Swift 5.4.2, Web lacks Foundation.TimeZone.init(identifier:).)
-    //.define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.5.1, Web lacks Foundation.TimeZone.init(identifier:).)
+    .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.5.1, Android lacks FoundationNetworking.)
