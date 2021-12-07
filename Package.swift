@@ -157,10 +157,10 @@ import PackageDescription
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi, .android])),
+/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
 /// .define(
 ///   "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-///   .when(platforms: [.windows, .wasi, .tvOS, .iOS, .android, .watchOS])
+///   .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
 /// ),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 /// .define(
@@ -800,18 +800,15 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(Swift 5.4.2, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.4.2, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.4.2, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.4.2, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.4.2, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.4.2, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.4.2, FoundationXML is broken on Windows.)
-    // #workaround(Swift 5.4.2, Web lacks FoundationXML.)
-    // #workaround(Swift 5.5.1, Android lacks FoundationXML.)
-    // #workaround(Swift 5.4.2, Web lacks FoundationXML.XMLDocument.)
-    // #workaround(Swift 5.4.2, FoundationXML.XMLDocument is broken on Windows.)
-    // #workaround(Swift 5.4.2, macOS lacks Swift.Float16.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.ProcessInfo.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.5.1, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.5.1, FoundationXML is broken for web.)
+    // #workaround(Swift 5.5.1, FoundationXML is broken on Android.)
+    // #workaround(Swift 5.5.1, macOS lacks Swift.Float16.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
@@ -820,10 +817,10 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.windows, .wasi, .android])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-      .when(platforms: [.windows, .wasi, .tvOS, .iOS, .android, .watchOS])
+      .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define(
