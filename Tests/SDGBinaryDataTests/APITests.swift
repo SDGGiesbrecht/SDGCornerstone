@@ -40,11 +40,14 @@ class APITests: TestCase {
     let data = Data([UInt8.max])
 #warning("Debugging...")
 print(#function, "A")
+#warning("Debugging...")
+let data_binary = data.binary
+print(type(of: data_binary))
+#warning("Debugging...")
+#if false
       XCTAssertEqual(data.binary.count, 8)
 #warning("Debugging...")
 print(#function, "B")
-#warning("Debugging...")
-#if false
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 #warning("Debugging...")
 print(#function, "C")
