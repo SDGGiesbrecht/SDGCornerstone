@@ -38,29 +38,59 @@ class APITests: TestCase {
     )
 
     let data = Data([UInt8.max])
+#warning("Debugging...")
+print(#function, "A")
       XCTAssertEqual(data.binary.count, 8)
+#warning("Debugging...")
+print(#function, "B")
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
+#warning("Debugging...")
+print(#function, "C")
 
       var toReverse = Data([0b11110000, 0b00000000])
+#warning("Debugging...")
+print(#function, "D")
       toReverse.binary.reverse()
+#warning("Debugging...")
+print(#function, "E")
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
+#warning("Debugging...")
+print(#function, "F")
 
       let alternating = Data([0b01010101, 0b01010101])
+#warning("Debugging...")
+print(#function, "G")
       let sorted = Data([0b00000000, 0b11111111])
+#warning("Debugging...")
+print(#function, "H")
 
       XCTAssertEqual(alternating.bitwiseNot(), Data([0b10101010, 0b10101010]))
+#warning("Debugging...")
+print(#function, "I")
       XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data([0b00000000, 0b01010101]))
+#warning("Debugging...")
+print(#function, "J")
       XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data([0b01010101, 0b11111111]))
+#warning("Debugging...")
+print(#function, "K")
       XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
+#warning("Debugging...")
+print(#function, "L")
 
       var forDescription = Data([0, 0])
+#warning("Debugging...")
+print(#function, "M")
       forDescription.binary[11] = true
+#warning("Debugging...")
+print(#function, "N")
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
+#warning("Debugging...")
+print(#function, "O")
   }
 
   func testDataStream() {
