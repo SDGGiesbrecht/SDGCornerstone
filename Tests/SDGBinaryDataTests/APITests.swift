@@ -43,6 +43,8 @@ print(#function, "A")
       XCTAssertEqual(data.binary.count, 8)
 #warning("Debugging...")
 print(#function, "B")
+#warning("Debugging...")
+#if false
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 #warning("Debugging...")
 print(#function, "C")
@@ -91,6 +93,7 @@ print(#function, "N")
       )
 #warning("Debugging...")
 print(#function, "O")
+#endif
   }
 
   func testDataStream() {
