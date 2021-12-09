@@ -57,18 +57,20 @@ extension Data {
     public var startIndex: IntMax {
 #warning("Debugging...")
       print(#function, "A")
-      let result = Data.BinaryView.startIndex
+      return 0
+      /*let result = Data.BinaryView.startIndex
 #warning("Debugging...")
         print(#function, "B")
-      return result
+      return result*/
     }
     public var endIndex: IntMax {
 #warning("Debugging...")
       print(#function, "A")
-      let result = IntMax(data.endIndex) × BinaryView.bitsPerByte
+      return 0
+      /*let result = IntMax(data.endIndex) × BinaryView.bitsPerByte
 #warning("Debugging...")
       print(#function, "B")
-      return result
+      return result*/
     }
 
     public func index(after i: IntMax) -> IntMax {
