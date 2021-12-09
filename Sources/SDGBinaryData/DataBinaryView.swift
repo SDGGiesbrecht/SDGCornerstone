@@ -55,10 +55,20 @@ extension Data {
 
     private static let startIndex: IntMax = 0
     public var startIndex: IntMax {
-      return Data.BinaryView.startIndex
+#warning("Debugging...")
+      print(#function, "A")
+      let result = Data.BinaryView.startIndex
+#warning("Debugging...")
+        print(#function, "B")
+      return result
     }
     public var endIndex: IntMax {
-      return IntMax(data.endIndex) × BinaryView.bitsPerByte
+#warning("Debugging...")
+      print(#function, "A")
+      let result = IntMax(data.endIndex) × BinaryView.bitsPerByte
+#warning("Debugging...")
+      print(#function, "B")
+      return result
     }
 
     public func index(after i: IntMax) -> IntMax {
@@ -72,22 +82,6 @@ extension Data {
       set {
         data[byteIndex(position)].binary[bitIndex(position)] = newValue
       }
-    }
-
-#warning("Debugging...")
-    @inlinable public var count: Int {
-#warning("Debugging...")
-      print(#function, "A")
-      let startIndex = self.startIndex
-#warning("Debugging...")
-      print(#function, "B")
-      let endIndex = self.endIndex
-#warning("Debugging...")
-      print(#function, "C")
-      let result = distance(from: startIndex, to: endIndex)
-#warning("Debugging...")
-      print(#function, "D")
-      return result
     }
 
     // MARK: - CustomStringConvertible
