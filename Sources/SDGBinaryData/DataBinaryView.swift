@@ -74,6 +74,22 @@ extension Data {
       }
     }
 
+#warning("Debugging...")
+    @inlinable public var count: Int {
+#warning("Debugging...")
+      print(#function, "A")
+      let startIndex = self.startIndex
+#warning("Debugging...")
+      print(#function, "B")
+      let endIndex = self.endIndex
+#warning("Debugging...")
+      print(#function, "C")
+      let result = distance(from: startIndex, to: endIndex)
+#warning("Debugging...")
+      print(#function, "D")
+      return result
+    }
+
     // MARK: - CustomStringConvertible
 
     public var description: String {
