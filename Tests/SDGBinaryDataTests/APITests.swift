@@ -46,7 +46,7 @@ print(type(of: data_binary))
 let data_binary_count = data_binary.count
 print(type(of: data_binary_count))
 #warning("Debugging...")
-#if false
+//#if false
       XCTAssertEqual(data.binary.count, 8)
 #warning("Debugging...")
 print(#function, "B")
@@ -98,7 +98,7 @@ print(#function, "N")
       )
 #warning("Debugging...")
 print(#function, "O")
-#endif
+//#endif
   }
 
   func testDataStream() {
