@@ -57,11 +57,11 @@ extension Data {
     public var startIndex: IntMax {
 #warning("Debugging...")
       print(#function, "A")
-      return 0
-      /*let result = Data.BinaryView.startIndex
+      let result = Data.BinaryView.startIndex
 #warning("Debugging...")
-        print(#function, "B")
-      return result*/
+print(#function, "B")
+      return 0
+      //return result
     }
     public var endIndex: IntMax {
 #warning("Debugging...")
