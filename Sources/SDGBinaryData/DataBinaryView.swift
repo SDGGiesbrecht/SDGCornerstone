@@ -60,11 +60,11 @@ extension Data {
     public var endIndex: IntMax {
 #warning("Debugging...")
       print(#function, "A")
-      return 0
-      /*let result = IntMax(data.endIndex) × BinaryView.bitsPerByte
+      let result = IntMax(data.endIndex) × BinaryView.bitsPerByte
 #warning("Debugging...")
       print(#function, "B")
-      return result*/
+      return 0
+      //return result*/
     }
 
     public func index(after i: IntMax) -> IntMax {
