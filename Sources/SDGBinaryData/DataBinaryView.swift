@@ -63,7 +63,7 @@ extension Data {
       let data_endIndex = data.endIndex
       let IntMax_data_endIndex = IntMax(data_endIndex)
       let BinaryView_bitsPerByte = BinaryView.bitsPerByte
-      let IntMax_data_endIndex___BinaryView_bitsPerByte = IntMax_data_endIndex × BinaryView_bitsPerByte
+      let IntMax_data_endIndex___BinaryView_bitsPerByte = IntMax_data_endIndex * BinaryView_bitsPerByte
 #warning("Debugging...")
       print(#function, "B")
       return 0
