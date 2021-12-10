@@ -55,13 +55,7 @@ extension Data {
 
     private static let startIndex: IntMax = 0
     public var startIndex: IntMax {
-#warning("Debugging...")
-      print(#function, "A")
-      let result = Data.BinaryView.startIndex
-#warning("Debugging...")
-print(#function, "B")
-      return 0
-      //return result
+      return Data.BinaryView.startIndex
     }
     public var endIndex: IntMax {
 #warning("Debugging...")
