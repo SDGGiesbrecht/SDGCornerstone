@@ -58,7 +58,8 @@ extension Data {
       return Data.BinaryView.startIndex
     }
     public var endIndex: IntMax {
-      return IntMax(data.endIndex) × BinaryView.bitsPerByte
+      // #workaround(Swift 5.5.1, Should be “✗” but for Windows compiler bug.)
+      return IntMax(data.endIndex) * BinaryView.bitsPerByte  // @exempt(from: unicode)
     }
 
     public func index(after i: IntMax) -> IntMax {
