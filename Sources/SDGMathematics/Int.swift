@@ -77,10 +77,10 @@ extension IntFamily {
 
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
+    #if false
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
-    #if false
     self /= divisor  // @exempt(from: unicode)
 
     if needsToWrapToPrevious {
