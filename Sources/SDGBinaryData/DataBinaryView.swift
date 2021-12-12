@@ -38,7 +38,10 @@ extension Data {
     // MARK: - Conversions
 
     private func byteIndex(_ index: IntMax) -> Data.Index {
+      return 0
+      #if false
       return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
+      #endif
     }
 
     private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
