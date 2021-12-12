@@ -68,6 +68,7 @@ extension Data {
 
     public subscript(position: IntMax) -> Bool {
       get {
+        let a = byteIndex(position)
         return false
         #if false
         return data[byteIndex(position)].binary[bitIndex(position)]
