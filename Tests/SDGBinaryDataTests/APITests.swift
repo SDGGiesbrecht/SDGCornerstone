@@ -48,10 +48,12 @@ class APITests: TestCase {
       var result = ContiguousArray<String>()
       result.reserveCapacity(initialCapacity)
       var iterator = data_binary.makeIterator()
-#if false
       for _ in 0..<initialCapacity {
+#if false
         result.append(try transform(iterator.next()!))
+        #endif
       }
+#if false
       while let element = iterator.next() {
         result.append(try transform(element))
       }
