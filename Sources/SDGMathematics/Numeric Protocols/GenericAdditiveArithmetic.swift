@@ -35,10 +35,3 @@ extension GenericAdditiveArithmetic {
     precedingValue −= followingValue
   }
 }
-
-extension GenericAdditiveArithmetic where Self: ExpressibleByIntegerLiteral {
-
-  @inlinable public static var zero: Self {
-    return 0
-  }
-}
