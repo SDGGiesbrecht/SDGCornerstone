@@ -39,7 +39,6 @@ class APITests: TestCase {
 
     let data = Data([UInt8.max])
     XCTAssertEqual(data.binary.count, 8)
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
       var toReverse = Data([0b11110000, 0b00000000])
@@ -56,6 +55,7 @@ class APITests: TestCase {
 
       var forDescription = Data([0, 0])
       forDescription.binary[11] = true
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
