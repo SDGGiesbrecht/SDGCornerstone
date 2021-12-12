@@ -38,6 +38,7 @@ extension Data {
     // MARK: - Conversions
 
     private func byteIndex(_ index: IntMax) -> Data.Index {
+      let x = BinaryView.bitsPerByte
       return 0
       #if false
       return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
