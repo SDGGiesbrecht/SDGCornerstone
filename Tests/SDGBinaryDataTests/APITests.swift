@@ -49,7 +49,9 @@ class APITests: TestCase {
       result.reserveCapacity(initialCapacity)
       var iterator = data_binary.makeIterator()
       for _ in 0..<initialCapacity {
-        let x = iterator.next()!
+        // next
+        let x = data_binary.endIndex
+        //let x = iterator.next()!
 #if false
         result.append(try transform(iterator.next()!))
         #endif
