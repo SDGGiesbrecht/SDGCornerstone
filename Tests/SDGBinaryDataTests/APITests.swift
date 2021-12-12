@@ -45,10 +45,10 @@ class APITests: TestCase {
       toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let alternating = Data([0b01010101, 0b01010101])
       let sorted = Data([0b00000000, 0b11111111])
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(alternating.bitwiseNot(), Data([0b10101010, 0b10101010]))
       XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data([0b00000000, 0b01010101]))
       XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data([0b01010101, 0b11111111]))
