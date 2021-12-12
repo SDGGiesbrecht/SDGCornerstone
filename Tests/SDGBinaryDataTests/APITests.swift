@@ -48,6 +48,7 @@ class APITests: TestCase {
       var result = ContiguousArray<String>()
       result.reserveCapacity(initialCapacity)
       var iterator = data_binary.makeIterator()
+#if false
       for _ in 0..<initialCapacity {
         result.append(try transform(iterator.next()!))
       }
@@ -55,6 +56,7 @@ class APITests: TestCase {
         result.append(try transform(element))
       }
       let `return` = Array(result)
+      #endif
     } catch {
       XCTFail("Rethrowing...")
     }
