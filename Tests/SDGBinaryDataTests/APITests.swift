@@ -52,7 +52,7 @@ class APITests: TestCase {
         // next
         if data_binary.startIndex == data_binary.endIndex { break }
         let element = data_binary[data_binary.startIndex]
-        //let x = iterator.next()!
+        let x = iterator.next()!
 #if false
         result.append(try transform(iterator.next()!))
         #endif
