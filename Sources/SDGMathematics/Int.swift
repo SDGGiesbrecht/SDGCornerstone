@@ -75,6 +75,7 @@ extension IntFamily {
 
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
+    #if false
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
@@ -85,6 +86,7 @@ extension IntFamily {
     if needsToWrapToPrevious {
       self −= 1 as Self
     }
+    #endif
   }
 
   @inlinable public var isEven: Bool {
