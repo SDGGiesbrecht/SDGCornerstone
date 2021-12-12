@@ -41,24 +41,7 @@ class APITests: TestCase {
     XCTAssertEqual(data.binary.count, 8)
     #warning("Debugging...")
     let data_binary = data.binary
-    // map
-    let transform: (Bool) throws -> String = { $0 ? "1" : "0" }
-    do {
-      let initialCapacity = data_binary.underestimatedCount
-      var result = ContiguousArray<String>()
-      result.reserveCapacity(initialCapacity)
-      var iterator = data_binary.makeIterator()
-      for _ in 0..<initialCapacity {
-        result.append(try transform(iterator.next()!))
-      }
-      while let element = iterator.next() {
-        result.append(try transform(element))
-      }
-      let `return` = Array(result)
-    } catch {
-      XCTFail("Rethrowing...")
-    }
-    //let data_binary_map____0____1_____0____ = data_binary.map({ $0 ? "1" : "0" })
+    let data_binary_map____0____1_____0____ = data_binary.map({ $0 ? "1" : "0" })
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
