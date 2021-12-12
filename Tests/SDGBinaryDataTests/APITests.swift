@@ -51,12 +51,10 @@ class APITests: TestCase {
       for _ in 0..<initialCapacity {
         result.append(try transform(iterator.next()!))
       }
-#if false
       while let element = iterator.next() {
         result.append(try transform(element))
       }
       let `return` = Array(result)
-      #endif
     } catch {
       XCTFail("Rethrowing...")
     }
