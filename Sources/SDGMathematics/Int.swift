@@ -75,12 +75,12 @@ extension IntFamily {
 
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
-    #if false
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
+    #if false
     self /= divisor  // @exempt(from: unicode)
 
     if needsToWrapToPrevious {
