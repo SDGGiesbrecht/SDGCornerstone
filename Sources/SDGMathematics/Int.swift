@@ -75,11 +75,8 @@ extension IntFamily {
 
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
-    _ = self.isNegative
-    //_ = (self.isNegative ∧ divisor.isPositive)
-    //let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
+    let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
-    #if false
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
@@ -88,7 +85,6 @@ extension IntFamily {
     if needsToWrapToPrevious {
       self −= 1 as Self
     }
-    #endif
   }
 
   @inlinable public var isEven: Bool {
@@ -127,13 +123,6 @@ extension BinaryInteger {
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
 public typealias GZahl = Int
 extension Int: IntFamily {
-
-  // MARK: - NumericAdditiveArithmetic
-
-  // #workaround(Swift 5.5.1, Redundant, but evades a compiler bug on Windows.)
-  @inlinable public var isNegative: Bool {
-    return self < 0
-  }
 
   // MARK: - PointProtocol
 
