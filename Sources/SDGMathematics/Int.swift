@@ -98,6 +98,13 @@ extension IntFamily {
   @inlinable public var isOdd: Bool {
     return self & 1 == 1
   }
+
+  // MARK: - NumericAdditiveArithmetic
+
+  // #workaround(Swift 5.5.1, Redundant, but evades a compiler bug on Windows.)
+  @inlinable public var isNegative: Bool {
+    return self < 0
+  }
 }
 
 extension IntXFamily {
