@@ -38,10 +38,8 @@ extension Data {
     // MARK: - Conversions
 
     private func byteIndex(_ index: IntMax) -> Data.Index {
+      // #workaround(Swift 5.5.1, Should be “dividedAccordingToEuclid(by:)” but for Windows compiler bug.)
       return Data.Index(index / BinaryView.bitsPerByte)
-      #if false
-      return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
-      #endif
     }
 
     private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
@@ -71,11 +69,7 @@ extension Data {
 
     public subscript(position: IntMax) -> Bool {
       get {
-        let a = byteIndex(position)
-        return false
-        #if false
         return data[byteIndex(position)].binary[bitIndex(position)]
-        #endif
       }
       set {
         data[byteIndex(position)].binary[bitIndex(position)] = newValue
