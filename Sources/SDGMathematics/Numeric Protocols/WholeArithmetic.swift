@@ -404,6 +404,13 @@ extension WholeArithmetic {
   ) {
     precedingValue ×= followingValue
   }
+
+  // MARK: - NumericAdditiveArithmetic
+
+  // #workaround(Swift 5.5.1, Redundant, but evades a compiler bug on Windows.)
+  @inlinable public var isNegative: Bool {
+    return self < Self.zero
+  }
 }
 
 // MARK: - Whole Arithmetic
