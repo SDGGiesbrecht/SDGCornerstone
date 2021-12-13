@@ -39,7 +39,7 @@ class APITests: TestCase {
 
     let data = Data([UInt8.max])
     XCTAssertEqual(data.binary.count, 8)
-      XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
+    XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var toReverse = Data([0b11110000, 0b00000000])
