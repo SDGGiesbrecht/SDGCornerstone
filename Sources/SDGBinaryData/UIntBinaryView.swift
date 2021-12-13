@@ -86,7 +86,9 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 
   @inlinable public subscript(position: Index) -> Element {
     get {
+      #if false
       assertIndexExists(position)
+      #endif
       return uInt.bitwiseAnd(with: 1 << position) >> position == 1
     }
     set {
