@@ -44,6 +44,7 @@ extension Data {
 
     private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
       let a = BinaryView.bitsPerByte
+      let b = index.mod(BinaryView.bitsPerByte)
       return 0
       #if false
       return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
