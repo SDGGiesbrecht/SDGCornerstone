@@ -91,7 +91,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
       #endif
       return false
       let a: UIntValue = 1 << position
-      //let b = uInt.bitwiseAnd(with: a)
+      let b = uInt.bitwiseAnd(with: a)
       #if false
       return uInt.bitwiseAnd(with: 1 << position) >> position == 1
       #endif
