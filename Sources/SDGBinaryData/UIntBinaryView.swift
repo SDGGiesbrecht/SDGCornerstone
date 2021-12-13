@@ -90,7 +90,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
       assertIndexExists(position)
       #endif
       let a: UIntValue = 1 << position
-      let b = uInt.bitwiseAnd(with: a)
+      //let b = uInt.bitwiseAnd(with: a)
       return false
       #if false
       return uInt.bitwiseAnd(with: 1 << position) >> position == 1
