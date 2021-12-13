@@ -220,7 +220,10 @@ extension WholeArithmetic {
   }
 
   @inlinable public func mod(_ divisor: Self) -> Self {
+    return self
+    #if
     return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
+    #endif
   }
 
   @inlinable public mutating func formRemainder(mod divisor: Self) {
