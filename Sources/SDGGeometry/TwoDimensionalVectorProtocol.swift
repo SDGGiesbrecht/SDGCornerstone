@@ -41,6 +41,7 @@ extension TwoDimensionalVectorProtocol {
   }
 
   // MARK: - AdditiveArithmetic
+
   @inlinable public static var zero: Self {
     return Self(Δx: 0, Δy: 0)
   }

@@ -38,11 +38,14 @@ extension Data {
     // MARK: - Conversions
 
     private func byteIndex(_ index: IntMax) -> Data.Index {
-      return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
+      // #workaround(Swift 5.5.1, Should be “dividedAccordingToEuclid(by:)” but for Windows compiler bug.)
+      return Data.Index(index / BinaryView.bitsPerByte)  // @exempt(from: unicode)
     }
 
     private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
-      return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
+      // #workaround(Swift 5.5.1, Should be “mod(_:)” but for Windows compiler bug.)
+      return SDGBinaryData.BinaryView<UInt8>
+        .Index(index % BinaryView.bitsPerByte)  // @exempt(from: unicode)
     }
 
     // MARK: - BidirectionalCollection
