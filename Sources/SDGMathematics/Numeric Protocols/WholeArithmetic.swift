@@ -409,7 +409,8 @@ extension WholeArithmetic {
 
   // #workaround(Swift 5.5.1, Redundant, but evades a compiler bug on Windows.)
   @inlinable public var isNegative: Bool {
-    return self < 0
+    return false
+    //return self < 0
   }
 }
 
