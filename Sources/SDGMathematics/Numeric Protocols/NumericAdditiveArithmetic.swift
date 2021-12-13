@@ -49,11 +49,7 @@ extension NumericAdditiveArithmetic {
   }
 
   @inlinable public var isNegative: Bool {
-    _ = Self.zero
-    return false
-    #if false
     return self < Self.zero
-    #endif
   }
 
   @inlinable public var isNonNegative: Bool {
