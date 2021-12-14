@@ -66,7 +66,9 @@ extension IntFamily {
   }
 
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-    return precedingValue * followingValue  // @exempt(from: unicode)
+    #warning("Debugging...")
+    return precedingValue
+    //return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
   @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
