@@ -39,18 +39,20 @@ class APITests: TestCase {
 
     let data = Data([UInt8.max])
     XCTAssertEqual(data.binary.count, 8)
-    #if !os(Windows)  // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView.)
+    #if !os(Windows)  // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
     #endif
 
       var toReverse = Data([0b11110000, 0b00000000])
+    #if !os(Windows)  // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
       toReverse.binary.reverse()
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
+    #endif
 
       let alternating = Data([0b01010101, 0b01010101])
       let sorted = Data([0b00000000, 0b11111111])
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(alternating.bitwiseNot(), Data([0b10101010, 0b10101010]))
       XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data([0b00000000, 0b01010101]))
       XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data([0b01010101, 0b11111111]))
