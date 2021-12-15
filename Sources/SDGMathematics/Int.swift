@@ -141,6 +141,13 @@ extension Int64: IntXFamily {
 
   public typealias Vector = Stride
 
+  // MARK: - NumericAdditiveArithmetic
+
+  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  @inlinable public var isNegative: Bool {
+    return self < Self.zero
+  }
+
   // MARK: - WholeArithmetic
 
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
