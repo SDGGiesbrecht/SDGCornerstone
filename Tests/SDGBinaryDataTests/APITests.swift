@@ -39,10 +39,7 @@ class APITests: TestCase {
 
     let data = Data([UInt8.max])
     XCTAssertEqual(data.binary.count, 8)
-    // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
-    #if !os(Windows)
-      XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
-    #endif
+    XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
     var toReverse = Data([0b11110000, 0b00000000])
     // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
