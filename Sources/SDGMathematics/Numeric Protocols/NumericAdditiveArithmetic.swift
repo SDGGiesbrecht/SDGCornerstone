@@ -50,6 +50,7 @@ extension NumericAdditiveArithmetic {
 
   @inlinable public var isNegative: Bool {
     #warning("Debugging...")
+    let x = Self.zero
     return false
     //return self < Self.zero
   }
