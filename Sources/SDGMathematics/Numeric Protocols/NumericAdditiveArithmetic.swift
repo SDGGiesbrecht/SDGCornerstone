@@ -49,7 +49,9 @@ extension NumericAdditiveArithmetic {
   }
 
   @inlinable public var isNegative: Bool {
-    return self < Self.zero
+    #warning("Debugging...")
+    return false
+    //return self < Self.zero
   }
 
   @inlinable public var isNonNegative: Bool {
