@@ -216,6 +216,9 @@ extension WholeArithmetic {
   }
 
   @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
+    #warning("Debugging...")
+    var copy = self
+    copy.divideAccordingToEuclid(by: divisor)
     return self
     //return nonmutatingVariant(of: { $0.divideAccordingToEuclid(by: $1) }, on: self, with: divisor)
   }
