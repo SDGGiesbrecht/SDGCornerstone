@@ -139,6 +139,13 @@ extension Int64: IntXFamily {
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
+
+  // MARK: - WholeArithmetic
+
+  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue * followingValue  // @exempt(from: unicode)
+  }
 }
 extension Int32: IntXFamily {
 
