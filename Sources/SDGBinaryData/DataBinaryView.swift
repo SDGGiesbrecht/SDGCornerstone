@@ -67,7 +67,9 @@ extension Data {
 
     public subscript(position: IntMax) -> Bool {
       get {
-        return data[byteIndex(position)].binary[bitIndex(position)]
+        #warning("Debugging...")
+        return false
+        //return data[byteIndex(position)].binary[bitIndex(position)]
       }
       set {
         data[byteIndex(position)].binary[bitIndex(position)] = newValue
