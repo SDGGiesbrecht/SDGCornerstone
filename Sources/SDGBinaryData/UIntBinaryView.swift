@@ -62,9 +62,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   public typealias Indices = DefaultIndices<BinaryView>
 
   @inlinable public var startIndex: Index {
-    #warning("Debugging...")
-    return 0
-    //return BinaryView.startIndex
+    return BinaryView.startIndex
   }
   @inlinable public var endIndex: Index {
     return BinaryView.endIndex
@@ -75,9 +73,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable internal func assertIndexExists(_ index: Index) {
-    #warning("Debugging...")
-    let x = bounds
-    /*_assert(
+    _assert(
       index ∈ bounds,
       { (localization: _APILocalization) in  // @exempt(from: tests)
         switch localization {  // @exempt(from: tests)
@@ -85,16 +81,13 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
           return "Index out of bounds."
         }
       }
-    )*/
+    )
   }
 
   @inlinable public subscript(position: Index) -> Element {
     get {
-      #warning("Debugging...")
       assertIndexExists(position)
-      return false
-      /*assertIndexExists(position)
-      return uInt.bitwiseAnd(with: 1 << position) >> position == 1*/
+      return uInt.bitwiseAnd(with: 1 << position) >> position == 1
     }
     set {
       assertIndexExists(position)
@@ -106,6 +99,93 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   // MARK: - CustomStringConvertible
 
   public var description: String {
+    let bits = self.map { bit in
+      return bit ? "1" : "0"
+    }
+    return bits.joined()
+  }
+}
+
+// #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+@usableFromInline internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
+  CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
+{
+
+  // MARK: - Initialization
+
+  @inlinable internal init(_ uInt: UInt8) {
+    self.uInt = uInt
+  }
+
+  // MARK: - Static Properties
+
+  @inlinable internal static var startIndex: Index {
+    return 0
+  }
+
+  @inlinable internal static var endIndex: Index {
+    return Index(count)
+  }
+
+  @inlinable internal static var count: Int {
+    let bytes = MemoryLayout<UInt8>.size
+    return bytes × 8
+  }
+
+  // MARK: - Properties
+
+  @usableFromInline internal var uInt: UInt8
+
+  // MARK: - BidirectionalCollection
+
+  @inlinable internal func index(before i: Index) -> Index {
+    return i − (1 as Index)
+  }
+
+  // MARK: - Collection
+
+  @usableFromInline internal typealias Element = Bool
+  @usableFromInline internal typealias Index = UInt8
+  @usableFromInline internal typealias Indices = DefaultIndices<BinaryViewUInt8>
+
+  @inlinable internal var startIndex: Index {
+    return BinaryView.startIndex
+  }
+  @inlinable internal var endIndex: Index {
+    return BinaryView.endIndex
+  }
+
+  @inlinable internal func index(after i: Index) -> Index {
+    return i + (1 as Index)
+  }
+
+  @inlinable internal func assertIndexExists(_ index: Index) {
+    _assert(
+      index ∈ bounds,
+      { (localization: _APILocalization) in  // @exempt(from: tests)
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return "Index out of bounds."
+        }
+      }
+    )
+  }
+
+  @inlinable internal subscript(position: Index) -> Element {
+    get {
+      assertIndexExists(position)
+      return uInt.bitwiseAnd(with: 1 << position) >> position == 1
+    }
+    set {
+      assertIndexExists(position)
+      let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
+      uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
+    }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  @inlinable internal var description: String {
     let bits = self.map { bit in
       return bit ? "1" : "0"
     }
