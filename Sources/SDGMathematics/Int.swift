@@ -158,9 +158,7 @@ extension Int64: IntXFamily {
 
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-    #warning("Debugging...")
-    print("−= (Int64)")
-    //precedingValue -= followingValue  // @exempt(from: unicode)
+    precedingValue -= followingValue  // @exempt(from: unicode)
   }
 
   // MARK: - WholeArithmetic
