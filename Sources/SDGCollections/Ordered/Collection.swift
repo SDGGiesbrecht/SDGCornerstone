@@ -22,6 +22,7 @@ extension Collection {
   /// Returns the range for all of `self`.
   @inlinable public var bounds: Range<Index> {
     #warning("...")
+    let a = startIndex
     fatalError("Made it here.")
     //return startIndex..<endIndex
   }
