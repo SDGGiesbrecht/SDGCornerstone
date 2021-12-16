@@ -163,6 +163,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     #warning("Debugging...")
     print(#function)
     print(index)
+    print(startIndex)
     //print(bounds)
     /*_assert(
       index ∈ bounds,
