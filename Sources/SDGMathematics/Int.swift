@@ -82,8 +82,9 @@ extension IntFamily {
 
     self /= divisor  // @exempt(from: unicode)
 
-    #warning("Debugging...")
     if needsToWrapToPrevious {
+      #warning("Debugging...")
+      let x = 1 as Self
       /*self −= 1 as Self*/
     }
   }
