@@ -124,7 +124,9 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable internal static var endIndex: Index {
-    return Index(count)
+    #warning("Debugging...")
+    return 0
+    //return Index(count)
   }
 
   @inlinable internal static var count: Int {
@@ -152,9 +154,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     return BinaryViewUInt8.startIndex
   }
   @inlinable internal var endIndex: Index {
-    #warning("Debugging...")
-    return 0
-    //return BinaryViewUInt8.endIndex
+    return BinaryViewUInt8.endIndex
   }
 
   @inlinable internal func index(after i: Index) -> Index {
