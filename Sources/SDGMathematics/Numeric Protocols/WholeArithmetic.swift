@@ -226,6 +226,7 @@ extension WholeArithmetic {
   @inlinable public mutating func formRemainder(mod divisor: Self) {
     #warning("Debugging...")
     let x = dividedAccordingToEuclid(by: divisor)
+    let y = x × divisor
     //self −= dividedAccordingToEuclid(by: divisor) × divisor
   }
 
