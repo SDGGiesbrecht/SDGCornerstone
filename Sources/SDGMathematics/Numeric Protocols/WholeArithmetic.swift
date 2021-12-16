@@ -224,11 +224,7 @@ extension WholeArithmetic {
   }
 
   @inlinable public mutating func formRemainder(mod divisor: Self) {
-    #warning("Debugging...")
-    let x = dividedAccordingToEuclid(by: divisor)
-    let y = x × divisor
-    self −= y
-    //self −= dividedAccordingToEuclid(by: divisor) × divisor
+    self −= dividedAccordingToEuclid(by: divisor) × divisor
   }
 
   @inlinable public func isDivisible(by divisor: Self) -> Bool {
