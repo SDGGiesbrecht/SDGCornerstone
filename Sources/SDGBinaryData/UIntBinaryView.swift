@@ -152,7 +152,9 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     return BinaryViewUInt8.startIndex
   }
   @inlinable internal var endIndex: Index {
-    return BinaryViewUInt8.endIndex
+    #warning("Debugging...")
+    return 0
+    //return BinaryViewUInt8.endIndex
   }
 
   @inlinable internal func index(after i: Index) -> Index {
