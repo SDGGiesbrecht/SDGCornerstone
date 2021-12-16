@@ -70,6 +70,7 @@ extension Data {
         #warning("Debugging...")
         let a = byteIndex(position)
         let b = bitIndex(position)
+        let c = data[a]
         return false
         //return data[byteIndex(position)].binary[bitIndex(position)]
       }
