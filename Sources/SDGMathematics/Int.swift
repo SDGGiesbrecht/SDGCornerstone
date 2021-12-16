@@ -80,12 +80,12 @@ extension IntFamily {
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
-    #warning("Debugging...")
     self /= divisor  // @exempt(from: unicode)
 
-    /*if needsToWrapToPrevious {
-      self −= 1 as Self
-    }*/
+    #warning("Debugging...")
+    if needsToWrapToPrevious {
+      /*self −= 1 as Self*/
+    }
   }
 
   @inlinable public var isEven: Bool {
