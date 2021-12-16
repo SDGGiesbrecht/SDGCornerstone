@@ -227,6 +227,7 @@ extension WholeArithmetic {
     #warning("Debugging...")
     let x = dividedAccordingToEuclid(by: divisor)
     let y = x × divisor
+    self −= y
     //self −= dividedAccordingToEuclid(by: divisor) × divisor
   }
 
