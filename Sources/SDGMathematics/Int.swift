@@ -78,14 +78,14 @@ extension IntFamily {
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
     #warning("Debugging...")
-    /*let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
+    let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
     self /= divisor  // @exempt(from: unicode)
 
     if needsToWrapToPrevious {
       self −= 1 as Self
-    }*/
+    }
   }
 
   @inlinable public var isEven: Bool {
