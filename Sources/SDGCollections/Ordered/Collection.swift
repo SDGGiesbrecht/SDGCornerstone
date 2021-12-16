@@ -23,8 +23,11 @@ extension Collection {
   @inlinable public var bounds: Range<Index> {
     #warning("...")
     let a = startIndex
+    if Index.self == UInt8.self {
     fatalError("Made it here.")
-    //return startIndex..<endIndex
+    } else {
+      return startIndex..<endIndex
+    }
   }
 
   // MARK: - Difference Analysis
