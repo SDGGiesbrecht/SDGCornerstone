@@ -72,7 +72,7 @@ extension Data {
         let b = bitIndex(position)
         let c = data[a]
         let d = c.binaryUInt8
-        //let e = d[b]
+        let e = d[b]
         return false
         //return data[byteIndex(position)].binary[bitIndex(position)]
       }
