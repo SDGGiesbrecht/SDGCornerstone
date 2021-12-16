@@ -69,9 +69,7 @@ extension PointProtocol {
   }
 
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Vector) {
-    #warning("Debugging...")
-    print("−= (PointProtocol)")
-    //precedingValue += −followingValue
+    precedingValue += −followingValue
   }
 }
 
