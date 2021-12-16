@@ -77,6 +77,7 @@ extension IntFamily {
     #warning("Debugging...")
     let x = self.isNegative
     let y = divisor.isPositive
+    let z = (x ∧ y)
     /*let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
