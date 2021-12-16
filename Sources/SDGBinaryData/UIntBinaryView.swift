@@ -149,10 +149,10 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   @usableFromInline internal typealias Indices = DefaultIndices<BinaryViewUInt8>
 
   @inlinable internal var startIndex: Index {
-    return BinaryView.startIndex
+    return BinaryViewUInt8.startIndex
   }
   @inlinable internal var endIndex: Index {
-    return BinaryView.endIndex
+    return BinaryViewUInt8.endIndex
   }
 
   @inlinable internal func index(after i: Index) -> Index {
