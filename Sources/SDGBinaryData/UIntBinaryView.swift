@@ -173,8 +173,11 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 
   @inlinable internal subscript(position: Index) -> Element {
     get {
+      #warning("Debugging...")
       assertIndexExists(position)
-      return uInt.bitwiseAnd(with: 1 << position) >> position == 1
+      return false
+      /*assertIndexExists(position)
+      return uInt.bitwiseAnd(with: 1 << position) >> position == 1*/
     }
     set {
       assertIndexExists(position)
