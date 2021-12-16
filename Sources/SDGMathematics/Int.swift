@@ -74,13 +74,11 @@ extension IntFamily {
   }
 
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
-    #warning("Debugging...")
-    let x = self.isNegative
-    let y = divisor.isPositive
-    let z = (x ∧ y)
-    /*let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
-    let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
+    let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
+
+    #warning("Debugging...")
+    /*let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
     // Wrap to previous if negative (ignoring when exactly even)
 
     self /= divisor  // @exempt(from: unicode)
