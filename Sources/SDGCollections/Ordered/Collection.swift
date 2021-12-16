@@ -24,7 +24,7 @@ extension Collection {
     #warning("...")
     let a = startIndex
     if Index.self == UInt8.self {
-    fatalError("Made it here.")
+      fatalError("Made it here.")
     } else {
       return startIndex..<endIndex
     }

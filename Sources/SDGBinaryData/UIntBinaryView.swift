@@ -62,7 +62,9 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   public typealias Indices = DefaultIndices<BinaryView>
 
   @inlinable public var startIndex: Index {
-    return BinaryView.startIndex
+    #warning("Debugging...")
+    return 0
+    //return BinaryView.startIndex
   }
   @inlinable public var endIndex: Index {
     return BinaryView.endIndex
@@ -73,7 +75,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable internal func assertIndexExists(_ index: Index) {
-    #warning("...")
+    #warning("Debugging...")
     let x = bounds
     /*_assert(
       index ∈ bounds,
