@@ -220,13 +220,12 @@ extension WholeArithmetic {
   }
 
   @inlinable public func mod(_ divisor: Self) -> Self {
-    #warning("Debugging...")
-    return self
-    //return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
+    return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
   }
 
   @inlinable public mutating func formRemainder(mod divisor: Self) {
-    self −= dividedAccordingToEuclid(by: divisor) × divisor
+    #warning("Debugging...")
+    //self −= dividedAccordingToEuclid(by: divisor) × divisor
   }
 
   @inlinable public func isDivisible(by divisor: Self) -> Bool {
