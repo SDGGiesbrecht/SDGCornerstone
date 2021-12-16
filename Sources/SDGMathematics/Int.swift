@@ -76,6 +76,7 @@ extension IntFamily {
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
     #warning("Debugging...")
     let x = self.isNegative
+    let y = divisor.isPositive
     /*let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
     let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
