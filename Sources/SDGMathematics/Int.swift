@@ -168,6 +168,7 @@ extension Int64: IntXFamily {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
+  /*
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
@@ -182,6 +183,7 @@ extension Int64: IntXFamily {
       self −= 1 as Self
     }
   }
+   */
 }
 extension Int32: IntXFamily {
 
