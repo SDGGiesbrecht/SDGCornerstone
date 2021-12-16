@@ -125,6 +125,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 
   @inlinable internal static var endIndex: Index {
     #warning("Debugging...")
+    let x = count
     return 0
     //return Index(count)
   }
