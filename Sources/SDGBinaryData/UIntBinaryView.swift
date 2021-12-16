@@ -131,11 +131,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable internal static var count: Int {
-    #warning("Debugging...")
-    let x = MemoryLayout<UInt8>.size
-    return 0
-    /*let bytes = MemoryLayout<UInt8>.size
-    return bytes × 8*/
+    let bytes = MemoryLayout<UInt8>.size
+    return bytes × 8
   }
 
   // MARK: - Properties
