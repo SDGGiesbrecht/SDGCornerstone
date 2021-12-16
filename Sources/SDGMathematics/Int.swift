@@ -169,6 +169,21 @@ extension Int64: IntXFamily {
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
+
+  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
+
+    let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
+
+    let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
+    // Wrap to previous if negative (ignoring when exactly even)
+
+    self /= divisor  // @exempt(from: unicode)
+
+    if needsToWrapToPrevious {
+      self −= 1 as Self
+    }
+  }
 }
 extension Int32: IntXFamily {
 
