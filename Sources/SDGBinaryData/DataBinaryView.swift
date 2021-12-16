@@ -69,6 +69,7 @@ extension Data {
       get {
         #warning("Debugging...")
         let a = byteIndex(position)
+        let b = bitIndex(position)
         return false
         //return data[byteIndex(position)].binary[bitIndex(position)]
       }
