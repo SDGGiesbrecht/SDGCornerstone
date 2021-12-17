@@ -148,7 +148,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable internal func index(after i: Index) -> Index {
-    return i + (1 as Index)
+    return i + (1 as Index)  // @exempt(from: tests) Currently unreachable.
   }
 
   @inlinable internal func assertIndexExists(_ index: Index) {
