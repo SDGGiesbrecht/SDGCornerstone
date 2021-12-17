@@ -62,9 +62,7 @@ extension Data {
     }
 
     public func index(after i: IntMax) -> IntMax {
-      #warning("Debugging...")
-      return 0
-      //return i + 1
+      return i + 1
     }
 
     public subscript(position: IntMax) -> Bool {
