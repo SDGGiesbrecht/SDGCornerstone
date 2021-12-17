@@ -107,7 +107,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 }
 
 // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
-@usableFromInline internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
+@usableFromInline
+internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
   CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
 {
 
