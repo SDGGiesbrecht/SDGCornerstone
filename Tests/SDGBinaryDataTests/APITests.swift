@@ -104,5 +104,8 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
     #endif
+
+    var uInt8: UInt8 = 0
+    uInt8.binary[0] = true
   }
 }
