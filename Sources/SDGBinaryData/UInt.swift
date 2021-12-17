@@ -33,8 +33,6 @@ extension UInt8 {
 
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
   @inlinable internal var binaryUInt8: BinaryViewUInt8 {
-    get {
-      return BinaryViewUInt8(self)
-    }
+    return BinaryViewUInt8(self)
   }
 }
