@@ -48,9 +48,7 @@ extension Data {
     // MARK: - BidirectionalCollection
 
     public func index(before i: IntMax) -> IntMax {
-      #warning("Debugging...")
-      return 0
-      //return i − 1
+      return i − 1
     }
 
     // MARK: - Collection
