@@ -21,13 +21,7 @@ extension Collection {
 
   /// Returns the range for all of `self`.
   @inlinable public var bounds: Range<Index> {
-    #warning("...")
-    let a = startIndex
-    if Index.self == UInt8.self {
-      fatalError("Made it here.")
-    } else {
-      return startIndex..<endIndex
-    }
+    return startIndex..<endIndex
   }
 
   // MARK: - Difference Analysis
