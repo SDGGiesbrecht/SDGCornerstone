@@ -42,8 +42,12 @@ class APITests: TestCase {
     XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
     var toReverse = Data([0b11110000, 0b00000000])
-      toReverse.binary.reverse()
+    #warning("Debugging...")
+    let x = toReverse.binary
+      //toReverse.binary.reverse()
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
+    #endif
 
     let alternating = Data([0b01010101, 0b01010101])
     let sorted = Data([0b00000000, 0b11111111])
