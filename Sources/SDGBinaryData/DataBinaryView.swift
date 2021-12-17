@@ -48,7 +48,9 @@ extension Data {
     // MARK: - BidirectionalCollection
 
     public func index(before i: IntMax) -> IntMax {
-      return i − 1
+      #warning("Debugging...")
+      return 0
+      //return i − 1
     }
 
     // MARK: - Collection
@@ -62,7 +64,9 @@ extension Data {
     }
 
     public func index(after i: IntMax) -> IntMax {
-      return i + 1
+      #warning("Debugging...")
+      return 0
+      //return i + 1
     }
 
     public subscript(position: IntMax) -> Bool {
@@ -70,7 +74,8 @@ extension Data {
         return data[byteIndex(position)].binaryUInt8[bitIndex(position)]
       }
       set {
-        data[byteIndex(position)].binary[bitIndex(position)] = newValue
+        #warning("Debugging...")
+        //data[byteIndex(position)].binary[bitIndex(position)] = newValue
       }
     }
 
