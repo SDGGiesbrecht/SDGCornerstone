@@ -38,14 +38,11 @@ extension Data {
     // MARK: - Conversions
 
     private func byteIndex(_ index: IntMax) -> Data.Index {
-      // #workaround(Swift 5.5.1, Should be “dividedAccordingToEuclid(by:)” but for Windows compiler bug.)
-      return Data.Index(index / BinaryView.bitsPerByte)  // @exempt(from: unicode)
+      return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
     }
 
     private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
-      // #workaround(Swift 5.5.1, Should be “mod(_:)” but for Windows compiler bug.)
-      return SDGBinaryData.BinaryView<UInt8>
-        .Index(index % BinaryView.bitsPerByte)  // @exempt(from: unicode)
+      return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
     }
 
     // MARK: - BidirectionalCollection
@@ -70,7 +67,7 @@ extension Data {
 
     public subscript(position: IntMax) -> Bool {
       get {
-        return data[byteIndex(position)].binary[bitIndex(position)]
+        return data[byteIndex(position)].binaryUInt8[bitIndex(position)]
       }
       set {
         data[byteIndex(position)].binary[bitIndex(position)] = newValue
