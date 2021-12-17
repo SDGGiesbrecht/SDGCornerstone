@@ -162,6 +162,11 @@ extension Int64: IntXFamily {
   // MARK: - Subtractable
 
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue - followingValue  // @exempt(from: unicode)
+  }
+
+  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
     precedingValue -= followingValue  // @exempt(from: unicode)
   }
