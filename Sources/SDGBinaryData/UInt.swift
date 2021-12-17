@@ -36,8 +36,5 @@ extension UInt8 {
     get {
       return BinaryViewUInt8(self)
     }
-    set {
-      self = newValue.uInt
-    }
   }
 }

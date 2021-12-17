@@ -107,10 +107,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 }
 
 // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
-@usableFromInline
-internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
-  CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
-{
+@usableFromInline internal struct BinaryViewUInt8: Collection {
 
   // MARK: - Initialization
 
@@ -136,12 +133,6 @@ internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
   // MARK: - Properties
 
   @usableFromInline internal var uInt: UInt8
-
-  // MARK: - BidirectionalCollection
-
-  @inlinable internal func index(before i: Index) -> Index {
-    return i − (1 as Index)
-  }
 
   // MARK: - Collection
 
@@ -174,21 +165,8 @@ internal struct BinaryViewUInt8: BidirectionalCollection, Collection,
 
   @inlinable internal subscript(position: Index) -> Element {
     get {
+      assertIndexExists(position)
       return uInt.bitwiseAnd(with: 1 << position) >> position == 1
     }
-    set {
-      assertIndexExists(position)
-      let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
-      uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
-    }
-  }
-
-  // MARK: - CustomStringConvertible
-
-  @inlinable internal var description: String {
-    let bits = self.map { bit in
-      return bit ? "1" : "0"
-    }
-    return bits.joined()
   }
 }
