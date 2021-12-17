@@ -43,7 +43,7 @@ class APITests: TestCase {
 
     var toReverse = Data([0b11110000, 0b00000000])
     #warning("Debugging...")
-    let x = toReverse.binary
+    toReverse.binary = toReverse.binary
       //toReverse.binary.reverse()
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
