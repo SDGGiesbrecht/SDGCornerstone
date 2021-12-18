@@ -56,7 +56,6 @@ class APITests: TestCase {
     XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
 
     var forDescription = Data([0, 0])
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       forDescription.binary[11] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
@@ -64,7 +63,6 @@ class APITests: TestCase {
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
   }
 
   func testDataStream() {
