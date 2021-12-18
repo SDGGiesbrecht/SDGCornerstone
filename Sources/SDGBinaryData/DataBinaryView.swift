@@ -70,7 +70,7 @@ extension Data {
         return data[byteIndex(position)].binaryUInt8[bitIndex(position)]
       }
       set {
-        data[byteIndex(position)].binary[bitIndex(position)] = newValue
+        data[byteIndex(position)].binaryUInt8[bitIndex(position)] = newValue
       }
     }
 

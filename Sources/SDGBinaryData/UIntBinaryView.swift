@@ -168,5 +168,11 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
       assertIndexExists(position)
       return uInt.bitwiseAnd(with: 1 << position) >> position == 1
     }
+    set {
+      #warning("Debugging...")
+      /*assertIndexExists(position)
+      let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
+      uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)*/
+    }
   }
 }
