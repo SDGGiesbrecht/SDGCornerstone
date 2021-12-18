@@ -42,9 +42,8 @@ class APITests: TestCase {
     XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
     var toReverse = Data([0b11110000, 0b00000000])
-    // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
-    #if !os(Windows)
-      toReverse.binary.reverse()
+    toReverse.binary.reverse()
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
     #endif
 
@@ -57,8 +56,7 @@ class APITests: TestCase {
     XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
 
     var forDescription = Data([0, 0])
-    // #workaround(Swift 5.5.1, Compiler trips over bitshift in UInt BinaryView subscript.)
-    #if !os(Windows)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       forDescription.binary[11] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
