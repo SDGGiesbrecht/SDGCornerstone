@@ -55,12 +55,14 @@ class APITests: TestCase {
 
     var forDescription = Data([0, 0])
     forDescription.binary[11] = true
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
+    #endif
   }
 
   func testDataStream() {
