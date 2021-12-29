@@ -43,7 +43,7 @@ class APITests: TestCase {
 
     var toReverse = Data([0b11110000, 0b00000000])
     toReverse.binary.reverse()
-      XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
+    XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
 
     let alternating = Data([0b01010101, 0b01010101])
     let sorted = Data([0b00000000, 0b11111111])
