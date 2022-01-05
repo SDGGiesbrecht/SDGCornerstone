@@ -77,9 +77,10 @@ extension Data {
     // MARK: - CustomStringConvertible
 
     public var description: String {
-      let bytes = data.map { String(describing: $0.binary) }
+      let x = data.map { $0 }
       return ""
       #if false
+      let bytes = data.map { String(describing: $0.binary) }
       return bytes.joined(separator: " ")
       #endif
     }
