@@ -78,6 +78,7 @@ extension Data {
 
     public var description: String {
       let x = data.map { $0 }
+      let y = x.map { $0.binary }
       return ""
       #if false
       let bytes = data.map { String(describing: $0.binary) }
