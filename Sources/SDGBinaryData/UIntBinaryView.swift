@@ -107,7 +107,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
 }
 
 // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
-@usableFromInline internal struct BinaryViewUInt8: Collection {
+@usableFromInline internal struct BinaryViewUInt8: Collection, CustomStringConvertible {
 
   // MARK: - Initialization
 
@@ -173,5 +173,14 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
       let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
       uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
     }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    let bits = self.map { bit in
+      return bit ? "1" : "0"
+    }
+    return bits.joined()
   }
 }
