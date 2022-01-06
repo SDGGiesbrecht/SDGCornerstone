@@ -77,12 +77,14 @@ class APITests: TestCase {
       inputStream.append(unit: backwards)
 
       var results: [Data] = []
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
+        #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         outputStream.buffer.append(transfer)
         results.append(contentsOf: outputStream.extractCompleteUnits())
+        #endif
       }
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(results, [forwards, backwards])
     #endif
   }
