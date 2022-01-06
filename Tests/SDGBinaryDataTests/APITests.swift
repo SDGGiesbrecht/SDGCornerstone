@@ -73,6 +73,7 @@ class APITests: TestCase {
       }
       let backwards = Data(forwards.reversed())
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       inputStream.append(unit: forwards)
       inputStream.append(unit: backwards)
 
@@ -83,6 +84,7 @@ class APITests: TestCase {
         results.append(contentsOf: outputStream.extractCompleteUnits())
       }
       XCTAssertEqual(results, [forwards, backwards])
+    #endif
   }
 
   func testUInt() {
