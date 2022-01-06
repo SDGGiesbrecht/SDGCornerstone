@@ -64,7 +64,6 @@ class APITests: TestCase {
   }
 
   func testDataStream() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var inputStream = DataStream()
       var outputStream = DataStream()
 
@@ -84,7 +83,6 @@ class APITests: TestCase {
         results.append(contentsOf: outputStream.extractCompleteUnits())
       }
       XCTAssertEqual(results, [forwards, backwards])
-    #endif
   }
 
   func testUInt() {
