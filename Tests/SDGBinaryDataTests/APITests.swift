@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2022 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -55,12 +55,12 @@ class APITests: TestCase {
 
     var forDescription = Data([0, 0])
     forDescription.binary[11] = true
-      testCustomStringConvertibleConformance(
-        of: forDescription.binary,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "10th",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCustomStringConvertibleConformance(
+      of: forDescription.binary,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "10th",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testDataStream() {
