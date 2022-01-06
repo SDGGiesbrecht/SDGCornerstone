@@ -79,8 +79,8 @@ class APITests: TestCase {
       var results: [Data] = []
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
-        #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         outputStream.buffer.append(transfer)
+        #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         results.append(contentsOf: outputStream.extractCompleteUnits())
         #endif
       }
