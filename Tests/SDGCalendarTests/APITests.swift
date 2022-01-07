@@ -30,12 +30,14 @@ class APITests: TestCase {
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
       XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
       XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
 
       XCTAssertEqual(GregorianDay(ordinal: 8), 8)
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
