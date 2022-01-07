@@ -86,8 +86,9 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      var forDescription: UInt8 = 0
+    var forDescription: UInt8 = 0
+    // #workaround(Swift 5.5.2, Windows miscompiles UInt.BinaryView and crashes at runtime.)
+    #if !os(Windows)
       forDescription.binary[0] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
