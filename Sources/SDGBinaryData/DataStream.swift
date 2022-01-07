@@ -75,13 +75,8 @@ public struct DataStream {
           }
         }
 
-  #warning("Debugging...")
-        let x = escapes.isOdd
-  return false
-  #if false
         // An odd number of escapes means the last one affects the marker.
         return ¬escapes.isOdd
-        #endif
       }
 
       #warning("Debugging...")
