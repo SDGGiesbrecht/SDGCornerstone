@@ -79,9 +79,6 @@ public struct DataStream {
         return ¬escapes.isOdd
       }
 
-      #warning("Debugging...")
-      return []
-      #if false
     let unitRanges = buffer.ranges(separatedBy: endMarkerRanges.map({ $0.range }))
 
     var unitsAndRemainder = unitRanges.map { Data(buffer[$0]) }
@@ -100,6 +97,5 @@ public struct DataStream {
 
       return unit
     }
-    #endif
   }
 }
