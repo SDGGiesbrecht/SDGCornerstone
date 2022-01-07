@@ -62,6 +62,9 @@ public struct DataStream {
   ///
   /// If the final unit is incomplete, it will not be extracted and will remain in the buffer.
   public mutating func extractCompleteUnits() -> [Data] {
+    #warning("Debugging...")
+    return []
+    #if false
     let endMarkerRanges = buffer.matches(for: DataStream.endData)
       .filter { (match: PatternMatch<Data>) -> Bool in
 
@@ -97,5 +100,6 @@ public struct DataStream {
 
       return unit
     }
+    #endif
   }
 }
