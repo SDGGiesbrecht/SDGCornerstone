@@ -64,6 +64,9 @@ public struct DataStream {
   public mutating func extractCompleteUnits() -> [Data] {
     let endMarkerRanges = buffer.matches(for: DataStream.endData)
       .filter { (match: PatternMatch<Data>) -> Bool in
+#warning("Debugging...")
+return false
+#if false
 
         // Count escapes.
         var escapes = 0
@@ -77,6 +80,7 @@ public struct DataStream {
 
         // An odd number of escapes means the last one affects the marker.
         return ¬escapes.isOdd
+        #endif
       }
 
       #warning("Debugging...")
