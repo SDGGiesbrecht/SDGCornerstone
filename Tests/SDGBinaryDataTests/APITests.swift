@@ -80,6 +80,7 @@ class APITests: TestCase {
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
         outputStream.buffer.append(transfer)
+        let x = outputStream.extractCompleteUnits()
         #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
         results.append(contentsOf: outputStream.extractCompleteUnits())
         #endif
