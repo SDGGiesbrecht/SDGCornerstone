@@ -92,7 +92,11 @@ extension IntFamily {
   }
 
   @inlinable public var isOdd: Bool {
+#warning("Debugging...")
+return false
+#if false
     return self & 1 == 1
+    #endif
   }
 }
 
