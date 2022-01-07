@@ -27,7 +27,11 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
+    #warning("Debugging...")
+    let x = GregorianDay.meanDuration
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
+    #endif
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
     #endif
