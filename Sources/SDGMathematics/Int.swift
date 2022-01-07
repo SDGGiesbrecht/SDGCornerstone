@@ -92,11 +92,7 @@ extension IntFamily {
   }
 
   @inlinable public var isOdd: Bool {
-#warning("Debugging...")
-return false
-#if false
     return self & 1 == 1
-    #endif
   }
 }
 
@@ -214,4 +210,11 @@ extension Int8: IntXFamily {
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
+
+  // MARK: - WholeArithmetic
+
+  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  @inlinable public var isOdd: Bool {
+    return self & 1 == 1
+  }
 }
