@@ -28,7 +28,9 @@ class APITests: TestCase {
 
   func testCalendarComponent() {
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
