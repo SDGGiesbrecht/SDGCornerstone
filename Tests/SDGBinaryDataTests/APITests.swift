@@ -86,7 +86,6 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var forDescription: UInt8 = 0
       forDescription.binary[0] = true
       testCustomStringConvertibleConformance(
@@ -95,6 +94,5 @@ class APITests: TestCase {
         uniqueTestName: "1st",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
   }
 }
