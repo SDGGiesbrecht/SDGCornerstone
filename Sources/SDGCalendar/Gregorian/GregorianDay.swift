@@ -46,6 +46,7 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   public static var duration: CalendarInterval<FloatMax> {
     #warning("Debugging...")
+    let x = 1 as FloatMax
     print("Call succeeded.")
     fatalError()
     #if false
