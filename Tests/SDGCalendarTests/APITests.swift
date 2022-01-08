@@ -32,7 +32,7 @@ class APITests: TestCase {
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
     #endif
 
-      XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+    XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
