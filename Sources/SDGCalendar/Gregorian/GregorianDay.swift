@@ -84,6 +84,7 @@ extension FloatMax {
   /// Returns a calendar interval in days.
   public var days: CalendarInterval<FloatMax> {
     #warning("Debugging...")
+    let x = CalendarInterval(days: self)
     fatalError("Call succeeded.")
     #if false
     return CalendarInterval(days: self)
