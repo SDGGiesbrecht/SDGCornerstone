@@ -27,6 +27,7 @@ extension CardinalCalendarComponent {
 
   public init(ordinal: RawValue) {
     #warning("Debugging...")
+    let x = 1 as Vector
     fatalError()
     #if false
     self.init(ordinal − (1 as Vector))
