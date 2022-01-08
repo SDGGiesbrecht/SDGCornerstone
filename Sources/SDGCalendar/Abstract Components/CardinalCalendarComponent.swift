@@ -26,7 +26,11 @@ extension CardinalCalendarComponent {
   }
 
   public init(ordinal: RawValue) {
+    #warning("Debugging...")
+    fatalError()
+    #if false
     self.init(ordinal − (1 as Vector))
+    #endif
   }
 
   public var numberAlreadyElapsed: RawValue {
