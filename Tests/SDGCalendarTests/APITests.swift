@@ -325,6 +325,23 @@ class APITests: TestCase {
     #endif
   }
 
+  func testCardinalCalendarComponent() {
+    struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent {
+      static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
+      }
+      typealias Vector = Int
+      init(unsafeRawValue: RawValue) {
+        rawValue = unsafeRawValue
+      }
+      static let validRange: Range<RawValue>? = nil
+      var rawValue: RawValue
+    }
+    #if !PLATFORM_MISCOMPILES_CARDINAL_CALENDAR_COMPONENT
+      XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
+    #endif
+  }
+
   func testGregorianDay() {
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
