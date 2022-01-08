@@ -34,6 +34,7 @@ class APITests: TestCase {
 
     #warning("Debugging...")
     let x = GregorianMinute(ordinal: 5)
+    let y = GregorianMinute(numberAlreadyElapsed: 4)
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
     #endif
