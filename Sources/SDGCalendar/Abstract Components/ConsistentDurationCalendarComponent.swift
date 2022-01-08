@@ -27,7 +27,9 @@ extension ConsistentDurationCalendarComponent {
 
   public static var meanDuration: CalendarInterval<FloatMax> {
     #warning("Debugging...")
-    fatalError("Succeeded.")
+    let x = duration
+    print("Call succeeded.")
+    fatalError()
     #if false
     return duration
     #endif
