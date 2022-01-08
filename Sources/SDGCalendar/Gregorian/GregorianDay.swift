@@ -45,7 +45,12 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
   // MARK: - ConsistentDurationCalendarComponent
 
   public static var duration: CalendarInterval<FloatMax> {
+    #warning("Debugging...")
+    print("Call succeeded.")
+    fatalError()
+    #if false
     return (1 as FloatMax).days
+    #endif
   }
 
   // MARK: - ISOCalendarComponent
