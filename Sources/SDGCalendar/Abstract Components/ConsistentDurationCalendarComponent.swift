@@ -26,7 +26,11 @@ extension ConsistentDurationCalendarComponent {
   // MARK: - CalendarComponent
 
   public static var meanDuration: CalendarInterval<FloatMax> {
+    #warning("Debugging...")
+    fatalError("Succeeded.")
+    #if false
     return duration
+    #endif
   }
 
   public static var minimumDuration: CalendarInterval<FloatMax> {
