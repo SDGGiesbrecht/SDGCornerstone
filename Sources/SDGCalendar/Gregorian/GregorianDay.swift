@@ -45,14 +45,7 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
   // MARK: - ConsistentDurationCalendarComponent
 
   public static var duration: CalendarInterval<FloatMax> {
-    #warning("Debugging...")
-    let x = 1 as FloatMax
-    let y = x.days
-    print("Call succeeded.")
-    fatalError()
-    #if false
     return (1 as FloatMax).days
-    #endif
   }
 
   // MARK: - ISOCalendarComponent
@@ -75,19 +68,5 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   public var rawValue: Int {
     return day
-  }
-}
-
-// #workaround(Swift 5.5.2, Redundant, but evades a compiler bug on Windows that leads to runtime crashes.)
-extension FloatMax {
-
-  /// Returns a calendar interval in days.
-  public var days: CalendarInterval<FloatMax> {
-    #warning("Debugging...")
-    let x = CalendarInterval(days: self)
-    fatalError("Call succeeded.")
-    #if false
-    return CalendarInterval(days: self)
-    #endif
   }
 }

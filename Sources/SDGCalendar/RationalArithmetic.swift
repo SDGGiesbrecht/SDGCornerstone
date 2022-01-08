@@ -35,11 +35,7 @@ extension RationalArithmetic {
 
   /// Returns a calendar interval in days.
   public var days: CalendarInterval<Self> {
-    #warning("Debugging...")
-    fatalError("Call succeeded.")
-    #if false
     return CalendarInterval(days: self)
-    #endif
   }
 
   /// Returns a calendar interval in hours.
