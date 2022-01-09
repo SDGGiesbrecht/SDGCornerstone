@@ -73,6 +73,7 @@ class APITests: TestCase {
         "Date conversion failed."
       )
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(hebrew: .tevet, 10, 5776, at: 3),
         CalendarDate(gregorian: .december, 21, 2015, at: 21),
@@ -89,6 +90,7 @@ class APITests: TestCase {
           "CalendarDate does not match Foundation."
         )
       #endif
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
