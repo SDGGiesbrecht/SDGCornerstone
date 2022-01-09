@@ -658,15 +658,15 @@ class APITests: TestCase {
     struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent,
       NumericCalendarComponent, RawRepresentableCalendarComponent
     {
-      public static var duration: CalendarInterval<FloatMax> {
+      static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
       }
-      public typealias Vector = Int
-      public init(unsafeRawValue: RawValue) {
+      typealias Vector = Int
+      init(unsafeRawValue: RawValue) {
         rawValue = unsafeRawValue
       }
-      public static let validRange: Range<RawValue>? = nil
-      public var rawValue: RawValue
+      static let validRange: Range<RawValue>? = nil
+      var rawValue: RawValue
     }
     var component = TestComponent(1)
     #if !PLATFORM_MISCOMPILES_NUMERIC_CALENDAR_COMPONENT
