@@ -42,6 +42,11 @@ public struct GregorianMinute: CardinalCalendarComponent,
     self.init(ordinal − (1 as Vector))
   }
 
+  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
+  public var ordinal: RawValue {
+    return rawValue + (1 as Vector)
+  }
+
   // MARK: - ConsistentDurationCalendarComponent
 
   public static var duration: CalendarInterval<FloatMax> {
