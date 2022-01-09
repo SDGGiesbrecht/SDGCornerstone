@@ -62,6 +62,7 @@ class APITests: TestCase {
       // Force these to take place first.
       InternalTests.testHebrewYear()
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(hebrew: .iyar, 4, 5751),
         CalendarDate(gregorian: .april, 17, 1991, at: 18),
@@ -72,6 +73,7 @@ class APITests: TestCase {
         CalendarDate(gregorian: .april, 18, 1991),
         "Date conversion failed."
       )
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
