@@ -654,6 +654,27 @@ class APITests: TestCase {
     #endif
   }
 
+  func testNumericCalendarComponent() {
+    struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent,
+      NumericCalendarComponent, RawRepresentableCalendarComponent
+    {
+      public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
+      }
+      public typealias Vector = Int
+      public init(unsafeRawValue: RawValue) {
+        rawValue = unsafeRawValue
+      }
+      public static let validRange: Range<RawValue>? = nil
+      public var rawValue: RawValue
+    }
+    var component = TestComponent(1)
+    #if !PLATFORM_MISCOMPILES_NUMERIC_CALENDAR_COMPONENT
+      component += 1
+      XCTAssertEqual(component.rawValue, 2)
+    #endif
+  }
+
   func testWeekday() {
     for weekday in GregorianWeekday.sunday...GregorianWeekday.saturday {
       XCTAssertNotEqual(weekday.inEnglish(), "")
