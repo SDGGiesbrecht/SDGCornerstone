@@ -96,6 +96,11 @@ public struct HebrewYear: CardinalCalendarComponent, CodableViaRawRepresentableC
 
   public typealias Vector = Int
 
+  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
+  public static func += (precedingValue: inout Self, followingValue: Vector) {
+    precedingValue = Self(precedingValue.rawValue + followingValue)
+  }
+
   // MARK: - RawRepresentableCalendarComponent
 
   public init(unsafeRawValue: RawValue) {
