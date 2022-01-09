@@ -33,15 +33,11 @@ class APITests: TestCase {
     #endif
 
     XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
-    let x = GregorianMinute(ordinal: 4)
-    let y = x.ordinal
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
-    #endif
+    XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay(ordinal: 8), 8)
     #endif
 
