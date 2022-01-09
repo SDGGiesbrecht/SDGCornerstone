@@ -129,6 +129,7 @@ class APITests: TestCase {
       XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
       XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
       XCTAssertEqual(
         yetAnotherDate.hebrewDateInBritishEnglish(withWeekday: true),
@@ -296,6 +297,7 @@ class APITests: TestCase {
         adjustedToLongitude.twentyFourHourTimeInEnglish(),
         longitudeEquivalent.twentyFourHourTimeInEnglish()
       )
+    #endif
   }
 
   func testCalendarInterval() {
