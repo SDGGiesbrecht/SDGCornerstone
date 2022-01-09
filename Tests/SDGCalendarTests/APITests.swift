@@ -35,11 +35,9 @@ class APITests: TestCase {
     XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
     XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
-      XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
+    XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(GregorianDay(ordinal: 8), 8)
-    #endif
+    XCTAssertEqual(GregorianDay(ordinal: 8), 8)
 
     #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
