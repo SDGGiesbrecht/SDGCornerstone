@@ -27,17 +27,21 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+    #endif
 
-      XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+    XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
       XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
 
       XCTAssertEqual(GregorianDay(ordinal: 8), 8)
+    #endif
 
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
       XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
@@ -46,7 +50,9 @@ class APITests: TestCase {
       XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
       XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
+    #endif
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
       XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
 
@@ -316,6 +322,23 @@ class APITests: TestCase {
 
       XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
       XCTAssert(28.days.inHebrewMoons < 1)
+    #endif
+  }
+
+  func testCardinalCalendarComponent() {
+    struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent {
+      static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
+      }
+      typealias Vector = Int
+      init(unsafeRawValue: RawValue) {
+        rawValue = unsafeRawValue
+      }
+      static let validRange: Range<RawValue>? = nil
+      var rawValue: RawValue
+    }
+    #if !PLATFORM_MISCOMPILES_CARDINAL_CALENDAR_COMPONENT
+      XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
     #endif
   }
 

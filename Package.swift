@@ -850,6 +850,10 @@ for target in package.targets {
       "PLATFORM_LACKS_SWIFT_COMPILER",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
+    // #workaround(Swift 5.5.2, Miscompilation leads to runtime crashes.)
+    .define("PLATFORM_MISCOMPILES_CALENDAR_INTERVAL", .when(platforms: [.windows])),
+    // #workaround(Swift 5.5.2, Miscompilation leads to runtime crashes.)
+    .define("PLATFORM_MISCOMPILES_CARDINAL_CALENDAR_COMPONENT", .when(platforms: [.windows])),
     // #workaround(Windows suffers unexplained segmentation faults.)
     .define("PLATFORM_SUFFERS_SEGMENTATION_FAULTS", .when(platforms: [.windows])),
   ])
