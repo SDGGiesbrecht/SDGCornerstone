@@ -90,6 +90,7 @@ class APITests: TestCase {
         )
       #endif
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
         .wednesday,
@@ -128,6 +129,7 @@ class APITests: TestCase {
       XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
       XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
       XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
