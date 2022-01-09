@@ -50,14 +50,12 @@ class APITests: TestCase {
       XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
     #endif
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
       XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
 
       var day = GregorianWeekday.monday
       day.decrement()
       XCTAssertEqual(day, .sunday)
-    #endif
   }
 
   func testCalendarDate() throws {
