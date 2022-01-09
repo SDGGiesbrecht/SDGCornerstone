@@ -59,8 +59,10 @@ class APITests: TestCase {
   }
 
   func testCalendarDate() throws {
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       // Force these to take place first.
       InternalTests.testHebrewYear()
+    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
