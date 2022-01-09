@@ -101,9 +101,11 @@ class InternalTests: TestCase {
   static func testHebrewYear() {
     // Untracked
 
+    #warning("Debugging...")
+    let x = HebrewYear(5700)
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
     for year in HebrewYear(5700)..<5800 {
 
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
       assert(
         HebrewDate.intervalFromReferenceDate(toStartOf: year)
@@ -112,8 +114,8 @@ class InternalTests: TestCase {
       )
 
       _ = year.length  // Throws exception if the year has an invalid length.
-      #endif
     }
+    #endif
   }
 
   func testRelativeDate() {
