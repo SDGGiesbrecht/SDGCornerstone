@@ -103,6 +103,8 @@ class InternalTests: TestCase {
 
     #warning("Debugging...")
     let x = HebrewYear(5700)..<5800
+    let y = HebrewYear(5700)
+    let z = y + 1
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
     for year in HebrewYear(5700)..<5800 {
 
