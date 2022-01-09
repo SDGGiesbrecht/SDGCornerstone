@@ -31,9 +31,9 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
 
   // MARK: - Root Calendar Functions
 
-  internal static func intervalFromReferenceDate(toStartOf targetYear: HebrewYear)
-    -> CalendarInterval<FloatMax>
-  {
+  internal static func intervalFromReferenceDate(
+    toStartOf targetYear: HebrewYear
+  ) -> CalendarInterval<FloatMax> {
 
     let yearsElapsed = targetYear − HebrewDate.referenceYear
 

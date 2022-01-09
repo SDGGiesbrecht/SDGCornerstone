@@ -50,21 +50,19 @@ class APITests: TestCase {
       XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
     #endif
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
-      XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
+    XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
+    XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
 
-      var day = GregorianWeekday.monday
-      day.decrement()
-      XCTAssertEqual(day, .sunday)
-    #endif
+    var day = GregorianWeekday.monday
+    day.decrement()
+    XCTAssertEqual(day, .sunday)
   }
 
   func testCalendarDate() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      // Force these to take place first.
-      InternalTests.testHebrewYear()
+    // Force these to take place first.
+    InternalTests.testHebrewYear()
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(hebrew: .iyar, 4, 5751),
         CalendarDate(gregorian: .april, 17, 1991, at: 18),
@@ -75,7 +73,9 @@ class APITests: TestCase {
         CalendarDate(gregorian: .april, 18, 1991),
         "Date conversion failed."
       )
+    #endif
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(hebrew: .tevet, 10, 5776, at: 3),
         CalendarDate(gregorian: .december, 21, 2015, at: 21),
@@ -92,7 +92,9 @@ class APITests: TestCase {
           "CalendarDate does not match Foundation."
         )
       #endif
+    #endif
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
         .wednesday,
@@ -131,7 +133,9 @@ class APITests: TestCase {
       XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
       XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
       XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
+    #endif
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
       XCTAssertEqual(
         yetAnotherDate.hebrewDateInBritishEnglish(withWeekday: true),
@@ -647,6 +651,27 @@ class APITests: TestCase {
       let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
       XCTAssert(length ≥ HebrewYear.minimumDuration)
       XCTAssert(length ≤ HebrewYear.maximumDuration)
+    #endif
+  }
+
+  func testNumericCalendarComponent() {
+    struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent,
+      NumericCalendarComponent, RawRepresentableCalendarComponent
+    {
+      static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
+      }
+      typealias Vector = Int
+      init(unsafeRawValue: RawValue) {
+        rawValue = unsafeRawValue
+      }
+      static let validRange: Range<RawValue>? = nil
+      var rawValue: RawValue
+    }
+    var component = TestComponent(1)
+    #if !PLATFORM_MISCOMPILES_NUMERIC_CALENDAR_COMPONENT
+      component += 1
+      XCTAssertEqual(component.rawValue, 2)
     #endif
   }
 
