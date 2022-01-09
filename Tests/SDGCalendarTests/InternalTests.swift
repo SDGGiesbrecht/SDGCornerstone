@@ -102,7 +102,7 @@ class InternalTests: TestCase {
     // Untracked
 
     #warning("Debugging...")
-    let x = HebrewYear(5700)
+    let x = HebrewYear(5700)..<5800
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
     for year in HebrewYear(5700)..<5800 {
 
