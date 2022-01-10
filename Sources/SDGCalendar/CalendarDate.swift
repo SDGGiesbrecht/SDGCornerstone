@@ -75,12 +75,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     hour: HebrewHour = 0,
     part: HebrewPart = 0
   ) {
-    #warning("Debugging...")
-    let x = HebrewDate(year: year, month: month, day: day, hour: hour, part: part)
-    fatalError()
-    #if false
     self.init(definition: HebrewDate(year: year, month: month, day: day, hour: hour, part: part))
-    #endif
   }
 
   /// Creates a date using the Hebrew calendar.
