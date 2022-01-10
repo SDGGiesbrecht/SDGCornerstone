@@ -108,8 +108,6 @@ public func testCodableConformance<T>(
     if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {  // @exempt(from: unicode)
       encoder.outputFormatting.insert(.sortedKeys)
     }
-    #warning("Debugging...")
-    #if false
     let encoded = try encoder.encode([instance])
 
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
@@ -125,7 +123,6 @@ public func testCodableConformance<T>(
         )
       #endif
     }
-    #endif
   } catch {
     fail("\(error)", file: file, line: line)
   }
