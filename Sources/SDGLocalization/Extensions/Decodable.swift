@@ -30,9 +30,6 @@ extension Decodable {
     via type: Other.Type,
     convert: (_ other: Other) throws -> Self?
   ) throws where Other: Decodable {
-    #warning("Debugging...")
-    fatalError()
-    #if false
     let container = try decoder.singleValueContainer()
     let other = try container.decode(Other.self)
 
@@ -61,6 +58,5 @@ extension Decodable {
     } catch {
       throw generateError(underlyingError: error)
     }
-    #endif
   }
 }

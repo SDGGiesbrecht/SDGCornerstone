@@ -42,6 +42,13 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
     }
   }
 
+  // MARK: - CodableViaRawRepresentableCalendarComponent
+
+  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
+  public init(from decoder: Decoder) throws {
+    try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
+  }
+
   // MARK: - ConsistentDurationCalendarComponent
 
   public static var duration: CalendarInterval<FloatMax> {
