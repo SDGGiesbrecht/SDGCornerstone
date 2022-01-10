@@ -98,9 +98,9 @@ extension CodableViaRawRepresentableCalendarComponent {
 
   public init(from decoder: Decoder) throws {
     #warning("Debugging...")
-    fatalError()
-    #if false
+    //fatalError()
+    //#if false
     try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
-    #endif
+    //#endif
   }
 }
