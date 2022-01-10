@@ -93,7 +93,11 @@ public protocol CodableViaRawRepresentableCalendarComponent: RawRepresentableCal
 extension CodableViaRawRepresentableCalendarComponent {
 
   public func encode(to encoder: Encoder) throws {
+    #warning("Debugging...")
+    print(#function)
+    #if false
     try encode(to: encoder, via: rawValue)
+    #endif
   }
 
   public init(from decoder: Decoder) throws {
