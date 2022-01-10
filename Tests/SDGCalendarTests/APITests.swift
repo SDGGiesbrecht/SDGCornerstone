@@ -317,7 +317,7 @@ class APITests: TestCase {
   }
 
   func testCalendarInterval() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
       testCustomStringConvertibleConformance(
         of: 1.days,
@@ -355,7 +355,6 @@ class APITests: TestCase {
   }
 
   func testGregorianDay() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),
@@ -375,7 +374,6 @@ class APITests: TestCase {
       day.correct(forMonth: &month, year: 2017)
       XCTAssertEqual(day, 1)
       XCTAssertEqual(month, .december)
-    #endif
   }
 
   func testGregorianHour() {
