@@ -113,9 +113,9 @@ public func testCodableConformance<T>(
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
+    let newSpecification = try String(file: encoded, origin: nil)
     #warning("Debugging...")
     #if false
-    let newSpecification = try String(file: encoded, origin: nil)
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
       let now = CalendarDate.gregorianNow()
