@@ -363,6 +363,7 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
 
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var day: GregorianDay = 29
       var month: GregorianMonth = .february
       day.correct(forMonth: &month, year: 2017)
@@ -374,6 +375,7 @@ class APITests: TestCase {
       day.correct(forMonth: &month, year: 2017)
       XCTAssertEqual(day, 1)
       XCTAssertEqual(month, .december)
+    #endif
   }
 
   func testGregorianHour() {
