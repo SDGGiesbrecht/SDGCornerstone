@@ -355,7 +355,14 @@ class APITests: TestCase {
   }
 
   func testGregorianDay() {
+    #warning("Debugging...")
     let x = GregorianDay(12)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted]
+    if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {  // @exempt(from: unicode)
+      encoder.outputFormatting.insert(.sortedKeys)
+    }
+    let encoded = try encoder.encode([x])
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
     #endif
