@@ -45,11 +45,6 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
   // MARK: - CodableViaRawRepresentableCalendarComponent
 
   // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
-  public func encode(to encoder: Encoder) throws {
-    try encode(to: encoder, via: rawValue)
-  }
-
-  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
   public init(from decoder: Decoder) throws {
     try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
   }

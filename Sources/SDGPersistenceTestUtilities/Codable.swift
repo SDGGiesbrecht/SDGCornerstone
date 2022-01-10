@@ -110,6 +110,8 @@ public func testCodableConformance<T>(
     }
     let encoded = try encoder.encode([instance])
 
+    #warning("Debugging...")
+    #if false
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
@@ -123,6 +125,7 @@ public func testCodableConformance<T>(
         )
       #endif
     }
+    #endif
   } catch {
     fail("\(error)", file: file, line: line)
   }
