@@ -74,8 +74,6 @@ public func testCodableConformance<T>(
           ] {
             let data = representation.file
             let array = try JSONDecoder().decode([T].self, from: data)
-            #warning("Debugging...")
-            #if false
             guard let decoded = array.first else {
               fail(
                 String(
@@ -100,7 +98,6 @@ public func testCodableConformance<T>(
               file: file,
               line: line
             )
-            #endif
           }
         }
       }
