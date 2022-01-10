@@ -133,6 +133,9 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
     hour: HebrewHour,
     part: HebrewPart
   ) {
+    #warning("Debugging...")
+    fatalError()
+    #if false
     var year = year
     var month = month
     var day = day
@@ -161,6 +164,7 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
     interval += part.numberAlreadyElapsed.hebrewParts
 
     self.intervalSinceReferenceDate = interval
+    #endif
   }
 
   // MARK: - Properties
