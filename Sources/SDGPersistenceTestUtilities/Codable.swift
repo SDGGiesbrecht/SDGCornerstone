@@ -110,9 +110,9 @@ public func testCodableConformance<T>(
     }
     let encoded = try encoder.encode([instance])
 
+    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     #warning("Debugging...")
     #if false
-    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
     let newSpecification = try String(file: encoded, origin: nil)
