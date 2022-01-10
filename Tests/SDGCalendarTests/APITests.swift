@@ -303,8 +303,8 @@ class APITests: TestCase {
         _ = adjustedToZone.playgroundDescription
       #endif
     #endif
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let longitude: Angle<Double> = 90°
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
       let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
       XCTAssertEqual(
