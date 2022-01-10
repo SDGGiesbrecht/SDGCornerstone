@@ -114,9 +114,9 @@ public func testCodableConformance<T>(
     test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
     let newSpecification = try String(file: encoded, origin: nil)
-    #warning("Debugging...")
-    #if false
     if newSpecification ∉ specifications {
+      #warning("Debugging...")
+      #if false
       // @exempt(from: tests)
       let now = CalendarDate.gregorianNow()
       #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
@@ -124,8 +124,8 @@ public func testCodableConformance<T>(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
         )
       #endif
+      #endif
     }
-    #endif
   } catch {
     fail("\(error)", file: file, line: line)
   }
