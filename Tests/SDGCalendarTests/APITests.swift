@@ -73,28 +73,28 @@ class APITests: TestCase {
         CalendarDate(gregorian: .april, 18, 1991),
         "Date conversion failed."
       )
-    #endif
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(
         CalendarDate(hebrew: .tevet, 10, 5776, at: 3),
         CalendarDate(gregorian: .december, 21, 2015, at: 21),
         "Date conversion failed."
       )
+    #endif
 
       #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
         let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
+        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         XCTAssert(
           Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
             ≈ system.timeIntervalSinceReferenceDate,
           "CalendarDate does not match Foundation."
         )
+        #endif
       #endif
-    #endif
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       XCTAssertEqual(
         CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
         .wednesday,
@@ -105,9 +105,11 @@ class APITests: TestCase {
         .wednesday,
         "Weekday failure."
       )
+    #endif
 
       XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
       XCTAssertEqual(referenceDate.gregorianMonth, .january)
       XCTAssertEqual(referenceDate.gregorianDay, 1)
@@ -133,9 +135,7 @@ class APITests: TestCase {
       XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
       XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
       XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
-    #endif
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
       XCTAssertEqual(
         yetAnotherDate.hebrewDateInBritishEnglish(withWeekday: true),
@@ -202,8 +202,10 @@ class APITests: TestCase {
         }
       }
       testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
+    #endif
 
       for n in 1...12 {
+        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let date = CalendarDate(
           gregorian: GregorianMonth(ordinal: n),
           GregorianDay(n),
@@ -218,7 +220,9 @@ class APITests: TestCase {
           uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
+        #endif
       }
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
       testCustomStringConvertibleConformance(
         of: bc,
@@ -226,7 +230,9 @@ class APITests: TestCase {
         uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
         overwriteSpecificationInsteadOfFailing: false
       )
+      #endif
       for n in 1...12 {
+        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let date = CalendarDate(
           hebrew: HebrewMonth(ordinal: n, leapYear: false),
           HebrewDay(n),
@@ -240,8 +246,10 @@ class APITests: TestCase {
           uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
+        #endif
       }
       for n in 21...22 {
+        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
         testCustomStringConvertibleConformance(
           of: adar,
@@ -249,7 +257,9 @@ class APITests: TestCase {
           uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
+        #endif
       }
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
       testCustomStringConvertibleConformance(
         of: relative,
@@ -292,6 +302,8 @@ class APITests: TestCase {
         _ = adjustedToZone.debugDescription
         _ = adjustedToZone.playgroundDescription
       #endif
+    #endif
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       let longitude: Angle<Double> = 90°
       let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
       let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
