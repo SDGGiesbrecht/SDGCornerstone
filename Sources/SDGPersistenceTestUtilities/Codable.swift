@@ -115,15 +115,12 @@ public func testCodableConformance<T>(
 
     let newSpecification = try String(file: encoded, origin: nil)
     if newSpecification ∉ specifications {
-      #warning("Debugging...")
-      #if false
       // @exempt(from: tests)
       let now = CalendarDate.gregorianNow()
       #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
         )
-      #endif
       #endif
     }
   } catch {
