@@ -81,18 +81,18 @@ class APITests: TestCase {
       )
     #endif
 
-      #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
-        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
-        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
+      let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         XCTAssert(
           Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
             ≈ system.timeIntervalSinceReferenceDate,
           "CalendarDate does not match Foundation."
         )
-        #endif
       #endif
+    #endif
 
     #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       XCTAssertEqual(
@@ -107,7 +107,7 @@ class APITests: TestCase {
       )
     #endif
 
-      XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
+    XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
     #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
@@ -204,8 +204,8 @@ class APITests: TestCase {
       testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
     #endif
 
-      for n in 1...12 {
-        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    for n in 1...12 {
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let date = CalendarDate(
           gregorian: GregorianMonth(ordinal: n),
           GregorianDay(n),
@@ -220,9 +220,9 @@ class APITests: TestCase {
           uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
-        #endif
-      }
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #endif
+    }
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
       testCustomStringConvertibleConformance(
         of: bc,
@@ -230,9 +230,9 @@ class APITests: TestCase {
         uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
         overwriteSpecificationInsteadOfFailing: false
       )
-      #endif
-      for n in 1...12 {
-        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #endif
+    for n in 1...12 {
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let date = CalendarDate(
           hebrew: HebrewMonth(ordinal: n, leapYear: false),
           HebrewDay(n),
@@ -246,10 +246,10 @@ class APITests: TestCase {
           uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
-        #endif
-      }
-      for n in 21...22 {
-        #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #endif
+    }
+    for n in 21...22 {
+      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
         let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
         testCustomStringConvertibleConformance(
           of: adar,
@@ -257,9 +257,9 @@ class APITests: TestCase {
           uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
           overwriteSpecificationInsteadOfFailing: false
         )
-        #endif
-      }
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #endif
+    }
+    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
       testCustomStringConvertibleConformance(
         of: relative,
@@ -355,7 +355,7 @@ class APITests: TestCase {
   }
 
   func testGregorianDay() {
-      testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
+    testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),

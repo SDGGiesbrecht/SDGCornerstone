@@ -117,12 +117,12 @@ public func testCodableConformance<T>(
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
       #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
-      let now = CalendarDate.gregorianNow()
-      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
-        try newSpecification.save(
-          to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
-        )
-      #endif
+        let now = CalendarDate.gregorianNow()
+        #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
+          try newSpecification.save(
+            to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
+          )
+        #endif
       #endif
     }
   } catch {
