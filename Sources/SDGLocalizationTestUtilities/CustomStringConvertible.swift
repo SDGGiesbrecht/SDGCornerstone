@@ -44,6 +44,8 @@ public func testCustomStringConvertibleConformance<T, L>(
 
   var report = ""
   for localization in localizations.allCases {
+    #warning("Debugging...")
+    #if false
     if let icon = localization.icon {
       report.append(contentsOf: String(icon))
     } else {
@@ -55,6 +57,7 @@ public func testCustomStringConvertibleConformance<T, L>(
       report.append("\n")
     }
     report.append("\n")
+    #endif
   }
 
   #warning("Debugging...")
