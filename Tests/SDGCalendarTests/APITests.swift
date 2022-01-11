@@ -356,14 +356,12 @@ class APITests: TestCase {
 
   func testGregorianDay() {
     testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),
         localizations: FormatLocalization.self,
         uniqueTestName: "4",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       var day: GregorianDay = 29
