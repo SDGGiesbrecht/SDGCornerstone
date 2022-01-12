@@ -33,6 +33,7 @@ extension MarkupPlaygroundDisplay {
 
   public var description: String {
     #warning("Debugging...")
+    let x = playgroundDescriptionMarkup()
     return ""
     #if false
     return String(playgroundDescriptionMarkup().rawTextApproximation())
