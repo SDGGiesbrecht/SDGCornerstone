@@ -32,6 +32,10 @@ extension MarkupPlaygroundDisplay {
   // MARK: - CustomStringConvertible
 
   public var description: String {
+    #warning("Debugging...")
+    return ""
+    #if false
     return String(playgroundDescriptionMarkup().rawTextApproximation())
+    #endif
   }
 }
