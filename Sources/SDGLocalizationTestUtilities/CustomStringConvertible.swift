@@ -51,9 +51,9 @@ public func testCustomStringConvertibleConformance<T, L>(
     }
     report.append("\n")
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
+      report.append(contentsOf: String(describing: instance))
       #warning("Debugging...")
       #if false
-      report.append(contentsOf: String(describing: instance))
       report.append("\n")
       #endif
     }
