@@ -56,9 +56,10 @@ extension Subtractable {
     return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
   }
 
-  @inlinable public static func ± (precedingValue: Self, followingValue: Self) -> (
-    sum: Self, difference: Self
-  ) {
+  @inlinable public static func ± (
+    precedingValue: Self,
+    followingValue: Self
+  ) -> (sum: Self, difference: Self) {
     return (precedingValue + followingValue, precedingValue − followingValue)
   }
 }
