@@ -104,7 +104,7 @@ class APITests: TestCase {
     forDescription.verifyPointProtocol()
     forDescription.verifyAdditiveArithmetic()
     forDescription.verifyHashable()
-    forDescription.verifySubtractable()
+    //forDescription.verifySubtractable()
     forDescription.verifyOneDimensionalPoint()
     forDescription.verifyStrideable()
     forDescription.verifyGenericAdditiveArithmetic()
