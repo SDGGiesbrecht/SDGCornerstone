@@ -73,10 +73,10 @@ extension Day {
   // MARK: - MarkupPlaygroundDisplay
 
   public func playgroundDescriptionMarkup() -> SemanticMarkup {
-    #warning("Debugging...")
-    fatalError()
-    #if false
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+      #warning("Debugging...")
+      return ""
+      #if false
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
         return SemanticMarkup(self.inEnglishDigits())
@@ -89,7 +89,7 @@ extension Day {
       case .עברית־ישראל:
         return SemanticMarkup(self.בעברית־בספרות())
       }
+      #endif
     }).resolved()
-    #endif
   }
 }
