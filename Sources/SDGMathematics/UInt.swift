@@ -26,6 +26,11 @@ public protocol UIntFamily: BitField, CustomReflectable, CVarArg, FixedWidthInte
 
 extension UIntFamily {
 
+  #warning("Debugging...")
+  public func verifyUIntFamily() {
+    print(#function)
+  }
+
   // MARK: - BitField
 
   @inlinable public func bitwiseNot() -> Self {
