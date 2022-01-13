@@ -23,7 +23,7 @@ extension GenericAdditiveArithmetic {
   
   #warning("Debugging...")
   public func verifyGenericAdditiveArithmetic() {
-    //verifyAdditiveArithmetic()
+    verifyAdditiveArithmetic()
     //verifyDecodable()
     //verifyEncodable()
     //verifyHashable()
