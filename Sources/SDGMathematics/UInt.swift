@@ -26,7 +26,7 @@ public protocol UIntFamily: BitField, CustomReflectable, CVarArg, FixedWidthInte
 
 extension CustomReflectable {
   #warning("Debugging...")
-  public func verifyCustomRefectable() {
+  public func verifyCustomReflectable() {
     print(#function)
   }
 }
