@@ -88,7 +88,7 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     #warning("Debugging...")
-    let int: Int = 0
+    let int: UInt.Vector = 0
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
     int.verifyDecodable()
