@@ -60,6 +60,11 @@ public protocol PointProtocol: Decodable, Encodable, Equatable {
 
 extension PointProtocol {
 
+  #warning("Debugging...")
+  public func verifyPointProtocol() {
+    print(#function)
+  }
+
   @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
   }

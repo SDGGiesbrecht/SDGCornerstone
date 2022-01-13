@@ -45,6 +45,11 @@ public protocol Subtractable: Addable {
 
 extension Subtractable {
 
+  #warning("Debugging...")
+  public func verifySubtractable() {
+    print(#function)
+  }
+
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
   }

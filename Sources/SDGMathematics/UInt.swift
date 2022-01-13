@@ -72,6 +72,30 @@ extension Comparable {
     print(#function)
   }
 }
+extension AdditiveArithmetic {
+  #warning("Debugging...")
+  public func verifyAdditiveArithmetic() {
+    print(#function)
+  }
+}
+extension Decodable {
+  #warning("Debugging...")
+  public func verifyDecodable() {
+    print(#function)
+  }
+}
+extension Encodable {
+  #warning("Debugging...")
+  public func verifyEncodable() {
+    print(#function)
+  }
+}
+extension Hashable {
+  #warning("Debugging...")
+  public func verifyHashable() {
+    print(#function)
+  }
+}
 
 extension UIntFamily {
 
