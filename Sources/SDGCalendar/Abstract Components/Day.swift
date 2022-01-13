@@ -33,6 +33,7 @@ extension Day {
   public func inEnglishDigits() -> StrictString {
     #warning("Debugging...")
     let x = ordinal
+    let y = x.inDigits()
     return ""
     #if false
     return ordinal.inDigits()
