@@ -77,6 +77,7 @@ extension Day {
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
         #warning("Debugging...")
+        let x = self.inEnglishDigits()
         return ""
         #if false
         return SemanticMarkup(self.inEnglishDigits())
