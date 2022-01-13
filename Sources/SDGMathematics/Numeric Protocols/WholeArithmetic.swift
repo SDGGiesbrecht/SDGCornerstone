@@ -207,6 +207,11 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric, Numeric
 
 extension WholeArithmetic {
 
+  #warning("Debugging...")
+  public func verifyWholeArithmetic() {
+    print(#function)
+  }
+
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(UIntMax(uInt))
   }

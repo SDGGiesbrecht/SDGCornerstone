@@ -88,13 +88,16 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     #warning("Debugging...")
+    forDescription.verifyEquatable()
+    forDescription.verifyWholeArithmetic() 
+    // ↓ Successful
+    // ↓ Inheritance already checked
     forDescription.verifyBitField()
     forDescription.verifyCustomReflectable()
     forDescription.verifyCVarArg()
     forDescription.verifyFixedWidthInteger()
     forDescription.verifyUnsignedInteger()
     forDescription.verifyWholeNumberProtocol()
-    // ↓ Inheritance already checked
     forDescription.verifyUIntFamily()
     // #workaround(Swift 5.5.2, Windows miscompiles UInt.BinaryView and crashes at runtime.)
     #if !os(Windows)

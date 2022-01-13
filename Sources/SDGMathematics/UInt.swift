@@ -48,6 +48,12 @@ extension UnsignedInteger {
     print(#function)
   }
 }
+extension Equatable {
+  #warning("Debugging...")
+  public func verifyEquatable() {
+    print(#function)
+  }
+}
 
 extension UIntFamily {
 
