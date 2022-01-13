@@ -107,7 +107,7 @@ class APITests: TestCase {
     //forDescription.verifySubtractable()
     forDescription.verifyOneDimensionalPoint()
     forDescription.verifyStrideable()
-    forDescription.verifyGenericAdditiveArithmetic()
+    //forDescription.verifyGenericAdditiveArithmetic()
     forDescription.verifyComparable()
     forDescription.verifyFixedScaleOneDimensionalPoint()
     forDescription.verifyNumeric()
