@@ -54,6 +54,12 @@ extension Equatable {
     print(#function)
   }
 }
+extension Numeric {
+  #warning("Debugging...")
+  public func verifyNumeric() {
+    print(#function)
+  }
+}
 
 extension UIntFamily {
 

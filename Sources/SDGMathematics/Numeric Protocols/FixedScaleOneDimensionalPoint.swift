@@ -15,3 +15,11 @@
 /// A one dimensional point with a fixed scale.
 public protocol FixedScaleOneDimensionalPoint: OneDimensionalPoint, Strideable
 where Stride == Vector {}
+
+extension FixedScaleOneDimensionalPoint {
+
+  #warning("Debugging...")
+  public func verifyFixedScaleOneDimensionalPoint() {
+    print(#function)
+  }
+}

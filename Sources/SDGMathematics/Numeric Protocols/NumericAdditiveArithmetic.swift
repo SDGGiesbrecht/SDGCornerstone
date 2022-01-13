@@ -44,6 +44,11 @@ public protocol NumericAdditiveArithmetic: GenericAdditiveArithmetic, Comparable
 
 extension NumericAdditiveArithmetic {
 
+  #warning("Debugging...")
+  public func verifyNumericAdditiveArithmetic() {
+    print(#function)
+  }
+
   @inlinable public var isPositive: Bool {
     return self > Self.zero
   }
