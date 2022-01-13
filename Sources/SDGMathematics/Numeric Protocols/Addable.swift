@@ -43,6 +43,7 @@ extension Addable {
   
   #warning("Debugging...")
   public func verifyAddable() {
+    _ = self + self
     print(#function)
   }
 
