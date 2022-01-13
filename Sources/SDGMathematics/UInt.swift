@@ -242,5 +242,5 @@ extension UInt8: UIntFamily {
 
   // MARK: - PointProtocol
 
-  public typealias Vector = Int
+  public typealias Vector = Stride
 }
