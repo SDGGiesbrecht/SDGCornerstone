@@ -47,6 +47,8 @@ extension Subtractable {
 
   #warning("Debugging...")
   public func verifySubtractable() {
+    verifyAddable()
+    _ = self − self
     print(#function, Self.self)
   }
 

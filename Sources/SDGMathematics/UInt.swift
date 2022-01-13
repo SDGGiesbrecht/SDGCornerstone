@@ -98,6 +98,8 @@ extension Encodable {
 extension Hashable {
   #warning("Debugging...")
   public func verifyHashable() {
+    var hasher = Hasher()
+    hash(into: &hasher)
     print(#function, Self.self)
   }
 }
