@@ -63,7 +63,7 @@ extension PointProtocol {
   #warning("Debugging...")
   public func verifyPointProtocol() {
     print(Vector.self)
-    //_ = self + Vector.zero
+    _ = self + Vector.zero
     print(#function)
   }
 
