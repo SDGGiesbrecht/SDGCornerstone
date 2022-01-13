@@ -40,6 +40,11 @@ public protocol Addable {
 }
 
 extension Addable {
+  
+  #warning("Debugging...")
+  public func verifyAddable() {
+    print(#function)
+  }
 
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
