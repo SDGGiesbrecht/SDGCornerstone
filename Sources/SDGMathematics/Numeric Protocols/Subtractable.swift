@@ -47,7 +47,7 @@ extension Subtractable {
 
   #warning("Debugging...")
   public func verifySubtractable() {
-    print(#function)
+    print(#function, Self.self)
   }
 
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {

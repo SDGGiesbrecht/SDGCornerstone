@@ -34,7 +34,7 @@ extension Negatable {
 
   #warning("Debugging...")
   public func verifyNegatable() {
-    print(#function)
+    print(#function, Self.self)
   }
 
   @inlinable public static prefix func − (operand: Self) -> Self {

@@ -76,7 +76,7 @@ extension Comparable {
 extension AdditiveArithmetic {
   #warning("Debugging...")
   public func verifyAdditiveArithmetic() {
-    print(#function)
+    print(#function, Self.self)
   }
 }
 import Foundation
@@ -84,20 +84,20 @@ extension Decodable {
   #warning("Debugging...")
   public func verifyDecodable() {
     try? JSONDecoder().decode(Self.self, from: Data())
-    print(#function)
+    print(#function, Self.self)
   }
 }
 extension Encodable {
   #warning("Debugging...")
   public func verifyEncodable() {
     try? JSONEncoder().encode(self)
-    print(#function)
+    print(#function, Self.self)
   }
 }
 extension Hashable {
   #warning("Debugging...")
   public func verifyHashable() {
-    print(#function)
+    print(#function, Self.self)
   }
 }
 

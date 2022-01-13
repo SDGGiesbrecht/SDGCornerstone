@@ -23,7 +23,7 @@ extension GenericAdditiveArithmetic {
   
   #warning("Debugging...")
   public func verifyGenericAdditiveArithmetic() {
-    print(#function)
+    print(#function, Self.self)
   }
 
   @inlinable public static func - (  // @exempt(from: unicode)

@@ -44,7 +44,7 @@ extension Addable {
   #warning("Debugging...")
   public func verifyAddable() {
     _ = self + self
-    print(#function)
+    print(#function, Self.self)
   }
 
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
