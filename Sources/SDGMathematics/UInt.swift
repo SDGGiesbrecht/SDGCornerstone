@@ -13,8 +13,6 @@
  */
 
 import SDGLogic
-import CoreGraphics
-import Foundation
 
 /// The member of the `UInt` family with the largest bit field.
 public typealias UIntMax = UInt64
@@ -81,6 +79,7 @@ extension AdditiveArithmetic {
     print(#function)
   }
 }
+import Foundation
 extension Decodable {
   #warning("Debugging...")
   public func verifyDecodable() {
