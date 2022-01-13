@@ -32,6 +32,11 @@ public protocol Negatable: GenericAdditiveArithmetic {
 
 extension Negatable {
 
+  #warning("Debugging...")
+  public func verifyNegatable() {
+    print(#function)
+  }
+
   @inlinable public static prefix func − (operand: Self) -> Self {
     return nonmutatingVariant(of: { $0.negate() }, on: operand)
   }
