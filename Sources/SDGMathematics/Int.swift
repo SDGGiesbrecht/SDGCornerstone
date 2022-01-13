@@ -130,6 +130,7 @@ extension Int: IntFamily {
 
   // MARK: - Subtractible
 
+  #warning("Is this really needed? (The diagnostic after removing it is very weird.)")
   @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
