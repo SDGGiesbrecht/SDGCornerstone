@@ -13,6 +13,8 @@
  */
 
 import SDGLogic
+import CoreGraphics
+import Foundation
 
 /// The member of the `UInt` family with the largest bit field.
 public typealias UIntMax = UInt64
@@ -51,6 +53,7 @@ extension UnsignedInteger {
 extension Equatable {
   #warning("Debugging...")
   public func verifyEquatable() {
+    _ = self == self
     print(#function)
   }
 }
@@ -81,12 +84,14 @@ extension AdditiveArithmetic {
 extension Decodable {
   #warning("Debugging...")
   public func verifyDecodable() {
+    try? JSONDecoder().decode(Self.self, from: Data())
     print(#function)
   }
 }
 extension Encodable {
   #warning("Debugging...")
   public func verifyEncodable() {
+    try? JSONEncoder().encode(self)
     print(#function)
   }
 }
