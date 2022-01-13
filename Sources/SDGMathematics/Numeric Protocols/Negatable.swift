@@ -34,8 +34,8 @@ extension Negatable {
 
   #warning("Debugging...")
   public func verifyNegatable() {
-    verifyGenericAdditiveArithmetic()
-    _ = −self
+    //verifyGenericAdditiveArithmetic()
+    //_ = −self
     print(#function, Self.self)
   }
 
