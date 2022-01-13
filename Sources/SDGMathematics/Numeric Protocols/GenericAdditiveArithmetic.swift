@@ -24,7 +24,7 @@ public protocol PartialGenericAdditiveArithmetic: AdditiveArithmetic {}
 extension PartialGenericAdditiveArithmetic {
   #warning("Debugging...")
   public func verifyPartialGenericAdditiveArithmetic() {
-    //verifyAdditiveArithmetic()
+    verifyAdditiveArithmetic()
     //verifyDecodable()
     //verifyEncodable()
     //verifyHashable()
