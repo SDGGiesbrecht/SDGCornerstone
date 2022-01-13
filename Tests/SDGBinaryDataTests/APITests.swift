@@ -88,10 +88,14 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     #warning("Debugging...")
+    forDescription.verifyOneDimensionalPoint()
+    forDescription.verifyStrideable()
+    forDescription.verifyGenericAdditiveArithmetic()
+    forDescription.verifyComparable()
+    // ↓ Successful
     forDescription.verifyFixedScaleOneDimensionalPoint()
     forDescription.verifyNumeric()
     forDescription.verifyNumericAdditiveArithmetic()
-    // ↓ Successful
     // ↓ Inheritance already checked
     forDescription.verifyEquatable()
     forDescription.verifyWholeArithmetic()

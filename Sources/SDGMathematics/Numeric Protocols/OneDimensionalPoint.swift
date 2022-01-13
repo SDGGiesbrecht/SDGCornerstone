@@ -19,6 +19,13 @@
 /// - Note: This is distinct from `FixedScaleOneDimensionalPoint` so that types can still conform to `OneDimensionalPoint` even if they have vectors that cannot conform to `Numeric`.
 public protocol OneDimensionalPoint: Comparable, PointProtocol {}
 
+extension OneDimensionalPoint {
+  #warning("Debugging...")
+  public func verifyOneDimensionalPoint() {
+    print(#function)
+  }
+}
+
 extension OneDimensionalPoint where Vector: IntegerProtocol {
 
   /// Advances to the next value.

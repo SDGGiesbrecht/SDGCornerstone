@@ -60,6 +60,18 @@ extension Numeric {
     print(#function)
   }
 }
+extension Strideable {
+  #warning("Debugging...")
+  public func verifyStrideable() {
+    print(#function)
+  }
+}
+extension Comparable {
+  #warning("Debugging...")
+  public func verifyComparable() {
+    print(#function)
+  }
+}
 
 extension UIntFamily {
 

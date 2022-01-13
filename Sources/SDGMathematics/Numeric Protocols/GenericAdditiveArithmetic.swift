@@ -20,6 +20,11 @@ public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encoda
 {}
 
 extension GenericAdditiveArithmetic {
+  
+  #warning("Debugging...")
+  public func verifyGenericAdditiveArithmetic() {
+    print(#function)
+  }
 
   @inlinable public static func - (  // @exempt(from: unicode)
     precedingValue: Self,
