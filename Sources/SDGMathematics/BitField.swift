@@ -61,6 +61,11 @@ public protocol BitField: Equatable {
 }
 
 extension BitField {
+  
+  #warning("Debugging...")
+  public func verifyBitField() {
+    print(#function)
+  }
 
   @inlinable public func bitwiseNot() -> Self {
     return nonmutatingVariant(of: { $0.formBitwiseNot() }, on: self)

@@ -24,6 +24,31 @@ public protocol UIntFamily: BitField, CustomReflectable, CVarArg, FixedWidthInte
   UnsignedInteger, WholeNumberProtocol
 {}
 
+extension CustomReflectable {
+  #warning("Debugging...")
+  public func verifyCustomRefectable() {
+    print(#function)
+  }
+}
+extension CVarArg {
+  #warning("Debugging...")
+  public func verifyCVarArg() {
+    print(#function)
+  }
+}
+extension FixedWidthInteger {
+  #warning("Debugging...")
+  public func verifyFixedWidthInteger() {
+    print(#function)
+  }
+}
+extension UnsignedInteger {
+  #warning("Debugging...")
+  public func verifyUnsignedInteger() {
+    print(#function)
+  }
+}
+
 extension UIntFamily {
 
   #warning("Debugging...")

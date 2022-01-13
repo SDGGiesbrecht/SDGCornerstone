@@ -17,6 +17,11 @@ public protocol WholeNumberProtocol: WholeArithmetic {}
 
 extension WholeNumberProtocol {
 
+  #warning("Debugging...")
+  public func verifyWholeNumberProtocol() {
+    print(#function)
+  }
+
   @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
     precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
   }
