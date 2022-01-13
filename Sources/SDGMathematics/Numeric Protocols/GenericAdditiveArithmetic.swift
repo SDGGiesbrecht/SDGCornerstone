@@ -19,11 +19,25 @@ public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encoda
   Subtractable
 {}
 
+#warning("Debugging...")
+public protocol PartialGenericAdditiveArithmetic: AdditiveArithmetic {}
+extension PartialGenericAdditiveArithmetic {
+  #warning("Debugging...")
+  public func verifyPartialGenericAdditiveArithmetic() {
+    //verifyAdditiveArithmetic()
+    //verifyDecodable()
+    //verifyEncodable()
+    //verifyHashable()
+    //verifySubtractable()
+    print(#function, Self.self)
+  }
+}
+
 extension GenericAdditiveArithmetic {
   
   #warning("Debugging...")
   public func verifyGenericAdditiveArithmetic() {
-    verifyAdditiveArithmetic()
+    //verifyAdditiveArithmetic()
     //verifyDecodable()
     //verifyEncodable()
     //verifyHashable()

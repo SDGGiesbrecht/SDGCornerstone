@@ -146,6 +146,8 @@ extension Int: IntFamily {
     return self & 1 == 1
   }
 }
+#warning("Debugging...")
+extension Int: PartialGenericAdditiveArithmetic {}
 extension Int64: IntXFamily {
 
   // MARK: - PointProtocol
