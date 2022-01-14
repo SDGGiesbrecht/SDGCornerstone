@@ -10,5 +10,6 @@ class DebuggingTests: XCTestCase {
     int.verifyCVarArg()
     int.verifyCustomStringConvertible()
     int.verifyEquatable()
+    int.verifyHashable()
   }
 }
