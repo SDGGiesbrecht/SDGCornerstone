@@ -93,6 +93,7 @@ class APITests: TestCase {
     #warning("Debugging...")
     let partial = PartialInt()
     partial.verifyAddable()
+    partial.verifyAdditiveArithmetic()
     let int: UInt.Vector = .zero
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
