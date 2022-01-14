@@ -86,14 +86,14 @@ import Foundation
 extension Decodable {
   #warning("Debugging...")
   public func verifyDecodable() {
-    try? JSONDecoder().decode(Self.self, from: Data())
+    _ = try? JSONDecoder().decode(Self.self, from: Data())
     print(#function, Self.self)
   }
 }
 extension Encodable {
   #warning("Debugging...")
   public func verifyEncodable() {
-    try? JSONEncoder().encode(self)
+    _ = try? JSONEncoder().encode(self)
     print(#function, Self.self)
   }
 }
