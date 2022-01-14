@@ -11,5 +11,6 @@ class DebuggingTests: XCTestCase {
     int.verifyCustomStringConvertible()
     int.verifyEquatable()
     int.verifyHashable()
+    int.verifyAdditiveArithmetic()
   }
 }
