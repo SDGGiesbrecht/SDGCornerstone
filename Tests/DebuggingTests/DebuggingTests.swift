@@ -18,5 +18,6 @@ class DebuggingTests: XCTestCase {
     int.verifyStrideable()
     int.verifyBinaryInteger()
     int.verifyLosslessStringConvertible()
+    int.verifyFixedWidthInteger()
   }
 }
