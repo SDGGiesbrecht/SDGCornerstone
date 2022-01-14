@@ -15,7 +15,7 @@
 import SDGMathematics
 import SDGText
 
-extension IntegralArithmetic {
+/*extension IntegralArithmetic {
 
   internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
     var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
@@ -24,4 +24,4 @@ extension IntegralArithmetic {
     }
     return digits
   }
-}
+}*/

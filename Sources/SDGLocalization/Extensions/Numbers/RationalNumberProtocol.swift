@@ -19,7 +19,7 @@ import SDGMathematics
 import SDGCollections
 import SDGText
 
-extension RationalNumberProtocol {
+/*extension RationalNumberProtocol {
 
   // MARK: - Text Representations
 
@@ -85,4 +85,4 @@ extension RationalNumberProtocol {
     return numerator.integralDigits(thousandsSeparator: thousandsSeparator) + " ∶ "
       + denominator.integralDigits(thousandsSeparator: thousandsSeparator)
   }
-}
+}*/

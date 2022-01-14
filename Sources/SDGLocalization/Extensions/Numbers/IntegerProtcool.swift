@@ -16,7 +16,7 @@ import SDGLogic
 import SDGMathematics
 import SDGText
 
-extension IntegerProtocol {
+/*extension IntegerProtocol {
 
   // @localization(🇩🇪DE) @crossReference(IntegerProtocol.inDigits(thousandsSeparator:))
   // #documentation(SDGCornerstone.WholeNumberProtocol.inZahlzeichen(tausendertrennzeichen:))
@@ -105,4 +105,4 @@ extension IntegerProtocol {
   public func בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
     return ספרות־עבריות(גרשיים: גרשיים)
   }
-}
+}*/
