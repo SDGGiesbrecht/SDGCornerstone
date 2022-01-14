@@ -12,5 +12,6 @@ class DebuggingTests: XCTestCase {
     int.verifyEquatable()
     int.verifyHashable()
     int.verifyAdditiveArithmetic()
+    int.verifyExpressibleByIntegerLiteral()
   }
 }
