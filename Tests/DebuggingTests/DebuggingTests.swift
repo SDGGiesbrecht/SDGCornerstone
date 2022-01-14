@@ -8,5 +8,6 @@ class DebuggingTests: XCTestCase {
     let int = 0
     int.verifyCustomReflectable()
     int.verifyCVarArg()
+    int.verifyCustomStringConvertible()
   }
 }
