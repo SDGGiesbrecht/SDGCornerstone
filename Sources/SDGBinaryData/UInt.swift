@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematics
+/*import SDGMathematics
 
 extension UIntFamily {
 
@@ -40,4 +40,4 @@ extension UInt8 {
       self = newValue.uInt
     }
   }
-}
+}*/
