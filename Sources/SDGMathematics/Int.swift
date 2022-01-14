@@ -149,6 +149,10 @@ extension Int: IntFamily {
 }
 #warning("Debugging...")
 extension Int: PartialGenericAdditiveArithmetic {}
+public struct PartialInt: Addable {
+  public init() {}
+  public static func += (precedingValue: inout PartialInt, followingValue: PartialInt) {}
+}
 extension Int64: IntXFamily {
 
   // MARK: - PointProtocol

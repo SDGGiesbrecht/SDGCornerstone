@@ -25,6 +25,9 @@ import SDGXCTestUtilities
 import SDGMathematicsTestUtilities
 import SDGLocalizationTestUtilities
 
+#warning("Debugging...")
+import SDGMathematics
+
 class APITests: TestCase {
 
   func testData() {
@@ -89,6 +92,7 @@ class APITests: TestCase {
     var forDescription: UInt8 = 0
     #warning("Debugging...")
     let partial = PartialInt()
+    partial.verifyAddable()
     let int: UInt.Vector = .zero
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
