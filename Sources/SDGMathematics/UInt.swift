@@ -51,7 +51,7 @@ extension UnsignedInteger {
 extension Equatable {
   #warning("Debugging...")
   public func verifyEquatable() {
-    _ = self == self
+    _ = self != self
     print(#function)
   }
 }
