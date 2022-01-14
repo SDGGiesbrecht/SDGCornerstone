@@ -76,7 +76,7 @@ public struct DataStream {
         }
 
         // An odd number of escapes means the last one affects the marker.
-        return ¬escapes.isOdd
+        return true//¬escapes.isOdd
       }
 
     let unitRanges = buffer.ranges(separatedBy: endMarkerRanges.map({ $0.range }))

@@ -130,7 +130,7 @@ extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, 
 
   // MARK: - PointProtocol
 
-  public typealias Vector = Stride
+  /*public typealias Vector = Stride
 
   // MARK: - Subtractible
 
@@ -149,7 +149,7 @@ extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, 
   // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
   @inlinable public var isOdd: Bool {
     return self & 1 == 1
-  }
+  }*/
 }
 /*extension Int64: IntXFamily {
 
