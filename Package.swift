@@ -170,7 +170,7 @@ import PackageDescription
 /// ```
 let package = Package(
   name: "SDGCornerstone",
-  products: [
+  products: [/*
 
     // #documentation(SDGControlFlow)
     /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -270,7 +270,7 @@ let package = Package(
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
-  ],
+  */],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
     .package(
@@ -279,6 +279,9 @@ let package = Package(
     ),
   ],
   targets: [
+    .target(name: "Debugging"),
+    .testTarget(name: "DebuggingTests", dependencies: ["Debugging"])
+    /*
 
     // @documentation(SDGControlFlow)
     /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -793,7 +796,7 @@ let package = Package(
         "SDGXCTestUtilities",
       ]
     ),
-  ]
+  */]
 )
 
 for target in package.targets {
