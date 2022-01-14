@@ -76,7 +76,9 @@ extension Comparable {
 extension AdditiveArithmetic {
   #warning("Debugging...")
   public func verifyAdditiveArithmetic() {
-    _ = Self.zero
+    let zero = Self.zero
+    var x = Self.zero
+    x -= Self.zero
     print(#function, Self.self)
   }
 }
