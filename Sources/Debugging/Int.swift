@@ -1,1 +1,1 @@
-extension Int: /*IntFamily (*/CustomReflectable/*...)*/ {}
+extension Int: /*IntFamily (*/CustomReflectable, CVarArg/*...)*/ {}
