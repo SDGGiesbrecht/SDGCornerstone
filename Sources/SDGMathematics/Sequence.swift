@@ -47,13 +47,13 @@ extension Sequence where Element: GenericAdditiveArithmetic {
   ///
   /// - Parameters:
   ///     - sequence: The sequence.
-  @inlinable public static prefix func ∑ (sequence: Self) -> Element {
+  /*@inlinable public static prefix func ∑ (sequence: Self) -> Element {
     var sum = Element.zero
     for element in sequence {
       sum += element
     }
     return sum
-  }
+  }*/
 }
 
 extension Sequence where Element: WholeArithmetic {

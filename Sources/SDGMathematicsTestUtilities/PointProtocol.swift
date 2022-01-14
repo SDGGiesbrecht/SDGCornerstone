@@ -55,5 +55,5 @@ public func testPointProtocolConformance<T>(
     file: file,
     line: line
   )
-  test(operator: (−, "−"), on: (destination, departure), returns: vector, file: file, line: line)
+  //test(operator: (−, "−"), on: (destination, departure), returns: vector, file: file, line: line)
 }

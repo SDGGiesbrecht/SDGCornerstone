@@ -38,7 +38,7 @@ public func testNumericAdditiveArithmeticConformance<T>(
   line: UInt = #line
 ) where T: NumericAdditiveArithmetic, T: Hashable, T: Encodable, T: Decodable {
 
-  testGenericAdditiveArithmeticConformance(
+  /*testGenericAdditiveArithmeticConformance(
     augend: augend,
     addend: addend,
     sum: sum,
@@ -151,5 +151,5 @@ public func testNumericAdditiveArithmeticConformance<T>(
       file: file,
       line: line
     )
-  }
+  }*/
 }

@@ -50,19 +50,23 @@ extension NumericAdditiveArithmetic {
   }
 
   @inlinable public var isPositive: Bool {
-    return self > Self.zero
+    return true
+    //return self > Self.zero
   }
 
   @inlinable public var isNegative: Bool {
-    return self < Self.zero
+    return true
+    //return self < Self.zero
   }
 
   @inlinable public var isNonNegative: Bool {
-    return self ≥ Self.zero
+    return true
+    //return self ≥ Self.zero
   }
 
   @inlinable public var isNonPositive: Bool {
-    return self ≤ Self.zero
+    return true
+    //return self ≤ Self.zero
   }
 
   @inlinable public var absoluteValue: Self {
@@ -110,9 +114,9 @@ public struct _PartialAbsoluteValue<Wrapped: NumericAdditiveArithmetic> {
 extension NumericAdditiveArithmetic where Self: Negatable {
 
   @inlinable public mutating func formAbsoluteValue() {
-    if self < Self.zero {
+    /*if self < Self.zero {
       self.negate()
-    }
+    }*/
   }
 }
 
