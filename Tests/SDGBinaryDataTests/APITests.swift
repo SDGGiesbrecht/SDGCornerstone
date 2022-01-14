@@ -99,7 +99,8 @@ class APITests: TestCase {
     partial.verifyEquatable()
     partial.verifyHashable()
     partial.verifySubtractable()
-    let int: UInt.Vector = .zero
+    partial.verifyGenericAdditiveArithmetic()
+    /*let int: UInt.Vector = .zero
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
     int.verifyDecodable()
@@ -131,7 +132,7 @@ class APITests: TestCase {
     forDescription.verifyFixedWidthInteger()
     forDescription.verifyUnsignedInteger()
     forDescription.verifyWholeNumberProtocol()
-    forDescription.verifyUIntFamily()
+    forDescription.verifyUIntFamily()*/
     // #workaround(Swift 5.5.2, Windows miscompiles UInt.BinaryView and crashes at runtime.)
     #if !os(Windows)
       forDescription.binary[0] = true

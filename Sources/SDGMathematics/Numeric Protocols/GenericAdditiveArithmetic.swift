@@ -37,11 +37,11 @@ extension GenericAdditiveArithmetic {
   
   #warning("Debugging...")
   public func verifyGenericAdditiveArithmetic() {
-    //verifyAdditiveArithmetic()
-    //verifyDecodable()
-    //verifyEncodable()
-    //verifyHashable()
-    //verifySubtractable()
+    verifyAdditiveArithmetic()
+    verifyDecodable()
+    verifyEncodable()
+    verifyHashable()
+    verifySubtractable()
     print(#function, Self.self)
   }
 
