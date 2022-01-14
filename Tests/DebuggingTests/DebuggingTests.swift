@@ -9,5 +9,6 @@ class DebuggingTests: XCTestCase {
     int.verifyCustomReflectable()
     int.verifyCVarArg()
     int.verifyCustomStringConvertible()
+    int.verifyEquatable()
   }
 }
