@@ -149,7 +149,7 @@ extension Int: IntFamily {
 }
 #warning("Debugging...")
 extension Int: PartialGenericAdditiveArithmetic {}
-public struct PartialInt: Addable, AdditiveArithmetic, Decodable, Encodable, Equatable {
+public struct PartialInt: Addable, AdditiveArithmetic, Decodable, Encodable, Equatable, Hashable {
   public init() {}
   public static func += (precedingValue: inout PartialInt, followingValue: PartialInt) {}
   public static var zero: PartialInt { return PartialInt() }

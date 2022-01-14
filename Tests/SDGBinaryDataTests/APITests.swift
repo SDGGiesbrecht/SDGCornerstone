@@ -97,6 +97,7 @@ class APITests: TestCase {
     partial.verifyDecodable()
     partial.verifyEncodable()
     partial.verifyEquatable()
+    partial.verifyHashable()
     let int: UInt.Vector = .zero
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
