@@ -91,15 +91,6 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     #warning("Debugging...")
-    let partial = PartialInt()
-    partial.verifyAddable()
-    partial.verifyAdditiveArithmetic()
-    partial.verifyDecodable()
-    partial.verifyEncodable()
-    partial.verifyEquatable()
-    partial.verifyHashable()
-    partial.verifySubtractable()
-    partial.verifyGenericAdditiveArithmetic()
     let int: Int = .zero
     int.verifyAddable()
     int.verifyAdditiveArithmetic()
@@ -108,8 +99,7 @@ class APITests: TestCase {
     int.verifyEquatable()
     int.verifyHashable()
     int.verifySubtractable()
-    //int.verifyPartialGenericAdditiveArithmetic()
-    //int.verifyGenericAdditiveArithmetic()
+    int.verifyGenericAdditiveArithmetic()
     //int.verifyNegatable()
     /*forDescription.verifyAddable()
     forDescription.verifyDecodable()

@@ -123,7 +123,7 @@ extension BinaryInteger {
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
 public typealias GZahl = Int
 #warning("Debugging...")
-extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, Equatable, Hashable, Subtractable {
+extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, Equatable, Hashable, Subtractable, GenericAdditiveArithmetic {
 
   #warning("Debugging...")
   public static func −= (precedingValue: inout Int, followingValue: Int) {}
@@ -150,15 +150,6 @@ extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, 
   @inlinable public var isOdd: Bool {
     return self & 1 == 1
   }
-}
-#warning("Debugging...")
-extension Int: PartialGenericAdditiveArithmetic {}
-public struct PartialInt: Addable, AdditiveArithmetic, Decodable, Encodable, Equatable, Hashable, Subtractable, GenericAdditiveArithmetic {
-  public init() {}
-  public static func += (precedingValue: inout PartialInt, followingValue: PartialInt) {}
-  public static var zero: PartialInt { return PartialInt() }
-  public static func - (lhs: PartialInt, rhs: PartialInt) -> PartialInt { return PartialInt() }
-  public static func −= (precedingValue: inout PartialInt, followingValue: PartialInt) {}
 }
 /*extension Int64: IntXFamily {
 
