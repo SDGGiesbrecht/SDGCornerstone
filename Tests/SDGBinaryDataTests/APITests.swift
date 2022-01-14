@@ -109,7 +109,7 @@ class APITests: TestCase {
     int.verifyHashable()
     int.verifySubtractable()
     //int.verifyPartialGenericAdditiveArithmetic()
-    //int.verifyGenericAdditiveArithmetic()
+    int.verifyGenericAdditiveArithmetic()
     //int.verifyNegatable()
     /*forDescription.verifyAddable()
     forDescription.verifyDecodable()
