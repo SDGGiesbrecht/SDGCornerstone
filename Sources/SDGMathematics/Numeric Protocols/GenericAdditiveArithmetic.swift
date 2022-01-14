@@ -15,7 +15,7 @@
 /// A value that can be added and subtracted.
 ///
 /// `GenericAdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
-public protocol GenericAdditiveArithmetic: /*AdditiveArithmetic, */Decodable, Encodable, Hashable/*,
+public protocol GenericAdditiveArithmetic: /*AdditiveArithmetic, */Decodable, Encodable, /*Hashable*//*,
   Addable*//*Subtractable*/
 {}
 
@@ -26,7 +26,7 @@ extension GenericAdditiveArithmetic {
     //verifyAdditiveArithmetic()
     verifyDecodable()
     verifyEncodable()
-    verifyHashable()
+    //verifyHashable()
     //verifyAddable()
     //verifySubtractable()
     print(#function, Self.self)
