@@ -19,5 +19,6 @@ class DebuggingTests: XCTestCase {
     int.verifyBinaryInteger()
     int.verifyLosslessStringConvertible()
     int.verifyFixedWidthInteger()
+    int.verifyDecodable()
   }
 }
