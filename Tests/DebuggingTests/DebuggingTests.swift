@@ -2,7 +2,7 @@ import Debugging
 
 import XCTest
 
-class DebuggingTests {
+class DebuggingTests: XCTestCase {
 
   func testInt() {
     let int = 0
