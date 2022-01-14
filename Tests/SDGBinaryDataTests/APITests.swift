@@ -99,7 +99,7 @@ class APITests: TestCase {
     int.verifyEquatable()
     int.verifyHashable()
     int.verifySubtractable()
-    int.verifyGenericAdditiveArithmetic()
+    //int.verifyGenericAdditiveArithmetic()
     //int.verifyNegatable()
     /*forDescription.verifyAddable()
     forDescription.verifyDecodable()
