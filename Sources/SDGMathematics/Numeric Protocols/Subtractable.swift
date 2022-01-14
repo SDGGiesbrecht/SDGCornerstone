@@ -64,7 +64,7 @@ extension Subtractable {
   }
 }
 
-extension Subtractable where Self: Numeric {
+/*extension Subtractable where Self: Numeric {
 
   // @documentation(SDGCornerstone.Subtractable.ASCII.−(_:_:))
   /// Subtracts one value from another and produces their difference.
@@ -120,4 +120,4 @@ extension Subtractable where Self: Strideable, Self.Stride == Self {
   ) {
     precedingValue −= followingValue
   }
-}
+}*/
