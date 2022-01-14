@@ -35,7 +35,7 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
     count: CountableRange<Int>? = nil,
     consumption: Consumption = .greedy
   ) {
-    _assert(
+    /*_assert(
       count == nil ∨ count!.lowerBound.isNonNegative,
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
         switch localization {  // @exempt(from: tests)
@@ -44,7 +44,7 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
             "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))"
         }
       }
-    )
+    )*/
 
     self.pattern = pattern
     self.count = count ?? 0..<Int.max

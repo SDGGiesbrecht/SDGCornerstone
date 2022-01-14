@@ -122,7 +122,11 @@ extension BinaryInteger {
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
 public typealias GZahl = Int
-extension Int: IntFamily {
+#warning("Debugging...")
+extension Int: /*IntFamily*/ Addable, AdditiveArithmetic, Decodable, Encodable, Equatable, Hashable, Subtractable {
+
+  #warning("Debugging...")
+  public static func −= (precedingValue: inout Int, followingValue: Int) {}
 
   // MARK: - PointProtocol
 
@@ -156,7 +160,7 @@ public struct PartialInt: Addable, AdditiveArithmetic, Decodable, Encodable, Equ
   public static func - (lhs: PartialInt, rhs: PartialInt) -> PartialInt { return PartialInt() }
   public static func −= (precedingValue: inout PartialInt, followingValue: PartialInt) {}
 }
-extension Int64: IntXFamily {
+/*extension Int64: IntXFamily {
 
   // MARK: - PointProtocol
 
@@ -225,4 +229,4 @@ extension Int8: IntXFamily {
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
-}
+}*/

@@ -19,7 +19,7 @@ import SDGLogic
 import SDGCollections
 import SDGText
 import SDGPersistence
-import SDGCalendar
+//import SDGCalendar
 
 import SDGTesting
 
@@ -79,12 +79,12 @@ public func testFileConvertibleConformance<T>(
     let newSpecification = encoded
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
-      let now = CalendarDate.gregorianNow()
+      /*let now = CalendarDate.gregorianNow()
       #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).testspec")
         )
-      #endif
+      #endif*/
     }
   } catch {
     fail("\(error)", file: file, line: line)

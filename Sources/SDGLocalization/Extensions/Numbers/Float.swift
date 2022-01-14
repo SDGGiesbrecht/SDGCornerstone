@@ -17,7 +17,7 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
-extension Double: TextConvertibleNumber {}
+/*extension Double: TextConvertibleNumber {}
 extension CGFloat: TextConvertibleNumber {}
 #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
   extension Float80: TextConvertibleNumber {}
@@ -26,4 +26,4 @@ extension Float: TextConvertibleNumber {}
 #if !PLATFORM_LACKS_SWIFT_FLOAT_16
   @available(tvOS 14, iOS 14, watchOS 7, *)
   extension Float16: TextConvertibleNumber {}
-#endif
+#endif*/

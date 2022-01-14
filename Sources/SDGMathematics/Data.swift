@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+/*import Foundation
 
 extension Data: BitField {
 
@@ -50,4 +50,4 @@ extension Data: BitField {
     }
     append(contentsOf: other[end...])
   }
-}
+}*/

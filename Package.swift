@@ -172,6 +172,7 @@ let package = Package(
   name: "SDGCornerstone",
   products: [
 
+    /*
     // #documentation(SDGControlFlow)
     /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
     .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
@@ -270,6 +271,7 @@ let package = Package(
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
+    */
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
@@ -362,7 +364,7 @@ let package = Package(
     /// Text collation.
     ///
     /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
-    .target(
+    /*.target(
       name: "SDGCollation",
       dependencies: [
         "SDGControlFlow",
@@ -372,7 +374,7 @@ let package = Package(
         "SDGText",
         "SDGPersistence",
       ]
-    ),
+    ),*/
 
     // @documentation(SDGPersistence)
     /// Preferences and simplified file system interactions.
@@ -398,14 +400,14 @@ let package = Package(
         "SDGCollections",
         "SDGText",
         "SDGLocalization",
-        "SDGCalendar",
+        //"SDGCalendar",
         "SDGCornerstoneLocalizations",
       ]
     ),
 
     // @documentation(SDGRandomization)
     /// Randomization tools.
-    .target(
+    /*.target(
       name: "SDGRandomization",
       dependencies: [
         "SDGControlFlow",
@@ -420,7 +422,7 @@ let package = Package(
       dependencies: [
         "SDGRandomization", "SDGTesting",
       ]
-    ),
+    ),*/
 
     // @documentation(SDGLocalization)
     /// Localization tools and locale information.
@@ -449,7 +451,7 @@ let package = Package(
 
     // @documentation(SDGGeometry)
     /// Extensions related to geometry.
-    .target(
+    /*.target(
       name: "SDGGeometry",
       dependencies: [
         "SDGControlFlow",
@@ -548,7 +550,7 @@ let package = Package(
         "SDGLocalization",
         "SDGCornerstoneLocalizations",
       ]
-    ),
+    ),*/
 
     // @documentation(SDGTesting)
     /// Miscellaneous test utilities.
@@ -590,7 +592,7 @@ let package = Package(
 
     // Internal utilities.
 
-    .executableTarget(
+    /*.executableTarget(
       name: "generate‐root‐collation",
       dependencies: [
         "SDGLogic",
@@ -620,7 +622,7 @@ let package = Package(
         "SDGLogic", "SDGLogicTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGMathematicsTestUtilities",
       ]
-    ),
+    ),*/
     .testTarget(
       name: "SDGBinaryDataTests",
       dependencies: [
@@ -631,7 +633,7 @@ let package = Package(
         "SDGLocalizationTestUtilities",
       ]
     ),
-    .testTarget(
+    /*.testTarget(
       name: "SDGMathematicsTests",
       dependencies: [
         "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
@@ -792,7 +794,7 @@ let package = Package(
         "SDGPersistenceTestUtilities",
         "SDGXCTestUtilities",
       ]
-    ),
+    ),*/
   ]
 )
 

@@ -12,9 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Int: TextConvertibleNumber {}
+/*extension Int: TextConvertibleNumber {}
 
 extension Int64: TextConvertibleNumber {}
 extension Int32: TextConvertibleNumber {}
 extension Int16: TextConvertibleNumber {}
-extension Int8: TextConvertibleNumber {}
+extension Int8: TextConvertibleNumber {}*/

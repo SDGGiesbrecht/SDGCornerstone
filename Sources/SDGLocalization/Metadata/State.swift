@@ -226,7 +226,8 @@ internal enum State: String, CaseIterable {
   }
 
   internal init?(flag: StrictString) {
-    self.init(
+    return nil
+    /*self.init(
       code: String(
         String.ScalarView(
           flag.scalars.map({
@@ -238,7 +239,7 @@ internal enum State: String, CaseIterable {
           })
         )
       )
-    )  // @exempt(from: tests) Meaningless region.
+    )  // @exempt(from: tests) Meaningless region.*/
   }
 
   // MARK: - Properties

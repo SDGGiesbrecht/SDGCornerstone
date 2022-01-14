@@ -92,7 +92,7 @@ extension Sequence where Element: RationalArithmetic {
   /// Returns the median.
   ///
   /// - Returns: The median or `nil` if the collection is empty.
-  @inlinable public func median() -> Element? {
+  /*@inlinable public func median() -> Element? {
     let sorted = self.sorted()
     let count = sorted.count
     if count == 0 { return nil }
@@ -105,5 +105,5 @@ extension Sequence where Element: RationalArithmetic {
       let lower = sorted.index(before: upper)
       return [sorted[lower], sorted[upper]].mean()
     }
-  }
+  }*/
 }

@@ -219,7 +219,7 @@ extension BinaryInteger {
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine natürliche Zahl ohne Vorzeichen. (`UInt`)
 public typealias NZahl = UInt
-extension UInt: UIntFamily {
+/*extension UInt: UIntFamily {
 
   // MARK: - PointProtocol
 
@@ -248,4 +248,4 @@ extension UInt8: UIntFamily {
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
-}
+}*/

@@ -18,7 +18,7 @@ import SDGControlFlow
 import SDGCollections
 import SDGText
 import SDGLocalization
-import SDGCalendar
+//import SDGCalendar
 
 import SDGCornerstoneLocalizations
 
@@ -117,12 +117,12 @@ public func testCodableConformance<T>(
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
       #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
-        let now = CalendarDate.gregorianNow()
+        /*let now = CalendarDate.gregorianNow()
         #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
           try newSpecification.save(
             to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
           )
-        #endif
+        #endif*/
       #endif
     }
   } catch {

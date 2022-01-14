@@ -319,8 +319,9 @@ extension Unicode.Scalar {
 
     // Variation Selectors
     case "\u{FE00}"..."\u{FE0F}":
-      let baseCode = self.value − 0xFE00 + UInt32(1)
-      return control(acronym: "VS" + "\(baseCode)")
+      return ""
+      /*let baseCode = self.value − 0xFE00 + UInt32(1)
+      return control(acronym: "VS" + "\(baseCode)")*/
 
     // Arabic Presentation Forms‐B
     case "\u{FEFF}":
@@ -375,7 +376,8 @@ extension Unicode.Scalar {
     case "\u{E0020}":
       return control(acronym: "SP🏷")
     case "\u{E0020}"..<"\u{E007E}":
-      return control(acronym: String(UnicodeScalar(value − 0xE0000)!) + "🏷")
+      return ""
+      //return control(acronym: String(UnicodeScalar(value − 0xE0000)!) + "🏷")
     case "\u{E007F}":
       return control(acronym: "END🏷")
 

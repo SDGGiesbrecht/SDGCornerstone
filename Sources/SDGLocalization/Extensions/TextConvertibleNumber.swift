@@ -19,7 +19,7 @@ import SDGCollections
 import SDGText
 
 /// A number that can be converted to and from localized text representations.
-public protocol TextConvertibleNumber: ExpressibleByStringLiteral, WholeArithmetic {
+/*public protocol TextConvertibleNumber: ExpressibleByStringLiteral, WholeArithmetic {
 
   // MARK: - Initialization
 
@@ -144,7 +144,7 @@ extension TextConvertibleNumber {
     base: Int
   ) -> Result<Self, TextConvertibleNumberParseError> {
 
-    assert(
+    /*assert(
       base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16,
       UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
         { localization in  // @exempt(from: tests)
@@ -154,7 +154,7 @@ extension TextConvertibleNumber {
               "Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive."
           }
         })
-    )
+    )*/
 
     let digits: [[UnicodeScalar]] = [
       //    arb  pes  hi   bn   ta   my   km   th   lo
@@ -423,4 +423,4 @@ extension CodableViaTextConvertibleNumber where Self: WholeNumberProtocol {
   public func encode(to encoder: Encoder) throws {
     try encode(to: encoder, via: inDigits())
   }
-}
+}*/

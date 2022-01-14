@@ -29,7 +29,8 @@ extension RationalArithmetic {
     radixCharacter: UnicodeScalar,
     thousandsSeparator: UnicodeScalar = " "
   ) -> StrictString {
-    let digitSet = egyptianDigits
+    return ""
+    /*let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
@@ -80,6 +81,6 @@ extension RationalArithmetic {
       }
 
       return result
-    }
+    }*/
   }
 }
