@@ -1,1 +1,1 @@
-extension Int {}
+extension Int: Addable {}

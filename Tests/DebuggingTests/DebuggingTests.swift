@@ -21,5 +21,6 @@ class DebuggingTests: XCTestCase {
     int.verifyFixedWidthInteger()
     int.verifyDecodable()
     int.verifyEncodable()
+    int.verifyAddable()
   }
 }
