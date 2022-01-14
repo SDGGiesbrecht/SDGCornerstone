@@ -13,5 +13,6 @@ class DebuggingTests: XCTestCase {
     int.verifyHashable()
     int.verifyAdditiveArithmetic()
     int.verifyExpressibleByIntegerLiteral()
+    int.verifyNumeric()
   }
 }
