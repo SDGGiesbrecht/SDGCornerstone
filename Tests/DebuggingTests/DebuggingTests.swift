@@ -15,5 +15,6 @@ class DebuggingTests: XCTestCase {
     int.verifyExpressibleByIntegerLiteral()
     int.verifyNumeric()
     int.verifyComparable()
+    int.verifyStrideable()
   }
 }
