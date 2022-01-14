@@ -20,5 +20,6 @@ class DebuggingTests: XCTestCase {
     int.verifyLosslessStringConvertible()
     int.verifyFixedWidthInteger()
     int.verifyDecodable()
+    int.verifyEncodable()
   }
 }

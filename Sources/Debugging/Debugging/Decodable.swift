@@ -1,4 +1,3 @@
-import Foundation
 extension Decodable {
 
   public func verifyDecodable() {
