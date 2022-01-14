@@ -4,5 +4,8 @@ import XCTest
 
 class DebuggingTests {
 
-  func testModule() {}
+  func testInt() {
+    let int = 0
+    int.verifyCustomReflectable()
+  }
 }
