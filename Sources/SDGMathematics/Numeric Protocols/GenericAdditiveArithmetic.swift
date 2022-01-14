@@ -16,7 +16,7 @@
 ///
 /// `GenericAdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
 public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encodable, Hashable,
-  Subtractable
+  Addable/*Subtractable*/
 {}
 
 extension GenericAdditiveArithmetic {
@@ -27,11 +27,12 @@ extension GenericAdditiveArithmetic {
     verifyDecodable()
     verifyEncodable()
     verifyHashable()
-    verifySubtractable()
+    verifyAddable()
+    //verifySubtractable()
     print(#function, Self.self)
   }
 
-  @inlinable public static func - (  // @exempt(from: unicode)
+  /*@inlinable public static func - (  // @exempt(from: unicode)
     precedingValue: Self,
     followingValue: Self
   ) -> Self {
@@ -43,5 +44,5 @@ extension GenericAdditiveArithmetic {
     followingValue: Self
   ) {
     precedingValue −= followingValue
-  }
+  }*/
 }
