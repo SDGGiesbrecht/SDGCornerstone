@@ -32,7 +32,7 @@ public func testGenericAdditiveArithmeticConformance<T>(
   sum: T,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: GenericAdditiveArithmetic {
+) where T: GenericAdditiveArithmetic, T: Subtractable {
   testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
   testSubtractableConformance(
     minuend: sum,

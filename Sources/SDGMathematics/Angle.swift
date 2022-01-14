@@ -14,6 +14,7 @@
 
 /// An angle.
 public struct Angle<Scalar: RealArithmetic>: CodableViaMeasurement {
+  public static func - (lhs: Angle<Scalar>, rhs: Angle<Scalar>) -> Angle<Scalar> { return Angle(rawValue: 0) }
 
   // MARK: - Initialization
 

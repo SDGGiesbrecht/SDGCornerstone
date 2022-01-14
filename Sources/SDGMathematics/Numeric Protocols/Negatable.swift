@@ -17,7 +17,7 @@ import SDGControlFlow
 /// A type that can be additively inverted.
 ///
 /// - Note: Unlike `SignedNumeric`, `Negatable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
-public protocol Negatable: GenericAdditiveArithmetic {
+public protocol Negatable: GenericAdditiveArithmetic, Subtractable {
 
   // @documentation(SDGCornerstone.Negatable.−)
   /// Returns the additive inverse of the operand.
