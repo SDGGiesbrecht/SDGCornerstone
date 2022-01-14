@@ -28,7 +28,7 @@ public func testWholeArithmeticConformance<T>(
   includingNegatives: Bool,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: WholeArithmetic {
+) where T: WholeArithmetic, T: Hashable, T: Encodable, T: Decodable {
 
   testFixedScaleOneDimensionalPointConformance(
     departure: 58 as T,

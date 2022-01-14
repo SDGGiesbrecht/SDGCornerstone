@@ -27,7 +27,7 @@ public func testRationalArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: RationalArithmetic {
+) where T: RationalArithmetic, T: Hashable, T: Encodable, T: Decodable {
 
   testIntegralArithmeticConformance(of: T.self, file: file, line: line)
 

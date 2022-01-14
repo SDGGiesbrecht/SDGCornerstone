@@ -36,7 +36,7 @@ public func testRationalVectorConformance<T>(
   product: T,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: RationalVector {
+) where T: RationalVector, T: Hashable, T: Encodable, T: Decodable {
 
   testVectorProtocolConformance(
     augend: augend,

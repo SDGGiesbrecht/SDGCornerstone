@@ -36,7 +36,7 @@ public func testVectorProtocolConformance<T>(
   product: T,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: VectorProtocol {
+) where T: VectorProtocol, T: Hashable, T: Encodable, T: Decodable {
 
   testGenericAdditiveArithmeticConformance(
     augend: augend,

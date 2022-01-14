@@ -26,7 +26,7 @@ public func testMeasurementConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: Measurement {
+) where T: Measurement, T: Hashable, T: Encodable, T: Decodable {
 
   testNumericAdditiveArithmeticConformance(
     augend: T(rawValue: 3),

@@ -26,7 +26,7 @@ public func testIntegralArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: IntegralArithmetic {
+) where T: IntegralArithmetic, T: Hashable, T: Encodable, T: Decodable {
 
   testNegatableConformance(minuend: 61 as T, subtrahend: 23, difference: 38, file: file, line: line)
   testWholeArithmeticConformance(of: T.self, includingNegatives: true, file: file, line: line)

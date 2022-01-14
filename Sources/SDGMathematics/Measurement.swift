@@ -329,7 +329,7 @@ extension Measurement {
   // MARK: - Hashable
 
   @inlinable public func hash(into hasher: inout Hasher) {
-    hasher.combine(rawValue)
+    //hasher.combine(rawValue)
   }
 
   // MARK: - Negatable
