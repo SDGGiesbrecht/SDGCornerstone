@@ -6,7 +6,12 @@ extension UmbrellaProtocol {
     hash(into: &hasher)
   }
 }
-extension Int: UmbrellaProtocol {}
+extension Int: UmbrellaProtocol {
+  func exercise() {
+    var hasher = Hasher()
+    hash(into: &hasher)
+  }
+}
 class DebuggingTests: XCTestCase {
   func testInt() {
     0.exercise()
