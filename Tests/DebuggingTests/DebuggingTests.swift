@@ -6,7 +6,6 @@ class DebuggingTests: XCTestCase {
 
   func testInt() {
     let int = 0
-    int.verifySubtractable()
     int.verifyGenericAdditiveArithmetic()
   }
 }
