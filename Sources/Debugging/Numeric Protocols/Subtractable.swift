@@ -3,7 +3,7 @@
 /// - Note: `Subtractable` is distinct from `Negatable` to allow whole number types to perform subtraction.
 ///
 /// - Note: Unlike `Numeric`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
-public protocol Subtractable: Addable {
+public protocol Subtractable {
 
   /// Returns the difference of the preceding value minus the following value.
   ///
@@ -29,7 +29,6 @@ public protocol Subtractable: Addable {
 
 extension Subtractable {
   public func verifySubtractable() {
-    verifyAddable()
     _ = self − self
     print(#function)
   }
@@ -45,6 +44,6 @@ extension Subtractable {
   @inlinable public static func ± (precedingValue: Self, followingValue: Self) -> (
     sum: Self, difference: Self
   ) {
-    return (precedingValue + followingValue, precedingValue − followingValue)
+    return (precedingValue, followingValue)
   }
 }
