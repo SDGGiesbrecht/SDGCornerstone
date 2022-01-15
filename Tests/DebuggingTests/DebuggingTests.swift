@@ -10,7 +10,6 @@ extension UmbrellaProtocol {
 extension Int: UmbrellaProtocol {}
 class DebuggingTests: XCTestCase {
   func testInt() {
-    let int = 0
-    int.exercise()
+    0.exercise()
   }
 }
