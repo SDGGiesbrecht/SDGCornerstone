@@ -29,6 +29,7 @@ public protocol Subtractable: Addable {
 
 extension Subtractable {
   public func verifySubtractable() {
+    verifyAddable()
     _ = self − self
     print(#function)
   }
