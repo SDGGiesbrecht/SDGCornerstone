@@ -23,5 +23,6 @@ class DebuggingTests: XCTestCase {
     int.verifyEncodable()
     int.verifyAddable()
     int.verifySubtractable()
+    int.verifyGenericAdditiveArithmetic()
   }
 }
