@@ -29,20 +29,3 @@ extension Addable {
     print(#function)
   }
 }
-
-extension Addable {
-
-  @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-    return precedingValue
-    //return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
-  }
-}
-
-extension Addable where Self: Strideable, Self.Stride == Self {
-
-  @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-    // Disambiguate Addable vs Strideable
-    return precedingValue
-    //return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
-  }
-}
