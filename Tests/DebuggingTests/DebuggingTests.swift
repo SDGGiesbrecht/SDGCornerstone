@@ -1,6 +1,6 @@
 import XCTest
 protocol UmbrellaProtocol: Hashable {}
-extension UmbrellaProtocol {
+extension Hashable {
   func exercise() {
     var hasher = Hasher()
     hash(into: &hasher)
