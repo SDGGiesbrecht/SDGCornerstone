@@ -271,13 +271,13 @@ let package = Package(
     /// Additional test utilities which require `XCTest`.
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
   */],
-  dependencies: [
+  dependencies: [/*
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
     .package(
       url: "https://github.com/apple/swift\u{2D}collections",
       from: Version(1, 0, 0)
     ),
-  ],
+  */],
   targets: [
     .target(name: "Debugging"),
     .testTarget(name: "DebuggingTests", dependencies: ["Debugging"])
