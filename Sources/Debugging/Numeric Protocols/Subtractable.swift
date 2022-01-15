@@ -33,3 +33,75 @@ extension Subtractable {
     print(#function)
   }
 }
+
+extension Subtractable {
+
+  @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue
+    //return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
+  }
+
+  @inlinable public static func ± (precedingValue: Self, followingValue: Self) -> (
+    sum: Self, difference: Self
+  ) {
+    return (precedingValue + followingValue, precedingValue − followingValue)
+  }
+}
+
+extension Subtractable where Self: Numeric {
+
+  // @documentation(SDGCornerstone.Subtractable.ASCII.−(_:_:))
+  /// Subtracts one value from another and produces their difference.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The minuend.
+  ///     - followingValue: The subtrahend.
+  @inlinable public static func - (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
+    return precedingValue − followingValue
+  }
+
+  // @documentation(SDGCornerstone.Subtractable.ASCII.−=(_:_:))
+  /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The minuend.
+  ///     - followingValue: The subtrahend.
+  @inlinable public static func -= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
+    precedingValue −= followingValue
+  }
+}
+
+extension Subtractable where Self: Strideable, Self.Stride == Self {
+
+  // #documentation(SDGCornerstone.Subtractable.ASCII.−(_:_:))
+  /// Subtracts one value from another and produces their difference.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The minuend.
+  ///     - followingValue: The subtrahend.
+  @inlinable public static func - (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
+    return precedingValue − followingValue
+  }
+
+  // #documentation(SDGCornerstone.Subtractable.ASCII.−=(_:_:))
+  /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The minuend.
+  ///     - followingValue: The subtrahend.
+  @inlinable public static func -= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
+    precedingValue −= followingValue
+  }
+}
