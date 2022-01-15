@@ -1,17 +1,17 @@
 import XCTest
-public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encodable, Hashable
+public protocol UmbrellaProtocol: AdditiveArithmetic, Decodable, Encodable, Hashable
 {}
-extension GenericAdditiveArithmetic {
-  public func verifyGenericAdditiveArithmetic() {
+extension UmbrellaProtocol {
+  public func exercise() {
     var hasher = Hasher()
     hash(into: &hasher)
     print(#function)
   }
 }
-extension Int: GenericAdditiveArithmetic {}
+extension Int: UmbrellaProtocol {}
 class DebuggingTests: XCTestCase {
   func testInt() {
     let int = 0
-    int.verifyGenericAdditiveArithmetic()
+    int.exercise()
   }
 }
