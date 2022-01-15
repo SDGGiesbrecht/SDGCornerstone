@@ -5,7 +5,6 @@ extension UmbrellaProtocol {
   public func exercise() {
     var hasher = Hasher()
     hash(into: &hasher)
-    print(#function)
   }
 }
 extension Int: UmbrellaProtocol {}
