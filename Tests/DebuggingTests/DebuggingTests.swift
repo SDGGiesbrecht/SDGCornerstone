@@ -8,7 +8,6 @@ class DebuggingTests: XCTestCase {
     let int = 0
     int.verifyEquatable()
     int.verifyHashable()
-    int.verifyAdditiveArithmetic()
     int.verifyAddable()
     int.verifySubtractable()
     int.verifyGenericAdditiveArithmetic()

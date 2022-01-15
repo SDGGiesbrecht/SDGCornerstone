@@ -7,7 +7,6 @@ public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encoda
 
 extension GenericAdditiveArithmetic {
   public func verifyGenericAdditiveArithmetic() {
-    verifyAdditiveArithmetic()
     verifyHashable()
     verifySubtractable()
     print(#function)
