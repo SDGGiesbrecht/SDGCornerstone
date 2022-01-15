@@ -9,7 +9,6 @@ extension GenericAdditiveArithmetic {
   public func verifyGenericAdditiveArithmetic() {
     verifyAdditiveArithmetic()
     verifyDecodable()
-    verifyEncodable()
     verifyHashable()
     verifySubtractable()
     print(#function)
