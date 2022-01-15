@@ -279,8 +279,7 @@ let package = Package(
     ),
   */],
   targets: [
-    .target(name: "Debugging"),
-    .testTarget(name: "DebuggingTests", dependencies: ["Debugging"])
+    .testTarget(name: "DebuggingTests")
     /*
 
     // @documentation(SDGControlFlow)
