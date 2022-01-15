@@ -1,7 +1,10 @@
 import XCTest
 protocol UmbrellaProtocol: Hashable {}
 extension UmbrellaProtocol {
-  func exercise() {}
+  func exercise() {
+    var hasher = Hasher()
+    hash(into: &hasher)
+  }
 }
 extension Int: UmbrellaProtocol {}
 class DebuggingTests: XCTestCase {
