@@ -9,7 +9,6 @@ class DebuggingTests: XCTestCase {
     int.verifyEquatable()
     int.verifyHashable()
     int.verifyAdditiveArithmetic()
-    int.verifyDecodable()
     int.verifyAddable()
     int.verifySubtractable()
     int.verifyGenericAdditiveArithmetic()
