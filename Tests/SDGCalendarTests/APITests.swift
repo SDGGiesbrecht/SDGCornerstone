@@ -27,7 +27,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
     #endif
@@ -39,7 +39,7 @@ class APITests: TestCase {
 
     XCTAssertEqual(GregorianDay(ordinal: 8), 8)
 
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
       XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
@@ -62,7 +62,7 @@ class APITests: TestCase {
     // Force these to take place first.
     InternalTests.testHebrewYear()
 
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(
         CalendarDate(hebrew: .iyar, 4, 5751),
         CalendarDate(gregorian: .april, 17, 1991, at: 18),
@@ -85,7 +85,7 @@ class APITests: TestCase {
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
       let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #if !PLATFORM_SUFFERS_SR_15734
         XCTAssert(
           Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
             ≈ system.timeIntervalSinceReferenceDate,
@@ -94,7 +94,7 @@ class APITests: TestCase {
       #endif
     #endif
 
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(
         CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
         .wednesday,
@@ -109,7 +109,7 @@ class APITests: TestCase {
 
     XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
       XCTAssertEqual(referenceDate.gregorianMonth, .january)
       XCTAssertEqual(referenceDate.gregorianDay, 1)
@@ -205,7 +205,7 @@ class APITests: TestCase {
     #endif
 
     for n in 1...12 {
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #if !PLATFORM_SUFFERS_SR_15734
         let date = CalendarDate(
           gregorian: GregorianMonth(ordinal: n),
           GregorianDay(n),
@@ -222,7 +222,7 @@ class APITests: TestCase {
         )
       #endif
     }
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
       testCustomStringConvertibleConformance(
         of: bc,
@@ -232,7 +232,7 @@ class APITests: TestCase {
       )
     #endif
     for n in 1...12 {
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #if !PLATFORM_SUFFERS_SR_15734
         let date = CalendarDate(
           hebrew: HebrewMonth(ordinal: n, leapYear: false),
           HebrewDay(n),
@@ -249,7 +249,7 @@ class APITests: TestCase {
       #endif
     }
     for n in 21...22 {
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #if !PLATFORM_SUFFERS_SR_15734
         let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
         testCustomStringConvertibleConformance(
           of: adar,
@@ -259,7 +259,7 @@ class APITests: TestCase {
         )
       #endif
     }
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
       testCustomStringConvertibleConformance(
         of: relative,
@@ -317,7 +317,7 @@ class APITests: TestCase {
   }
 
   func testCalendarInterval() {
-    #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+    #if !PLATFORM_SUFFERS_SR_15734
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
       testCustomStringConvertibleConformance(
         of: 1.days,
@@ -349,7 +349,7 @@ class APITests: TestCase {
       static let validRange: Range<RawValue>? = nil
       var rawValue: RawValue
     }
-    #if !PLATFORM_MISCOMPILES_CARDINAL_CALENDAR_COMPONENT
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
     #endif
   }
@@ -681,7 +681,7 @@ class APITests: TestCase {
       var rawValue: RawValue
     }
     var component = TestComponent(1)
-    #if !PLATFORM_MISCOMPILES_NUMERIC_CALENDAR_COMPONENT
+    #if !PLATFORM_SUFFERS_SR_15734
       component += 1
       XCTAssertEqual(component.rawValue, 2)
     #endif
