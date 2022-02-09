@@ -37,12 +37,12 @@ public struct GregorianMinute: CardinalCalendarComponent,
 
   // MARK: - ConsistentlyOrderedCalendarComponent
 
-  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.2, Redundant, but evades SR‐15734.)
   public init(ordinal: RawValue) {
     self.init(ordinal − (1 as Vector))
   }
 
-  // #workaround(Swift 5.5.2, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.2, Redundant, but evades SR‐15734.)
   public var ordinal: RawValue {
     return rawValue + (1 as Vector)
   }

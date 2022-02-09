@@ -136,12 +136,12 @@ extension Int: IntFamily {
 
   // MARK: - WholeArithmetic
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public var isOdd: Bool {
     return self & 1 == 1
   }
@@ -154,36 +154,36 @@ extension Int64: IntXFamily {
 
   // MARK: - NumericAdditiveArithmetic
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public var isPositive: Bool {
     return self > Self.zero
   }
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public var isNegative: Bool {
     return self < Self.zero
   }
 
   // MARK: - Subtractable
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
     precedingValue -= followingValue  // @exempt(from: unicode)
   }
 
   // MARK: - WholeArithmetic
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
-  // #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+  // #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
