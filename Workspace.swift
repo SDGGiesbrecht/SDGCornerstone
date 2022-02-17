@@ -56,3 +56,5 @@ configuration.documentation.api.ignoredDependencies = [
 configuration.testing.exemptionTokens.insert(
   TestCoverageExemptionToken("fail", scope: .previousLine)
 )
+
+configuration.supportedPlatforms.remove(.centOS)
