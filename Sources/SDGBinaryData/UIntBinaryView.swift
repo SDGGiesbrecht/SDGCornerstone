@@ -106,7 +106,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 }
 
-// #workaround(Swift 5.5.1, Redundant, but evades Windows compiler bug.)
+// #workaround(Swift 5.5.1, Redundant, but evades SR‐15734.)
 @usableFromInline internal struct BinaryViewUInt8: Collection, CustomStringConvertible {
 
   // MARK: - Initialization

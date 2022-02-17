@@ -116,7 +116,7 @@ public func testCodableConformance<T>(
     let newSpecification = try String(file: encoded, origin: nil)
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
-      #if !PLATFORM_MISCOMPILES_CALENDAR_INTERVAL
+      #if !PLATFORM_SUFFERS_SR_15734
         let now = CalendarDate.gregorianNow()
         #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
           try newSpecification.save(
