@@ -57,8 +57,6 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
-  #warning("Debugging...")
-  #if false
   func fileName(typeName: String) -> URL {
     testSpecificationDirectory(file)
       .appendingPathComponent("CustomStringConvertible")
@@ -85,5 +83,4 @@ public func testCustomStringConvertibleConformance<T, L>(
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription
   }
-  #endif
 }
