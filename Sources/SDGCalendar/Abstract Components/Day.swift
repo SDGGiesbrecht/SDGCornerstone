@@ -74,6 +74,7 @@ extension Day {
 
   public func playgroundDescriptionMarkup() -> SemanticMarkup {
     #warning("Debugging...")
+    return ""
     #if false
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
