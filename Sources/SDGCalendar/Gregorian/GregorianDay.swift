@@ -70,9 +70,6 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public func playgroundDescriptionMarkup() -> SemanticMarkup {
-    #warning("Debugging...")
-    return ""
-    #if false
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
@@ -87,7 +84,6 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
         return SemanticMarkup(self.בעברית־בספרות())
       }
     }).resolved()
-    #endif
   }
 
   // MARK: - PointProtocol
