@@ -41,6 +41,8 @@ public func testCustomStringConvertibleConformance<T, L>(
   file: StaticString = #filePath,
   line: UInt = #line
 ) where T: CustomStringConvertible, L: InputLocalization {
+  #warning("Debugging...")
+  #if false
 
   var report = ""
   for localization in localizations.allCases {
@@ -83,4 +85,5 @@ public func testCustomStringConvertibleConformance<T, L>(
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription
   }
+  #endif
 }
