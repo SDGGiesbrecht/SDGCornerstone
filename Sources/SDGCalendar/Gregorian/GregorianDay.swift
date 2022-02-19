@@ -44,12 +44,12 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   // MARK: - CodableViaRawRepresentableCalendarComponent
 
-  // #workaround(Swift 5.5.2, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public func encode(to encoder: Encoder) throws {
     try encode(to: encoder, via: rawValue)
   }
 
-  // #workaround(Swift 5.5.2, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public init(from decoder: Decoder) throws {
     try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
   }
@@ -64,6 +64,30 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   public func inISOFormat() -> StrictString {
     return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
+  }
+  
+  // MARK: - MarkupPlaygroundDisplay
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    #warning("Debugging...")
+    return ""
+    #if false
+    return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+      switch localization {
+      case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+        return SemanticMarkup(self.inEnglishDigits())
+      case .deutschDeutschland:
+        return SemanticMarkup(self.inDeutschenZiffern())
+      case .françaisFrance:
+        return self.enChiffresFrançais()
+      case .ελληνικάΕλλάδα:
+        return SemanticMarkup(self.σεΕλληνικάΨηφία())
+      case .עברית־ישראל:
+        return SemanticMarkup(self.בעברית־בספרות())
+      }
+    }).resolved()
+    #endif
   }
 
   // MARK: - PointProtocol
