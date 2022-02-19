@@ -68,26 +68,6 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
   public func inISOFormat() -> StrictString {
     return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
   }
-  
-  // MARK: - MarkupPlaygroundDisplay
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  public func playgroundDescriptionMarkup() -> SemanticMarkup {
-    return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
-      switch localization {
-      case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-        return SemanticMarkup(self.inEnglishDigits())
-      case .deutschDeutschland:
-        return SemanticMarkup(self.inDeutschenZiffern())
-      case .françaisFrance:
-        return self.enChiffresFrançais()
-      case .ελληνικάΕλλάδα:
-        return SemanticMarkup(self.σεΕλληνικάΨηφία())
-      case .עברית־ישראל:
-        return SemanticMarkup(self.בעברית־בספרות())
-      }
-    }).resolved()
-  }
 
   // MARK: - PointProtocol
 
