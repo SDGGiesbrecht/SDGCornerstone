@@ -32,6 +32,7 @@ extension Day {
   /// i.e. “1”, “2”, “3”...
   public func inEnglishDigits() -> StrictString {
 #warning("Debugging...")
+    _ = ordinal
 return ""
 #if false
     return ordinal.inDigits()
