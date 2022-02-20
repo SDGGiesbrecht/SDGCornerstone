@@ -18,10 +18,14 @@ import SDGText
 extension IntegralArithmetic {
 
   internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+#warning("Debugging...")
+return ""
+#if false
     var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
     if self.isNegative {
       digits.prepend("−")
     }
     return digits
+    #endif
   }
 }
