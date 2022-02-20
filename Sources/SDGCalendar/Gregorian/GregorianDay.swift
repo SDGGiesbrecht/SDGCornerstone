@@ -14,9 +14,6 @@
 
 import SDGMathematics
 import SDGText
-import SDGLocalization
-
-import SDGCornerstoneLocalizations
 
 /// A day of a Gregorian month.
 public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
