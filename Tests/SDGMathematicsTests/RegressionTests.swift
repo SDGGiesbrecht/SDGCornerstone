@@ -140,4 +140,11 @@ class RegressionTests: TestCase {
       let _: Float = 3 − 2
     #endif
   }
+
+  func testWholeArithmeticHashing() {
+    // SR‐15734
+
+    let int: Int = 0
+    int.exerciseHashable()
+  }
 }
