@@ -2,7 +2,7 @@ import SDGMathematics
 
 extension WholeArithmetic {
 
-  func exerciseHashable() {
+  func exerciseWholeArithmeticHashing() {
     var hasher = Hasher()
     hash(into: &hasher)
   }

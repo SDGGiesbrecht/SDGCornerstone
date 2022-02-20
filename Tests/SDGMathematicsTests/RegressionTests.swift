@@ -95,6 +95,13 @@ class RegressionTests: TestCase {
     let thirty = 30
     XCTAssertEqual(thirty, thirty.rounded(.down))
   }
+  
+  func testNumericAdditiveArithmeticHashing() {
+    // SR‐15734
+
+    let int: Int = 0
+    int.exerciseNumericAdditiveArithmeticHashing()
+  }
 
   func testSubtraction() {
     // Untracked
@@ -147,7 +154,7 @@ class RegressionTests: TestCase {
     let int: Int = 0
 #warning("Debugging...")
 #if false
-    int.exerciseHashable()
+    int.exerciseWholeArithmeticHashing()
     #endif
   }
 }
