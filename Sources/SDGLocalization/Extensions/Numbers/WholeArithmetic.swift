@@ -29,7 +29,10 @@ extension WholeArithmetic {
   internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
     var result: [Self: UnicodeScalar] = [:]
     for value in digits.indices {
+#warning("Debugging...")
+#if false
       result[Self(UInt(value))] = digits[value]
+      #endif
     }
     return result
   }
