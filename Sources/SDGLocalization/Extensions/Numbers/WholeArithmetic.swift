@@ -35,14 +35,14 @@ extension WholeArithmetic {
   }
 
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
-#warning("Debugging...")
-return ""
-#if false
     let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
 
+#warning("Debugging...")
+return ""
+#if false
     var whole = (|self|).rounded(.towardZero)
     var digits: [UnicodeScalar] = []
     var position: Self = 0
