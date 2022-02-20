@@ -35,6 +35,9 @@ extension WholeArithmetic {
   }
 
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+#warning("Debugging...")
+return ""
+#if false
     let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
@@ -66,6 +69,7 @@ extension WholeArithmetic {
     }
 
     return StrictString(digits.reversed())
+    #endif
   }
 
   internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
