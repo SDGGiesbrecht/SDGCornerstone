@@ -30,7 +30,7 @@ extension WholeArithmetic {
     var result: [Self: UnicodeScalar] = [:]
     for value in digits.indices {
 #warning("Debugging...")
-      _ = Self(UInt(value))
+      _ = result[Self(UInt(value))]
 #if false
       result[Self(UInt(value))] = digits[value]
       #endif
