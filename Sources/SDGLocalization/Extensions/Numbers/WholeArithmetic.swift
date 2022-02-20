@@ -28,14 +28,13 @@ extension WholeArithmetic {
 
   internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
     var result: [Self: UnicodeScalar] = [:]
-#warning("Debugging...")
-return [:]
-#if false
     for value in digits.indices {
+#warning("Debugging...")
+#if false
       result[Self(UInt(value))] = digits[value]
+      #endif
     }
     return result
-    #endif
   }
 
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
