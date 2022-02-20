@@ -73,7 +73,7 @@ extension RationalArithmetic {
         if index.mod(3) == 0 ∧ index ≠ 0 {
           result.append(thousandsSeparator)
         }
-        guard let digit = digitMapping[decimalDigits[index]] else {
+        guard let digit = digitMapping[_HashableWrapper(decimalDigits[index])] else {
           unreachable()
         }
         result.append(digit)

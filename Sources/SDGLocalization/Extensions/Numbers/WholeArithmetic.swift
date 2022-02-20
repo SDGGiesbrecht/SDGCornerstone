@@ -26,10 +26,10 @@ extension WholeArithmetic {
     return Self(UInt(digits.count))
   }
 
-  internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
-    var result: [Self: UnicodeScalar] = [:]
+  internal func mapping(for digits: [UnicodeScalar]) -> [_HashableWrapper<Self>: UnicodeScalar] {
+    var result: [_HashableWrapper<Self>: UnicodeScalar] = [:]
     for value in digits.indices {
-      result[Self(UInt(value))] = digits[value]
+      result[_HashableWrapper(Self(UInt(value)))] = digits[value]
     }
     return result
   }
