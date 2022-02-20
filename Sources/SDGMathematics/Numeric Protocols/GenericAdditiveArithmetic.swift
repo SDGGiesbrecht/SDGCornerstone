@@ -17,7 +17,10 @@
 /// `GenericAdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
 public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encodable, Hashable,
   Subtractable
-{}
+{
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  func hash(into hasher: inout Hasher)
+}
 
 extension GenericAdditiveArithmetic {
 
