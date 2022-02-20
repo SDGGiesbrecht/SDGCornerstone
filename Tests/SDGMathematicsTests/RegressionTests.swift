@@ -100,7 +100,20 @@ class RegressionTests: TestCase {
     // SR‐15734
 
     let int: Int = 0
+#warning("Debugging...")
+#if false
     int.exerciseGenericAdditiveArithmeticHashing()
+    #endif
+  }
+  
+  func testHashableHashing() {
+    // SR‐15734
+
+    let int: Int = 0
+#warning("Debugging...")
+#if false
+    int.exerciseHashableHashing()
+    #endif
   }
   
   func testNumericAdditiveArithmeticHashing() {
