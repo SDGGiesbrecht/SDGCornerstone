@@ -36,7 +36,11 @@ extension IntegerProtocol {
   /// - Parameters:
   ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
   public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+#warning("Debugging...")
+return ""
+#if false
     return integralDigits(thousandsSeparator: thousandsSeparator)
+#endif
   }
 
   // #documentation(SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal())
