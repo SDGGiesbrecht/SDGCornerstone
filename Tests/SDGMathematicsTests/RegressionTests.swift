@@ -145,6 +145,9 @@ class RegressionTests: TestCase {
     // SR‐15734
 
     let int: Int = 0
+#warning("Debugging...")
+#if false
     int.exerciseHashable()
+    #endif
   }
 }
