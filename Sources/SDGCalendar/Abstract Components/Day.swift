@@ -76,36 +76,15 @@ extension Day {
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-#warning("Debugging...")
-        _ = self.inEnglishDigits()
-return ""
-#if false
         return SemanticMarkup(self.inEnglishDigits())
-        #endif
       case .deutschDeutschland:
-#warning("Debugging...")
-return ""
-#if false
         return SemanticMarkup(self.inDeutschenZiffern())
-        #endif
       case .françaisFrance:
-#warning("Debugging...")
-return ""
-#if false
         return self.enChiffresFrançais()
-        #endif
       case .ελληνικάΕλλάδα:
-#warning("Debugging...")
-return ""
-#if false
         return SemanticMarkup(self.σεΕλληνικάΨηφία())
-        #endif
       case .עברית־ישראל:
-#warning("Debugging...")
-return ""
-#if false
         return SemanticMarkup(self.בעברית־בספרות())
-        #endif
       }
     }).resolved()
   }

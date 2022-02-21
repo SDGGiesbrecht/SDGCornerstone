@@ -29,10 +29,7 @@ extension WholeArithmetic {
   internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
     var result: [Self: UnicodeScalar] = [:]
     for value in digits.indices {
-#warning("Debugging...")
-#if false
       result[Self(UInt(value))] = digits[value]
-      #endif
     }
     return result
   }
@@ -43,9 +40,6 @@ extension WholeArithmetic {
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
 
-#warning("Debugging...")
-return ""
-#if false
     var whole = (|self|).rounded(.towardZero)
     var digits: [UnicodeScalar] = []
     var position: Self = 0
@@ -72,7 +66,6 @@ return ""
     }
 
     return StrictString(digits.reversed())
-    #endif
   }
 
   internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
