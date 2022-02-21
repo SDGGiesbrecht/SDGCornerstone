@@ -74,7 +74,11 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public func inEnglishDigits() -> StrictString {
+#warning("Debugging...")
+return ""
+#if false
     return ordinal.inDigits()
+    #endif
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
