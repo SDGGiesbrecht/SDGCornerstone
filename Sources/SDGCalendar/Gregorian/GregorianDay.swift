@@ -107,7 +107,11 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+#warning("Debugging...")
+return ""
+#if false
         return SemanticMarkup(self.inEnglishDigits())
+        #endif
       case .deutschDeutschland:
         #warning("Debugging...")
         return ""
