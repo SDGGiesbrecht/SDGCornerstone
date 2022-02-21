@@ -89,13 +89,6 @@ class RegressionTests: TestCase {
     #endif
   }
 
-  func testEquatableExtension() {
-    // SR‐15734
-
-    let int: Int = 0
-    int.exerciseEquatable()
-  }
-
   func testFloor() {
     // Untracked
 
