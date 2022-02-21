@@ -63,6 +63,13 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
     return (1 as FloatMax).days
   }
 
+  // MARK: - ConsistentlyOrderedCalendarComponent
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public var ordinal: Vector {
+    return rawValue
+  }
+
   // MARK: - Day
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
