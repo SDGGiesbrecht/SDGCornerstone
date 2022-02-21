@@ -14,6 +14,9 @@
 
 import SDGMathematics
 import SDGText
+import SDGLocalization
+
+import SDGCornerstoneLocalizations
 
 /// A day of a Gregorian month.
 public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
@@ -60,10 +63,77 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
     return (1 as FloatMax).days
   }
 
+  // MARK: - Day
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func inEnglishDigits() -> StrictString {
+    return ordinal.inDigits()
+  }
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func inDeutschenZiffern() -> StrictString {
+    return ordinal.abgekürzteDeutscheOrdnungszahl()
+  }
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func enChiffresFrançais() -> SemanticMarkup {
+    if ordinal == 1 {
+      return ordinal.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
+    } else {
+      return SemanticMarkup(ordinal.inDigits())
+    }
+  }
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func σεΕλληνικάΨηφία() -> StrictString {
+    return ordinal.inDigits()
+  }
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func בעברית־בספרות() -> StrictString {
+    return ordinal.inDigits()
+  }
+
   // MARK: - ISOCalendarComponent
 
   public func inISOFormat() -> StrictString {
     return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
+  }
+  
+  // MARK: - MarkupPlaygroundDisplay
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+      switch localization {
+      case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+        return SemanticMarkup(self.inEnglishDigits())
+      case .deutschDeutschland:
+        #warning("Debugging...")
+        return ""
+        #if false
+        return SemanticMarkup(self.inDeutschenZiffern())
+        #endif
+      case .françaisFrance:
+#warning("Debugging...")
+return ""
+#if false
+        return self.enChiffresFrançais()
+#endif
+      case .ελληνικάΕλλάδα:
+#warning("Debugging...")
+return ""
+#if false
+        return SemanticMarkup(self.σεΕλληνικάΨηφία())
+#endif
+      case .עברית־ישראל:
+#warning("Debugging...")
+return ""
+#if false
+        return SemanticMarkup(self.בעברית־בספרות())
+#endif
+      }
+    }).resolved()
   }
 
   // MARK: - PointProtocol
