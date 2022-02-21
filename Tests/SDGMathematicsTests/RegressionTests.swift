@@ -88,7 +88,7 @@ class RegressionTests: TestCase {
       XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
     #endif
   }
-  
+
   func testEquatableExtension() {
     // SR‐15734
 
@@ -102,21 +102,21 @@ class RegressionTests: TestCase {
     let thirty = 30
     XCTAssertEqual(thirty, thirty.rounded(.down))
   }
-  
+
   func testGenericAdditiveArithmeticHashing() {
     // SR‐15734
 
     let int: Int = 0
     int.exerciseGenericAdditiveArithmeticHashing()
   }
-  
+
   func testHashableHashing() {
     // SR‐15734
 
     let int: Int = 0
     int.exerciseHashableHashing()
   }
-  
+
   func testNumericAdditiveArithmeticHashing() {
     // SR‐15734
 
