@@ -96,7 +96,7 @@ public struct HebrewYear: CardinalCalendarComponent, CodableViaRawRepresentableC
 
   public typealias Vector = Int
 
-  // #workaround(Swift 5.5.2, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue = Self(precedingValue.rawValue + followingValue)
   }
