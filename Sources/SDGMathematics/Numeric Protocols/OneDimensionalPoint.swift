@@ -17,7 +17,7 @@
 /// - Note: For multi‐dimensional points, see `PointProtocol`.
 ///
 /// - Note: This is distinct from `FixedScaleOneDimensionalPoint` so that types can still conform to `OneDimensionalPoint` even if they have vectors that cannot conform to `Numeric`.
-public protocol OneDimensionalPoint: Comparable, PointProtocol {}
+public protocol OneDimensionalPoint: _ComparableUnlessBrokenByPlatform, PointProtocol {}
 
 extension OneDimensionalPoint where Vector: IntegerProtocol {
 
@@ -42,7 +42,7 @@ extension OneDimensionalPoint where Vector: IntegerProtocol {
   }
 }
 
-extension OneDimensionalPoint where Self: Strideable {
+extension OneDimensionalPoint where Self: _StrideableUnlessBrokenByPlatform {
 
   /// Returns the value that follows `self` by a distance of `n`.
   ///

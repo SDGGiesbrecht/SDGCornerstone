@@ -56,7 +56,7 @@ extension Sequence where Element: GenericAdditiveArithmetic {
   }
 }
 
-extension Sequence where Element: WholeArithmetic {
+extension Sequence where Element: WholeArithmetic & _NumericIfNotInherited {
 
   /// Returns the product of all values in the sequence.
   ///
@@ -71,7 +71,7 @@ extension Sequence where Element: WholeArithmetic {
   }
 }
 
-extension Sequence where Element: RationalArithmetic {
+extension Sequence where Element: RationalArithmetic & _ComparableIfNotInherited {
 
   /// Returns the arithmetic mean.
   ///

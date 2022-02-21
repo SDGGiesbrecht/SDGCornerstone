@@ -30,7 +30,7 @@ public func testFixedScaleOneDimensionalPointConformance<T>(
   destination: T,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: OneDimensionalPoint {
+) where T: OneDimensionalPoint & _ComparableIfNotInherited {
   testOneDimensionalPointConformance(
     departure: departure,
     vector: vector,

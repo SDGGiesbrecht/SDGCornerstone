@@ -132,31 +132,31 @@ extension BinaryInteger {
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine natürliche Zahl ohne Vorzeichen. (`UInt`)
 public typealias NZahl = UInt
-extension UInt: UIntFamily {
+extension UInt: UIntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension UInt64: UIntFamily {
+extension UInt64: UIntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension UInt32: UIntFamily {
+extension UInt32: UIntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension UInt16: UIntFamily {
+extension UInt16: UIntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension UInt8: UIntFamily {
+extension UInt8: UIntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 

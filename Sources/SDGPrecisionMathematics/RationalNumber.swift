@@ -28,10 +28,7 @@ import SDGCornerstoneLocalizations
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatable,
-  ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol,
-  RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic,
-  TextualPlaygroundDisplay
+public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic & _WholeArithmeticRandomness, TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization

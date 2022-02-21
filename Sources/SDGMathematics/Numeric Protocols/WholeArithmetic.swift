@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGLogic
 
 /// A type that can be used for whole‐number arithmetic.
-public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric, NumericAdditiveArithmetic {
+public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, _NumericUnlessBrokenByPlatform, NumericAdditiveArithmetic {
 
   // MARK: - Initialization
 
@@ -187,6 +187,8 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric, Numeric
   ///     - factor: The factor to round to a multiple of.
   func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
+  // #workaround(Swift 5.5.3, Desabled as condition, because Comparable is broken by SR‐15734.)
+  #if !PLATFORM_SUFFERS_SR_15734
   // @localization(🇨🇦EN) @crossReference(WholeArithmetic.random(in:))
   // @documentation(SDGCornerstone.WholeArithmetic.random(in:))
   /// Creates a random value within a particular range.
@@ -203,9 +205,19 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric, Numeric
   ///     - generator: The randomizer to use to generate the random value.
   static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator
+  #endif
 }
+// #workaround(Swift 5.5.3, Simplifies evasion of SR‐15734.)
+#if PLATFORM_SUFFERS_SR_15734
+public protocol _WholeArithmeticRandomness: Comparable {
+  static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
+  where R: RandomNumberGenerator
+}
+#else
+public typealias _WholeArithmeticRandomness = Any
+#endif
 
-extension WholeArithmetic {
+extension _NumericIfNotInherited where Self: WholeArithmetic {
 
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(UIntMax(uInt))
@@ -368,10 +380,12 @@ extension WholeArithmetic {
   ///
   /// - Parameters:
   ///     - intervall: Das erlaubte Intervall für den zufälligen Wert.
-  @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self {
+  @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self
+  where Self: _WholeArithmeticRandomness {
     return random(in: intervall)
   }
-  @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+  @inlinable public static func random(in range: ClosedRange<Self>) -> Self
+  where Self: _WholeArithmeticRandomness {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }

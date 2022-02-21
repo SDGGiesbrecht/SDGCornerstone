@@ -16,10 +16,7 @@ import SDGMathematics
 import SDGText
 
 /// A day of a Gregorian month.
-public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
-  ConsistentDurationCalendarComponent, Day, ICalendarComponent, ISOCalendarComponent,
-  OrdinalCalendarComponent, RawRepresentableCalendarComponent
-{
+public struct GregorianDay: CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, Day, ICalendarComponent, ISOCalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent & _StrideableIfNotInherited {
 
   // MARK: - Properties
 

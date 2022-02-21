@@ -16,7 +16,7 @@ import SDGLogic
 import SDGMathematics
 import SDGText
 
-extension WholeNumberProtocol {
+extension _NumericIfNotInherited where Self: WholeNumberProtocol {
 
   // @localization(🇩🇪DE) @crossReference(WholeNumberProtcol.inDigits(thousandsSeparator:))
   // @documentation(SDGCornerstone.WholeNumberProtocol.inZahlzeichen(tausendertrennzeichen:))

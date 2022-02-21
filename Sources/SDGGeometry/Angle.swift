@@ -54,7 +54,7 @@ extension Angle: CustomPlaygroundDisplayConvertible {
         flip = (0 as Double).rad
       }
       let arrowHeadLength: Double = 10
-      let leftDirection = ((5 as Double × π()) ÷ 4).radians
+      let leftDirection = ((5 as Double × SDGMathematics.π()) ÷ 4).radians
       let adjustedLeftDirection = leftDirection + floatAngle + flip
       let leftSide =
         end
@@ -62,7 +62,7 @@ extension Angle: CustomPlaygroundDisplayConvertible {
       arrow.appendLine(to: leftSide)
       arrow.appendLine(to: end)
 
-      let rightDirection = ((−1 as Double × π()) ÷ 4).radians
+      let rightDirection = ((−1 as Double × SDGMathematics.π()) ÷ 4).radians
       let adjustedRightDirection = rightDirection + floatAngle + flip
       let rightSide =
         end

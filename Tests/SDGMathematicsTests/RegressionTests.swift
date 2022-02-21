@@ -100,7 +100,7 @@ class RegressionTests: TestCase {
     // Untracked
 
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      func runTests<N: WholeArithmetic>(_ type: N.Type) {
+      func runTests<N>(_ type: N.Type) where N: WholeArithmetic & _NumericIfNotInherited {
         let five: N = 10 − 5
         XCTAssertEqual(five, 5)
       }

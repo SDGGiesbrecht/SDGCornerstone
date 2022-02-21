@@ -122,7 +122,7 @@ extension BinaryInteger {
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
 public typealias GZahl = Int
-extension Int: IntFamily {
+extension Int: IntFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
@@ -146,7 +146,7 @@ extension Int: IntFamily {
     return self & 1 == 1
   }
 }
-extension Int64: IntXFamily {
+extension Int64: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
@@ -198,19 +198,19 @@ extension Int64: IntXFamily {
     }
   }
 }
-extension Int32: IntXFamily {
+extension Int32: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension Int16: IntXFamily {
+extension Int16: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
   public typealias Vector = Stride
 }
-extension Int8: IntXFamily {
+extension Int8: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 

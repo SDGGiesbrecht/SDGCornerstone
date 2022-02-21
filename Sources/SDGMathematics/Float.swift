@@ -190,7 +190,7 @@ extension FloatFamily where Self: ElementaryFunctions {
   }
 }
 
-extension Double: FloatFamily {
+extension Double: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
@@ -209,7 +209,7 @@ extension Double: FloatFamily {
   }
 }
 
-extension CGFloat: FloatFamily {
+extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - CustomDebugStringConvertible
 
@@ -253,12 +253,12 @@ extension CGFloat: FloatFamily {
     return Angle(rawValue: NativeType(angle.rawValue))
   }
 
-  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-    return CGFloat(SDGMathematics.cos(convert(angle)))
-  }
-
   @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
     return CGFloat(SDGMathematics.sin(convert(angle)))
+  }
+
+  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+    return CGFloat(SDGMathematics.cos(convert(angle)))
   }
 
   @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
@@ -302,7 +302,7 @@ extension CGFloat: FloatFamily {
 }
 
 #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
-  extension Float80: Decodable, Encodable, FloatFamily {
+  extension Float80: Decodable, Encodable, FloatFamily & _WholeArithmeticRandomness {
 
     // MARK: - Decodable
 
@@ -335,7 +335,7 @@ extension CGFloat: FloatFamily {
   }
 #endif
 
-extension Float: FloatFamily {
+extension Float: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
@@ -356,7 +356,7 @@ extension Float: FloatFamily {
 
 #if !PLATFORM_LACKS_SWIFT_FLOAT_16
   @available(tvOS 14, iOS 14, watchOS 7, *)
-  extension Float16: FloatFamily {
+  extension Float16: FloatFamily & _WholeArithmeticRandomness {
 
     // MARK: - PointProtocol
 

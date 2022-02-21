@@ -36,7 +36,7 @@ public func testNumericAdditiveArithmeticConformance<T>(
   includingNegatives: Bool,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: NumericAdditiveArithmetic {
+) where T: NumericAdditiveArithmetic & _ComparableIfNotInherited {
 
   testGenericAdditiveArithmeticConformance(
     augend: augend,
