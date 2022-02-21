@@ -3,10 +3,7 @@ import SDGMathematics
 extension _Hashable {
 
   func exerciseHashableHashing() {
-    #warning("Debugging...")
-    #if false
     _ = self == self
-    #endif
 
     var hasher = Hasher()
     hash(into: &hasher)
