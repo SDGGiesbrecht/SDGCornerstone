@@ -15,7 +15,10 @@
 import SDGMathematics
 
 /// A day of the Gregorian week.
-public enum GregorianWeekday: Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent & _StrideableIfNotInherited, Decodable, Encodable, EnumerationCalendarComponent, Weekday {
+public enum GregorianWeekday: Int, ConsistentDurationCalendarComponent,
+  ConsistentlyOrderedCalendarComponent & _StrideableIfNotInherited, Decodable, Encodable,
+  EnumerationCalendarComponent, Weekday
+{
 
   // MARK: - Cases
 
@@ -60,7 +63,7 @@ public enum GregorianWeekday: Int, ConsistentDurationCalendarComponent, Consiste
   // MARK: - PointProtocol
 
   public typealias Vector = RawValue
-  
+
   // MARK: - Strideable
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)

@@ -48,7 +48,10 @@ public typealias GregorianischesJahr = GregorianYear
 /// XCTAssertEqual(adOne − oneYear, oneBC)
 /// XCTAssertEqual(adOne − oneBC, oneYear)
 /// ```
-public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent & _StrideableIfNotInherited, Year {
+public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent,
+  RawRepresentableCalendarComponent & _StrideableIfNotInherited, Year
+{
 
   // MARK: - Static Properties
 

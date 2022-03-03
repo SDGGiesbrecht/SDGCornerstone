@@ -40,21 +40,21 @@ public protocol RationalArithmetic: ExpressibleByFloatLiteral, IntegralArithmeti
 
   // #workaround(Swift 5.5.3, Desabled as condition, because Comparable is broken by SR‐15734.)
   #if !PLATFORM_SUFFERS_SR_15734
-  // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-  /// Creates a random value within a particular range.
-  ///
-  /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  static func random(in range: Range<Self>) -> Self
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    static func random(in range: Range<Self>) -> Self
 
-  // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-  /// Creates a random value within a particular range using the specified randomizer.
-  ///
-  /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
-  static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
-  where R: RandomNumberGenerator
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - generator: The randomizer to use to generate the random value.
+    static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
+    where R: RandomNumberGenerator
   #endif
 }
 

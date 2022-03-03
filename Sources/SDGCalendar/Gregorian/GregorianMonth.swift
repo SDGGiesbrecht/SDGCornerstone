@@ -20,7 +20,10 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarComponent & _StrideableIfNotInherited, Decodable, Encodable, EnumerationCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, TextualPlaygroundDisplay {
+public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarComponent
+    & _StrideableIfNotInherited, Decodable, Encodable, EnumerationCalendarComponent,
+  ICalendarComponent, ISOCalendarComponent, Month, TextualPlaygroundDisplay
+{
 
   // MARK: - Cases
 

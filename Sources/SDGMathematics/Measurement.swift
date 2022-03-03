@@ -326,14 +326,14 @@ extension _ComparableIfNotInherited where Self: Measurement {
 
   // #workaround(Swift 5.5.3, Split to evade oposing warnings due to _ComparableIfNotInherited.)
   #if PLATFORM_SUFFERS_SR_15734
-  @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool
-  where Scalar: _ComparableIfNotInherited {
-    return compare(precedingValue, followingValue) { $0.rawValue }
-  }
+    @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool
+    where Scalar: _ComparableIfNotInherited {
+      return compare(precedingValue, followingValue) { $0.rawValue }
+    }
   #else
-  @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-    return compare(precedingValue, followingValue) { $0.rawValue }
-  }
+    @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+      return compare(precedingValue, followingValue) { $0.rawValue }
+    }
   #endif
 
   // MARK: - Equatable

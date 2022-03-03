@@ -20,7 +20,10 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A part of the Hebrew hour.
-public struct HebrewPart: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent & _StrideableIfNotInherited, SmallestCalendarComponent, TextualPlaygroundDisplay {
+public struct HebrewPart: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent
+    & _StrideableIfNotInherited, SmallestCalendarComponent, TextualPlaygroundDisplay
+{
 
   // MARK: - Static Properties
 
