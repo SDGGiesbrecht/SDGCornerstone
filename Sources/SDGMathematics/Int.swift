@@ -124,6 +124,13 @@ extension BinaryInteger {
 public typealias GZahl = Int
 extension Int: IntFamily & _WholeArithmeticRandomness {
 
+  // MARK: - Negatable
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  @inlinable public static prefix func − (operand: Self) -> Self {
+    return 0 - operand  // @exempt(from: unicode)
+  }
+
   // MARK: - PointProtocol
 
   public typealias Vector = Stride

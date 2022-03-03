@@ -21,7 +21,7 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A month of the Hebrew year.
-public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
+public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInherited, Month {
 
   // MARK: - Cases
 

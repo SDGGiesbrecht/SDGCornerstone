@@ -314,7 +314,7 @@ class APITests: TestCase {
     #endif
   }
 
-  enum OrderedEnumerationExample: Int, OrderedEnumeration {
+  enum OrderedEnumerationExample: Int, OrderedEnumeration & _ComparableIfNotInherited {
     typealias RawValue = Int
     case a
     case b
