@@ -332,6 +332,7 @@ extension _ComparableIfNotInherited where Self: Measurement {
     }
   #else
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+      // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
       return compare(precedingValue, followingValue) { $0.rawValue }
     }
   #endif
@@ -367,22 +368,27 @@ extension _ComparableIfNotInherited where Self: Measurement {
   // MARK: - NumericAdditiveArithmetic
 
   @inlinable public var isPositive: Bool {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isPositive
   }
 
   @inlinable public var isNegative: Bool {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNegative
   }
 
   @inlinable public var isNonNegative: Bool {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNonNegative
   }
 
   @inlinable public var isNonPositive: Bool {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNonPositive
   }
 
   @inlinable public var absoluteValue: Self {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return Self(rawValue: rawValue.absoluteValue)
   }
 
