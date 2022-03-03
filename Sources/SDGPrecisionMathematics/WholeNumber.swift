@@ -157,6 +157,10 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
 
   // MARK: - Numeric
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Creates a whole number from another type.
+  /// - Parameters:
+  ///   - source: An alternate representation of the number.
   public init?<T>(exactly source: T) where T: BinaryInteger {
     guard let whole = UIntMax(exactly: source) else {
       return nil  // Source could be a negative integer.

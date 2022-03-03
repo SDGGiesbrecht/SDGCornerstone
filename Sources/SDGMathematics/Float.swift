@@ -235,16 +235,38 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - RealArithmetic
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.e)
+  /// An instance of *e*.
   public static let e: CGFloat = CGFloat(NativeType.e)
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
+  /// Returns the natural logarithm of `antilogarithm`.
+  ///
+  /// - Precondition: `antilogarithm` > 0
+  ///
+  /// - Parameters:
+  ///     - antilogarithm: The antilogarithm.
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
     return CGFloat(SDGMathematics.ln(NativeType(antilogarithm)))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+  /// Returns the common logarithm of `antilogarithm`.
+  ///
+  /// - Precondition: `antilogarithm` > 0
+  ///
+  /// - Parameters:
+  ///     - antilogarithm: The antilogarithm.
   @inlinable public static func log(_ antilogarithm: Self) -> Self {
     return CGFloat(SDGMathematics.log(NativeType(antilogarithm)))
   }
@@ -253,14 +275,32 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return Angle(rawValue: NativeType(angle.rawValue))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
+  /// Returns the sine of an angle.
+  ///
+  /// - Parameters:
+  ///     - angle: The angle.
   @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
     return CGFloat(SDGMathematics.sin(convert(angle)))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
+  /// Returns the cosine of an angle.
+  ///
+  /// - Parameters:
+  ///     - angle: The angle.
   @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
     return CGFloat(SDGMathematics.cos(convert(angle)))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
+  /// Returns the tangent of an angle.
+  ///
+  /// - Parameters:
+  ///     - angle: The angle.
   @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
     return CGFloat(SDGMathematics.tan(convert(angle)))
   }
@@ -269,14 +309,42 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return Angle(rawValue: CGFloat(angle.rawValue))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
+  /// Returns the arcsine of a value.
+  ///
+  /// The returned angle will be between −90° and 90° inclusive.
+  ///
+  /// - Precondition: −1 ≤ `sine` ≤ 1
+  ///
+  /// - Parameters:
+  ///     - sine: The sine.
   @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
     return convert(SDGMathematics.arcsin(NativeType(sine)))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
+  /// Returns the arccosine of a value.
+  ///
+  /// The returned angle will be between 0° and 180° inclusive.
+  ///
+  /// - Precondition: −1 ≤ `sine` ≤ 1
+  ///
+  /// - Parameters:
+  ///     - cosine: The cosine.
   @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
     return convert(SDGMathematics.arccos(NativeType(cosine)))
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
+  /// Returns the arctangent of a value.
+  ///
+  /// The returned angle will be between −90° and 90°.
+  ///
+  /// - Parameters:
+  ///     - tangent: The tangent.
   @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
     return convert(SDGMathematics.arctan(NativeType(tangent)))
   }

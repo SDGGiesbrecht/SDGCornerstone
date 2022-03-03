@@ -29,6 +29,8 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Internal Values
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(Measurement.init(rawValue:))
   /// Creates a measurement from a raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -37,6 +39,8 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
   ///     - rawValue: The raw value.
   init(rawValue: Scalar)
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(Measurement.rawValue)
   /// A raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -169,6 +173,12 @@ extension Measurement {
   // MARK: - Comparable
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Compares two measurements.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The preceding value.
+  ///   - followingValue: The following value.
   @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
     return precedingValue.rawValue < followingValue.rawValue
   }
@@ -326,11 +336,23 @@ extension _ComparableIfNotInherited where Self: Measurement {
 
   // #workaround(Swift 5.5.3, Split to evade oposing warnings due to _ComparableIfNotInherited.)
   #if PLATFORM_SUFFERS_SR_15734
+    // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    /// Compares two measurements.
+    ///
+    /// - Parameters:
+    ///   - precedingValue: The preceding value.
+    ///   - followingValue: The following value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool
     where Scalar: _ComparableIfNotInherited {
       return compare(precedingValue, followingValue) { $0.rawValue }
     }
   #else
+    // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    /// Compares two measurements.
+    ///
+    /// - Parameters:
+    ///   - precedingValue: The preceding value.
+    ///   - followingValue: The following value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
       // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
       return compare(precedingValue, followingValue) { $0.rawValue }

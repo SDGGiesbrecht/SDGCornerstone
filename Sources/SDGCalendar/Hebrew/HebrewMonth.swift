@@ -307,14 +307,23 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - CalendarComponent
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(CalendarComponent.meanDuration)
+  /// The mean duration.
   public static var meanDuration: CalendarInterval<FloatMax> {
     return lengthOfMoon
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(CalendarComponent.minimumDuration)
+  /// The minimum duration.
   public static var minimumDuration: CalendarInterval<FloatMax> {
     return FloatMax(HebrewMonth.minimumNumberOfDays).days
   }
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(CalendarComponent.maximumDuration)
+  /// The maximum duration.
   public static var maximumDuration: CalendarInterval<FloatMax> {
     return FloatMax(HebrewMonth.maximumNumberOfDays).days
   }
@@ -434,6 +443,10 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - Decodable
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Decodes a month.
+  /// - Parameters:
+  ///   - decoder: The decoder.
   public init(from decoder: Decoder) throws {
     try self.init(
       from: decoder,
@@ -462,6 +475,10 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - Encodable
 
+  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Encodes a month.
+  /// - Parameters:
+  ///   - encoder: The encoder.
   public func encode(to encoder: Encoder) throws {
     let number: StrictString
     switch self {
