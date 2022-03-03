@@ -393,6 +393,7 @@ extension _ComparableIfNotInherited where Self: Measurement {
   }
 
   @inlinable public mutating func formAbsoluteValue() {
+    // @exempt(from: tests) #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     rawValue.formAbsoluteValue()
   }
 
