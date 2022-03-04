@@ -21,8 +21,8 @@ public protocol IntegralArithmetic: Negatable, SignedNumeric, WholeArithmetic {
   // @documentation(IntegralArithmetic.init(_:))
   /// Creates an instance equal to `int`.
   ///
-  /// - Properties:
-  ///     - int: An instance of `IntMax`.
+  /// - Parameters:
+  ///   - int: An instance of `IntMax`.
   init(_ int: IntMax)
 }
 

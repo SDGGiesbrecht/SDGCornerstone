@@ -242,8 +242,8 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
   // #documentation(IntegralArithmetic.init(_:))
   /// Creates an instance equal to `int`.
   ///
-  /// - Properties:
-  ///     - int: An instance of `IntMax`.
+  /// - Parameters:
+  ///   - int: An instance of `IntMax`.
   @inlinable public init(_ int: IntMax) {
     self = CGFloat(NativeType(int))
   }
