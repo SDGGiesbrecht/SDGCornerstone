@@ -26,7 +26,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// An instance of τ.
   static var τ: Self { get }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(RealArithmetic.e)
   /// An instance of *e*.
   static var e: Self { get }
@@ -217,6 +217,8 @@ public protocol RealArithmetic: RationalArithmetic {
 
   // MARK: - Conversions
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(RealArithmetic.floatingPointApproximation)
   /// A floating point approximation.
   var floatingPointApproximation: FloatMax { get }
 }

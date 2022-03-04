@@ -307,21 +307,21 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - CalendarComponent
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(CalendarComponent.meanDuration)
   /// The mean duration.
   public static var meanDuration: CalendarInterval<FloatMax> {
     return lengthOfMoon
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(CalendarComponent.minimumDuration)
   /// The minimum duration.
   public static var minimumDuration: CalendarInterval<FloatMax> {
     return FloatMax(HebrewMonth.minimumNumberOfDays).days
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(CalendarComponent.maximumDuration)
   /// The maximum duration.
   public static var maximumDuration: CalendarInterval<FloatMax> {
@@ -443,7 +443,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - Decodable
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   /// Decodes a month.
   /// - Parameters:
   ///   - decoder: The decoder.
@@ -475,7 +475,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent & _ComparableIfNotInh
 
   // MARK: - Encodable
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   /// Encodes a month.
   /// - Parameters:
   ///   - encoder: The encoder.

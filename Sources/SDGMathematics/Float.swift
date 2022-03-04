@@ -194,16 +194,33 @@ extension Double: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - RealArithmetic
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.e)
+  /// An instance of *e*.
   public static let e: Double = 0x1.5BF0A8B145769p1
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+  /// Returns the common logarithm of `antilogarithm`.
+  ///
+  /// - Precondition: `antilogarithm` > 0
+  ///
+  /// - Parameters:
+  ///     - antilogarithm: The antilogarithm.
   @inlinable public static func log(_ antilogarithm: Self) -> Self {
     return Self.log10(antilogarithm)
   }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.floatingPointApproximation)
+  /// A floating point approximation.
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
@@ -213,12 +230,20 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - CustomDebugStringConvertible
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// The debug description.
   @inlinable public var debugDescription: String {
     return NativeType(self).debugDescription
   }
 
   // MARK: - IntegralArithmetic
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(IntegralArithmetic.init(_:))
+  /// Creates an instance equal to `int`.
+  ///
+  /// - Properties:
+  ///     - int: An instance of `IntMax`.
   @inlinable public init(_ int: IntMax) {
     self = CGFloat(NativeType(int))
   }
@@ -235,19 +260,19 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(PointProtocol.Vector)
   /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - RealArithmetic
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(RealArithmetic.e)
   /// An instance of *e*.
   public static let e: CGFloat = CGFloat(NativeType.e)
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
   /// Returns the natural logarithm of `antilogarithm`.
   ///
@@ -259,7 +284,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return CGFloat(SDGMathematics.ln(NativeType(antilogarithm)))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.log(_:))
   /// Returns the common logarithm of `antilogarithm`.
   ///
@@ -275,7 +300,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return Angle(rawValue: NativeType(angle.rawValue))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
   /// Returns the sine of an angle.
   ///
@@ -285,7 +310,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return CGFloat(SDGMathematics.sin(convert(angle)))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
   /// Returns the cosine of an angle.
   ///
@@ -295,7 +320,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return CGFloat(SDGMathematics.cos(convert(angle)))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
   /// Returns the tangent of an angle.
   ///
@@ -309,7 +334,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return Angle(rawValue: CGFloat(angle.rawValue))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
   /// Returns the arcsine of a value.
   ///
@@ -323,7 +348,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return convert(SDGMathematics.arcsin(NativeType(sine)))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
   /// Returns the arccosine of a value.
   ///
@@ -337,7 +362,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return convert(SDGMathematics.arccos(NativeType(cosine)))
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
   /// Returns the arctangent of a value.
   ///
@@ -349,6 +374,9 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     return convert(SDGMathematics.arctan(NativeType(tangent)))
   }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.floatingPointApproximation)
+  /// A floating point approximation.
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(NativeType(self))
   }
@@ -359,6 +387,20 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
     self = CGFloat(NativeType(uInt))
   }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(WholeArithmetic.↑)
+  /// Returns the result of the preceding value to the power of the following value.
+  ///
+  /// - Precondition:
+  ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+  ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
+  ///   - If `Self` conforms to `RealNumberProtocol`, either
+  ///     - `precedingValue` must be positive, or
+  ///     - `followingValue` must be an integer.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The base.
+  ///     - followingValue: The exponent.
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
     return CGFloat(
       NativeType.unifiedSwiftNumericsPower(
@@ -387,16 +429,33 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 
     // MARK: - PointProtocol
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(PointProtocol.Vector)
+    /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(RealArithmetic.e)
+    /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+    /// Returns the common logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(RealArithmetic.floatingPointApproximation)
+    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
       return FloatMax(self)
     }
@@ -407,16 +466,33 @@ extension Float: FloatFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - RealArithmetic
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.e)
+  /// An instance of *e*.
   public static let e: Float = 0x1.5BF0Bp1
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+  /// Returns the common logarithm of `antilogarithm`.
+  ///
+  /// - Precondition: `antilogarithm` > 0
+  ///
+  /// - Parameters:
+  ///     - antilogarithm: The antilogarithm.
   @inlinable public static func log(_ antilogarithm: Self) -> Self {
     return Self.log10(antilogarithm)
   }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(RealArithmetic.floatingPointApproximation)
+  /// A floating point approximation.
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
@@ -428,16 +504,33 @@ extension Float: FloatFamily & _WholeArithmeticRandomness {
 
     // MARK: - PointProtocol
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(PointProtocol.Vector)
+    /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(RealArithmetic.e)
+    /// An instance of *e*.
     public static let e: Float16 = 0x1.5Cp1
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+    /// Returns the common logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
 
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #documentation(RealArithmetic.floatingPointApproximation)
+    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
       return FloatMax(self)
     }

@@ -292,7 +292,7 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Measurement
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(Measurement.init(rawValue:))
   /// Creates a measurement from a raw value in undefined but consistent units.
   ///
@@ -304,7 +304,7 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
     inUnits = rawValue
   }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(Measurement.rawValue)
   /// A raw value in undefined but consistent units.
   ///

@@ -17,17 +17,17 @@ import SDGMathematics
 /// A component of a particular calendar.
 public protocol CalendarComponent: Decodable, Encodable {
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(CalendarComponent.meanDuration)
   /// The mean duration.
   static var meanDuration: CalendarInterval<FloatMax> { get }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(CalendarComponent.minimumDuration)
   /// The minimum duration.
   static var minimumDuration: CalendarInterval<FloatMax> { get }
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(CalendarComponent.maximumDuration)
   /// The maximum duration.
   static var maximumDuration: CalendarInterval<FloatMax> { get }

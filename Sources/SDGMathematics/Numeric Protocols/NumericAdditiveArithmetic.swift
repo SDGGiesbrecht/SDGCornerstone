@@ -23,9 +23,13 @@ public protocol NumericAdditiveArithmetic: GenericAdditiveArithmetic,
 
   // MARK: - Classification
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(SDGCornerstone.WholeArithmetic.isPositive)
   /// Returns `true` if `self` is positive.
   var isPositive: Bool { get }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(SDGCornerstone.WholeArithmetic.isNegative)
   /// Returns `true` if `self` is negative.
   var isNegative: Bool { get }
 

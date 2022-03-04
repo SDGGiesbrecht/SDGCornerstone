@@ -127,16 +127,32 @@ extension Int: IntFamily & _WholeArithmeticRandomness {
   // MARK: - Negatable
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.Negatable.−)
+  /// Returns the additive inverse of the operand.
+  ///
+  /// - Parameters:
+  ///     - operand: The value to invert.
   @inlinable public static prefix func − (operand: Self) -> Self {
     return 0 - operand  // @exempt(from: unicode)
   }
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - Subtractible
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.Subtractible.−(_:_:))
+  /// Returns the difference of the preceding value minus the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting value.
+  ///     - followingValue: The value to subtract.
   @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
@@ -144,11 +160,21 @@ extension Int: IntFamily & _WholeArithmeticRandomness {
   // MARK: - WholeArithmetic
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.×(_:_:))
+  /// Returns the product of the preceding value times the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: A value.
+  ///     - followingValue: Another value.
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
+  /// Returns true if `self` is an odd integer.
   @inlinable public var isOdd: Bool {
     return self & 1 == 1
   }
@@ -157,16 +183,25 @@ extension Int64: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - NumericAdditiveArithmetic
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.isPositive)
+  /// Returns `true` if `self` is positive.
   @inlinable public var isPositive: Bool {
     return self > Self.zero
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.isNegative)
+  /// Returns `true` if `self` is negative.
   @inlinable public var isNegative: Bool {
     return self < Self.zero
   }
@@ -174,11 +209,25 @@ extension Int64: IntXFamily & _WholeArithmeticRandomness {
   // MARK: - Subtractable
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.Subtractible.−(_:_:))
+  /// Returns the difference of the preceding value minus the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting value.
+  ///     - followingValue: The value to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.−=(_:_:))
+  /// Subtracts the following value from the preceding value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The value to modify.
+  ///     - followingValue: The value to subtract.
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
     precedingValue -= followingValue  // @exempt(from: unicode)
   }
@@ -186,11 +235,26 @@ extension Int64: IntXFamily & _WholeArithmeticRandomness {
   // MARK: - WholeArithmetic
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.×(_:_:))
+  /// Returns the product of the preceding value times the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: A value.
+  ///     - followingValue: Another value.
   @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue * followingValue  // @exempt(from: unicode)
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
+  /// Sets `self` to the integral quotient of `self` divided by `divisor`.
+  ///
+  /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
+  ///
+  /// - Parameters:
+  ///     - divisor: The divisor.
   @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
     let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
@@ -209,17 +273,26 @@ extension Int32: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension Int16: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension Int8: IntXFamily & _WholeArithmeticRandomness {
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = Stride
 }

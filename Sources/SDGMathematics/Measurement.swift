@@ -29,7 +29,7 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Internal Values
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(Measurement.init(rawValue:))
   /// Creates a measurement from a raw value in undefined but consistent units.
   ///
@@ -39,7 +39,7 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
   ///     - rawValue: The raw value.
   init(rawValue: Scalar)
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // @documentation(Measurement.rawValue)
   /// A raw value in undefined but consistent units.
   ///
@@ -173,7 +173,7 @@ extension Measurement {
   // MARK: - Comparable
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   /// Compares two measurements.
   ///
   /// - Parameters:
@@ -336,7 +336,7 @@ extension _ComparableIfNotInherited where Self: Measurement {
 
   // #workaround(Swift 5.5.3, Split to evade oposing warnings due to _ComparableIfNotInherited.)
   #if PLATFORM_SUFFERS_SR_15734
-    // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
     /// Compares two measurements.
     ///
     /// - Parameters:
@@ -347,7 +347,7 @@ extension _ComparableIfNotInherited where Self: Measurement {
       return compare(precedingValue, followingValue) { $0.rawValue }
     }
   #else
-    // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
     /// Compares two measurements.
     ///
     /// - Parameters:

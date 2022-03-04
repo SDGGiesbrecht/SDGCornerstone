@@ -183,7 +183,7 @@ extension OrderedEnumeration where Self: RawRepresentable, Self: Strideable {
 
   // MARK: - Comparable
 
-  // #warning(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   /// Compares two values.
   ///
   /// - Parameters:
