@@ -30,7 +30,7 @@ public func testOneDimensionalPointConformance<T>(
   destination: T,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: OneDimensionalPoint {
+) where T: OneDimensionalPoint & _ComparableIfNotInherited {
   testComparableConformance(less: departure, greater: destination, file: file, line: line)
   testPointProtocolConformance(
     departure: departure,

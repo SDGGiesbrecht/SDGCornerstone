@@ -35,7 +35,8 @@ import SDGCornerstoneLocalizations
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
 public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable, Equatable,
   Hashable, PointProtocol, Strideable, Subtractable, TextConvertibleNumber,
-  TextualPlaygroundDisplay, WholeArithmetic, WholeNumberProtocol
+  TextualPlaygroundDisplay, WholeArithmetic & _WholeArithmeticRandomness, WholeNumberProtocol
+    & _NumericIfNotInherited
 {
 
   // MARK: - Properties
@@ -156,6 +157,10 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
 
   // MARK: - Numeric
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Creates a whole number from another type.
+  /// - Parameters:
+  ///   - source: An alternate representation of the number.
   public init?<T>(exactly source: T) where T: BinaryInteger {
     guard let whole = UIntMax(exactly: source) else {
       return nil  // Source could be a negative integer.

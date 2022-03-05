@@ -16,7 +16,8 @@ import SDGMathematics
 
 /// A day of the Hebrew week.
 public enum HebrewWeekday: Int, ConsistentDurationCalendarComponent,
-  ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday
+  ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent
+    & _ComparableIfNotInherited, Weekday
 {
 
   // MARK: - Cases

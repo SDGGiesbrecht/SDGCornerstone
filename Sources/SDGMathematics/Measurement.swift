@@ -19,15 +19,18 @@ import SDGControlFlow
 /// See `Angle` and `CalendarInterval` for examples.
 ///
 /// - Requires: A `Measurement`’s units must be definable as ratios of one another. (For example, `Measurement` can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
-public protocol Measurement: Negatable, NumericAdditiveArithmetic {
+public protocol Measurement: Negatable, NumericAdditiveArithmetic
+where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Scalar Type
 
   /// The numeric type used to express the value in any given unit.
-  associatedtype Scalar: RationalArithmetic
+  associatedtype Scalar
 
   // MARK: - Internal Values
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(Measurement.init(rawValue:))
   /// Creates a measurement from a raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -36,6 +39,8 @@ public protocol Measurement: Negatable, NumericAdditiveArithmetic {
   ///     - rawValue: The raw value.
   init(rawValue: Scalar)
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(Measurement.rawValue)
   /// A raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -165,6 +170,22 @@ public protocol Measurement: Negatable, NumericAdditiveArithmetic {
 
 extension Measurement {
 
+  // MARK: - Comparable
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Compares two measurements.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The preceding value.
+  ///   - followingValue: The following value.
+  @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+    return precedingValue.rawValue < followingValue.rawValue
+  }
+}
+
+extension _ComparableIfNotInherited where Self: Measurement {
+
   @inlinable public init() {
     self.init(rawValue: 0)
   }
@@ -246,7 +267,8 @@ extension Measurement {
   ///
   /// - Parameters:
   ///     - range: The allowed range for the random value.
-  @inlinable public static func random(in range: Range<Self>) -> Self {
+  @inlinable public static func random(in range: Range<Self>) -> Self
+  where Scalar: _WholeArithmeticRandomness {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }
@@ -258,7 +280,8 @@ extension Measurement {
   ///
   /// - Parameters:
   ///     - range: The allowed range for the random value.
-  @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+  @inlinable public static func random(in range: ClosedRange<Self>) -> Self
+  where Scalar: _WholeArithmeticRandomness {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }
@@ -272,7 +295,7 @@ extension Measurement {
   ///     - range: The allowed range for the random value.
   ///     - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
-  where R: RandomNumberGenerator {
+  where Scalar: _WholeArithmeticRandomness, R: RandomNumberGenerator {
     let scalar = Scalar.random(
       in: range.lowerBound.rawValue..<range.upperBound.rawValue,
       using: &generator
@@ -288,9 +311,10 @@ extension Measurement {
   /// - Parameters:
   ///     - range: The allowed range for the random value.
   ///     - generator: The randomizer to use to generate the random value.
-  @inlinable public static func random<R>(in range: ClosedRange<Self>, using generator: inout R)
-    -> Self where R: RandomNumberGenerator
-  {
+  @inlinable public static func random<R>(
+    in range: ClosedRange<Self>,
+    using generator: inout R
+  ) -> Self where Scalar: _WholeArithmeticRandomness, R: RandomNumberGenerator {
     let scalar = Scalar.random(
       in: range.lowerBound.rawValue...range.upperBound.rawValue,
       using: &generator
@@ -310,9 +334,33 @@ extension Measurement {
 
   // MARK: - Comparable
 
-  @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-    return compare(precedingValue, followingValue) { $0.rawValue }
-  }
+  // #workaround(Swift 5.5.3, Split to evade oposing warnings due to _ComparableIfNotInherited.)
+  #if PLATFORM_SUFFERS_SR_15734
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    /// Compares two measurements.
+    ///
+    /// - Parameters:
+    ///   - precedingValue: The preceding value.
+    ///   - followingValue: The following value.
+    @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool
+    where Scalar: _ComparableIfNotInherited {
+      return compare(precedingValue, followingValue) { $0.rawValue }
+    }
+  #else
+    // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+    /// Compares two measurements.
+    ///
+    /// - Parameters:
+    ///   - precedingValue: The preceding value.
+    ///   - followingValue: The following value.
+    @inlinable public static func < (
+      precedingValue: Self,
+      followingValue: Self
+    ) -> Bool {  // @exempt(from: tests)
+      // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+      return compare(precedingValue, followingValue) { $0.rawValue }
+    }
+  #endif
 
   // MARK: - Equatable
 
@@ -344,27 +392,33 @@ extension Measurement {
 
   // MARK: - NumericAdditiveArithmetic
 
-  @inlinable public var isPositive: Bool {
+  @inlinable public var isPositive: Bool {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isPositive
   }
 
-  @inlinable public var isNegative: Bool {
+  @inlinable public var isNegative: Bool {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNegative
   }
 
-  @inlinable public var isNonNegative: Bool {
+  @inlinable public var isNonNegative: Bool {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNonNegative
   }
 
-  @inlinable public var isNonPositive: Bool {
+  @inlinable public var isNonPositive: Bool {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return rawValue.isNonPositive
   }
 
-  @inlinable public var absoluteValue: Self {
+  @inlinable public var absoluteValue: Self {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     return Self(rawValue: rawValue.absoluteValue)
   }
 
-  @inlinable public mutating func formAbsoluteValue() {
+  @inlinable public mutating func formAbsoluteValue() {  // @exempt(from: tests)
+    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
     rawValue.formAbsoluteValue()
   }
 

@@ -22,7 +22,7 @@ import SDGCornerstoneLocalizations
 /// An hour of the Gregorian day.
 public struct GregorianHour: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
   ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent,
-  RawRepresentableCalendarComponent, TextualPlaygroundDisplay
+  RawRepresentableCalendarComponent & _StrideableIfNotInherited, TextualPlaygroundDisplay
 {
 
   // MARK: - Static Properties

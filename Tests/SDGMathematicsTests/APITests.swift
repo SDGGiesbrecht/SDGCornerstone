@@ -314,7 +314,7 @@ class APITests: TestCase {
     #endif
   }
 
-  enum OrderedEnumerationExample: Int, OrderedEnumeration {
+  enum OrderedEnumerationExample: Int, OrderedEnumeration & _ComparableIfNotInherited {
     typealias RawValue = Int
     case a
     case b
@@ -427,19 +427,21 @@ class APITests: TestCase {
     #endif
   }
 
-  struct RealArithmeticExample: RealArithmetic {
+  struct RealArithmeticExample: RealArithmetic & _ComparableIfNotInherited {
     var value: Double
     init(_ value: Double) {
       self.value = value
     }
-    static func == (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample)
-      -> Bool
-    {
+    static func == (
+      precedingValue: RealArithmeticExample,
+      followingValue: RealArithmeticExample
+    ) -> Bool {
       return precedingValue.value == followingValue.value
     }
-    static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample)
-      -> Bool
-    {
+    static func < (
+      precedingValue: RealArithmeticExample,
+      followingValue: RealArithmeticExample
+    ) -> Bool {
       return precedingValue.value < followingValue.value
     }
     typealias Vector = RealArithmeticExample

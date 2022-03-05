@@ -20,9 +20,9 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable,
-  Encodable, EnumerationCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month,
-  TextualPlaygroundDisplay
+public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarComponent
+    & _StrideableIfNotInherited, Decodable, Encodable, EnumerationCalendarComponent,
+  ICalendarComponent, ISOCalendarComponent, Month, TextualPlaygroundDisplay
 {
 
   // MARK: - Cases
@@ -319,5 +319,19 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
 
   // MARK: - PointProtocol
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(PointProtocol.Vector)
+  /// The type to be used as a vector.
   public typealias Vector = RawValue
+
+  // MARK: - Strideable
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  /// Returns the month advanced by the provided stride.
+  ///
+  /// - Parameters:
+  ///   - n: The desired stride.
+  public func advanced(by n: Int) -> GregorianMonth {
+    return Self(rawValue: rawValue + n)!
+  }
 }

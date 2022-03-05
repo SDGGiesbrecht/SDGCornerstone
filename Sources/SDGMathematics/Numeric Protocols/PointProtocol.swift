@@ -19,6 +19,8 @@ import SDGControlFlow
 /// - Note: Unlike `Strideable`, types conforming to `PointProtocol` do not need to conform to `Comparable`, allowing conformance by two‐dimensional points, etc.
 public protocol PointProtocol: Decodable, Encodable, Equatable {
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // @documentation(PointProtocol.Vector)
   /// The type to be used as a vector.
   associatedtype Vector: Negatable
 

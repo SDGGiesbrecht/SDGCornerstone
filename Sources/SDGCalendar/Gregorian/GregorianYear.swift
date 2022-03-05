@@ -50,7 +50,7 @@ public typealias GregorianischesJahr = GregorianYear
 /// ```
 public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalendarComponent,
   ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent,
-  RawRepresentableCalendarComponent, Year
+  RawRepresentableCalendarComponent & _StrideableIfNotInherited, Year
 {
 
   // MARK: - Static Properties

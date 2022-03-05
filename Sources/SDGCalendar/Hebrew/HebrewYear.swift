@@ -17,7 +17,7 @@ import SDGText
 
 /// A Hebrew year.
 public struct HebrewYear: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
-  RawRepresentableCalendarComponent, Year
+  RawRepresentableCalendarComponent & _StrideableIfNotInherited, Year
 {
 
   // MARK: - Static Properties

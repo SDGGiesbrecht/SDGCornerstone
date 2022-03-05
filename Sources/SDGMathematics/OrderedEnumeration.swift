@@ -17,7 +17,7 @@ import SDGControlFlow
 /// An enumeration whose cases have a defined order.
 ///
 /// - Requires: `allCases` must have stable indices, and should be O(1).
-public protocol OrderedEnumeration: CaseIterable, Comparable, Hashable
+public protocol OrderedEnumeration: CaseIterable, _ComparableUnlessBrokenByPlatform, Hashable
 where AllCases: BidirectionalCollection {
 
   /// Increments to the next case.
@@ -183,6 +183,12 @@ extension OrderedEnumeration where Self: RawRepresentable, Self: Strideable {
 
   // MARK: - Comparable
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  /// Compares two values.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The preceding value.
+  ///   - followingValue: The following value.
   @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
     return precedingValue.isLessThan(followingValue)
   }

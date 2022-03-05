@@ -13,7 +13,8 @@
  */
 
 /// An angle.
-public struct Angle<Scalar: RealArithmetic>: CodableViaMeasurement {
+public struct Angle<Scalar>: CodableViaMeasurement & _ComparableIfNotInherited
+where Scalar: RealArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Initialization
 
@@ -137,10 +138,23 @@ public struct Angle<Scalar: RealArithmetic>: CodableViaMeasurement {
 
   // MARK: - Measurement
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(Measurement.init(rawValue:))
+  /// Creates a measurement from a raw value in undefined but consistent units.
+  ///
+  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
+  ///
+  /// - Parameters:
+  ///     - rawValue: The raw value.
   @inlinable public init(rawValue: Scalar) {
     inRadians = rawValue
   }
 
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(Measurement.rawValue)
+  /// A raw value in undefined but consistent units.
+  ///
+  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
   @inlinable public var rawValue: Scalar {
     get {
       return inRadians
@@ -151,7 +165,7 @@ public struct Angle<Scalar: RealArithmetic>: CodableViaMeasurement {
   }
 }
 
-extension RealArithmetic {
+extension _ComparableIfNotInherited where Self: RealArithmetic {
 
   // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
   // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.
