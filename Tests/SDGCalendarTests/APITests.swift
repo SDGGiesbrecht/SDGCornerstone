@@ -27,8 +27,12 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
+    #warning("Debugging...")
+    _ = GregorianDay.meanDuration
+    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+    #endif
 
     XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
     XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
