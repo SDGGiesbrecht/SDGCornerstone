@@ -252,9 +252,10 @@ class APITests: TestCase {
 
   func testCalendarComponent() {
     #warning("Debugging...")
-    _ = (1 as FloatMax)
-    _ = (1 as FloatMax).standInDays
-    /*_ = (1 as FloatMax).days
+    let one = (1 as FloatMax)
+    _ = StandInCalendarInterval(days: one)
+    /*_ = one.standInDays
+    _ = one.days
     _ = GregorianDay.duration
     _ = GregorianDay.meanDuration*/
     #if !PLATFORM_SUFFERS_SR_15734
