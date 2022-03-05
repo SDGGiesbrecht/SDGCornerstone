@@ -24,11 +24,236 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
+import SDGControlFlow
+import SDGText
+import SDGLocalization
+private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
+private let secondsPerDay =
+  GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour
+  × GregorianSecond.secondsPerMinute
+private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
+private typealias Measurement = SDGMathematics.Measurement
+public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
+    & _ComparableIfNotInherited, TextualPlaygroundDisplay
+where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
+
+  // MARK: - Initialization
+
+  /// Creates an interval from a number of Gregorian leap year cycles.
+  ///
+  /// - Parameters:
+  ///     - gregorianLeapYearCycles: The number of leap year cycles.
+  public init(gregorianLeapYearCycles: Scalar) {
+    self.inGregorianLeapYearCycles = gregorianLeapYearCycles
+  }
+
+  /// Creates an interval from a number of weeks.
+  ///
+  /// - Parameters:
+  ///     - weeks: The number of weeks.
+  public init(weeks: Scalar) {
+    self.inWeeks = weeks
+  }
+
+  /// Creates an interval from a number of days.
+  ///
+  /// - Parameters:
+  ///     - days: The number of days.
+  public init(days: Scalar) {
+    self.inDays = days
+  }
+
+  /// Creates an interval from a number of hours.
+  ///
+  /// - Parameters:
+  ///     - hours: The number of hours.
+  public init(hours: Scalar) {
+    self.inHours = hours
+  }
+
+  /// Creates an interval from a number of minutes.
+  ///
+  /// - Parameters:
+  ///     - minutes: The number of minutes.
+  public init(minutes: Scalar) {
+    self.inMinutes = minutes
+  }
+
+  /// Creates an interval from a number of Hebrew parts.
+  ///
+  /// - Parameters:
+  ///     - hebrewParts: The number of parts.
+  public init(hebrewParts: Scalar) {
+    self.inHebrewParts = hebrewParts
+  }
+
+  /// Creates an interval from a number of seconds.
+  ///
+  /// - Parameters:
+  ///     - seconds: The number of seconds.
+  public init(seconds: Scalar) {
+    self.inSeconds = seconds
+  }
+
+  // MARK: - Properties
+
+  private var inUnits: Scalar = Scalar.zero
+
+  internal var unitsPerGregorianLeapYearCycle: Scalar {
+    return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)
+  }
+  /// The numeric value in Gregorian leap year cycles.
+  public var inGregorianLeapYearCycles: Scalar {
+    get {
+      return inUnits ÷ unitsPerGregorianLeapYearCycle
+    }
+    set {
+      inUnits = newValue × unitsPerGregorianLeapYearCycle
+    }
+  }
+
+  internal var unitsPerWeek: Scalar {
+    return unitsPerDay × Scalar(HebrewWeekday.daysPerWeek)
+  }
+  /// The numeric value in weeks.
+  public var inWeeks: Scalar {
+    get {
+      return inUnits ÷ unitsPerWeek
+    }
+    set {
+      inUnits = newValue × unitsPerWeek
+    }
+  }
+
+  internal var unitsPerDay: Scalar {
+    return Scalar(integralUnitsPerDay)
+  }
+  /// The numeric value in days.
+  public var inDays: Scalar {
+    get {
+      return inUnits ÷ unitsPerDay
+    }
+    set {
+      inUnits = newValue × unitsPerDay
+    }
+  }
+
+  internal var unitsPerHour: Scalar {
+    return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
+  }
+  /// The numeric value in hours.
+  public var inHours: Scalar {
+    get {
+      return inUnits ÷ unitsPerHour
+    }
+    set {
+      inUnits = newValue × unitsPerHour
+    }
+  }
+
+  internal var unitsPerMinute: Scalar {
+    return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
+  }
+  /// The numeric value in minutes.
+  public var inMinutes: Scalar {
+    get {
+      return inUnits ÷ unitsPerMinute
+    }
+    set {
+      inUnits = newValue × unitsPerMinute
+    }
+  }
+
+  internal var unitsPerHebrewPart: Scalar {
+    return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
+  }
+  /// The numeric value in Hebrew parts.
+  public var inHebrewParts: Scalar {
+    get {
+      return inUnits ÷ unitsPerHebrewPart
+    }
+    set {
+      inUnits = newValue × unitsPerHebrewPart
+    }
+  }
+
+  internal var unitsPerSecond: Scalar {
+    return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
+  }
+  /// The numeric value in seconds.
+  public var inSeconds: Scalar {
+    get {
+      return inUnits ÷ unitsPerSecond
+    }
+    set {
+      inUnits = newValue × unitsPerSecond
+    }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    return ""
+  }
+
+  // MARK: - Decodable
+
+  public init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    let units = try container.decode(Scalar.self)
+    let unitsPerDay = try container.decode(Int.self)
+    self = StandInCalendarInterval(days: units ÷ Scalar(unitsPerDay))
+  }
+
+  // MARK: - Encodable
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.unkeyedContainer()
+    try container.encode(inUnits)
+    try container.encode(integralUnitsPerDay)
+  }
+
+  // MARK: - Measurement
+
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(Measurement.init(rawValue:))
+  /// Creates a measurement from a raw value in undefined but consistent units.
+  ///
+  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
+  ///
+  /// - Parameters:
+  ///     - rawValue: The raw value.
+  public init(rawValue: Scalar) {
+    inUnits = rawValue
+  }
+
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
+  // #documentation(Measurement.rawValue)
+  /// A raw value in undefined but consistent units.
+  ///
+  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
+  public var rawValue: Scalar {
+    get {
+      return inUnits
+    }
+    set {
+      inUnits = newValue
+    }
+  }
+}
+extension RationalArithmetic {
+  /// Returns a calendar interval in days.
+  public var standInDays: StandInCalendarInterval<Self> {
+    return StandInCalendarInterval(days: self)
+  }
+}
+
 class APITests: TestCase {
 
   func testCalendarComponent() {
     #warning("Debugging...")
     _ = (1 as FloatMax)
+    _ = (1 as FloatMax).standInDays
     /*_ = (1 as FloatMax).days
     _ = GregorianDay.duration
     _ = GregorianDay.meanDuration*/
