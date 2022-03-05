@@ -28,8 +28,9 @@ class APITests: TestCase {
 
   func testCalendarComponent() {
     #warning("Debugging...")
-    _ = GregorianDay.duration
-    //_ = GregorianDay.meanDuration
+    _ = (1 as FloatMax).days
+    /*_ = GregorianDay.duration
+    _ = GregorianDay.meanDuration*/
     #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
