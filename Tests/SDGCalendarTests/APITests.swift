@@ -35,7 +35,7 @@ private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 private typealias Measurement = SDGMathematics.Measurement
 public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
     & _ComparableIfNotInherited, TextualPlaygroundDisplay
-where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
+where Scalar: RationalArithmetic {
 
   // MARK: - Initialization
 
