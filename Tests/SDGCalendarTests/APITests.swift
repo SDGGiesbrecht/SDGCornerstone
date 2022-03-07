@@ -36,9 +36,8 @@ private typealias Measurement = SDGMathematics.Measurement
 // public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
-public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
-    & _ComparableIfNotInherited, TextualPlaygroundDisplay
-where Scalar: RationalArithmetic {
+public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, TextualPlaygroundDisplay
+where Scalar: ExpressibleByFloatLiteral, Scalar: IntegralArithmetic {
 
   // MARK: - Initialization
 
@@ -108,7 +107,8 @@ where Scalar: RationalArithmetic {
   /// The numeric value in Gregorian leap year cycles.
   public var inGregorianLeapYearCycles: Scalar {
     get {
-      return inUnits ÷ unitsPerGregorianLeapYearCycle
+      return 1
+      //return inUnits ÷ unitsPerGregorianLeapYearCycle
     }
     set {
       inUnits = newValue × unitsPerGregorianLeapYearCycle
@@ -121,7 +121,8 @@ where Scalar: RationalArithmetic {
   /// The numeric value in weeks.
   public var inWeeks: Scalar {
     get {
-      return inUnits ÷ unitsPerWeek
+      return 1
+      //return inUnits ÷ unitsPerWeek
     }
     set {
       inUnits = newValue × unitsPerWeek
@@ -134,7 +135,8 @@ where Scalar: RationalArithmetic {
   /// The numeric value in days.
   public var inDays: Scalar {
     get {
-      return inUnits ÷ unitsPerDay
+      return 1
+      //return inUnits ÷ unitsPerDay
     }
     set {
       inUnits = newValue × unitsPerDay
@@ -142,12 +144,14 @@ where Scalar: RationalArithmetic {
   }
 
   internal var unitsPerHour: Scalar {
-    return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
+    return 1
+    //return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
   }
   /// The numeric value in hours.
   public var inHours: Scalar {
     get {
-      return inUnits ÷ unitsPerHour
+      return 1
+      //return inUnits ÷ unitsPerHour
     }
     set {
       inUnits = newValue × unitsPerHour
@@ -155,12 +159,14 @@ where Scalar: RationalArithmetic {
   }
 
   internal var unitsPerMinute: Scalar {
-    return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
+    return 1
+    //return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
   }
   /// The numeric value in minutes.
   public var inMinutes: Scalar {
     get {
-      return inUnits ÷ unitsPerMinute
+      return 1
+      //return inUnits ÷ unitsPerMinute
     }
     set {
       inUnits = newValue × unitsPerMinute
@@ -168,12 +174,14 @@ where Scalar: RationalArithmetic {
   }
 
   internal var unitsPerHebrewPart: Scalar {
-    return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
+    return 1
+    //return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
   }
   /// The numeric value in Hebrew parts.
   public var inHebrewParts: Scalar {
     get {
-      return inUnits ÷ unitsPerHebrewPart
+      return 1
+      //return inUnits ÷ unitsPerHebrewPart
     }
     set {
       inUnits = newValue × unitsPerHebrewPart
@@ -181,12 +189,14 @@ where Scalar: RationalArithmetic {
   }
 
   internal var unitsPerSecond: Scalar {
-    return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
+    return 1
+    //return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
   }
   /// The numeric value in seconds.
   public var inSeconds: Scalar {
     get {
-      return inUnits ÷ unitsPerSecond
+      return 1
+      //return inUnits ÷ unitsPerSecond
     }
     set {
       inUnits = newValue × unitsPerSecond
@@ -205,7 +215,7 @@ where Scalar: RationalArithmetic {
     var container = try decoder.unkeyedContainer()
     let units = try container.decode(Scalar.self)
     let unitsPerDay = try container.decode(Int.self)
-    self = StandInCalendarInterval(days: units ÷ Scalar(unitsPerDay))
+    self = StandInCalendarInterval(days: 1)//units ÷ Scalar(unitsPerDay))
   }
 
   // MARK: - Encodable
