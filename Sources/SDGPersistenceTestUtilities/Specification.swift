@@ -129,7 +129,6 @@ public func compare(
         let specificationString = immutableSpecificationString
       #endif
 
-      #if false
       #if os(Windows)
         // On Windows, Git may have butchered the newlines during checkout.
         specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
@@ -139,6 +138,7 @@ public func compare(
         return  // Passing
       }
 
+      #if false
       // These need to be random access collections.
       let stringLines: [String] = string.lines
         .map({ String($0.line) + String($0.newline) })
