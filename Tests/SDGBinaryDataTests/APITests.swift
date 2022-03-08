@@ -96,7 +96,6 @@ class APITests: TestCase {
     var i: Int = 0
     //i −= 1
     var w = Wrapper(i)
-    w.exercise()
     
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
@@ -112,7 +111,4 @@ struct Wrapper<I> where I: IntFamily {
     self.i = i
   }
   var i: I
-  mutating func exercise() {
-    i −= 1
-  }
 }
