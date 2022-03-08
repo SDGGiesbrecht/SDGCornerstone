@@ -105,7 +105,9 @@ class APITests: TestCase {
   }
 }
 
-struct Wrapper<I> where I: IntFamily {
+protocol IProtocol: CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {}
+extension Int: IProtocol {}
+struct Wrapper<I> where I: IProtocol {
   init(_ i: I) {
     self.i = i
   }
