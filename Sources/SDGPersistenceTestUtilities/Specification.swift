@@ -100,6 +100,8 @@ public func compare(
   file: StaticString = #filePath,
   line: UInt = #line
 ) {
+  #warning("Debugging...")
+  #if false
   purgingAutoreleased {
 
     if overwriteSpecificationInsteadOfFailing {
@@ -201,4 +203,5 @@ public func compare(
       )
     #endif
   }
+  #endif
 }
