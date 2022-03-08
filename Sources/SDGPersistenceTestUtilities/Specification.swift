@@ -114,7 +114,6 @@ public func compare(
       return
     }
     
-    #if false
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       guard let immutableSpecificationString = try? String(from: specification) else {
         do {
@@ -130,6 +129,7 @@ public func compare(
         let specificationString = immutableSpecificationString
       #endif
 
+      #if false
       #if os(Windows)
         // On Windows, Git may have butchered the newlines during checkout.
         specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
