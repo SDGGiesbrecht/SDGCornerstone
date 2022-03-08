@@ -37,7 +37,7 @@ private typealias Measurement = SDGMathematics.Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, TextualPlaygroundDisplay
-where Scalar: IntegralArithmetic {
+where Scalar: Negatable, Scalar: SignedNumeric, Scalar: WholeArithmetic {
 
   // MARK: - Initialization
 
@@ -102,7 +102,8 @@ where Scalar: IntegralArithmetic {
   private var inUnits: Scalar = Scalar.zero
 
   internal var unitsPerGregorianLeapYearCycle: Scalar {
-    return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)
+    return 1
+    //return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)
   }
   /// The numeric value in Gregorian leap year cycles.
   public var inGregorianLeapYearCycles: Scalar {
@@ -116,7 +117,8 @@ where Scalar: IntegralArithmetic {
   }
 
   internal var unitsPerWeek: Scalar {
-    return unitsPerDay × Scalar(HebrewWeekday.daysPerWeek)
+    return 0
+    //return unitsPerDay × Scalar(HebrewWeekday.daysPerWeek)
   }
   /// The numeric value in weeks.
   public var inWeeks: Scalar {
@@ -130,7 +132,8 @@ where Scalar: IntegralArithmetic {
   }
 
   internal var unitsPerDay: Scalar {
-    return Scalar(integralUnitsPerDay)
+    return 1
+    //return Scalar(integralUnitsPerDay)
   }
   /// The numeric value in days.
   public var inDays: Scalar {
