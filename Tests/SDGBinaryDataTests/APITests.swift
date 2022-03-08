@@ -94,8 +94,8 @@ class APITests: TestCase {
     #warning("Debugging...")
     var i: Int = 0
     //i −= 1
-    //let w = Wrapper(i)
-    //w.exercise()
+    let w = Wrapper(i)
+    w.exercise()
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
