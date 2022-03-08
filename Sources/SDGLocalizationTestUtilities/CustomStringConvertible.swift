@@ -73,7 +73,6 @@ public func testCustomStringConvertibleConformance<T, L>(
   #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     try? FileManager.default.move(deprecated, to: specification)
   #endif
-  #if false
   SDGPersistenceTestUtilities.compare(
     report,
     against: specification,
@@ -81,7 +80,6 @@ public func testCustomStringConvertibleConformance<T, L>(
     file: file,
     line: line
   )
-  #endif
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription
