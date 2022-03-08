@@ -102,7 +102,6 @@ public func compare(
 ) {
   #warning("Debugging...")
   purgingAutoreleased {
-    #if false
 
     if overwriteSpecificationInsteadOfFailing {
       do {
@@ -114,7 +113,8 @@ public func compare(
       }
       return
     }
-
+    
+    #if false
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       guard let immutableSpecificationString = try? String(from: specification) else {
         do {
