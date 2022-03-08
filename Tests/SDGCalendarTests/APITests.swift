@@ -37,7 +37,7 @@ private typealias Measurement = SDGMathematics.Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, TextualPlaygroundDisplay
-where Scalar: ExpressibleByFloatLiteral, Scalar: IntegralArithmetic {
+where Scalar: IntegralArithmetic {
 
   // MARK: - Initialization
 
@@ -62,7 +62,6 @@ where Scalar: ExpressibleByFloatLiteral, Scalar: IntegralArithmetic {
   /// - Parameters:
   ///     - days: The number of days.
   public init(days: Scalar) {
-    self.inUnits = 1
     //self.inDays = days
   }
 
