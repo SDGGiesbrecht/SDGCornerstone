@@ -43,7 +43,6 @@ public func testCustomStringConvertibleConformance<T, L>(
 ) where T: CustomStringConvertible, L: InputLocalization {
   #warning("Debugging...")
   _ = instance.description
-  #if false
   var report = ""
   for localization in localizations.allCases {
     if let icon = localization.icon {
@@ -59,6 +58,7 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
+  #if false
   func fileName(typeName: String) -> URL {
     testSpecificationDirectory(file)
       .appendingPathComponent("CustomStringConvertible")
