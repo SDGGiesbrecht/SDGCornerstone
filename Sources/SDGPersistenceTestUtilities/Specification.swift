@@ -138,7 +138,6 @@ public func compare(
         return  // Passing
       }
 
-      #if false
       // These need to be random access collections.
       let stringLines: [String] = string.lines
         .map({ String($0.line) + String($0.newline) })
@@ -146,6 +145,7 @@ public func compare(
         .map({ String($0.line) + String($0.newline) })
       let differences = stringLines.changes(from: specificationLines)
 
+      #if false
       var removals: Set<Int> = []
       var inserts: [Int: String] = [:]
       for difference in differences {
