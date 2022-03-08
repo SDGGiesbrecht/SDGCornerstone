@@ -58,7 +58,6 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
-  #if false
   func fileName(typeName: String) -> URL {
     testSpecificationDirectory(file)
       .appendingPathComponent("CustomStringConvertible")
@@ -74,6 +73,7 @@ public func testCustomStringConvertibleConformance<T, L>(
   #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     try? FileManager.default.move(deprecated, to: specification)
   #endif
+  #if false
   SDGPersistenceTestUtilities.compare(
     report,
     against: specification,
