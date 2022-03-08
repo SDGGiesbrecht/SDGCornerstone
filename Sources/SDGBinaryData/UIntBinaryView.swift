@@ -99,10 +99,13 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   // MARK: - CustomStringConvertible
 
   public var description: String {
+    return ""
+    #if false
     let bits = self.map { bit in
       return bit ? "1" : "0"
     }
     return bits.joined()
+    #endif
   }
 }
 
