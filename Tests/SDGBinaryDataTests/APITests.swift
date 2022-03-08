@@ -25,6 +25,9 @@ import SDGXCTestUtilities
 import SDGMathematicsTestUtilities
 import SDGLocalizationTestUtilities
 
+#warning("Debugging...")
+import SDGMathematics
+
 class APITests: TestCase {
 
   func testData() {
@@ -90,6 +93,8 @@ class APITests: TestCase {
     forDescription.binary[0] = true
     #warning("Debugging...")
     _ = forDescription.binary.description
+    var i: Int = 0
+    i −= 1
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
