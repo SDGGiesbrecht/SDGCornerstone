@@ -94,7 +94,8 @@ class APITests: TestCase {
     #warning("Debugging...")
     _ = forDescription.binary.description
     var i: Int = 0
-    i −= 1
+    //i −= 1
+    let w = Wrapper(i)
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
@@ -102,4 +103,11 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
   }
+}
+
+struct Wrapper<I> where I: IntFamily {
+  init(_ i: I) {
+    self.i = i
+  }
+  var i: I
 }
