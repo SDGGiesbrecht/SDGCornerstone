@@ -62,7 +62,8 @@ where Scalar: ExpressibleByFloatLiteral, Scalar: IntegralArithmetic {
   /// - Parameters:
   ///     - days: The number of days.
   public init(days: Scalar) {
-    self.inDays = days
+    self.inUnits = 1
+    //self.inDays = days
   }
 
   /// Creates an interval from a number of hours.
