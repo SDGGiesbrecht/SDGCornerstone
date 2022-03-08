@@ -166,8 +166,8 @@ public func compare(
           originalOffset += 1
         }
 
-#if false
         if originalOffset ∈ removals {
+#if false
           reportArray.append(
             "− "
               + specificationLines[
@@ -176,17 +176,21 @@ public func compare(
           )
           resultOffset −= 1
           continuingKeptRange = false
+          #endif
         } else if let insert = inserts[resultOffset] {
+#if false
           reportArray.append("+ " + insert)
           originalOffset −= 1
           continuingKeptRange = false
+          #endif
         } else {
+#if false
           if ¬continuingKeptRange {
             reportArray.append("  [...]\n")
           }
           continuingKeptRange = true
+          #endif
         }
-        #endif
       }
       let report = reportArray.joined()
 
