@@ -175,11 +175,9 @@ public func compare(
           resultOffset −= 1
           continuingKeptRange = false
         } else if let insert = inserts[resultOffset] {
-          #if false
           reportArray.append("+ " + insert)
           originalOffset −= 1
           continuingKeptRange = false
-          #endif
         } else {
           #if false
           if ¬continuingKeptRange {
