@@ -179,12 +179,10 @@ public func compare(
           originalOffset −= 1
           continuingKeptRange = false
         } else {
-          #if false
           if ¬continuingKeptRange {
             reportArray.append("  [...]\n")
           }
           continuingKeptRange = true
-          #endif
         }
       }
       let report = reportArray.joined()
