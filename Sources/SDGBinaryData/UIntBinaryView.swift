@@ -102,10 +102,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     let bits = self.lazy.map { bit in
       return bit ? "1" : "0"
     }
-    return ""
-    #if false
     return bits.joined()
-    #endif
   }
 }
 
