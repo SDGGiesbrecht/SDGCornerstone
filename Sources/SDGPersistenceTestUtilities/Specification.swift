@@ -156,7 +156,6 @@ public func compare(
         }
       }
 
-#if false
       var reportArray: [String] = []
       var resultOffset = 0
       var originalOffset = 0
@@ -189,6 +188,7 @@ public func compare(
       }
       let report = reportArray.joined()
 
+#if false
       fail(
         String(
           UserFacing<StrictString, APILocalization>({ localization in
