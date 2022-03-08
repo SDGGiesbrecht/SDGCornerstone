@@ -105,7 +105,7 @@ class APITests: TestCase {
   }
 }
 
-protocol IProtocol: CustomReflectable, CVarArg, FixedWidthInteger, Negatable, WholeArithmetic, MirrorPath, SignedInteger {}
+protocol IProtocol: CustomReflectable, CVarArg, FixedWidthInteger, GenericAdditiveArithmetic, WholeArithmetic, MirrorPath, SignedInteger {}
 extension Int: IProtocol {}
 struct Wrapper<I> where I: IProtocol {
   init(_ i: I) {
