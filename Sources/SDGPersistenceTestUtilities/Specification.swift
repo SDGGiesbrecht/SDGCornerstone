@@ -145,7 +145,6 @@ public func compare(
         .map({ String($0.line) + String($0.newline) })
       let differences = stringLines.changes(from: specificationLines)
 
-      #if false
       var removals: Set<Int> = []
       var inserts: [Int: String] = [:]
       for difference in differences {
@@ -157,6 +156,7 @@ public func compare(
         }
       }
 
+#if false
       var reportArray: [String] = []
       var resultOffset = 0
       var originalOffset = 0
