@@ -92,11 +92,9 @@ class APITests: TestCase {
     var forDescription: UInt8 = 0
     forDescription.binary[0] = true
     #warning("Debugging...")
-    _ = forDescription.binary.description
     var i: Int = 0
     //i −= 1
     var w = Wrapper(i)
-    
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
