@@ -81,9 +81,9 @@ public func testCustomStringConvertibleConformance<T, L>(
     file: file,
     line: line
   )
+  #endif
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription
   }
-  #endif
 }
