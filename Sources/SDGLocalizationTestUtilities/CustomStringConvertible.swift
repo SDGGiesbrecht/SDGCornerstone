@@ -41,8 +41,6 @@ public func testCustomStringConvertibleConformance<T, L>(
   file: StaticString = #filePath,
   line: UInt = #line
 ) where T: CustomStringConvertible, L: InputLocalization {
-  #warning("Debugging...")
-  _ = instance.description
   var report = ""
   for localization in localizations.allCases {
     if let icon = localization.icon {
