@@ -166,6 +166,7 @@ public func compare(
           originalOffset += 1
         }
 
+#if false
         if originalOffset ∈ removals {
           reportArray.append(
             "− "
@@ -185,6 +186,7 @@ public func compare(
           }
           continuingKeptRange = true
         }
+        #endif
       }
       let report = reportArray.joined()
 
