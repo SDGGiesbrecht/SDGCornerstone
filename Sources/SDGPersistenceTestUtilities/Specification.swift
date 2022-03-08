@@ -101,8 +101,8 @@ public func compare(
   line: UInt = #line
 ) {
   #warning("Debugging...")
-  #if false
   purgingAutoreleased {
+    #if false
 
     if overwriteSpecificationInsteadOfFailing {
       do {
@@ -202,6 +202,6 @@ public func compare(
         line: line
       )
     #endif
+    #endif
   }
-  #endif
 }
