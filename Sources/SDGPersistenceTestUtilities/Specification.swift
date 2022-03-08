@@ -100,7 +100,6 @@ public func compare(
   file: StaticString = #filePath,
   line: UInt = #line
 ) {
-  #warning("Debugging...")
   purgingAutoreleased {
 
     if overwriteSpecificationInsteadOfFailing {
@@ -178,13 +177,13 @@ public func compare(
           #endif
           continuingKeptRange = false
         } else if let insert = inserts[resultOffset] {
-#if false
+          #if false
           reportArray.append("+ " + insert)
           originalOffset −= 1
           continuingKeptRange = false
           #endif
         } else {
-#if false
+          #if false
           if ¬continuingKeptRange {
             reportArray.append("  [...]\n")
           }
