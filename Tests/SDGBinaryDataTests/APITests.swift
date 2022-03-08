@@ -94,7 +94,8 @@ class APITests: TestCase {
     #warning("Debugging...")
     var i: Int = 0
     //i −= 1
-    var w = Wrapper(i)
+    //let w = Wrapper(i)
+    //w.exercise()
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
@@ -109,4 +110,8 @@ struct Wrapper<I> where I: IntFamily {
     self.i = i
   }
   var i: I
+  func exercise() {
+    var copy = i
+    copy −= i
+  }
 }
