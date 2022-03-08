@@ -113,7 +113,7 @@ public func compare(
       }
       return
     }
-    
+
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       guard let immutableSpecificationString = try? String(from: specification) else {
         do {
