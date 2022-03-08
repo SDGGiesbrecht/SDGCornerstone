@@ -90,13 +90,11 @@ class APITests: TestCase {
     forDescription.binary[0] = true
     #warning("Debugging...")
     _ = forDescription.binary.description
-    #if false
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
         uniqueTestName: "1st",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
   }
 }
