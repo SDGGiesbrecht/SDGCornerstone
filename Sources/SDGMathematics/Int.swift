@@ -56,9 +56,7 @@ extension IntFamily {
   }
 
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-    #if false
     precedingValue -= followingValue  // @exempt(from: unicode)
-    #endif
   }
 
   // MARK: - WholeArithmetic
