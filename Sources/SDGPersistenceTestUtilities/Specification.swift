@@ -172,9 +172,7 @@ public func compare(
                 specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
               ]
           )
-          #if false
           resultOffset −= 1
-          #endif
           continuingKeptRange = false
         } else if let insert = inserts[resultOffset] {
           #if false
