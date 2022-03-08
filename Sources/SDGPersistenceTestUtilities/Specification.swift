@@ -187,7 +187,6 @@ public func compare(
       }
       let report = reportArray.joined()
 
-      #if false
       fail(
         String(
           UserFacing<StrictString, APILocalization>({ localization in
@@ -200,7 +199,6 @@ public func compare(
         file: file,
         line: line
       )
-      #endif
     #endif
   }
 }
