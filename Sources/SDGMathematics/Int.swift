@@ -158,6 +158,7 @@ extension Int: IntFamily & _WholeArithmeticRandomness {
   }
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
   // #documentation(SDGCornerstone.Subtractible.−(_:_:))
   /// Returns the difference of the preceding value minus the following value.
   ///
