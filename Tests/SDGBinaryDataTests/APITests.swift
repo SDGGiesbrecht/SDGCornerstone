@@ -25,9 +25,6 @@ import SDGXCTestUtilities
 import SDGMathematicsTestUtilities
 import SDGLocalizationTestUtilities
 
-#warning("Debugging...")
-import SDGMathematics
-
 class APITests: TestCase {
 
   func testData() {
@@ -91,29 +88,11 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     forDescription.binary[0] = true
-    #warning("Debugging...")
-    var i: Int = 0
-    //i −= 1
-    let w = Wrapper(i)
-    w.exercise()
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
         uniqueTestName: "1st",
         overwriteSpecificationInsteadOfFailing: false
       )
-  }
-}
-
-protocol IProtocol: CustomReflectable, CVarArg, FixedWidthInteger, WholeArithmetic {}
-extension Int: IProtocol {}
-struct Wrapper<I> where I: IProtocol {
-  init(_ i: I) {
-    self.i = i
-  }
-  var i: I
-  func exercise() {
-    var copy = i
-    copy −= i
   }
 }

@@ -851,7 +851,7 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
     // #workaround(Swift 5.5.2, SR‐15734: Windows miscompiles certain protocols.)
-    .define("PLATFORM_SUFFERS_SR_15734", .when(platforms: [.macOS, .windows])),
+    .define("PLATFORM_SUFFERS_SR_15734", .when(platforms: [.windows])),
     // #workaround(Windows suffers unexplained segmentation faults.)
     .define("PLATFORM_SUFFERS_SEGMENTATION_FAULTS", .when(platforms: [.windows])),
   ])
