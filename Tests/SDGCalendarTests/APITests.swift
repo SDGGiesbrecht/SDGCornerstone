@@ -37,7 +37,7 @@ private typealias Measurement = SDGMathematics.Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Encodable, TextualPlaygroundDisplay
-where Scalar: ExpressibleByIntegerLiteral {
+where Scalar: Decodable, Scalar: ExpressibleByIntegerLiteral {
 
   // MARK: - Initialization
 
