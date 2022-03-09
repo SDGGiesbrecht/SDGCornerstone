@@ -84,8 +84,8 @@ class APITests: TestCase {
     #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
-      let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
       #if !PLATFORM_SUFFERS_SR_15734
+        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
         XCTAssert(
           Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
             ≈ system.timeIntervalSinceReferenceDate,
