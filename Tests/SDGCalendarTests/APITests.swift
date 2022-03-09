@@ -33,11 +33,16 @@ private let secondsPerDay =
   × GregorianSecond.secondsPerMinute
 private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 private typealias Measurement = SDGMathematics.Measurement
+// public protocol RationalArithmetic: ExpressibleByFloatLiteral, IntegralArithmetic {
+public protocol StandInRationalArithmetic: ExpressibleByIntegerLiteral {
+  
+}
+extension FloatMax: StandInRationalArithmetic {}
 // public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Encodable, TextualPlaygroundDisplay
-where Scalar: Decodable, Scalar: Encodable, Scalar: ExpressibleByIntegerLiteral {
+where Scalar: StandInRationalArithmetic & _ComparableUnlessBrokenByPlatform {
 
   // MARK: - Initialization
 
@@ -245,7 +250,7 @@ where Scalar: Decodable, Scalar: Encodable, Scalar: ExpressibleByIntegerLiteral 
     }
   }
 }
-extension RationalArithmetic {
+extension _ComparableUnlessBrokenByPlatform where Self: StandInRationalArithmetic {
   /// Returns a calendar interval in days.
   public var standInDays: StandInCalendarInterval<Self> {
     return StandInCalendarInterval(days: self)
