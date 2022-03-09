@@ -42,7 +42,7 @@ extension FloatMax: StandInRationalArithmetic {}
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Encodable, TextualPlaygroundDisplay
-where Scalar: StandInRationalArithmetic & _ComparableUnlessBrokenByPlatform {
+where Scalar: StandInRationalArithmetic {
 
   // MARK: - Initialization
 
@@ -250,7 +250,7 @@ where Scalar: StandInRationalArithmetic & _ComparableUnlessBrokenByPlatform {
     }
   }
 }
-extension _ComparableUnlessBrokenByPlatform where Self: StandInRationalArithmetic {
+extension StandInRationalArithmetic {
   /// Returns a calendar interval in days.
   public var standInDays: StandInCalendarInterval<Self> {
     return StandInCalendarInterval(days: self)
