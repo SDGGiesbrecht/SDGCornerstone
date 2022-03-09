@@ -37,7 +37,7 @@ private typealias Measurement = SDGMathematics.Measurement
 public protocol StandInRationalArithmetic: ExpressibleByIntegerLiteral {
   
 }
-extension FloatMax: StandInRationalArithmetic {}
+extension Double: StandInRationalArithmetic {}
 // public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
@@ -261,7 +261,7 @@ class APITests: TestCase {
 
   func testCalendarComponent() {
     #warning("Debugging...")
-    let one = (1 as FloatMax)
+    let one = (1 as Double)
     _ = StandInCalendarInterval(days: one)
     /*_ = one.standInDays
     _ = one.days
