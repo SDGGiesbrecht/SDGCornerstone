@@ -351,9 +351,7 @@ class APITests: TestCase {
       static let validRange: Range<RawValue>? = nil
       var rawValue: RawValue
     }
-    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
-    #endif
   }
 
   func testGregorianDay() {
