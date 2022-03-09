@@ -36,8 +36,8 @@ private typealias Measurement = SDGMathematics.Measurement
 // public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
-public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, TextualPlaygroundDisplay
-where Scalar: ExpressibleByIntegerLiteral, Scalar: PointProtocol, Scalar: _StrideableUnlessBrokenByPlatform, Scalar: _NumericUnlessBrokenByPlatform, Scalar: NumericAdditiveArithmetic {
+public struct StandInCalendarInterval<Scalar>: Encodable, TextualPlaygroundDisplay
+where Scalar: ExpressibleByIntegerLiteral {
 
   // MARK: - Initialization
 
@@ -99,7 +99,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: PointProtocol, Scalar: _Strid
 
   // MARK: - Properties
 
-  private var inUnits: Scalar = Scalar.zero
+  private var inUnits: Scalar = 0
 
   internal var unitsPerGregorianLeapYearCycle: Scalar {
     return 1
@@ -212,21 +212,9 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: PointProtocol, Scalar: _Strid
     return ""
   }
 
-  // MARK: - Decodable
-
-  public init(from decoder: Decoder) throws {
-    var container = try decoder.unkeyedContainer()
-    let units = try container.decode(Scalar.self)
-    let unitsPerDay = try container.decode(Int.self)
-    self = StandInCalendarInterval(days: 1)//units ÷ Scalar(unitsPerDay))
-  }
-
   // MARK: - Encodable
 
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.unkeyedContainer()
-    try container.encode(inUnits)
-    try container.encode(integralUnitsPerDay)
   }
 
   // MARK: - Measurement
