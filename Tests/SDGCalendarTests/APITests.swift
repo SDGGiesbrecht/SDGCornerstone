@@ -37,7 +37,7 @@ private typealias Measurement = SDGMathematics.Measurement
 //   & _ComparableIfNotInherited, TextualPlaygroundDisplay
 // where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 public struct StandInCalendarInterval<Scalar>: Decodable, Encodable, TextualPlaygroundDisplay
-where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
+where Scalar: ExpressibleByIntegerLiteral, Scalar: FixedScaleOneDimensionalPoint, Scalar: _NumericUnlessBrokenByPlatform, Scalar: NumericAdditiveArithmetic {
 
   // MARK: - Initialization
 
@@ -112,7 +112,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerGregorianLeapYearCycle
     }
     set {
-      inUnits = newValue × unitsPerGregorianLeapYearCycle
+      //inUnits = newValue × unitsPerGregorianLeapYearCycle
     }
   }
 
@@ -127,7 +127,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerWeek
     }
     set {
-      inUnits = newValue × unitsPerWeek
+      //inUnits = newValue × unitsPerWeek
     }
   }
 
@@ -142,7 +142,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerDay
     }
     set {
-      inUnits = newValue × unitsPerDay
+      //inUnits = newValue × unitsPerDay
     }
   }
 
@@ -157,7 +157,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerHour
     }
     set {
-      inUnits = newValue × unitsPerHour
+      //inUnits = newValue × unitsPerHour
     }
   }
 
@@ -172,7 +172,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerMinute
     }
     set {
-      inUnits = newValue × unitsPerMinute
+      //inUnits = newValue × unitsPerMinute
     }
   }
 
@@ -187,7 +187,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerHebrewPart
     }
     set {
-      inUnits = newValue × unitsPerHebrewPart
+      //inUnits = newValue × unitsPerHebrewPart
     }
   }
 
@@ -202,7 +202,7 @@ where Scalar: ExpressibleByIntegerLiteral, Scalar: WholeArithmetic {
       //return inUnits ÷ unitsPerSecond
     }
     set {
-      inUnits = newValue × unitsPerSecond
+      //inUnits = newValue × unitsPerSecond
     }
   }
 
