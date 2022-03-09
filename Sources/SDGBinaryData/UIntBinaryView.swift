@@ -107,8 +107,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     /*for index in bits.indices {
       _ = index
     }*/
-    return ""
-    //return bits.joined()
+    //return ""
+    return bits.joined()
   }
 }
 
