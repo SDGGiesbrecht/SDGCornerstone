@@ -69,7 +69,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable public func index(after i: Index) -> Index {
-    _ = (1 as Index)
+    let one = (1 as Index)
+    _ = i.advanced(by: 1)
     return i
     //return i + (1 as Index)
   }
