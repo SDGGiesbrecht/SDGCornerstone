@@ -103,6 +103,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
       return bit ? "1" : "0"
     }
     let first = bits.startIndex
+    let next = index(after: first)
     /*for index in bits.indices {
       _ = index
     }*/
