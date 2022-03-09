@@ -681,7 +681,7 @@ class APITests: TestCase {
       var rawValue: RawValue
     }
     var component = TestComponent(1)
-    #if !PLATFORM_SUFFERS_SR_15734
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       component += 1
       XCTAssertEqual(component.rawValue, 2)
     #endif
