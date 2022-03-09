@@ -69,7 +69,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable public func index(after i: Index) -> Index {
-    return i + (1 as Index)
+    // #workaround(Swift 5.5.3, Should just be +, but for SR‐15734.)
+    return i.advanced(by: 1)
   }
 
   @inlinable internal func assertIndexExists(_ index: Index) {
@@ -99,7 +100,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   // MARK: - CustomStringConvertible
 
   public var description: String {
-    let bits = self.map { bit in
+    let bits = self.lazy.map { bit in
       return bit ? "1" : "0"
     }
     return bits.joined()
