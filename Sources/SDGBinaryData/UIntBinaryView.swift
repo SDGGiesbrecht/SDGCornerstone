@@ -69,10 +69,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   }
 
   @inlinable public func index(after i: Index) -> Index {
-    let one = (1 as Index)
-    _ = i.advanced(by: 1)
-    return i
-    //return i + (1 as Index)
+    return i.advanced(by: 1)
   }
 
   @inlinable internal func assertIndexExists(_ index: Index) {
