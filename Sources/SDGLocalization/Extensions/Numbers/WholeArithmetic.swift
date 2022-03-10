@@ -35,6 +35,8 @@ extension _NumericIfNotInherited where Self: WholeArithmetic {
   }
 
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    return ""
+    #if false
     let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
@@ -66,6 +68,7 @@ extension _NumericIfNotInherited where Self: WholeArithmetic {
     }
 
     return StrictString(digits.reversed())
+    #endif
   }
 
   internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
