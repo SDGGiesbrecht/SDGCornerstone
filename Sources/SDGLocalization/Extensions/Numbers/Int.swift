@@ -20,10 +20,7 @@ extension Int: TextConvertibleNumber {
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
-    return ""
-    #if false
     return integralDigits(thousandsSeparator: thousandsSeparator)
-    #endif
   }
 }
 
