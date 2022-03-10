@@ -31,10 +31,7 @@ extension Day {
   ///
   /// i.e. “1”, “2”, “3”...
   public func inEnglishDigits() -> StrictString {
-    return ""
-    #if false
     return ordinal.inDigits()
-    #endif
   }
 
   // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
@@ -76,6 +73,8 @@ extension Day {
   // MARK: - MarkupPlaygroundDisplay
 
   public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    return ""
+    #if false
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
@@ -90,5 +89,6 @@ extension Day {
         return SemanticMarkup(self.בעברית־בספרות())
       }
     }).resolved()
+    #endif
   }
 }
