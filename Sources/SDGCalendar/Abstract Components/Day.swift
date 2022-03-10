@@ -31,6 +31,7 @@ extension Day {
   ///
   /// i.e. “1”, “2”, “3”...
   public func inEnglishDigits() -> StrictString {
+    _ = ordinal
     return ""
     #if false
     return ordinal.inDigits()
