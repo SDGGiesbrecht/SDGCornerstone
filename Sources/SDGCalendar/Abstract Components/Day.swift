@@ -21,7 +21,8 @@ import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
 public protocol Day: ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
-where Vector: IntegerProtocol {}
+// #workaround(Swift 5.5.3, Should just be “Vector: IntegerProtocol”, but for SR‐15734)
+where Vector == Int {}
 
 extension Day {
 
