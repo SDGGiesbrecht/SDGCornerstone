@@ -73,22 +73,34 @@ extension Day {
   // MARK: - MarkupPlaygroundDisplay
 
   public func playgroundDescriptionMarkup() -> SemanticMarkup {
-    return ""
-    #if false
     return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
       switch localization {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+        return ""
+        #if false
         return SemanticMarkup(self.inEnglishDigits())
+        #endif
       case .deutschDeutschland:
+        return ""
+        #if false
         return SemanticMarkup(self.inDeutschenZiffern())
+        #endif
       case .françaisFrance:
+        return ""
+        #if false
         return self.enChiffresFrançais()
+        #endif
       case .ελληνικάΕλλάδα:
+        return ""
+        #if false
         return SemanticMarkup(self.σεΕλληνικάΨηφία())
+        #endif
       case .עברית־ישראל:
+        return ""
+        #if false
         return SemanticMarkup(self.בעברית־בספרות())
+        #endif
       }
     }).resolved()
-    #endif
   }
 }
