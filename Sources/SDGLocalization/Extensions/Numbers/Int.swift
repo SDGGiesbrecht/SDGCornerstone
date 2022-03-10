@@ -25,6 +25,18 @@ extension Int: TextConvertibleNumber {
     return integralDigits(thousandsSeparator: thousandsSeparator)
   }
 
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+    var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
+    return ""
+    #if false
+    if self.isNegative {
+      digits.prepend("−")
+    }
+    return digits
+    #endif
+  }
+
   // MARK: - WholeArithmetic
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
