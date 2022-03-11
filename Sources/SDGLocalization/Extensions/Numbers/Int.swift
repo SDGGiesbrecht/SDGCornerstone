@@ -56,10 +56,10 @@ extension Int: TextConvertibleNumber {
     let digitMapping = mapping(for: digitSet)
 
     var whole = (|self|).rounded(.towardZero)
-    var digits: [UnicodeScalar] = []
-    var position: Self = 0
     return ""
     #if false
+    var digits: [UnicodeScalar] = []
+    var position: Self = 0
     while whole ≠ 0 {
       if position.mod(3) == 0 ∧ position ≠ 0 {
         digits.append(thousandsSeparator)
