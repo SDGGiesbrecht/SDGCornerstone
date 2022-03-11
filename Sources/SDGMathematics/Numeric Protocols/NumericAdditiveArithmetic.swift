@@ -77,13 +77,6 @@ public struct _PartialAbsoluteValue<Wrapped: NumericAdditiveArithmetic> {
   }
   public var contents: Wrapped
 }
-// #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-public struct _PartialAbsoluteValueInt {
-  @inlinable public init(contents: Int) {
-    self.contents = contents
-  }
-  public var contents: Int
-}
 
 // #example(1, absoluteValue)
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
@@ -97,10 +90,6 @@ public struct _PartialAbsoluteValueInt {
 /// - Parameters:
 ///     - operand: The value.
 @inlinable public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
-  return operand.contents
-}
-// #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-@inlinable public prefix func | (operand: _PartialAbsoluteValueInt) -> Int {
   return operand.contents
 }
 
@@ -117,10 +106,6 @@ public struct _PartialAbsoluteValueInt {
 ///     - operand: The value.
 @inlinable public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
   return _PartialAbsoluteValue(contents: operand.absoluteValue)
-}
-// #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-@inlinable public postfix func | (operand: Int) -> _PartialAbsoluteValueInt {
-  return _PartialAbsoluteValueInt(contents: operand.absoluteValue)
 }
 
 extension NumericAdditiveArithmetic where Self: Negatable {

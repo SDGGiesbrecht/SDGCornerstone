@@ -21,8 +21,7 @@ import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
 public protocol Day: ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
-// #workaround(Swift 5.5.3, Should just be “Vector: IntegerProtocol”, but for SR‐15734)
-where Vector == Int {}
+where Vector == IntegerProtocol {}
 
 extension Day {
 
@@ -32,12 +31,7 @@ extension Day {
   ///
   /// i.e. “1”, “2”, “3”...
   public func inEnglishDigits() -> StrictString {
-    let a = ordinal
-    let b = a.inDigits()
-    return ""
-    #if false
     return ordinal.inDigits()
-    #endif
   }
 
   // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
@@ -84,25 +78,13 @@ extension Day {
       case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
         return SemanticMarkup(self.inEnglishDigits())
       case .deutschDeutschland:
-        return ""
-        #if false
         return SemanticMarkup(self.inDeutschenZiffern())
-        #endif
       case .françaisFrance:
-        return ""
-        #if false
         return self.enChiffresFrançais()
-        #endif
       case .ελληνικάΕλλάδα:
-        return ""
-        #if false
         return SemanticMarkup(self.σεΕλληνικάΨηφία())
-        #endif
       case .עברית־ישראל:
-        return ""
-        #if false
         return SemanticMarkup(self.בעברית־בספרות())
-        #endif
       }
     }).resolved()
   }
