@@ -12,10 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
-import SDGMathematics
-import SDGText
-
 extension Int: TextConvertibleNumber {}
 
 extension Int64: TextConvertibleNumber {}
