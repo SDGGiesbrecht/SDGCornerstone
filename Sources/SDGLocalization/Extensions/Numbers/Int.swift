@@ -41,8 +41,6 @@ extension Int: TextConvertibleNumber {
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
-    return ""
-    #if false
     let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
@@ -74,7 +72,6 @@ extension Int: TextConvertibleNumber {
     }
 
     return StrictString(digits.reversed())
-    #endif
   }
 }
 
