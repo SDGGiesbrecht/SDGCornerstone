@@ -55,11 +55,11 @@ extension Int: TextConvertibleNumber {
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
 
-    return ""
-    #if false
     var whole = (|self|).rounded(.towardZero)
     var digits: [UnicodeScalar] = []
     var position: Self = 0
+    return ""
+    #if false
     while whole ≠ 0 {
       if position.mod(3) == 0 ∧ position ≠ 0 {
         digits.append(thousandsSeparator)
