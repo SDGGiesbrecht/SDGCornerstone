@@ -44,6 +44,8 @@ extension Int: TextConvertibleNumber {
     let digitSet = egyptianDigits
 
     let radix = self.radix(for: digitSet)
+    return ""
+    #if false
     let digitMapping = mapping(for: digitSet)
 
     var whole = (|self|).rounded(.towardZero)
@@ -72,6 +74,7 @@ extension Int: TextConvertibleNumber {
     }
 
     return StrictString(digits.reversed())
+    #endif
   }
 }
 
