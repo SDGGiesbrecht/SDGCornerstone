@@ -55,8 +55,6 @@ extension Int: TextConvertibleNumber {
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
 
-    return ""
-    #if false
     var whole = (|self|).rounded(.towardZero)
     var digits: [UnicodeScalar] = []
     var position: Self = 0
@@ -83,7 +81,6 @@ extension Int: TextConvertibleNumber {
     }
 
     return StrictString(digits.reversed())
-    #endif
   }
 }
 
