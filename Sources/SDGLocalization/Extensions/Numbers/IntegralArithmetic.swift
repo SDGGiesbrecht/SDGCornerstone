@@ -19,12 +19,9 @@ extension IntegralArithmetic {
 
   internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
     var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
-    return ""
-    #if false
     if self.isNegative {
       digits.prepend("−")
     }
     return digits
-    #endif
   }
 }
