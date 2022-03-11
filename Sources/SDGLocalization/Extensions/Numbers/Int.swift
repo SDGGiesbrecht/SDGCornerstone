@@ -40,6 +40,15 @@ extension Int: TextConvertibleNumber {
   // MARK: - WholeArithmetic
 
   // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
+  internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
+    var result: [Self: UnicodeScalar] = [:]
+    for value in digits.indices {
+      result[Self(UInt(value))] = digits[value]
+    }
+    return result
+  }
+
+  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
     let digitSet = egyptianDigits
 
