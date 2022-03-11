@@ -27,11 +27,14 @@ extension _NumericIfNotInherited where Self: WholeArithmetic {
   }
 
   internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
+    return [:]
+    #if false
     var result: [Self: UnicodeScalar] = [:]
     for value in digits.indices {
       result[Self(UInt(value))] = digits[value]
     }
     return result
+    #endif
   }
 
   internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
