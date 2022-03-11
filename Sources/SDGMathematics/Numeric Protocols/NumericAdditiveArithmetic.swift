@@ -100,7 +100,7 @@ public struct _PartialAbsoluteValueInt {
   return operand.contents
 }
 // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-@inlinable public prefix func | (operand: _PartialAbsoluteValue<Int>) -> Int {
+@inlinable public prefix func | (operand: _PartialAbsoluteValueInt) -> Int {
   return operand.contents
 }
 

@@ -55,7 +55,7 @@ extension Int: TextConvertibleNumber {
     let radix = self.radix(for: digitSet)
     let digitMapping = mapping(for: digitSet)
 
-    _ = (self|)
+    _ = (self.absoluteValue)
     return ""
     #if false
     var whole = (|self|).rounded(.towardZero)
