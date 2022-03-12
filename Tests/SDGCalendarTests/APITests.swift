@@ -369,8 +369,8 @@ class APITests: TestCase {
 
       var day: GregorianDay = 29
       var month: GregorianMonth = .february
-      day.correct(forMonth: &month, year: 2017)
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+      day.correct(forMonth: &month, year: 2017)
       XCTAssertEqual(day, 1)
       XCTAssertEqual(month, .march)
 
