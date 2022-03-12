@@ -358,7 +358,7 @@ class APITests: TestCase {
 
   func testGregorianDay() {
     testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    #if !PLATFORM_SUFFERS_SR_15734
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),
         localizations: FormatLocalization.self,
@@ -367,9 +367,9 @@ class APITests: TestCase {
       )
     #endif
 
+    var day: GregorianDay = 29
+    var month: GregorianMonth = .february
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      var day: GregorianDay = 29
-      var month: GregorianMonth = .february
       day.correct(forMonth: &month, year: 2017)
       XCTAssertEqual(day, 1)
       XCTAssertEqual(month, .march)
@@ -683,7 +683,7 @@ class APITests: TestCase {
       var rawValue: RawValue
     }
     var component = TestComponent(1)
-    #if !PLATFORM_SUFFERS_SR_15734
+    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       component += 1
       XCTAssertEqual(component.rawValue, 2)
     #endif
