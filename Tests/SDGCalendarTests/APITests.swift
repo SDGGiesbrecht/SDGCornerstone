@@ -84,8 +84,8 @@ class APITests: TestCase {
     #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
+      let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
       #if !PLATFORM_SUFFERS_SR_15734
-        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
         XCTAssert(
           Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
             ≈ system.timeIntervalSinceReferenceDate,
@@ -367,8 +367,8 @@ class APITests: TestCase {
       )
     #endif
 
-      var day: GregorianDay = 29
-      var month: GregorianMonth = .february
+    var day: GregorianDay = 29
+    var month: GregorianMonth = .february
     #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
       day.correct(forMonth: &month, year: 2017)
       XCTAssertEqual(day, 1)
