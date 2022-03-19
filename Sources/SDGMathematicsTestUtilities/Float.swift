@@ -55,7 +55,8 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
-    let result = try method.call(instance)()
+    let methodCall = method.call(instance)
+    let result = try methodCall()
     test(
       result ≈ expectedResult,
       {  // @exempt(from: tests)
