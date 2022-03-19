@@ -189,7 +189,8 @@ public func test<T, A, B, R>(
   line: UInt = #line
 ) where R: Equatable {
   do {
-    let result = try method.call(instance)(arguments.0, arguments.1)
+    let methodCall = method.call(instance)
+    let result = try methodCall(arguments.0, arguments.1)
     test(
       result == expectedResult,
       {  // @exempt(from: tests)
