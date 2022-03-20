@@ -183,7 +183,7 @@ let package = Package(
     .package(
       name: "SDGCornerstone",
       url: "https://github.com/SDGGiesbrecht/SDGCornerstone",
-      from: Version(8, 0, 1)
+      from: Version(9, 0, 0)
     ),
   ],
   targets: [
