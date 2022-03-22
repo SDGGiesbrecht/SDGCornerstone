@@ -14,4 +14,22 @@
 
 import Foundation
 
-extension Data: SearchableBidirectionalCollection {}
+import SDGLogic
+
+extension Data: SearchableBidirectionalCollection {
+
+  // #workaround(Swift 5.6, Redundant, but evades compiler bug in release configuration.)
+  @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
+    let backwards: ReversedCollection<Self> = reversed()
+    guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
+      return nil
+    }
+    return PatternMatch(range: forward(range), in: self)
+  }
+
+  // #workaround(Swift 5.6, Redundant, but evades compiler bug in release configuration.)
+  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
+    let backwards: ReversedCollection<Self> = reversed()
+    return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+  }
+}
