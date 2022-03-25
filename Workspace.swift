@@ -51,8 +51,3 @@ configuration.documentation.api.ignoredDependencies = [
   "_NumericsShims",
   "RealModule",
 ]
-
-// #workaround(workspace 0.38.0, Until default scope is fixed.)
-configuration.testing.exemptionTokens.insert(
-  TestCoverageExemptionToken("fail", scope: .previousLine)
-)
