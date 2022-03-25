@@ -37,19 +37,7 @@ public func setTestSpecificationDirectory(to directory: URL) {
 }
 
 private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
-  var callerURL = URL(fileURLWithPath: String(describing: callerLocation))
-  #if os(Windows)
-    // Convert WSL paths to native Windows paths if cross‐compiled.
-    var directory = callerURL.path
-    if directory.hasPrefix("/mnt/") {
-      directory.removeFirst(5)
-      let driveLetter = directory.removeFirst()
-      directory.prepend(contentsOf: "\(driveLetter.uppercased()):")
-      callerURL = URL(fileURLWithPath: directory)
-    }
-  #endif
-  return
-    callerURL
+  return URL(fileURLWithPath: String(describing: callerLocation))
     .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
 }
 /// Returns the directory where test specifications should be stored.
