@@ -86,6 +86,8 @@ class APITests: TestCase {
   }
 
   func testUInt() {
+    #warning("Debugging...")
+    #if !os(Windows)
     var forDescription: UInt8 = 0
     forDescription.binary[0] = true
     testCustomStringConvertibleConformance(
@@ -94,5 +96,6 @@ class APITests: TestCase {
       uniqueTestName: "1st",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #endif
   }
 }
