@@ -70,7 +70,8 @@ extension XML {
 
         if parser.parse() {
           guard var document = document
-          else {  // @exempt(from: tests) XMLParser should have thrown this itself.
+          else {
+            // @exempt(from: tests) XMLParser should have thrown this itself.
             throw NSError(
               domain: XMLParser.errorDomain,
               code: XMLParser.ErrorCode.prematureDocumentEndError.rawValue,
@@ -148,7 +149,8 @@ extension XML {
       internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
         do {
           self.parser(parser, foundCharacters: try String(file: CDATABlock, origin: nil))
-        } catch {  // @exempt(from: tests) Reachable only with corrupt UTF‐8.
+        } catch {
+          // @exempt(from: tests) Reachable only with corrupt UTF‐8.
           self.error = error
           self.parser.abortParsing()
         }
