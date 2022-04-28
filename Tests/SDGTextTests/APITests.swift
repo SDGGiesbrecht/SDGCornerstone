@@ -285,8 +285,6 @@ class APITests: TestCase {
   }
 
   func testScalarView() {
-    #warning("Debugging...")
-    #if !os(Windows)
     func runTests<S: StringFamily>(helloWorld: S) {
 
       XCTAssert(helloWorld.scalars.contains("world".scalars))
@@ -308,7 +306,6 @@ class APITests: TestCase {
 
     runTests(helloWorld: "Hello, world!")
     runTests(helloWorld: StrictString("Hello, world!"))
-    #endif
   }
 
   func testSemanticMarkup() {
