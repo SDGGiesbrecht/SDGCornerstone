@@ -141,8 +141,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private static let osApplicationPreferences: Shared<Preference> = {
     #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
-      guard ProcessInfo.possibleApplicationIdentifier ≠ nil
-      else {  // @exempt(from: tests)
+      guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
+        // @exempt(from: tests)
         return Shared(Preference.mock())
       }
     #endif
@@ -183,8 +183,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     #if PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
       return Shared(Preference.mock())
     #else
-      guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier
-      else {  // @exempt(from: tests)
+      guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
+        // @exempt(from: tests)
         return Shared(Preference.mock())
       }
       let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
