@@ -844,8 +844,8 @@ for target in package.targets {
     //.define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
-    // #warning(Swift 5.5.2, Web lacks XCTest.XCTestExpectation.)
-    //.define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
+    // #warning(Swift 5.6, Web lacks XCTest.XCTestExpectation.)
+    .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
       "PLATFORM_LACKS_SWIFT_COMPILER",
