@@ -271,8 +271,12 @@ class APITests: TestCase {
       _ = "\(CalendarDate(Date()))"
 
       let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
-      #if !PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER
-        let adjustedToZone = utc.adjusted(to: TimeZone(identifier: "Asia/Jerusalem")!)
+      let timeZone = TimeZone(identifier: "Asia/Jerusalem")
+      #if os(macOS) || os(Linux)  // Time zone knowledge varies by platform.
+        XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
+      #endif
+      if let timeZone = timeZone {
+        let adjustedToZone = utc.adjusted(to: timeZone)
         let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
         XCTAssertEqual(
           adjustedToZone.gregorianDateInAmericanEnglish(),
@@ -301,7 +305,8 @@ class APITests: TestCase {
         _ = adjustedToZone.description
         _ = adjustedToZone.debugDescription
         _ = adjustedToZone.playgroundDescription
-      #endif
+      }
+
       let longitude: Angle<Double> = 90°
       let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
       let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
