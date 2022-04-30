@@ -839,8 +839,6 @@ for target in package.targets {
     // #workaround(Swift 5.6, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #warning(Swift 5.5.2, Web lacks Foundation.TimeZone.init(identifier:).)
-    //.define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-    // #warning(Swift 5.5.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     //.define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
