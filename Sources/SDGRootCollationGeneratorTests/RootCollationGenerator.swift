@@ -1,5 +1,5 @@
 /*
- main.swift
+ RootCollationGenerator.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,11 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.6, Directory should be “generate‐root‐collation”, but for Windows bug.)
-
 import SDGCollation
 
-#if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
-  let root = try CollationOrder.generateRoot()
-  try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
-#endif
+enum RootCollationGenerator {
+
+  static func main() throws {
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
+      let root = try CollationOrder.generateRoot()
+      try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
+    #endif
+  }
+}
