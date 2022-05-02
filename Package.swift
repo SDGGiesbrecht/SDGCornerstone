@@ -590,8 +590,9 @@ let package = Package(
 
     // Internal utilities.
 
-    .executableTarget(
-      name: "generate‐root‐collation",
+    // #workaround(xcodebuild -version 13.3.1, Should be executable, but for interference with tvOS, etc.) @exempt(from: unicode)
+    .testTarget(
+      name: "SDGRootCollationGeneratorTests",
       dependencies: [
         "SDGLogic",
         "SDGMathematics",
@@ -601,7 +602,7 @@ let package = Package(
         "SDGPersistence",
         "SDGLocalization",
       ],
-      path: "Sources/generate_root_collation"
+      path: "Sources/SDGRootCollationGeneratorTests"
     ),
 
     // Internal tests.
@@ -852,27 +853,4 @@ for target in package.targets {
     // #workaround(Windows suffers unexplained segmentation faults.)
     .define("PLATFORM_SUFFERS_SEGMENTATION_FAULTS", .when(platforms: [.windows])),
   ])
-}
-
-import Foundation
-if ProcessInfo.processInfo.environment["TARGETING_WINDOWS"] == "true" {
-  // #workaround(Swift 5.6, Windows cannot handle Unicode name.)
-  for target in package.targets {
-    target.name = target.name.replacingOccurrences(of: "‐", with: "_")
-  }
-}
-
-if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
-  // #workaround(xcodebuild -version 13.3.1, Tool targets don’t work on tvOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.type == .executable })
-}
-
-if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
-  // #workaround(xcodebuild -version 13.3.1, Tool targets don’t work on iOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.type == .executable })
-}
-
-if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 13.3.1, Tool targets don’t work on watchOS.) @exempt(from: unicode)
-  package.targets.removeAll(where: { $0.type == .executable })
 }
