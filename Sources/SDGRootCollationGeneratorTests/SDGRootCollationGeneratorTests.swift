@@ -17,7 +17,7 @@ import XCTest
 final class SDGRootCollationGeneratorTests: XCTestCase {
 
   // Fix the spelling of “test” and run the test to execute the generator.
-  func testRootCollationGenerator() throws {
+  func tesRootCollationGenerator() throws {
     try RootCollationGenerator.main()
   }
 }
