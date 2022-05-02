@@ -12,10 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.5.3, Simplifies evasion of SR‐15734.)
-#if PLATFORM_SUFFERS_SR_15734
+// #warning(Swift 5.5.3, Simplifies evasion of SR‐15734.)
+/*#if PLATFORM_SUFFERS_SR_15734
   public protocol _NumericUnlessBrokenByPlatform {}
-#else
+#else*/
   public protocol _NumericUnlessBrokenByPlatform: Numeric {}
-#endif
+//#endif
 public typealias _NumericIfNotInherited = Numeric
