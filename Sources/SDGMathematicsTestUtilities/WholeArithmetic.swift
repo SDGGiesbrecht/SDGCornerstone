@@ -30,7 +30,7 @@ public func testWholeArithmeticConformance<T>(
   line: UInt = #line
 )
 where
-  T: WholeArithmetic & _ComparableIfNotInherited & _NumericIfNotInherited
+  T: WholeArithmetic & _ComparableIfNotInherited
     & _WholeArithmeticRandomness
 {
 

@@ -56,7 +56,7 @@ extension Sequence where Element: GenericAdditiveArithmetic {
   }
 }
 
-extension Sequence where Element: WholeArithmetic & _NumericIfNotInherited {
+extension Sequence where Element: WholeArithmetic {
 
   /// Returns the product of all values in the sequence.
   ///

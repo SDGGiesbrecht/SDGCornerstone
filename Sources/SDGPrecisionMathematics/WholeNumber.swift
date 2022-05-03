@@ -36,7 +36,6 @@ import SDGCornerstoneLocalizations
 public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable, Equatable,
   Hashable, PointProtocol, Strideable, Subtractable, TextConvertibleNumber,
   TextualPlaygroundDisplay, WholeArithmetic & _WholeArithmeticRandomness, WholeNumberProtocol
-    & _NumericIfNotInherited
 {
 
   // MARK: - Properties

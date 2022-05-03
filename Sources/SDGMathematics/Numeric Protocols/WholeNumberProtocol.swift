@@ -15,7 +15,7 @@
 /// A type which *only ever* represents whole numbers.
 public protocol WholeNumberProtocol: WholeArithmetic {}
 
-extension _NumericIfNotInherited where Self: WholeNumberProtocol {
+extension WholeNumberProtocol {
 
   @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
     precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
