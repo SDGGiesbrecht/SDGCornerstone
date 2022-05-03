@@ -16,7 +16,7 @@ import SDGLogic
 import SDGMathematics
 import SDGText
 
-extension _NumericIfNotInherited where Self: WholeArithmetic {
+extension WholeArithmetic {
 
   internal var egyptianDigits: [UnicodeScalar] {
     return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]

@@ -40,7 +40,7 @@ public protocol TextConvertibleNumber: ExpressibleByStringLiteral, WholeArithmet
   ) -> Result<Self, TextConvertibleNumberParseError>
 }
 
-extension _NumericIfNotInherited where Self: TextConvertibleNumber {
+extension TextConvertibleNumber {
 
   @inlinable internal init(forcing parse: () -> Result<Self, TextConvertibleNumberParseError>) {
     switch parse() {
@@ -400,7 +400,7 @@ extension TextConvertibleNumber where Self: RationalArithmetic {
 /// A type that conforms to `Codable` through its `TextConvertibleNumber` interface.
 public protocol CodableViaTextConvertibleNumber: TextConvertibleNumber {}
 
-extension _NumericIfNotInherited where Self: CodableViaTextConvertibleNumber {
+extension CodableViaTextConvertibleNumber {
 
   public init(from decoder: Decoder) throws {
     try self.init(
@@ -418,7 +418,7 @@ extension CodableViaTextConvertibleNumber where Self: IntegerProtocol {
   }
 }
 
-extension CodableViaTextConvertibleNumber where Self: WholeNumberProtocol & _NumericIfNotInherited {
+extension CodableViaTextConvertibleNumber where Self: WholeNumberProtocol {
 
   public func encode(to encoder: Encoder) throws {
     try encode(to: encoder, via: inDigits())

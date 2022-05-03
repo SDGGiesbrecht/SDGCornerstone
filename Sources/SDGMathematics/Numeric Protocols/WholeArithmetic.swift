@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGLogic
 
 /// A type that can be used for whole‐number arithmetic.
-public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, _NumericUnlessBrokenByPlatform,
+public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   NumericAdditiveArithmetic
 {
 
@@ -227,7 +227,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, _NumericUnlessBr
   public typealias _WholeArithmeticRandomness = Any
 #endif
 
-extension _NumericIfNotInherited where Self: WholeArithmetic {
+extension WholeArithmetic {
 
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(UIntMax(uInt))
