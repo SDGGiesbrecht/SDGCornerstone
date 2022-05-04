@@ -251,8 +251,7 @@ extension Measurement {
   ///
   /// - Parameters:
   ///     - range: The allowed range for the random value.
-  @inlinable public static func random(in range: Range<Self>) -> Self
-  where Scalar: _WholeArithmeticRandomness {
+  @inlinable public static func random(in range: Range<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }
@@ -264,8 +263,7 @@ extension Measurement {
   ///
   /// - Parameters:
   ///     - range: The allowed range for the random value.
-  @inlinable public static func random(in range: ClosedRange<Self>) -> Self
-  where Scalar: _WholeArithmeticRandomness {
+  @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }
@@ -279,7 +277,7 @@ extension Measurement {
   ///     - range: The allowed range for the random value.
   ///     - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
-  where Scalar: _WholeArithmeticRandomness, R: RandomNumberGenerator {
+  where R: RandomNumberGenerator {
     let scalar = Scalar.random(
       in: range.lowerBound.rawValue..<range.upperBound.rawValue,
       using: &generator
@@ -298,7 +296,7 @@ extension Measurement {
   @inlinable public static func random<R>(
     in range: ClosedRange<Self>,
     using generator: inout R
-  ) -> Self where Scalar: _WholeArithmeticRandomness, R: RandomNumberGenerator {
+  ) -> Self where R: RandomNumberGenerator {
     let scalar = Scalar.random(
       in: range.lowerBound.rawValue...range.upperBound.rawValue,
       using: &generator

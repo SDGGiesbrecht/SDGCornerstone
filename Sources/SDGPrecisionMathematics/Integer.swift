@@ -33,7 +33,7 @@ import SDGCornerstoneLocalizations
 /// ```
 public struct Integer: Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable,
   IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, Subtractable,
-  TextConvertibleNumber, WholeArithmetic & _WholeArithmeticRandomness, TextualPlaygroundDisplay
+  TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization
