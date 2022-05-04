@@ -343,9 +343,7 @@ class APITests: TestCase {
   }
 
   func testCardinalCalendarComponent() {
-    struct TestComponent: CardinalCalendarComponent & _StrideableIfNotInherited,
-      ConsistentDurationCalendarComponent
-    {
+    struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent {
       static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
       }
@@ -675,7 +673,7 @@ class APITests: TestCase {
 
   func testNumericCalendarComponent() {
     struct TestComponent: CardinalCalendarComponent, ConsistentDurationCalendarComponent,
-      NumericCalendarComponent, RawRepresentableCalendarComponent & _StrideableIfNotInherited
+      NumericCalendarComponent, RawRepresentableCalendarComponent
     {
       static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days

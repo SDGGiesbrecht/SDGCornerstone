@@ -21,8 +21,7 @@ import SDGCornerstoneLocalizations
 
 /// An hour of the Hebrew day.
 public struct HebrewHour: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
-  ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent
-    & _StrideableIfNotInherited, TextualPlaygroundDisplay
+  ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay
 {
 
   // MARK: - Static Properties
