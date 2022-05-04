@@ -500,7 +500,7 @@ extension Float: FloatFamily {
 
 #if !PLATFORM_LACKS_SWIFT_FLOAT_16
   @available(tvOS 14, iOS 14, watchOS 7, *)
-  extension Float16: FloatFamily & _WholeArithmeticRandomness {
+  extension Float16: FloatFamily {
 
     // MARK: - PointProtocol
 
