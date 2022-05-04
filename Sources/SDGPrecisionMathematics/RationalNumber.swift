@@ -30,7 +30,8 @@ import SDGCornerstoneLocalizations
 /// ```
 public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatable,
   ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol,
-  RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay
+  RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic,
+  TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization
