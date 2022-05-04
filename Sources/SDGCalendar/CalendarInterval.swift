@@ -32,9 +32,8 @@ private typealias Measurement = SDGMathematics.Measurement
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar>: Decodable, Encodable, Measurement
-    & _ComparableIfNotInherited, TextualPlaygroundDisplay
-where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
+public struct CalendarInterval<Scalar>: Decodable, Encodable, Measurement, TextualPlaygroundDisplay
+where Scalar: RationalArithmetic {
 
   // MARK: - Initialization
 

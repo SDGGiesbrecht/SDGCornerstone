@@ -82,7 +82,7 @@ extension TwoDimensionalVectorProtocol where Self: RationalVector {
   }
 }
 
-extension TwoDimensionalVectorProtocol where Scalar: RealArithmetic & _ComparableIfNotInherited {
+extension TwoDimensionalVectorProtocol where Scalar: RealArithmetic {
 
   /// Creates a vector from an angular direction and a length.
   ///

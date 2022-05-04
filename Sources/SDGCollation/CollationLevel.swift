@@ -14,7 +14,7 @@
 
 import SDGMathematics
 
-internal enum CollationLevel: Int, OrderedEnumeration & _ComparableIfNotInherited {
+internal enum CollationLevel: Int, OrderedEnumeration {
 
   // MARK: - Cases
 

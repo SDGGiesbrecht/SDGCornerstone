@@ -22,7 +22,7 @@ import SDGCornerstoneLocalizations
 /// A calendar component defined by a raw value.
 public protocol RawRepresentableCalendarComponent: ConsistentlyOrderedCalendarComponent,
   ExpressibleByIntegerLiteral
-where Vector: IntegralArithmetic & _ComparableIfNotInherited {
+where Vector: IntegralArithmetic {
 
   // MARK: - Associated Type
 

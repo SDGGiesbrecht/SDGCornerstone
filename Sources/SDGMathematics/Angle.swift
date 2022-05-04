@@ -13,8 +13,8 @@
  */
 
 /// An angle.
-public struct Angle<Scalar>: CodableViaMeasurement & _ComparableIfNotInherited
-where Scalar: RealArithmetic & _ComparableUnlessBrokenByPlatform {
+public struct Angle<Scalar>: CodableViaMeasurement
+where Scalar: RealArithmetic {
 
   // MARK: - Initialization
 
@@ -165,7 +165,7 @@ where Scalar: RealArithmetic & _ComparableUnlessBrokenByPlatform {
   }
 }
 
-extension _ComparableIfNotInherited where Self: RealArithmetic {
+extension RealArithmetic {
 
   // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
   // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.

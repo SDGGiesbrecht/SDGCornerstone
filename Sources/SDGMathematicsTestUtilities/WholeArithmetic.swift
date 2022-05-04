@@ -28,11 +28,7 @@ public func testWholeArithmeticConformance<T>(
   includingNegatives: Bool,
   file: StaticString = #filePath,
   line: UInt = #line
-)
-where
-  T: WholeArithmetic & _ComparableIfNotInherited
-    & _WholeArithmeticRandomness
-{
+) where T: WholeArithmetic & _WholeArithmeticRandomness {
 
   testFixedScaleOneDimensionalPointConformance(
     departure: 58 as T,
