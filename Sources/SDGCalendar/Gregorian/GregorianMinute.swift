@@ -22,8 +22,8 @@ import SDGCornerstoneLocalizations
 /// A minute of the Gregorian hour.
 public struct GregorianMinute: CardinalCalendarComponent,
   CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent,
-  ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent
-    & _StrideableIfNotInherited, TextualPlaygroundDisplay
+  ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent,
+  TextualPlaygroundDisplay
 {
 
   // MARK: - Static Properties

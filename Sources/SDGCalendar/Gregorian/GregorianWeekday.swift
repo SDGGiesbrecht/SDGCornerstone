@@ -16,8 +16,7 @@ import SDGMathematics
 
 /// A day of the Gregorian week.
 public enum GregorianWeekday: Int, ConsistentDurationCalendarComponent,
-  ConsistentlyOrderedCalendarComponent & _StrideableIfNotInherited, Decodable, Encodable,
-  EnumerationCalendarComponent, Weekday
+  ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday
 {
 
   // MARK: - Cases

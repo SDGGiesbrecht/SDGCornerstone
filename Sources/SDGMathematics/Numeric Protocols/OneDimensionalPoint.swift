@@ -42,7 +42,7 @@ extension OneDimensionalPoint where Vector: IntegerProtocol {
   }
 }
 
-extension OneDimensionalPoint where Self: _StrideableUnlessBrokenByPlatform {
+extension OneDimensionalPoint where Self: Strideable {
 
   /// Returns the value that follows `self` by a distance of `n`.
   ///

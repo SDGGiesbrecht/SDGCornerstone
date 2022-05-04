@@ -17,7 +17,7 @@ import SDGMathematics
 /// A day of the Hebrew month.
 public struct HebrewDay: CodableViaRawRepresentableCalendarComponent,
   ConsistentDurationCalendarComponent, Day, OrdinalCalendarComponent,
-  RawRepresentableCalendarComponent & _StrideableIfNotInherited
+  RawRepresentableCalendarComponent
 {
 
   // MARK: - Properties
