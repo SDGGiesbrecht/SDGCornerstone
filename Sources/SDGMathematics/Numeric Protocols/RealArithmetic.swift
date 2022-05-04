@@ -223,7 +223,7 @@ public protocol RealArithmetic: RationalArithmetic {
   var floatingPointApproximation: FloatMax { get }
 }
 
-extension _ComparableIfNotInherited where Self: RealArithmetic {
+extension RealArithmetic {
 
   // #workaround(Swift 5.4.2, These can be removed when global generic constants are available.)
 

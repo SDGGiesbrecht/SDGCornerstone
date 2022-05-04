@@ -26,7 +26,7 @@ public func testIntegralArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: IntegralArithmetic & _ComparableIfNotInherited & _WholeArithmeticRandomness {
+) where T: IntegralArithmetic & _WholeArithmeticRandomness {
 
   testNegatableConformance(minuend: 61 as T, subtrahend: 23, difference: 38, file: file, line: line)
   testWholeArithmeticConformance(of: T.self, includingNegatives: true, file: file, line: line)

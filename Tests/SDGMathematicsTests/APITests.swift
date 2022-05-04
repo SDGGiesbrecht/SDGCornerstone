@@ -314,7 +314,7 @@ class APITests: TestCase {
     #endif
   }
 
-  enum OrderedEnumerationExample: Int, OrderedEnumeration & _ComparableIfNotInherited {
+  enum OrderedEnumerationExample: Int, OrderedEnumeration {
     typealias RawValue = Int
     case a
     case b
@@ -427,7 +427,7 @@ class APITests: TestCase {
     #endif
   }
 
-  struct RealArithmeticExample: RealArithmetic & _ComparableIfNotInherited {
+  struct RealArithmeticExample: RealArithmetic {
     var value: Double
     init(_ value: Double) {
       self.value = value

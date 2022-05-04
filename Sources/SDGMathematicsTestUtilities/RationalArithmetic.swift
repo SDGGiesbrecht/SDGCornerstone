@@ -27,7 +27,7 @@ public func testRationalArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: RationalArithmetic & _ComparableIfNotInherited & _WholeArithmeticRandomness {
+) where T: RationalArithmetic & _WholeArithmeticRandomness {
 
   testIntegralArithmeticConformance(of: T.self, file: file, line: line)
 

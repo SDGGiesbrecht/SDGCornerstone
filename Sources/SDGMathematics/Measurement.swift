@@ -20,7 +20,7 @@ import SDGControlFlow
 ///
 /// - Requires: A `Measurement`’s units must be definable as ratios of one another. (For example, `Measurement` can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
 public protocol Measurement: Negatable, NumericAdditiveArithmetic
-where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
+where Scalar: RationalArithmetic {
 
   // MARK: - Scalar Type
 
@@ -169,22 +169,6 @@ where Scalar: RationalArithmetic & _ComparableUnlessBrokenByPlatform {
 }
 
 extension Measurement {
-
-  // MARK: - Comparable
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  /// Compares two measurements.
-  ///
-  /// - Parameters:
-  ///   - precedingValue: The preceding value.
-  ///   - followingValue: The following value.
-  @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.rawValue < followingValue.rawValue
-  }
-}
-
-extension _ComparableIfNotInherited where Self: Measurement {
 
   @inlinable public init() {
     self.init(rawValue: 0)

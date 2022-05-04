@@ -14,7 +14,7 @@
 
 import SDGMathematics
 
-extension _ComparableUnlessBrokenByPlatform where Self: RationalArithmetic {
+extension RationalArithmetic {
 
   // MARK: - Calendar Intervals
 

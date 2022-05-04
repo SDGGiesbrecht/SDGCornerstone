@@ -14,19 +14,6 @@
 
 import SDGLogic
 
-// #workaround(Swift 5.5.3, Simplifies evasion of SR‐15734.)
-/*#if PLATFORM_SUFFERS_SR_15734
-  public protocol _ComparableUnlessBrokenByPlatform {
-    static func < (lhs: Self, rhs: Self) -> Bool
-    static func > (lhs: Self, rhs: Self) -> Bool
-    static func ≥ (precedingValue: Self, followingValue: Self) -> Bool
-    static func ≤ (precedingValue: Self, followingValue: Self) -> Bool
-  }
-#else*/
-  public protocol _ComparableUnlessBrokenByPlatform: Comparable {}
-//#endif
-public typealias _ComparableIfNotInherited = Comparable
-
 extension Comparable {
 
   // MARK: - Comparison

@@ -71,7 +71,7 @@ extension Sequence where Element: WholeArithmetic {
   }
 }
 
-extension Sequence where Element: RationalArithmetic & _ComparableIfNotInherited {
+extension Sequence where Element: RationalArithmetic {
 
   /// Returns the arithmetic mean.
   ///
