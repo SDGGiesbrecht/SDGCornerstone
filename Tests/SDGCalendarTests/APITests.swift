@@ -335,14 +335,12 @@ class APITests: TestCase {
 
   func testGregorianDay() {
     testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-    #if !PLATFORM_SUFFERS_SR_15734
-      testCustomStringConvertibleConformance(
-        of: GregorianDay(4),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "4",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: GregorianDay(4),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "4",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
     var day: GregorianDay = 29
     var month: GregorianMonth = .february
