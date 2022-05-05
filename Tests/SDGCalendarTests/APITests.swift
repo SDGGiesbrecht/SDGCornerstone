@@ -208,15 +208,13 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
     }
-    #if !PLATFORM_SUFFERS_SR_15734
-      let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
-      testCustomStringConvertibleConformance(
-        of: bc,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
+    testCustomStringConvertibleConformance(
+      of: bc,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     for n in 1...12 {
       #if !PLATFORM_SUFFERS_SR_15734
         let date = CalendarDate(
