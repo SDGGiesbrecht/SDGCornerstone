@@ -99,100 +99,98 @@ class APITests: TestCase {
 
     XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
-    #if !PLATFORM_SUFFERS_SR_15734
-      let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
-      XCTAssertEqual(referenceDate.gregorianMonth, .january)
-      XCTAssertEqual(referenceDate.gregorianDay, 1)
-      XCTAssertEqual(referenceDate.gregorianYear, 2001)
-      XCTAssertEqual(referenceDate.gregorianHour, 0)
-      XCTAssertEqual(referenceDate.gregorianMinute, 0)
-      XCTAssertEqual(referenceDate.gregorianSecond, 0)
+    let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
+    XCTAssertEqual(referenceDate.gregorianMonth, .january)
+    XCTAssertEqual(referenceDate.gregorianDay, 1)
+    XCTAssertEqual(referenceDate.gregorianYear, 2001)
+    XCTAssertEqual(referenceDate.gregorianHour, 0)
+    XCTAssertEqual(referenceDate.gregorianMinute, 0)
+    XCTAssertEqual(referenceDate.gregorianSecond, 0)
 
-      let anotherDate = CalendarDate(gregorian: .december, 31, 2015)
-      XCTAssertEqual(anotherDate.gregorianMonth, .december)
-      XCTAssertEqual(anotherDate.gregorianDay, 31)
-      XCTAssertEqual(anotherDate.gregorianYear, 2015)
-      XCTAssertEqual(anotherDate.gregorianHour, 0)
-      XCTAssertEqual(anotherDate.gregorianMinute, 0)
-      XCTAssertEqual(anotherDate.gregorianSecond, 0)
+    let anotherDate = CalendarDate(gregorian: .december, 31, 2015)
+    XCTAssertEqual(anotherDate.gregorianMonth, .december)
+    XCTAssertEqual(anotherDate.gregorianDay, 31)
+    XCTAssertEqual(anotherDate.gregorianYear, 2015)
+    XCTAssertEqual(anotherDate.gregorianHour, 0)
+    XCTAssertEqual(anotherDate.gregorianMinute, 0)
+    XCTAssertEqual(anotherDate.gregorianSecond, 0)
 
-      XCTAssert(CalendarDate.hebrewNow() > CalendarDate(hebrew: .tishrei, 1, 5777))
-      XCTAssert(CalendarDate.gregorianNow() > CalendarDate(gregorian: .january, 1, 2017))
+    XCTAssert(CalendarDate.hebrewNow() > CalendarDate(hebrew: .tishrei, 1, 5777))
+    XCTAssert(CalendarDate.gregorianNow() > CalendarDate(gregorian: .january, 1, 2017))
 
-      let yetAnotherDate = CalendarDate(gregorian: .july, 5, 2017, at: 18)
-      XCTAssertEqual(yetAnotherDate.hebrewYear, 5777)
-      XCTAssertEqual(yetAnotherDate.hebrewMonth, .tammuz)
-      XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
-      XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
-      XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
+    let yetAnotherDate = CalendarDate(gregorian: .july, 5, 2017, at: 18)
+    XCTAssertEqual(yetAnotherDate.hebrewYear, 5777)
+    XCTAssertEqual(yetAnotherDate.hebrewMonth, .tammuz)
+    XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
+    XCTAssertEqual(yetAnotherDate.hebrewHour, 0)
+    XCTAssertEqual(yetAnotherDate.hebrewPart, 0)
 
-      XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
-      XCTAssertEqual(
-        yetAnotherDate.hebrewDateInBritishEnglish(withWeekday: true),
-        "Thursday, 12 Tammuz 5777"
-      )
-      XCTAssertEqual(
-        yetAnotherDate.gregorianDateInBritishEnglish(withWeekday: true),
-        "Wednesday, 5 July 2017"
-      )
-      XCTAssertEqual(
-        yetAnotherDate.hebrewDateInAmericanEnglish(withWeekday: true),
-        "Thursday, Tammuz 12, 5777"
-      )
-      XCTAssertEqual(
-        yetAnotherDate.gregorianDateInAmericanEnglish(withWeekday: true),
-        "Wednesday, July 5, 2017"
-      )
+    XCTAssertEqual(yetAnotherDate.dateInISOFormat(), "2017‐07‐05")
+    XCTAssertEqual(
+      yetAnotherDate.hebrewDateInBritishEnglish(withWeekday: true),
+      "Thursday, 12 Tammuz 5777"
+    )
+    XCTAssertEqual(
+      yetAnotherDate.gregorianDateInBritishEnglish(withWeekday: true),
+      "Wednesday, 5 July 2017"
+    )
+    XCTAssertEqual(
+      yetAnotherDate.hebrewDateInAmericanEnglish(withWeekday: true),
+      "Thursday, Tammuz 12, 5777"
+    )
+    XCTAssertEqual(
+      yetAnotherDate.gregorianDateInAmericanEnglish(withWeekday: true),
+      "Wednesday, July 5, 2017"
+    )
 
-      let time = CalendarDate(gregorian: .july, 6, 2017, at: 2, 05, 06)
-      let time2 = CalendarDate(gregorian: .july, 6, 2017, at: 23, 55, 58)
-      let time3 = CalendarDate(gregorian: .july, 6, 2017, at: 0, 00, 00)
-      XCTAssertEqual(time.timeInISOFormat(includeSeconds: true), "02:05:06")
-      XCTAssertEqual(time2.timeInISOFormat(includeSeconds: true), "23:55:58")
-      XCTAssertEqual(time3.timeInISOFormat(includeSeconds: true), "00:00:00")
+    let time = CalendarDate(gregorian: .july, 6, 2017, at: 2, 05, 06)
+    let time2 = CalendarDate(gregorian: .july, 6, 2017, at: 23, 55, 58)
+    let time3 = CalendarDate(gregorian: .july, 6, 2017, at: 0, 00, 00)
+    XCTAssertEqual(time.timeInISOFormat(includeSeconds: true), "02:05:06")
+    XCTAssertEqual(time2.timeInISOFormat(includeSeconds: true), "23:55:58")
+    XCTAssertEqual(time3.timeInISOFormat(includeSeconds: true), "00:00:00")
 
-      XCTAssertEqual(time.twentyFourHourTimeInEnglish(), "2:05")
-      XCTAssertEqual(time2.twentyFourHourTimeInEnglish(), "23:55")
-      XCTAssertEqual(time3.twentyFourHourTimeInEnglish(), "0:00")
+    XCTAssertEqual(time.twentyFourHourTimeInEnglish(), "2:05")
+    XCTAssertEqual(time2.twentyFourHourTimeInEnglish(), "23:55")
+    XCTAssertEqual(time3.twentyFourHourTimeInEnglish(), "0:00")
 
-      XCTAssertEqual(time.twelveHourTimeInEnglish(), "2:05 a.m.")
-      XCTAssertEqual(time2.twelveHourTimeInEnglish(), "11:55 p.m.")
-      XCTAssertEqual(time3.twelveHourTimeInEnglish(), "12:00 a.m.")
+    XCTAssertEqual(time.twelveHourTimeInEnglish(), "2:05 a.m.")
+    XCTAssertEqual(time2.twelveHourTimeInEnglish(), "11:55 p.m.")
+    XCTAssertEqual(time3.twelveHourTimeInEnglish(), "12:00 a.m.")
 
-      XCTAssertEqual(time.iCalendarFormat(), "20170706T020506Z")
-      XCTAssertEqual(time2.iCalendarFormat(), "20170706T235558Z")
-      XCTAssertEqual(time3.iCalendarFormat(), "20170706T000000Z")
+    XCTAssertEqual(time.iCalendarFormat(), "20170706T020506Z")
+    XCTAssertEqual(time2.iCalendarFormat(), "20170706T235558Z")
+    XCTAssertEqual(time3.iCalendarFormat(), "20170706T000000Z")
 
-      XCTAssertEqual(time.floatingICalendarFormat(), "20170706T020506")
-      XCTAssertEqual(time2.floatingICalendarFormat(), "20170706T235558")
-      XCTAssertEqual(time3.floatingICalendarFormat(), "20170706T000000")
+    XCTAssertEqual(time.floatingICalendarFormat(), "20170706T020506")
+    XCTAssertEqual(time2.floatingICalendarFormat(), "20170706T235558")
+    XCTAssertEqual(time3.floatingICalendarFormat(), "20170706T000000")
 
-      let hebrew = CalendarDate(hebrew: HebrewMonth.tishrei, 23, 3456, at: 7, part: 890)
-      testCodableConformance(of: hebrew, uniqueTestName: "Hebrew")
-      testCodableConformance(
-        of: CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9),
-        uniqueTestName: "Gregorian"
-      )
-      testCodableConformance(
-        of: CalendarDate(Date(timeIntervalSinceReferenceDate: 123_456_789)),
-        uniqueTestName: "Foundation"
-      )
-      testCodableConformance(of: hebrew + (12345 as FloatMax).days, uniqueTestName: "Relative")
-      // For unregistered definitions, see DocumentationExampleTests.DateExampleTests.
+    let hebrew = CalendarDate(hebrew: HebrewMonth.tishrei, 23, 3456, at: 7, part: 890)
+    testCodableConformance(of: hebrew, uniqueTestName: "Hebrew")
+    testCodableConformance(
+      of: CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9),
+      uniqueTestName: "Gregorian"
+    )
+    testCodableConformance(
+      of: CalendarDate(Date(timeIntervalSinceReferenceDate: 123_456_789)),
+      uniqueTestName: "Foundation"
+    )
+    testCodableConformance(of: hebrew + (12345 as FloatMax).days, uniqueTestName: "Relative")
+    // For unregistered definitions, see DocumentationExampleTests.DateExampleTests.
 
-      struct Mock: Encodable {
-        let key = "gregoriano"
-        let container = "[]"
-        let other: [Int64] = [138_059_393_067, 259_200]
-        func encode(to encoder: Encoder) throws {
-          var container = encoder.unkeyedContainer()
-          try container.encode(key)
-          try container.encode(self.container)
-          try container.encode(other)
-        }
+    struct Mock: Encodable {
+      let key = "gregoriano"
+      let container = "[]"
+      let other: [Int64] = [138_059_393_067, 259_200]
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(key)
+        try container.encode(self.container)
+        try container.encode(other)
       }
-      testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
-    #endif
+    }
+    testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
 
     for n in 1...12 {
       #if !PLATFORM_SUFFERS_SR_15734
