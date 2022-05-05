@@ -38,24 +38,21 @@ public protocol RationalArithmetic: ExpressibleByFloatLiteral, IntegralArithmeti
   ///     - followingValue: The divisor.
   static func ÷= (precedingValue: inout Self, followingValue: Self)
 
-  // #workaround(Swift 5.5.3, Desabled as condition, because Comparable is broken by SR‐15734.)
-  #if !PLATFORM_SUFFERS_SR_15734
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    static func random(in range: Range<Self>) -> Self
+  // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+  /// Creates a random value within a particular range.
+  ///
+  /// - Parameters:
+  ///     - range: The allowed range for the random value.
+  static func random(in range: Range<Self>) -> Self
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
-    static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
-    where R: RandomNumberGenerator
-  #endif
+  // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
+  /// Creates a random value within a particular range using the specified randomizer.
+  ///
+  /// - Parameters:
+  ///     - range: The allowed range for the random value.
+  ///     - generator: The randomizer to use to generate the random value.
+  static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
+  where R: RandomNumberGenerator
 }
 
 extension RationalArithmetic {
@@ -85,14 +82,13 @@ extension RationalArithmetic {
     }
   }
 
-  @inlinable public static func random(in range: Range<Self>) -> Self
-  where Self: _WholeArithmeticRandomness {
+  @inlinable public static func random(in range: Range<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }
 
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
-  where Self: _WholeArithmeticRandomness, R: RandomNumberGenerator {
+  where R: RandomNumberGenerator {
 
     _assert(
       ¬range.isEmpty,

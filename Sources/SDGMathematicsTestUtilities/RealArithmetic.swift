@@ -26,7 +26,7 @@ public func testRealArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,
   line: UInt = #line
-) where T: FloatingPoint, T: RealArithmetic & _WholeArithmeticRandomness {
+) where T: FloatingPoint, T: RealArithmetic {
 
   testRationalArithmeticConformance(of: T.self, file: file, line: line)
 

@@ -197,35 +197,23 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///     - factor: The factor to round to a multiple of.
   func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
-  // #workaround(Swift 5.5.3, Desabled as condition, because Comparable is broken by SR‐15734.)
-  #if !PLATFORM_SUFFERS_SR_15734
-    // @localization(🇨🇦EN) @crossReference(WholeArithmetic.random(in:))
-    // @documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    static func random(in range: ClosedRange<Self>) -> Self
+  // @localization(🇨🇦EN) @crossReference(WholeArithmetic.random(in:))
+  // @documentation(SDGCornerstone.WholeArithmetic.random(in:))
+  /// Creates a random value within a particular range.
+  ///
+  /// - Parameters:
+  ///     - range: The allowed range for the random value.
+  static func random(in range: ClosedRange<Self>) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
-    static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
-    where R: RandomNumberGenerator
-  #endif
+  // @documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
+  /// Creates a random value within a particular range using the specified randomizer.
+  ///
+  /// - Parameters:
+  ///     - range: The allowed range for the random value.
+  ///     - generator: The randomizer to use to generate the random value.
+  static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
+  where R: RandomNumberGenerator
 }
-// #workaround(Swift 5.5.3, Simplifies evasion of SR‐15734.)
-#if PLATFORM_SUFFERS_SR_15734
-  public protocol _WholeArithmeticRandomness: Comparable {
-    static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
-    where R: RandomNumberGenerator
-  }
-#else
-  public typealias _WholeArithmeticRandomness = Any
-#endif
 
 extension WholeArithmetic {
 
@@ -390,12 +378,10 @@ extension WholeArithmetic {
   ///
   /// - Parameters:
   ///     - intervall: Das erlaubte Intervall für den zufälligen Wert.
-  @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self
-  where Self: _WholeArithmeticRandomness {
+  @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self {
     return random(in: intervall)
   }
-  @inlinable public static func random(in range: ClosedRange<Self>) -> Self
-  where Self: _WholeArithmeticRandomness {
+  @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
   }

@@ -132,7 +132,7 @@ extension BinaryInteger {
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine natürliche Zahl ohne Vorzeichen. (`UInt`)
 public typealias NZahl = UInt
-extension UInt: UIntFamily & _WholeArithmeticRandomness {
+extension UInt: UIntFamily {
 
   // MARK: - PointProtocol
 
@@ -141,7 +141,7 @@ extension UInt: UIntFamily & _WholeArithmeticRandomness {
   /// The type to be used as a vector.
   public typealias Vector = Stride
 }
-extension UInt64: UIntFamily & _WholeArithmeticRandomness {
+extension UInt64: UIntFamily {
 
   // MARK: - PointProtocol
 
@@ -150,7 +150,7 @@ extension UInt64: UIntFamily & _WholeArithmeticRandomness {
   /// The type to be used as a vector.
   public typealias Vector = Stride
 }
-extension UInt32: UIntFamily & _WholeArithmeticRandomness {
+extension UInt32: UIntFamily {
 
   // MARK: - PointProtocol
 
@@ -159,7 +159,7 @@ extension UInt32: UIntFamily & _WholeArithmeticRandomness {
   /// The type to be used as a vector.
   public typealias Vector = Stride
 }
-extension UInt16: UIntFamily & _WholeArithmeticRandomness {
+extension UInt16: UIntFamily {
 
   // MARK: - PointProtocol
 
@@ -168,7 +168,7 @@ extension UInt16: UIntFamily & _WholeArithmeticRandomness {
   /// The type to be used as a vector.
   public typealias Vector = Stride
 }
-extension UInt8: UIntFamily & _WholeArithmeticRandomness {
+extension UInt8: UIntFamily {
 
   // MARK: - PointProtocol
 

@@ -190,7 +190,7 @@ extension FloatFamily where Self: ElementaryFunctions {
   }
 }
 
-extension Double: FloatFamily & _WholeArithmeticRandomness {
+extension Double: FloatFamily {
 
   // MARK: - PointProtocol
 
@@ -226,7 +226,7 @@ extension Double: FloatFamily & _WholeArithmeticRandomness {
   }
 }
 
-extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
+extension CGFloat: FloatFamily {
 
   // MARK: - CustomDebugStringConvertible
 
@@ -412,7 +412,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
 }
 
 #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
-  extension Float80: Decodable, Encodable, FloatFamily & _WholeArithmeticRandomness {
+  extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable
 
@@ -462,7 +462,7 @@ extension CGFloat: FloatFamily & _WholeArithmeticRandomness {
   }
 #endif
 
-extension Float: FloatFamily & _WholeArithmeticRandomness {
+extension Float: FloatFamily {
 
   // MARK: - PointProtocol
 
@@ -500,7 +500,7 @@ extension Float: FloatFamily & _WholeArithmeticRandomness {
 
 #if !PLATFORM_LACKS_SWIFT_FLOAT_16
   @available(tvOS 14, iOS 14, watchOS 7, *)
-  extension Float16: FloatFamily & _WholeArithmeticRandomness {
+  extension Float16: FloatFamily {
 
     // MARK: - PointProtocol
 
