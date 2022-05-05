@@ -216,21 +216,19 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     for n in 1...12 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let date = CalendarDate(
-          hebrew: HebrewMonth(ordinal: n, leapYear: false),
-          HebrewDay(n),
-          5700 + n,
-          at: HebrewHour(n),
-          part: HebrewPart(FloatMax(n))
-        )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      let date = CalendarDate(
+        hebrew: HebrewMonth(ordinal: n, leapYear: false),
+        HebrewDay(n),
+        5700 + n,
+        at: HebrewHour(n),
+        part: HebrewPart(FloatMax(n))
+      )
+      testCustomStringConvertibleConformance(
+        of: date,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     }
     for n in 21...22 {
       #if !PLATFORM_SUFFERS_SR_15734
