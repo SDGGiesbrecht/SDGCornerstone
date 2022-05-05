@@ -86,18 +86,16 @@ class APITests: TestCase {
       )
     #endif
 
-    #if !PLATFORM_SUFFERS_SR_15734
-      XCTAssertEqual(
-        CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
-        .wednesday,
-        "Weekday failure."
-      )
-      XCTAssertEqual(
-        CalendarDate(hebrew: .tevet, 11, 5776).hebrewWeekday,
-        .wednesday,
-        "Weekday failure."
-      )
-    #endif
+    XCTAssertEqual(
+      CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
+      .wednesday,
+      "Weekday failure."
+    )
+    XCTAssertEqual(
+      CalendarDate(hebrew: .tevet, 11, 5776).hebrewWeekday,
+      .wednesday,
+      "Weekday failure."
+    )
 
     XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
