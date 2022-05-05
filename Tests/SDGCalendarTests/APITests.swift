@@ -58,24 +58,22 @@ class APITests: TestCase {
     // Force these to take place first.
     InternalTests.testHebrewYear()
 
-    #if !PLATFORM_SUFFERS_SR_15734
-      XCTAssertEqual(
-        CalendarDate(hebrew: .iyar, 4, 5751),
-        CalendarDate(gregorian: .april, 17, 1991, at: 18),
-        "Date conversion failed."
-      )
-      XCTAssertEqual(
-        CalendarDate(hebrew: .iyar, 4, 5751, at: 6),
-        CalendarDate(gregorian: .april, 18, 1991),
-        "Date conversion failed."
-      )
+    XCTAssertEqual(
+      CalendarDate(hebrew: .iyar, 4, 5751),
+      CalendarDate(gregorian: .april, 17, 1991, at: 18),
+      "Date conversion failed."
+    )
+    XCTAssertEqual(
+      CalendarDate(hebrew: .iyar, 4, 5751, at: 6),
+      CalendarDate(gregorian: .april, 18, 1991),
+      "Date conversion failed."
+    )
 
-      XCTAssertEqual(
-        CalendarDate(hebrew: .tevet, 10, 5776, at: 3),
-        CalendarDate(gregorian: .december, 21, 2015, at: 21),
-        "Date conversion failed."
-      )
-    #endif
+    XCTAssertEqual(
+      CalendarDate(hebrew: .tevet, 10, 5776, at: 3),
+      CalendarDate(gregorian: .december, 21, 2015, at: 21),
+      "Date conversion failed."
+    )
 
     #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
       let formatter = DateFormatter()
