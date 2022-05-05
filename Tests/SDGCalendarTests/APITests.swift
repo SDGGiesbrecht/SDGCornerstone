@@ -239,66 +239,64 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
     }
-    #if !PLATFORM_SUFFERS_SR_15734
-      let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
-      testCustomStringConvertibleConformance(
-        of: relative,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
+    testCustomStringConvertibleConformance(
+      of: relative,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      _ = "\(CalendarDate(Date()))"
+    _ = "\(CalendarDate(Date()))"
 
-      let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
-      let timeZone = TimeZone(identifier: "Asia/Jerusalem")
-      #if os(macOS) || os(Linux)  // Time zone knowledge varies by platform.
-        XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
-      #endif
-      if let timeZone = timeZone {
-        let adjustedToZone = utc.adjusted(to: timeZone)
-        let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
-        XCTAssertEqual(
-          adjustedToZone.gregorianDateInAmericanEnglish(),
-          timeZoneEquivalent.gregorianDateInAmericanEnglish()
-        )
-        XCTAssertEqual(
-          adjustedToZone.twentyFourHourTimeInEnglish(),
-          timeZoneEquivalent.twentyFourHourTimeInEnglish()
-        )
-        XCTAssertEqual(
-          adjustedToZone.hebrewDateInAmericanEnglish(),
-          timeZoneEquivalent.hebrewDateInAmericanEnglish()
-        )
-        XCTAssertEqual(
-          adjustedToZone.gregorianSecond,
-          timeZoneEquivalent.gregorianSecond
-        )
-        XCTAssertEqual(
-          adjustedToZone.hebrewHour,
-          timeZoneEquivalent.hebrewHour
-        )
-        XCTAssertEqual(
-          adjustedToZone.hebrewPart,
-          timeZoneEquivalent.hebrewPart
-        )
-        _ = adjustedToZone.description
-        _ = adjustedToZone.debugDescription
-        _ = adjustedToZone.playgroundDescription
-      }
-
-      let longitude: Angle<Double> = 90°
-      let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
-      let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
-      XCTAssertEqual(
-        adjustedToLongitude.gregorianDateInAmericanEnglish(),
-        longitudeEquivalent.gregorianDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToLongitude.twentyFourHourTimeInEnglish(),
-        longitudeEquivalent.twentyFourHourTimeInEnglish()
-      )
+    let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
+    let timeZone = TimeZone(identifier: "Asia/Jerusalem")
+    #if os(macOS) || os(Linux)  // Time zone knowledge varies by platform.
+      XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
     #endif
+    if let timeZone = timeZone {
+      let adjustedToZone = utc.adjusted(to: timeZone)
+      let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
+      XCTAssertEqual(
+        adjustedToZone.gregorianDateInAmericanEnglish(),
+        timeZoneEquivalent.gregorianDateInAmericanEnglish()
+      )
+      XCTAssertEqual(
+        adjustedToZone.twentyFourHourTimeInEnglish(),
+        timeZoneEquivalent.twentyFourHourTimeInEnglish()
+      )
+      XCTAssertEqual(
+        adjustedToZone.hebrewDateInAmericanEnglish(),
+        timeZoneEquivalent.hebrewDateInAmericanEnglish()
+      )
+      XCTAssertEqual(
+        adjustedToZone.gregorianSecond,
+        timeZoneEquivalent.gregorianSecond
+      )
+      XCTAssertEqual(
+        adjustedToZone.hebrewHour,
+        timeZoneEquivalent.hebrewHour
+      )
+      XCTAssertEqual(
+        adjustedToZone.hebrewPart,
+        timeZoneEquivalent.hebrewPart
+      )
+      _ = adjustedToZone.description
+      _ = adjustedToZone.debugDescription
+      _ = adjustedToZone.playgroundDescription
+    }
+
+    let longitude: Angle<Double> = 90°
+    let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
+    let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
+    XCTAssertEqual(
+      adjustedToLongitude.gregorianDateInAmericanEnglish(),
+      longitudeEquivalent.gregorianDateInAmericanEnglish()
+    )
+    XCTAssertEqual(
+      adjustedToLongitude.twentyFourHourTimeInEnglish(),
+      longitudeEquivalent.twentyFourHourTimeInEnglish()
+    )
   }
 
   func testCalendarInterval() {
