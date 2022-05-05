@@ -37,7 +37,6 @@ class APITests: TestCase {
 
     XCTAssertEqual(GregorianDay(ordinal: 8), 8)
 
-    #if !PLATFORM_SUFFERS_SR_15734
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
       XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
@@ -46,7 +45,6 @@ class APITests: TestCase {
       XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
       XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
-    #endif
 
     XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
     XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
