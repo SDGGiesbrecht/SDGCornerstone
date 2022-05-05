@@ -231,15 +231,13 @@ class APITests: TestCase {
       )
     }
     for n in 21...22 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
-        testCustomStringConvertibleConformance(
-          of: adar,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
+      testCustomStringConvertibleConformance(
+        of: adar,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     }
     #if !PLATFORM_SUFFERS_SR_15734
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
