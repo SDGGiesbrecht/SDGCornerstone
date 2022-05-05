@@ -300,24 +300,22 @@ class APITests: TestCase {
   }
 
   func testCalendarInterval() {
-    #if !PLATFORM_SUFFERS_SR_15734
-      testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
-      testCustomStringConvertibleConformance(
-        of: 1.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "1 Day",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: 2.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "2 Days",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
+    testCustomStringConvertibleConformance(
+      of: 1.days,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "1 Day",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    testCustomStringConvertibleConformance(
+      of: 2.days,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "2 Days",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
-      XCTAssert(28.days.inHebrewMoons < 1)
-    #endif
+    XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
+    XCTAssert(28.days.inHebrewMoons < 1)
   }
 
   func testCardinalCalendarComponent() {
