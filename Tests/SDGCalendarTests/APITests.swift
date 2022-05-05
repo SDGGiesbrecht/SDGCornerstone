@@ -193,22 +193,20 @@ class APITests: TestCase {
     testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
 
     for n in 1...12 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let date = CalendarDate(
-          gregorian: GregorianMonth(ordinal: n),
-          GregorianDay(n),
-          2000 + n,
-          at: GregorianHour(n),
-          GregorianMinute(n),
-          GregorianSecond(FloatMax(n))
-        )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      let date = CalendarDate(
+        gregorian: GregorianMonth(ordinal: n),
+        GregorianDay(n),
+        2000 + n,
+        at: GregorianHour(n),
+        GregorianMinute(n),
+        GregorianSecond(FloatMax(n))
+      )
+      testCustomStringConvertibleConformance(
+        of: date,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     }
     #if !PLATFORM_SUFFERS_SR_15734
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
