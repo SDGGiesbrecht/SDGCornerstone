@@ -257,14 +257,16 @@ class APITests: TestCase {
     if let timeZone = timeZone {
       let adjustedToZone = utc.adjusted(to: timeZone)
       let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
-      XCTAssertEqual(
-        adjustedToZone.gregorianDateInAmericanEnglish(),
-        timeZoneEquivalent.gregorianDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToZone.twentyFourHourTimeInEnglish(),
-        timeZoneEquivalent.twentyFourHourTimeInEnglish()
-      )
+      #if !PLATFORM_SUFFERS_SR_15734
+        XCTAssertEqual(
+          adjustedToZone.gregorianDateInAmericanEnglish(),
+          timeZoneEquivalent.gregorianDateInAmericanEnglish()
+        )
+        XCTAssertEqual(
+          adjustedToZone.twentyFourHourTimeInEnglish(),
+          timeZoneEquivalent.twentyFourHourTimeInEnglish()
+        )
+      #endif
       XCTAssertEqual(
         adjustedToZone.hebrewDateInAmericanEnglish(),
         timeZoneEquivalent.hebrewDateInAmericanEnglish()
@@ -273,10 +275,12 @@ class APITests: TestCase {
         adjustedToZone.gregorianSecond,
         timeZoneEquivalent.gregorianSecond
       )
-      XCTAssertEqual(
-        adjustedToZone.hebrewHour,
-        timeZoneEquivalent.hebrewHour
-      )
+      #if !PLATFORM_SUFFERS_SR_15734
+        XCTAssertEqual(
+          adjustedToZone.hebrewHour,
+          timeZoneEquivalent.hebrewHour
+        )
+      #endif
       XCTAssertEqual(
         adjustedToZone.hebrewPart,
         timeZoneEquivalent.hebrewPart
