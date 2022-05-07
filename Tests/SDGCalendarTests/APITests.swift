@@ -193,79 +193,71 @@ class APITests: TestCase {
     testDecoding(CalendarDate.self, failsFor: Mock())  // Empty container array.
 
     for n in 1...12 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let date = CalendarDate(
-          gregorian: GregorianMonth(ordinal: n),
-          GregorianDay(n),
-          2000 + n,
-          at: GregorianHour(n),
-          GregorianMinute(n),
-          GregorianSecond(FloatMax(n))
-        )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
-    }
-    #if !PLATFORM_SUFFERS_SR_15734
-      let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
+      let date = CalendarDate(
+        gregorian: GregorianMonth(ordinal: n),
+        GregorianDay(n),
+        2000 + n,
+        at: GregorianHour(n),
+        GregorianMinute(n),
+        GregorianSecond(FloatMax(n))
+      )
       testCustomStringConvertibleConformance(
-        of: bc,
+        of: date,
         localizations: FormatLocalization.self,
-        uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
+        uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
         overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
+    }
+    let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
+    testCustomStringConvertibleConformance(
+      of: bc,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     for n in 1...12 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let date = CalendarDate(
-          hebrew: HebrewMonth(ordinal: n, leapYear: false),
-          HebrewDay(n),
-          5700 + n,
-          at: HebrewHour(n),
-          part: HebrewPart(FloatMax(n))
-        )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      let date = CalendarDate(
+        hebrew: HebrewMonth(ordinal: n, leapYear: false),
+        HebrewDay(n),
+        5700 + n,
+        at: HebrewHour(n),
+        part: HebrewPart(FloatMax(n))
+      )
+      testCustomStringConvertibleConformance(
+        of: date,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     }
     for n in 21...22 {
-      #if !PLATFORM_SUFFERS_SR_15734
-        let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
-        testCustomStringConvertibleConformance(
-          of: adar,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
-    }
-    #if !PLATFORM_SUFFERS_SR_15734
-      let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
+      let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
       testCustomStringConvertibleConformance(
-        of: relative,
+        of: adar,
         localizations: FormatLocalization.self,
-        uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
+        uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
         overwriteSpecificationInsteadOfFailing: false
       )
+    }
+    let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
+    testCustomStringConvertibleConformance(
+      of: relative,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      _ = "\(CalendarDate(Date()))"
+    _ = "\(CalendarDate(Date()))"
 
-      let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
-      let timeZone = TimeZone(identifier: "Asia/Jerusalem")
-      #if os(macOS) || os(Linux)  // Time zone knowledge varies by platform.
-        XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
-      #endif
-      if let timeZone = timeZone {
-        let adjustedToZone = utc.adjusted(to: timeZone)
-        let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
+    let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
+    let timeZone = TimeZone(identifier: "Asia/Jerusalem")
+    #if os(macOS) || os(Linux)  // Time zone knowledge varies by platform.
+      XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
+    #endif
+    if let timeZone = timeZone {
+      let adjustedToZone = utc.adjusted(to: timeZone)
+      let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
+      #if !PLATFORM_SUFFERS_SR_15734
         XCTAssertEqual(
           adjustedToZone.gregorianDateInAmericanEnglish(),
           timeZoneEquivalent.gregorianDateInAmericanEnglish()
@@ -274,60 +266,60 @@ class APITests: TestCase {
           adjustedToZone.twentyFourHourTimeInEnglish(),
           timeZoneEquivalent.twentyFourHourTimeInEnglish()
         )
-        XCTAssertEqual(
-          adjustedToZone.hebrewDateInAmericanEnglish(),
-          timeZoneEquivalent.hebrewDateInAmericanEnglish()
-        )
-        XCTAssertEqual(
-          adjustedToZone.gregorianSecond,
-          timeZoneEquivalent.gregorianSecond
-        )
+      #endif
+      XCTAssertEqual(
+        adjustedToZone.hebrewDateInAmericanEnglish(),
+        timeZoneEquivalent.hebrewDateInAmericanEnglish()
+      )
+      XCTAssertEqual(
+        adjustedToZone.gregorianSecond,
+        timeZoneEquivalent.gregorianSecond
+      )
+      #if !PLATFORM_SUFFERS_SR_15734
         XCTAssertEqual(
           adjustedToZone.hebrewHour,
           timeZoneEquivalent.hebrewHour
         )
-        XCTAssertEqual(
-          adjustedToZone.hebrewPart,
-          timeZoneEquivalent.hebrewPart
-        )
-        _ = adjustedToZone.description
-        _ = adjustedToZone.debugDescription
-        _ = adjustedToZone.playgroundDescription
-      }
+      #endif
+      XCTAssertEqual(
+        adjustedToZone.hebrewPart,
+        timeZoneEquivalent.hebrewPart
+      )
+      _ = adjustedToZone.description
+      _ = adjustedToZone.debugDescription
+      _ = adjustedToZone.playgroundDescription
+    }
 
-      let longitude: Angle<Double> = 90°
-      let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
-      let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
-      XCTAssertEqual(
-        adjustedToLongitude.gregorianDateInAmericanEnglish(),
-        longitudeEquivalent.gregorianDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToLongitude.twentyFourHourTimeInEnglish(),
-        longitudeEquivalent.twentyFourHourTimeInEnglish()
-      )
-    #endif
+    let longitude: Angle<Double> = 90°
+    let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
+    let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
+    XCTAssertEqual(
+      adjustedToLongitude.gregorianDateInAmericanEnglish(),
+      longitudeEquivalent.gregorianDateInAmericanEnglish()
+    )
+    XCTAssertEqual(
+      adjustedToLongitude.twentyFourHourTimeInEnglish(),
+      longitudeEquivalent.twentyFourHourTimeInEnglish()
+    )
   }
 
   func testCalendarInterval() {
-    #if !PLATFORM_SUFFERS_SR_15734
-      testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
-      testCustomStringConvertibleConformance(
-        of: 1.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "1 Day",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: 2.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "2 Days",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
+    testCustomStringConvertibleConformance(
+      of: 1.days,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "1 Day",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    testCustomStringConvertibleConformance(
+      of: 2.days,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "2 Days",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
-      XCTAssert(28.days.inHebrewMoons < 1)
-    #endif
+    XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
+    XCTAssert(28.days.inHebrewMoons < 1)
   }
 
   func testCardinalCalendarComponent() {
@@ -342,21 +334,17 @@ class APITests: TestCase {
       static let validRange: Range<RawValue>? = nil
       var rawValue: RawValue
     }
-    #if !PLATFORM_SUFFERS_SR_15734
-      XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
-    #endif
+    XCTAssertEqual(TestComponent(ordinal: 3).ordinal, 3)
   }
 
   func testGregorianDay() {
     testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-    #if !PLATFORM_SUFFERS_SR_15734
-      testCustomStringConvertibleConformance(
-        of: GregorianDay(4),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "4",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: GregorianDay(4),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "4",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
     var day: GregorianDay = 29
     var month: GregorianMonth = .february
