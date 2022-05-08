@@ -257,7 +257,8 @@ class APITests: TestCase {
     if let timeZone = timeZone {
       let adjustedToZone = utc.adjusted(to: timeZone)
       let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
-      #if !PLATFORM_SUFFERS_SR_15734
+      // #workaround(Swift 5.6, Windows time zone information is incorrect.)
+      #if !os(Windows)
         XCTAssertEqual(
           adjustedToZone.gregorianDateInAmericanEnglish(),
           timeZoneEquivalent.gregorianDateInAmericanEnglish()
@@ -266,25 +267,23 @@ class APITests: TestCase {
           adjustedToZone.twentyFourHourTimeInEnglish(),
           timeZoneEquivalent.twentyFourHourTimeInEnglish()
         )
-      #endif
-      XCTAssertEqual(
-        adjustedToZone.hebrewDateInAmericanEnglish(),
-        timeZoneEquivalent.hebrewDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToZone.gregorianSecond,
-        timeZoneEquivalent.gregorianSecond
-      )
-      #if !PLATFORM_SUFFERS_SR_15734
+        XCTAssertEqual(
+          adjustedToZone.hebrewDateInAmericanEnglish(),
+          timeZoneEquivalent.hebrewDateInAmericanEnglish()
+        )
+        XCTAssertEqual(
+          adjustedToZone.gregorianSecond,
+          timeZoneEquivalent.gregorianSecond
+        )
         XCTAssertEqual(
           adjustedToZone.hebrewHour,
           timeZoneEquivalent.hebrewHour
         )
+        XCTAssertEqual(
+          adjustedToZone.hebrewPart,
+          timeZoneEquivalent.hebrewPart
+        )
       #endif
-      XCTAssertEqual(
-        adjustedToZone.hebrewPart,
-        timeZoneEquivalent.hebrewPart
-      )
       _ = adjustedToZone.description
       _ = adjustedToZone.debugDescription
       _ = adjustedToZone.playgroundDescription
