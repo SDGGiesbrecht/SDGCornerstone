@@ -347,303 +347,275 @@ class APITests: TestCase {
 
     var day: GregorianDay = 29
     var month: GregorianMonth = .february
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      day.correct(forMonth: &month, year: 2017)
-      XCTAssertEqual(day, 1)
-      XCTAssertEqual(month, .march)
+    day.correct(forMonth: &month, year: 2017)
+    XCTAssertEqual(day, 1)
+    XCTAssertEqual(month, .march)
 
-      day = 31
-      month = .november
-      day.correct(forMonth: &month, year: 2017)
-      XCTAssertEqual(day, 1)
-      XCTAssertEqual(month, .december)
-    #endif
+    day = 31
+    month = .november
+    day.correct(forMonth: &month, year: 2017)
+    XCTAssertEqual(day, 1)
+    XCTAssertEqual(month, .december)
   }
 
   func testGregorianHour() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
-      testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
-      testCustomStringConvertibleConformance(
-        of: GregorianHour(6),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "6",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
+    testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
+    testCustomStringConvertibleConformance(
+      of: GregorianHour(6),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "6",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testGregorianMinute() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: GregorianMinute(14),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "14",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
+    testCustomStringConvertibleConformance(
+      of: GregorianMinute(14),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "14",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testGregorianMonth() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
-      testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
-      testCustomStringConvertibleConformance(
-        of: GregorianMonth.august,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "August",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
+    testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
+    testCustomStringConvertibleConformance(
+      of: GregorianMonth.august,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "August",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      let length =
-        FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
-        × (1 as FloatMax).days
-      XCTAssert(length ≥ GregorianMonth.minimumDuration)
-      XCTAssert(length ≤ GregorianMonth.maximumDuration)
+    let length =
+      FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
+      × (1 as FloatMax).days
+    XCTAssert(length ≥ GregorianMonth.minimumDuration)
+    XCTAssert(length ≤ GregorianMonth.maximumDuration)
 
-      for month in GregorianMonth.january...GregorianMonth.december {
-        XCTAssertNotEqual(month.inEnglish(), "")
+    for month in GregorianMonth.january...GregorianMonth.december {
+      XCTAssertNotEqual(month.inEnglish(), "")
 
-        if month == .january {
-          XCTAssertEqual(month.inEnglish(), "January")
-        }
+      if month == .january {
+        XCTAssertEqual(month.inEnglish(), "January")
       }
+    }
 
-      XCTAssertNil(HebrewMonth.adarII.numberAlreadyElapsed(leapYear: false))
-      XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: false), 1)
-      XCTAssertNil(HebrewMonth.adarII.ordinal(leapYear: false))
-      XCTAssertEqual(HebrewMonth.adar.ordinal(leapYear: false), 6)
-      XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: false), 12)
-      XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: true), 1)
-      XCTAssertNil(HebrewMonth.adar.ordinal(leapYear: true))
-      XCTAssertEqual(HebrewMonth.adarI.ordinal(leapYear: true), 6)
-      XCTAssertEqual(HebrewMonth.adarII.ordinal(leapYear: true), 7)
-      XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: true), 13)
-    #endif
+    XCTAssertNil(HebrewMonth.adarII.numberAlreadyElapsed(leapYear: false))
+    XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: false), 1)
+    XCTAssertNil(HebrewMonth.adarII.ordinal(leapYear: false))
+    XCTAssertEqual(HebrewMonth.adar.ordinal(leapYear: false), 6)
+    XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: false), 12)
+    XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: true), 1)
+    XCTAssertNil(HebrewMonth.adar.ordinal(leapYear: true))
+    XCTAssertEqual(HebrewMonth.adarI.ordinal(leapYear: true), 6)
+    XCTAssertEqual(HebrewMonth.adarII.ordinal(leapYear: true), 7)
+    XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: true), 13)
   }
 
   func testGregorianSecond() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: GregorianSecond(12),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "12",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
+    testCustomStringConvertibleConformance(
+      of: GregorianSecond(12),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "12",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      let second: GregorianSecond = 0.0
-      XCTAssertEqual(second, 0)
+    let second: GregorianSecond = 0.0
+    XCTAssertEqual(second, 0)
 
-      XCTAssertEqual(GregorianSecond(0).inDigits(), "00")
-    #endif
+    XCTAssertEqual(GregorianSecond(0).inDigits(), "00")
   }
 
   func testGregorianWeekday() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
-      for ordinal in 1...7 {
-        testCustomStringConvertibleConformance(
-          of: GregorianWeekday(ordinal: ordinal),
-          localizations: FormatLocalization.self,
-          uniqueTestName: ordinal.inDigits(),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      }
-    #endif
+    testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
+    for ordinal in 1...7 {
+      testCustomStringConvertibleConformance(
+        of: GregorianWeekday(ordinal: ordinal),
+        localizations: FormatLocalization.self,
+        uniqueTestName: ordinal.inDigits(),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    }
   }
 
   func testGregorianYear() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
-      testCustomStringConvertibleConformance(
-        of: GregorianYear(1870),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "1870",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
+    testCustomStringConvertibleConformance(
+      of: GregorianYear(1870),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "1870",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
-      XCTAssert(length ≥ GregorianYear.minimumDuration)
-      XCTAssert(length ≤ GregorianYear.maximumDuration)
+    let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
+    XCTAssert(length ≥ GregorianYear.minimumDuration)
+    XCTAssert(length ≤ GregorianYear.maximumDuration)
 
-      XCTAssertEqual(GregorianYear(ordinal: 1), 1)
-      XCTAssertEqual(GregorianYear(2017).numberAlreadyElapsed, 2016)
+    XCTAssertEqual(GregorianYear(ordinal: 1), 1)
+    XCTAssertEqual(GregorianYear(2017).numberAlreadyElapsed, 2016)
 
-      XCTAssertEqual(GregorianYear(1).inISOFormat(), "0001")
-      XCTAssertEqual(GregorianYear(−1).inISOFormat(), "0000")
-      XCTAssertEqual(GregorianYear(−2).inISOFormat(), "−0001")
+    XCTAssertEqual(GregorianYear(1).inISOFormat(), "0001")
+    XCTAssertEqual(GregorianYear(−1).inISOFormat(), "0000")
+    XCTAssertEqual(GregorianYear(−2).inISOFormat(), "−0001")
 
-      XCTAssertEqual(GregorianYear(−1) + 1, GregorianYear(1))
-      XCTAssertEqual(GregorianYear(1) − 1, GregorianYear(−1))
-      XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
+    XCTAssertEqual(GregorianYear(−1) + 1, GregorianYear(1))
+    XCTAssertEqual(GregorianYear(1) − 1, GregorianYear(−1))
+    XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
 
-      XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
+    XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
 
-      XCTAssertEqual(GregorianYear(numberAlreadyElapsed: 0), 1)
-      XCTAssertEqual(GregorianYear(2017).ordinal, 2017)
-    #endif
+    XCTAssertEqual(GregorianYear(numberAlreadyElapsed: 0), 1)
+    XCTAssertEqual(GregorianYear(2017).ordinal, 2017)
   }
 
   func testHebrewDay() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewDay(12), uniqueTestName: "12")
+    testCodableConformance(of: HebrewDay(12), uniqueTestName: "12")
 
-      var day: HebrewDay = 30
-      var month: HebrewMonth = .adar
-      var year: HebrewYear = 5774
-      day.correct(forMonth: &month, year: &year)
-      XCTAssertEqual(day, 1)
-      XCTAssertEqual(month, .nisan)
+    var day: HebrewDay = 30
+    var month: HebrewMonth = .adar
+    var year: HebrewYear = 5774
+    day.correct(forMonth: &month, year: &year)
+    XCTAssertEqual(day, 1)
+    XCTAssertEqual(month, .nisan)
 
-      day = 30
-      month = .elul
-      year = 5777
-      day.correct(forMonth: &month, year: &year)
-      XCTAssertEqual(day, 1)
-      XCTAssertEqual(month, .tishrei)
-      XCTAssertEqual(year, 5778)
+    day = 30
+    month = .elul
+    year = 5777
+    day.correct(forMonth: &month, year: &year)
+    XCTAssertEqual(day, 1)
+    XCTAssertEqual(month, .tishrei)
+    XCTAssertEqual(year, 5778)
 
-      XCTAssertEqual(HebrewMonth.nisan.numberAlreadyElapsed(leapYear: true), 7)
-      XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: false), 7)
-      XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: true), 8)
-    #endif
+    XCTAssertEqual(HebrewMonth.nisan.numberAlreadyElapsed(leapYear: true), 7)
+    XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: false), 7)
+    XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: true), 8)
   }
 
   func testHebrewHour() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: HebrewHour(3),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "3",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
+    testCustomStringConvertibleConformance(
+      of: HebrewHour(3),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "3",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      XCTAssertEqual(HebrewHour(5).inDigits(), "5")
-    #endif
+    XCTAssertEqual(HebrewHour(5).inDigits(), "5")
   }
 
   func testHebrewMonth() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewMonth.tishrei, uniqueTestName: "Tishrei")
-      testCodableConformance(of: HebrewMonth.adar, uniqueTestName: "Adar")
-      testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
-      testCodableConformance(of: HebrewMonth.adarII, uniqueTestName: "Adar II")
-      testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
-      for ordinal in 1...12 {
-        let month = HebrewMonth(ordinal: ordinal, leapYear: false)
-        testCustomStringConvertibleConformance(
-          of: month,
-          localizations: FormatLocalization.self,
-          uniqueTestName: ordinal.inDigits(),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      }
+    testCodableConformance(of: HebrewMonth.tishrei, uniqueTestName: "Tishrei")
+    testCodableConformance(of: HebrewMonth.adar, uniqueTestName: "Adar")
+    testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
+    testCodableConformance(of: HebrewMonth.adarII, uniqueTestName: "Adar II")
+    testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
+    for ordinal in 1...12 {
+      let month = HebrewMonth(ordinal: ordinal, leapYear: false)
       testCustomStringConvertibleConformance(
-        of: HebrewMonth.adarI,
+        of: month,
         localizations: FormatLocalization.self,
-        uniqueTestName: "Adar I",
+        uniqueTestName: ordinal.inDigits(),
         overwriteSpecificationInsteadOfFailing: false
       )
-      testCustomStringConvertibleConformance(
-        of: HebrewMonth.adarII,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Adar II",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    }
+    testCustomStringConvertibleConformance(
+      of: HebrewMonth.adarI,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Adar I",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    testCustomStringConvertibleConformance(
+      of: HebrewMonth.adarII,
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Adar II",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      let length =
-        FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
-        × (1 as FloatMax).days
-      XCTAssert(length ≥ HebrewMonth.minimumDuration)
-      XCTAssert(length ≤ HebrewMonth.maximumDuration)
+    let length =
+      FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
+      × (1 as FloatMax).days
+    XCTAssert(length ≥ HebrewMonth.minimumDuration)
+    XCTAssert(length ≤ HebrewMonth.maximumDuration)
 
-      var month: HebrewMonth = .adar
-      month.increment(leapYear: false)
-      XCTAssertEqual(month, .nisan)
-      month.decrement(leapYear: false)
-      XCTAssertEqual(month, .adar)
+    var month: HebrewMonth = .adar
+    month.increment(leapYear: false)
+    XCTAssertEqual(month, .nisan)
+    month.decrement(leapYear: false)
+    XCTAssertEqual(month, .adar)
 
-      XCTAssertEqual(HebrewMonth.tishrei.cyclicPredecessor(leapYear: false, {}), .elul)
+    XCTAssertEqual(HebrewMonth.tishrei.cyclicPredecessor(leapYear: false, {}), .elul)
 
-      month = .adar
-      month.correctForYear(leapYear: true)
-      XCTAssertEqual(month, .adarII)
+    month = .adar
+    month.correctForYear(leapYear: true)
+    XCTAssertEqual(month, .adarII)
 
-      month = .adarII
-      month.correctForYear(leapYear: false)
-      XCTAssertEqual(month, .adar)
+    month = .adarII
+    month.correctForYear(leapYear: false)
+    XCTAssertEqual(month, .adar)
 
-      for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
-        XCTAssertNotEqual(month.inEnglish(), "")
+    for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
+      XCTAssertNotEqual(month.inEnglish(), "")
 
-        if month == .tishrei {
-          XCTAssertEqual(month.inEnglish(), "Tishrei")
-        } else if month == .adarII {
-          XCTAssertEqual(month.inEnglish(), "Adar II")
-        }
+      if month == .tishrei {
+        XCTAssertEqual(month.inEnglish(), "Tishrei")
+      } else if month == .adarII {
+        XCTAssertEqual(month.inEnglish(), "Adar II")
       }
+    }
 
-      XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
-      XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
-      XCTAssertEqual(
-        HebrewMonthAndYear(month: .tishrei, year: 5778)
-          − HebrewMonthAndYear(month: .elul, year: 5777),
-        1
-      )
-      XCTAssertEqual(
-        HebrewMonthAndYear(month: .nisan, year: 5777)
-          − HebrewMonthAndYear(month: .sivan, year: 5777),
-        −2
-      )
-    #endif
+    XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
+    XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
+    XCTAssertEqual(
+      HebrewMonthAndYear(month: .tishrei, year: 5778)
+        − HebrewMonthAndYear(month: .elul, year: 5777),
+      1
+    )
+    XCTAssertEqual(
+      HebrewMonthAndYear(month: .nisan, year: 5777)
+        − HebrewMonthAndYear(month: .sivan, year: 5777),
+      −2
+    )
   }
 
   func testHebrewMonthAndYear() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(
-        of: HebrewMonthAndYear(month: .tishrei, year: 2345),
-        uniqueTestName: "Tishrei, 2345"
-      )
-      testCustomStringConvertibleConformance(
-        of: HebrewMonthAndYear(month: .nisan, year: 4460),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Nisan, 4460",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCodableConformance(
+      of: HebrewMonthAndYear(month: .tishrei, year: 2345),
+      uniqueTestName: "Tishrei, 2345"
+    )
+    testCustomStringConvertibleConformance(
+      of: HebrewMonthAndYear(month: .nisan, year: 4460),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "Nisan, 4460",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testHebrewPart() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
-      testCustomStringConvertibleConformance(
-        of: HebrewPart(82),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "82",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
+    testCustomStringConvertibleConformance(
+      of: HebrewPart(82),
+      localizations: FormatLocalization.self,
+      uniqueTestName: "82",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      XCTAssertEqual(HebrewPart(102).inDigits(), "102")
-    #endif
+    XCTAssertEqual(HebrewPart(102).inDigits(), "102")
   }
 
   func testHebrewWeekday() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewWeekday.sunday, uniqueTestName: "Sunday")
-    #endif
+    testCodableConformance(of: HebrewWeekday.sunday, uniqueTestName: "Sunday")
   }
 
   func testHebrewYear() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(of: HebrewYear(1234), uniqueTestName: "1234")
+    testCodableConformance(of: HebrewYear(1234), uniqueTestName: "1234")
 
-      let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
-      XCTAssert(length ≥ HebrewYear.minimumDuration)
-      XCTAssert(length ≤ HebrewYear.maximumDuration)
-    #endif
+    let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
+    XCTAssert(length ≥ HebrewYear.minimumDuration)
+    XCTAssert(length ≤ HebrewYear.maximumDuration)
   }
 
   func testNumericCalendarComponent() {
@@ -661,10 +633,8 @@ class APITests: TestCase {
       var rawValue: RawValue
     }
     var component = TestComponent(1)
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      component += 1
-      XCTAssertEqual(component.rawValue, 2)
-    #endif
+    component += 1
+    XCTAssertEqual(component.rawValue, 2)
   }
 
   func testWeekday() {

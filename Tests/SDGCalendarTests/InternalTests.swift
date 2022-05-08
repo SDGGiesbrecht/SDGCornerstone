@@ -24,33 +24,31 @@ import SDGXCTestUtilities
 class InternalTests: TestCase {
 
   func testDate() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let date = CalendarDate(gregorian: .august, 28, 8232)
-      let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
-      compare(
-        String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
-        against: datesDirectory.appendingPathComponent("Deutsch.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      compare(
-        String(
-          date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
-            .html()
-        ),
-        against: datesDirectory.appendingPathComponent("Français.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      compare(
-        String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
-        against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      compare(
-        String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
-        against: datesDirectory.appendingPathComponent("עברית.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    let date = CalendarDate(gregorian: .august, 28, 8232)
+    let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
+    compare(
+      String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
+      against: datesDirectory.appendingPathComponent("Deutsch.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    compare(
+      String(
+        date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
+          .html()
+      ),
+      against: datesDirectory.appendingPathComponent("Français.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    compare(
+      String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
+      against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    compare(
+      String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
+      against: datesDirectory.appendingPathComponent("עברית.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testGregorianMonth() {
@@ -68,58 +66,48 @@ class InternalTests: TestCase {
   }
 
   func testGregorianWeekdayDate() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(
-        CalendarDate(
-          definition: GregorianWeekdayDate(
-            week: 1,
-            weekday: .tuesday,
-            hour: 0,
-            minute: 0,
-            second: 0
-          )
-        ),
-        CalendarDate(gregorian: .january, 16, 2001)
-      )
-    #endif
+    XCTAssertEqual(
+      CalendarDate(
+        definition: GregorianWeekdayDate(
+          week: 1,
+          weekday: .tuesday,
+          hour: 0,
+          minute: 0,
+          second: 0
+        )
+      ),
+      CalendarDate(gregorian: .january, 16, 2001)
+    )
   }
 
   func testHebrewWeekdayDate() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(
-        CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
-        CalendarDate(hebrew: .tishrei, 15, 5758)
-      )
-    #endif
+    XCTAssertEqual(
+      CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
+      CalendarDate(hebrew: .tishrei, 15, 5758)
+    )
   }
 
   func testHebrewYear() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      InternalTests.testHebrewYear()
-    #endif
+    InternalTests.testHebrewYear()
   }
   static func testHebrewYear() {
     // Untracked
 
     for year in HebrewYear(5700)..<5800 {
 
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-        /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
-        assert(
-          HebrewDate.intervalFromReferenceDate(toStartOf: year)
-            < HebrewDate.intervalFromReferenceDate(toStartOf: year + 1),
-          "Years incorrectly share interval."
-        )
+      /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
+      assert(
+        HebrewDate.intervalFromReferenceDate(toStartOf: year)
+          < HebrewDate.intervalFromReferenceDate(toStartOf: year + 1),
+        "Years incorrectly share interval."
+      )
 
-        _ = year.length  // Throws exception if the year has an invalid length.
-      #endif
+      _ = year.length  // Throws exception if the year has an invalid length.
     }
   }
 
   func testRelativeDate() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let date = CalendarDate.hebrewNow()
-      XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
-    #endif
+    let date = CalendarDate.hebrewNow()
+    XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
   }
 }
