@@ -255,6 +255,8 @@ class APITests: TestCase {
       XCTAssertNotNil(timeZone, "Failed to construct the time zone.")
     #endif
     if let timeZone = timeZone {
+      #warning("Debugging...")
+      print(timeZone.secondsFromGMT())
       let adjustedToZone = utc.adjusted(to: timeZone)
       let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
       XCTAssertEqual(
