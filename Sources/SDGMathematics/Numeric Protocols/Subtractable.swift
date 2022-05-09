@@ -21,8 +21,6 @@ import SDGControlFlow
 /// - Note: Unlike `Numeric`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
 public protocol Subtractable: Addable {
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(SDGCornerstone.Subtractible.−(_:_:))
   /// Returns the difference of the preceding value minus the following value.
   ///
   /// - Parameters:
@@ -30,8 +28,6 @@ public protocol Subtractable: Addable {
   ///     - followingValue: The value to subtract.
   static func − (precedingValue: Self, followingValue: Self) -> Self
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(SDGCornerstone.WholeArithmetic.−=(_:_:))
   /// Subtracts the following value from the preceding value.
   ///
   /// - Parameters:

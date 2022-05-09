@@ -136,44 +136,29 @@ extension UInt: UIntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension UInt64: UIntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension UInt32: UIntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension UInt16: UIntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension UInt8: UIntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }

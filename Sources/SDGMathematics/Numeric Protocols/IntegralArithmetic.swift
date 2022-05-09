@@ -17,8 +17,6 @@ import SDGControlFlow
 /// A type that can be used for integral arithmetic.
 public protocol IntegralArithmetic: Negatable, SignedNumeric, WholeArithmetic {
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(IntegralArithmetic.init(_:))
   /// Creates an instance equal to `int`.
   ///
   /// - Parameters:

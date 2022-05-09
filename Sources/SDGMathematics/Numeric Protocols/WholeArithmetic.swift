@@ -33,8 +33,6 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   // Duplicates Subtractable, but makes the compiler prefer the “Self” variant over the “Vector” variant.
   static func − (precedingValue: Self, followingValue: Self) -> Self
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(SDGCornerstone.WholeArithmetic.×(_:_:))
   /// Returns the product of the preceding value times the following value.
   ///
   /// - Parameters:
@@ -49,8 +47,6 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///     - followingValue: The coefficient by which to multiply.
   static func ×= (precedingValue: inout Self, followingValue: Self)
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
   /// Sets `self` to the integral quotient of `self` divided by `divisor`.
   ///
   /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -117,8 +113,6 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///     - other: Another value.
   mutating func formLeastCommonMultiple(with other: Self)
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(WholeArithmetic.↑)
   /// Returns the result of the preceding value to the power of the following value.
   ///
   /// - Precondition:
@@ -161,8 +155,6 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Returns true if `self` is an even integer.
   var isEven: Bool { get }
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(SDGCornerstone.WholeArithmetic.isOdd)
   /// Returns true if `self` is an odd integer.
   var isOdd: Bool { get }
 
