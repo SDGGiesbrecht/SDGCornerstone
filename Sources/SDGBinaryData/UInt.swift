@@ -28,16 +28,3 @@ extension UIntFamily {
     }
   }
 }
-
-extension UInt8 {
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  @inlinable internal var binaryUInt8: BinaryViewUInt8 {
-    get {
-      return BinaryViewUInt8(self)
-    }
-    set {
-      self = newValue.uInt
-    }
-  }
-}

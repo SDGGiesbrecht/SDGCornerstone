@@ -35,18 +35,6 @@ public struct GregorianMinute: CardinalCalendarComponent,
 
   private var minute: Int
 
-  // MARK: - ConsistentlyOrderedCalendarComponent
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  public init(ordinal: RawValue) {
-    self.init(ordinal − (1 as Vector))
-  }
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  public var ordinal: RawValue {
-    return rawValue + (1 as Vector)
-  }
-
   // MARK: - ConsistentDurationCalendarComponent
 
   public static var duration: CalendarInterval<FloatMax> {
