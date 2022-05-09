@@ -98,26 +98,24 @@ class APITests: TestCase {
   }
 
   func testAngle() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testMeasurementConformance(of: Angle<Double>.self)
+    testMeasurementConformance(of: Angle<Double>.self)
 
-      let _1: Double = 1
+    let _1: Double = 1
 
-      XCTAssertEqual((_1 × τ()).rad, _1.rotations)
-      XCTAssertEqual((_1 × τ()).rad.inRotations, _1)
+    XCTAssertEqual((_1 × τ()).rad, _1.rotations)
+    XCTAssertEqual((_1 × τ()).rad.inRotations, _1)
 
-      let πValue: Double = π()
-      XCTAssert((_1 × 180)°.rawValue ≈ πValue.rad.rawValue)
-      XCTAssert((_1 × 6)°.inDegrees ≈ _1 × 6)
-      XCTAssertEqual((_1 × 60)′, _1°)
-      XCTAssert((_1 × 6)′.inMinutes ≈ _1 × 6)
-      XCTAssertEqual((_1 × 60)′′, _1′)
-      XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
+    let πValue: Double = π()
+    XCTAssert((_1 × 180)°.rawValue ≈ πValue.rad.rawValue)
+    XCTAssert((_1 × 6)°.inDegrees ≈ _1 × 6)
+    XCTAssertEqual((_1 × 60)′, _1°)
+    XCTAssert((_1 × 6)′.inMinutes ≈ _1 × 6)
+    XCTAssertEqual((_1 × 60)′′, _1′)
+    XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
 
-      XCTAssert((_1 × 200).gradians.rawValue ≈ πValue.rad.rawValue)
-      XCTAssert((_1 × 200).gon.rawValue ≈ πValue.rad.rawValue)
-      XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
-    #endif
+    XCTAssert((_1 × 200).gradians.rawValue ≈ πValue.rad.rawValue)
+    XCTAssert((_1 × 200).gon.rawValue ≈ πValue.rad.rawValue)
+    XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
   }
 
   struct BitFieldExample: BitField, Equatable, ExpressibleByIntegerLiteral {
@@ -150,108 +148,100 @@ class APITests: TestCase {
   }
 
   func testComparable() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      test(operator: (≤, "≤"), on: (0, 1), returns: true)
-      test(operator: (≤, "≤"), on: (0, 0), returns: true)
-      test(operator: (≤, "≤"), on: (0, −1), returns: false)
+    test(operator: (≤, "≤"), on: (0, 1), returns: true)
+    test(operator: (≤, "≤"), on: (0, 0), returns: true)
+    test(operator: (≤, "≤"), on: (0, −1), returns: false)
 
-      test(operator: (≥, "≥"), on: (0, 1), returns: false)
-      test(operator: (≥, "≥"), on: (0, 0), returns: true)
-      test(operator: (≥, "≥"), on: (0, −1), returns: true)
+    test(operator: (≥, "≥"), on: (0, 1), returns: false)
+    test(operator: (≥, "≥"), on: (0, 0), returns: true)
+    test(operator: (≥, "≥"), on: (0, −1), returns: true)
 
-      let list = [1, 4, 1, 5]
-      var value = 3
+    let list = [1, 4, 1, 5]
+    var value = 3
 
-      for entry in list {
-        value.decrease(to: entry)
-      }
-      XCTAssertEqual(value, 1)
+    for entry in list {
+      value.decrease(to: entry)
+    }
+    XCTAssertEqual(value, 1)
 
-      for entry in list {
-        value.increase(to: entry)
-      }
-      XCTAssertEqual(value, 5)
+    for entry in list {
+      value.increase(to: entry)
+    }
+    XCTAssertEqual(value, 5)
 
-      XCTAssert(1 ≈ (0, 2))
+    XCTAssert(1 ≈ (0, 2))
 
-      XCTAssert(compare(0, 1, by: { _ in 0 }, { _ in 0 }, { _ in 0 }, { $0 }))
-      XCTAssertFalse(compare(0, 0, by: { $0 }, { $0 }, { $0 }, { $0 }))
-    #endif
+    XCTAssert(compare(0, 1, by: { _ in 0 }, { _ in 0 }, { _ in 0 }, { $0 }))
+    XCTAssertFalse(compare(0, 0, by: { $0 }, { $0 }, { $0 }, { $0 }))
   }
 
   func testFloat() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testRealArithmeticConformance(of: Double.self)
-      testRealArithmeticConformance(of: FloatMax.self)
-      testRealArithmeticConformance(of: CGFloat.self)
-      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
-        testRealArithmeticConformance(of: Float80.self)
-      #endif
-      testRealArithmeticConformance(of: Float.self)
-      #if !PLATFORM_LACKS_SWIFT_FLOAT_16
-        if #available(tvOS 14, iOS 14, watchOS 7, *) {
-          testRealArithmeticConformance(of: Float16.self)
-        }
-      #endif
-
-      XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
-      XCTAssertNotNil(CGFloat("1"))
-      XCTAssertNotNil(CGFloat(String("1")))
-      XCTAssertNil(CGFloat(String("a")))
-
-      test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)
+    testRealArithmeticConformance(of: Double.self)
+    testRealArithmeticConformance(of: FloatMax.self)
+    testRealArithmeticConformance(of: CGFloat.self)
+    #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
+      testRealArithmeticConformance(of: Float80.self)
     #endif
+    testRealArithmeticConformance(of: Float.self)
+    #if !PLATFORM_LACKS_SWIFT_FLOAT_16
+      if #available(tvOS 14, iOS 14, watchOS 7, *) {
+        testRealArithmeticConformance(of: Float16.self)
+      }
+    #endif
+
+    XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
+    XCTAssertNotNil(CGFloat("1"))
+    XCTAssertNotNil(CGFloat(String("1")))
+    XCTAssertNil(CGFloat(String("a")))
+
+    test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)
   }
 
   func testFunctionAnalysis() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let negativeQuatratic = { (input: Int) -> Int in
-        return −(input ↑ 2)
-      }
-      XCTAssertEqual(
-        findLocalMaximum(near: 10, inFunction: negativeQuatratic),
-        0,
-        "Failed to find local maximum."
-      )
+    let negativeQuatratic = { (input: Int) -> Int in
+      return −(input ↑ 2)
+    }
+    XCTAssertEqual(
+      findLocalMaximum(near: 10, inFunction: negativeQuatratic),
+      0,
+      "Failed to find local maximum."
+    )
 
-      XCTAssertEqual(
-        findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic),
-        5,
-        "Failed to find local maximum."
-      )
-      XCTAssertEqual(
-        findLocalMaximum(near: −10, inFunction: negativeQuatratic),
-        0,
-        "Failed to find local maximum."
-      )
+    XCTAssertEqual(
+      findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic),
+      5,
+      "Failed to find local maximum."
+    )
+    XCTAssertEqual(
+      findLocalMaximum(near: −10, inFunction: negativeQuatratic),
+      0,
+      "Failed to find local maximum."
+    )
 
-      let quatratic = { (input: Int) -> Int in
-        return (input ↑ 2)
-      }
+    let quatratic = { (input: Int) -> Int in
+      return (input ↑ 2)
+    }
 
-      XCTAssertEqual(
-        findLocalMinimum(near: 10, inFunction: quatratic),
-        0,
-        "Failed to find local minimum."
-      )
+    XCTAssertEqual(
+      findLocalMinimum(near: 10, inFunction: quatratic),
+      0,
+      "Failed to find local minimum."
+    )
 
-      XCTAssertEqual(
-        findLocalMinimum(near: 10, within: 5...15, inFunction: quatratic),
-        5,
-        "Failed to find local minimum."
-      )
-    #endif
+    XCTAssertEqual(
+      findLocalMinimum(near: 10, within: 5...15, inFunction: quatratic),
+      5,
+      "Failed to find local minimum."
+    )
   }
 
   func testInt() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testIntegralArithmeticConformance(of: Int.self)
-      testIntegralArithmeticConformance(of: IntMax.self)
-      testIntegralArithmeticConformance(of: Int64.self)
-      testIntegralArithmeticConformance(of: Int32.self)
-      testIntegralArithmeticConformance(of: Int16.self)
-      testIntegralArithmeticConformance(of: Int8.self)
-    #endif
+    testIntegralArithmeticConformance(of: Int.self)
+    testIntegralArithmeticConformance(of: IntMax.self)
+    testIntegralArithmeticConformance(of: Int64.self)
+    testIntegralArithmeticConformance(of: Int32.self)
+    testIntegralArithmeticConformance(of: Int16.self)
+    testIntegralArithmeticConformance(of: Int8.self)
   }
 
   struct NegatableSignedNumeric: Negatable, SignedNumeric {
@@ -297,21 +287,17 @@ class APITests: TestCase {
     }
   }
   func testNegatable() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testNegatableConformance(
-        minuend: NegatableSignedNumeric(5),
-        subtrahend: NegatableSignedNumeric(3),
-        difference: NegatableSignedNumeric(2)
-      )
-    #endif
+    testNegatableConformance(
+      minuend: NegatableSignedNumeric(5),
+      subtrahend: NegatableSignedNumeric(3),
+      difference: NegatableSignedNumeric(2)
+    )
   }
 
   func testOneDimensionalPoint() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      var x = 1
-      x.decrement()
-      XCTAssertEqual(0, x)
-    #endif
+    var x = 1
+    x.decrement()
+    XCTAssertEqual(0, x)
   }
 
   enum OrderedEnumerationExample: Int, OrderedEnumeration {
@@ -408,23 +394,21 @@ class APITests: TestCase {
     }
   }
   func testPointProtocol() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testPointProtocolConformance(
-        departure: PointProtocolVectorSelfExample(8),
-        vector: PointProtocolVectorSelfExample(1),
-        destination: PointProtocolVectorSelfExample(9)
-      )
-      testPointProtocolConformance(
-        departure: PointProtocolStrideableExample(0),
-        vector: 9,
-        destination: PointProtocolStrideableExample(9)
-      )
-      testPointProtocolConformance(
-        departure: PointProtocolStrideableVectorStrideExample(7),
-        vector: 2,
-        destination: PointProtocolStrideableVectorStrideExample(9)
-      )
-    #endif
+    testPointProtocolConformance(
+      departure: PointProtocolVectorSelfExample(8),
+      vector: PointProtocolVectorSelfExample(1),
+      destination: PointProtocolVectorSelfExample(9)
+    )
+    testPointProtocolConformance(
+      departure: PointProtocolStrideableExample(0),
+      vector: 9,
+      destination: PointProtocolStrideableExample(9)
+    )
+    testPointProtocolConformance(
+      departure: PointProtocolStrideableVectorStrideExample(7),
+      vector: 2,
+      destination: PointProtocolStrideableVectorStrideExample(9)
+    )
   }
 
   struct RealArithmeticExample: RealArithmetic {
@@ -519,40 +503,36 @@ class APITests: TestCase {
     }
   }
   func testRealArithmetic() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(0.π, Double.π)
-      XCTAssertEqual(0.τ, Double.τ)
-      XCTAssertEqual(e(), Double.e)
-      XCTAssert((√RealArithmeticExample(4)).value ≈ RealArithmeticExample(2).value)
-      test(function: (log, "log"), on: 100 as RealArithmeticExample, returns: 2)
-      XCTAssert(ln(RealArithmeticExample(714)).value ≈ 6.570_88)
-      XCTAssert(cos(RealArithmeticExample(401).radians).value ≈ 0.432_21)
-      XCTAssert(tan((5 as RealArithmeticExample).rad).value ≈ −3.380_52)
-      XCTAssert(arcsin((1 ÷ 6 as RealArithmeticExample)).inRadians.value ≈ 0.167_44)
-      XCTAssert(arccos((1 ÷ 7 as RealArithmeticExample)).inRadians.value ≈ 1.427_44)
-    #endif
+    XCTAssertEqual(0.π, Double.π)
+    XCTAssertEqual(0.τ, Double.τ)
+    XCTAssertEqual(e(), Double.e)
+    XCTAssert((√RealArithmeticExample(4)).value ≈ RealArithmeticExample(2).value)
+    test(function: (log, "log"), on: 100 as RealArithmeticExample, returns: 2)
+    XCTAssert(ln(RealArithmeticExample(714)).value ≈ 6.570_88)
+    XCTAssert(cos(RealArithmeticExample(401).radians).value ≈ 0.432_21)
+    XCTAssert(tan((5 as RealArithmeticExample).rad).value ≈ −3.380_52)
+    XCTAssert(arcsin((1 ÷ 6 as RealArithmeticExample)).inRadians.value ≈ 0.167_44)
+    XCTAssert(arccos((1 ÷ 7 as RealArithmeticExample)).inRadians.value ≈ 1.427_44)
   }
 
   func testSequence() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(∑[1, 2, 3, 4], 10)
-      XCTAssertEqual(∏[1, 2, 3, 4], 24)
+    XCTAssertEqual(∑[1, 2, 3, 4], 10)
+    XCTAssertEqual(∏[1, 2, 3, 4], 24)
 
-      XCTAssertEqual(([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as [Double]).mean(), 5)
-      XCTAssertEqual(([0, 0, 0, 0, 50] as [Double]).mean(), 10)
-      XCTAssertNil(([] as [Double]).mean())
+    XCTAssertEqual(([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as [Double]).mean(), 5)
+    XCTAssertEqual(([0, 0, 0, 0, 50] as [Double]).mean(), 10)
+    XCTAssertNil(([] as [Double]).mean())
 
-      XCTAssertEqual(([0] as [Double]).median(), 0)
-      XCTAssertEqual(([−1, 0, 1] as [Double]).median(), 0)
-      XCTAssertEqual(([−1, 1, 0] as [Double]).median(), 0)
-      XCTAssertEqual(([1, 2, 3, 4] as [Double]).median(), 2.5)
-      XCTAssertEqual(([1, 4, 3, 2] as [Double]).median(), 2.5)
-      XCTAssertNil(([] as [Double]).median())
+    XCTAssertEqual(([0] as [Double]).median(), 0)
+    XCTAssertEqual(([−1, 0, 1] as [Double]).median(), 0)
+    XCTAssertEqual(([−1, 1, 0] as [Double]).median(), 0)
+    XCTAssertEqual(([1, 2, 3, 4] as [Double]).median(), 2.5)
+    XCTAssertEqual(([1, 4, 3, 2] as [Double]).median(), 2.5)
+    XCTAssertNil(([] as [Double]).median())
 
-      XCTAssertEqual("ABCABA".statisticalModes(), ["A"])
-      XCTAssertEqual("ABCABAB".statisticalModes().sorted(), ["A", "B"])
-      XCTAssertEqual("".statisticalModes(), [])
-    #endif
+    XCTAssertEqual("ABCABA".statisticalModes(), ["A"])
+    XCTAssertEqual("ABCABAB".statisticalModes().sorted(), ["A", "B"])
+    XCTAssertEqual("".statisticalModes(), [])
   }
 
   struct SubtractableNumericExample: Numeric, Subtractable {
@@ -665,24 +645,22 @@ class APITests: TestCase {
     }
   }
   func testSubtractable() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      XCTAssertEqual(
-        SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
-        SubtractableNumericExample(1)
-      )
-      var x = SubtractableNumericExample(7)
-      x -= SubtractableNumericExample(8)  // @exempt(from: unicode)
-      XCTAssertEqual(x, SubtractableNumericExample(−1))
+    XCTAssertEqual(
+      SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
+      SubtractableNumericExample(1)
+    )
+    var x = SubtractableNumericExample(7)
+    x -= SubtractableNumericExample(8)  // @exempt(from: unicode)
+    XCTAssertEqual(x, SubtractableNumericExample(−1))
 
-      XCTAssertEqual(
-        SubtractableStrideableExample(6)
-          - SubtractableStrideableExample(5),  // @exempt(from: unicode)
-        SubtractableStrideableExample(1)
-      )
-      var y = SubtractableStrideableExample(7)
-      y -= SubtractableStrideableExample(8)  // @exempt(from: unicode)
-      XCTAssertEqual(y, SubtractableStrideableExample(−1))
-    #endif
+    XCTAssertEqual(
+      SubtractableStrideableExample(6)
+        - SubtractableStrideableExample(5),  // @exempt(from: unicode)
+      SubtractableStrideableExample(1)
+    )
+    var y = SubtractableStrideableExample(7)
+    y -= SubtractableStrideableExample(8)  // @exempt(from: unicode)
+    XCTAssertEqual(y, SubtractableStrideableExample(−1))
   }
 
   func testTuple() {
@@ -728,23 +706,21 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
-      testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
-      testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
-      testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
-      testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
-      testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
+    testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
 
-      testBitFieldConformance(
-        start: 0b0101_0110 as UInt8,
-        not: 0b1010_1001,
-        other: 0b1101_0010,
-        and: 0b0101_0010,
-        or: 0b1101_0110,
-        exclusiveOr: 0b1000_0100
-      )
-    #endif
+    testBitFieldConformance(
+      start: 0b0101_0110 as UInt8,
+      not: 0b1010_1001,
+      other: 0b1101_0010,
+      and: 0b0101_0010,
+      or: 0b1101_0110,
+      exclusiveOr: 0b1000_0100
+    )
   }
 
   struct VectorProtocolExample: RationalVector {
@@ -776,16 +752,14 @@ class APITests: TestCase {
     }
   }
   func testVectorProtocol() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testRationalVectorConformance(
-        augend: VectorProtocolExample(1),
-        addend: VectorProtocolExample(2),
-        sum: VectorProtocolExample(3),
-        multiplicand: VectorProtocolExample(4),
-        multiplier: 5,
-        product: VectorProtocolExample(20)
-      )
-      XCTAssertEqual(5 × VectorProtocolExample(4), VectorProtocolExample(20))
-    #endif
+    testRationalVectorConformance(
+      augend: VectorProtocolExample(1),
+      addend: VectorProtocolExample(2),
+      sum: VectorProtocolExample(3),
+      multiplicand: VectorProtocolExample(4),
+      multiplier: 5,
+      product: VectorProtocolExample(20)
+    )
+    XCTAssertEqual(5 × VectorProtocolExample(4), VectorProtocolExample(20))
   }
 }

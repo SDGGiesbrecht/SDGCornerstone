@@ -50,16 +50,14 @@ class RegressionTests: TestCase {
   func testNestingLevelLocation() {
     // Untracked
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let nestString = StrictString("%{1~a~a^a|^}")
-      let open: StrictString = "{"
-      let close: StrictString = "}"
-      let start = nestString.index(nestString.startIndex, offsetBy: 1)
-      let end = nestString.index(nestString.startIndex, offsetBy: 12)
-      let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container
-        .range
-      XCTAssertEqual(nestRange, start..<end)
-    #endif
+    let nestString = StrictString("%{1~a~a^a|^}")
+    let open: StrictString = "{"
+    let close: StrictString = "}"
+    let start = nestString.index(nestString.startIndex, offsetBy: 1)
+    let end = nestString.index(nestString.startIndex, offsetBy: 12)
+    let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container
+      .range
+    XCTAssertEqual(nestRange, start..<end)
   }
 
   func testReverseSearch() {

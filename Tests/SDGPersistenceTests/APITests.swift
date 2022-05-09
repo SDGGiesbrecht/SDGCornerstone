@@ -160,12 +160,10 @@ class APITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCodableConformance(
-        of: LosslessStirngConvertibleExample("Example"),
-        uniqueTestName: "Example"
-      )
-    #endif
+    testCodableConformance(
+      of: LosslessStirngConvertibleExample("Example"),
+      uniqueTestName: "Example"
+    )
   }
 
   func testPreferences() throws {
@@ -249,42 +247,40 @@ class APITests: TestCase {
   }
 
   func testSpecification() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
+    let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
-      let new = specifications.appendingPathComponent("New.txt")
-      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
-        try? FileManager.default.removeItem(at: new)
-        compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
-        try? FileManager.default.removeItem(at: new)
+    let new = specifications.appendingPathComponent("New.txt")
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
+      try? FileManager.default.removeItem(at: new)
+      compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
+      try? FileManager.default.removeItem(at: new)
 
-        let overwrittenSpecification = specifications.appendingPathComponent("Overwrite.txt")
-        compare(
-          "Overwritten.",
-          against: overwrittenSpecification,
-          overwriteSpecificationInsteadOfFailing: true
-        )
+      let overwrittenSpecification = specifications.appendingPathComponent("Overwrite.txt")
+      compare(
+        "Overwritten.",
+        against: overwrittenSpecification,
+        overwriteSpecificationInsteadOfFailing: true
+      )
 
-        let failingSpecificationTests = {
-          let previous = testAssertionMethod
-          defer { testAssertionMethod = previous }
-          testAssertionMethod = { _, describe, _, _ in
-            _ = describe()
-          }
-
-          compare(
-            "Incorrect.",
-            against: overwrittenSpecification,
-            overwriteSpecificationInsteadOfFailing: false
-          )
-          compare(
-            "Prependend.\nOverwritten.",
-            against: overwrittenSpecification,
-            overwriteSpecificationInsteadOfFailing: false
-          )
+      let failingSpecificationTests = {
+        let previous = testAssertionMethod
+        defer { testAssertionMethod = previous }
+        testAssertionMethod = { _, describe, _, _ in
+          _ = describe()
         }
-        failingSpecificationTests()
-      #endif
+
+        compare(
+          "Incorrect.",
+          against: overwrittenSpecification,
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        compare(
+          "Prependend.\nOverwritten.",
+          against: overwrittenSpecification,
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      }
+      failingSpecificationTests()
     #endif
   }
 

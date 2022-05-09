@@ -23,25 +23,23 @@ class RegressionTests: TestCase {
   func testAddAndSetIsUnambiguous() {
     // Untracked
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      func runTests<N: IntegralArithmetic>(_ type: N.Type) {
-        var x: N = 0
-        let _1: N = 1
-        x −= _1
-        XCTAssertEqual(x, −1)
-        XCTAssertEqual((x − _1) as N, −2)
-        x += _1
-        XCTAssertEqual(x, 0)
-        XCTAssertEqual(x + _1, 1)
-      }
-      runTests(Int.self)
-      runTests(Int64.self)
-      runTests(Int32.self)
-      runTests(Int16.self)
-      runTests(Int8.self)
-      runTests(Double.self)
-      runTests(Float.self)
-    #endif
+    func runTests<N: IntegralArithmetic>(_ type: N.Type) {
+      var x: N = 0
+      let _1: N = 1
+      x −= _1
+      XCTAssertEqual(x, −1)
+      XCTAssertEqual((x − _1) as N, −2)
+      x += _1
+      XCTAssertEqual(x, 0)
+      XCTAssertEqual(x + _1, 1)
+    }
+    runTests(Int.self)
+    runTests(Int64.self)
+    runTests(Int32.self)
+    runTests(Int16.self)
+    runTests(Int8.self)
+    runTests(Double.self)
+    runTests(Float.self)
   }
 
   struct Values: Comparable, Equatable {
@@ -81,12 +79,10 @@ class RegressionTests: TestCase {
   func testDivisionOfNegatives() {
     // Untracked
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let negativeThree = −3
-      XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by: 1), −3)
-      let negativeEighteen = −18
-      XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
-    #endif
+    let negativeThree = −3
+    XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by: 1), −3)
+    let negativeEighteen = −18
+    XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
   }
 
   func testFloor() {
@@ -99,45 +95,41 @@ class RegressionTests: TestCase {
   func testSubtraction() {
     // Untracked
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      func runTests<N>(_ type: N.Type) where N: WholeArithmetic {
-        let five: N = 10 − 5
-        XCTAssertEqual(five, 5)
-      }
-      runTests(UInt.self)
-      runTests(UInt64.self)
-      runTests(UInt32.self)
-      runTests(UInt16.self)
-      runTests(UInt8.self)
-      runTests(Int.self)
-      runTests(Int64.self)
-      runTests(Int32.self)
-      runTests(Int16.self)
-      runTests(Int8.self)
-      runTests(Double.self)
-      runTests(Float.self)
-    #endif
+    func runTests<N>(_ type: N.Type) where N: WholeArithmetic {
+      let five: N = 10 − 5
+      XCTAssertEqual(five, 5)
+    }
+    runTests(UInt.self)
+    runTests(UInt64.self)
+    runTests(UInt32.self)
+    runTests(UInt16.self)
+    runTests(UInt8.self)
+    runTests(Int.self)
+    runTests(Int64.self)
+    runTests(Int32.self)
+    runTests(Int16.self)
+    runTests(Int8.self)
+    runTests(Double.self)
+    runTests(Float.self)
   }
 
   func testSubtractionIsUnambiguous() {
     // Untracked
 
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      let _: UInt = 3 − 2
-      let _: UInt64 = 3 − 2
-      let _: UInt32 = 3 − 2
-      let _: UInt16 = 3 − 2
-      let _: UInt8 = 3 − 2
-      let _: Int = 3 − 2
-      let _: Int64 = 3 − 2
-      let _: Int32 = 3 − 2
-      let _: Int16 = 3 − 2
-      let _: Int8 = 3 − 2
-      let _: Double = 3 − 2
-      #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
-        let _: Float80 = 3 − 2
-      #endif
-      let _: Float = 3 − 2
+    let _: UInt = 3 − 2
+    let _: UInt64 = 3 − 2
+    let _: UInt32 = 3 − 2
+    let _: UInt16 = 3 − 2
+    let _: UInt8 = 3 − 2
+    let _: Int = 3 − 2
+    let _: Int64 = 3 − 2
+    let _: Int32 = 3 − 2
+    let _: Int16 = 3 − 2
+    let _: Int8 = 3 − 2
+    let _: Double = 3 − 2
+    #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))
+      let _: Float80 = 3 − 2
     #endif
+    let _: Float = 3 − 2
   }
 }

@@ -848,7 +848,5 @@ for target in package.targets {
       "PLATFORM_LACKS_SWIFT_COMPILER",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
-    // #workaround(Windows suffers unexplained segmentation faults.)
-    .define("PLATFORM_SUFFERS_SEGMENTATION_FAULTS", .when(platforms: [.windows])),
   ])
 }

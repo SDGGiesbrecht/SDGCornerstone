@@ -28,7 +28,7 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
-    #if !(PLATFORM_SUFFERS_SEGMENTATION_FAULTS || PLATFORM_LACKS_FOUNDATION_FILE_MANAGER)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       LocalizationSetting(orderOfPrecedence: ["en"]).do {
         // @example(readMe🇨🇦EN)
         // ••••••• Localization •••••••
