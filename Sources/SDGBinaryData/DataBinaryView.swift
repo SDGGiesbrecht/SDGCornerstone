@@ -67,17 +67,17 @@ extension Data {
 
     public subscript(position: IntMax) -> Bool {
       get {
-        return data[byteIndex(position)].binaryUInt8[bitIndex(position)]
+        return data[byteIndex(position)].binary[bitIndex(position)]
       }
       set {
-        data[byteIndex(position)].binaryUInt8[bitIndex(position)] = newValue
+        data[byteIndex(position)].binary[bitIndex(position)] = newValue
       }
     }
 
     // MARK: - CustomStringConvertible
 
     public var description: String {
-      let bytes = data.map { String(describing: $0.binaryUInt8) }
+      let bytes = data.map { String(describing: $0.binary) }
       return bytes.joined(separator: " ")
     }
   }

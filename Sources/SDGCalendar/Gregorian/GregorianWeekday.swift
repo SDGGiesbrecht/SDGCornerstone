@@ -62,11 +62,4 @@ public enum GregorianWeekday: Int, ConsistentDurationCalendarComponent,
   // MARK: - PointProtocol
 
   public typealias Vector = RawValue
-
-  // MARK: - Strideable
-
-  // #workaround(Swift 5.5.3, Redundant, but evades SR‐15734.)
-  public func advanced(by n: Int) -> GregorianWeekday {
-    return Self(rawValue: rawValue + n)!
-  }
 }
