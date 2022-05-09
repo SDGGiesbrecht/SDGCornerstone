@@ -55,23 +55,21 @@ class APITests: TestCase {
   }
 
   func testXMLAttribute() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      struct XMLAttributeDemonstration: Codable, Equatable {
-        init() {
-          child = 1
-          attribute = 2
-        }
-        var child: Int
-        @XML.Attribute var attribute: Int
+    struct XMLAttributeDemonstration: Codable, Equatable {
+      init() {
+        child = 1
+        attribute = 2
       }
-      testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
+      var child: Int
+      @XML.Attribute var attribute: Int
+    }
+    testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
 
-      try SDGXMLTests.testXML(
-        of: XMLAttributeDemonstration(),
-        specification: "With Attribute",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: XMLAttributeDemonstration(),
+      specification: "With Attribute",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     XCTAssertNil(XML.Attribute<Int>("Not an Int.")?.wrappedValue)
     _ = XML.Attribute(wrappedValue: "string").wrappedInstance
     testHashableConformance(
@@ -87,40 +85,34 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-        testCodableConformance(
-          of: XML.AttributeValue(text: "value"),
-          uniqueTestName: "Value"
-        )
-      #endif
+      testCodableConformance(
+        of: XML.AttributeValue(text: "value"),
+        uniqueTestName: "Value"
+      )
     #endif
   }
 
   func testXMLCharacterData() {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCustomStringConvertibleConformance(
-        of: "attribute text, 0 < 1" as XML.CharacterData,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "Character Data",
-        overwriteSpecificationInsteadOfFailing: false
+    testCustomStringConvertibleConformance(
+      of: "attribute text, 0 < 1" as XML.CharacterData,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Character Data",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.CharacterData(text: "character data"),
+        uniqueTestName: "Character Data"
       )
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        testCodableConformance(
-          of: XML.CharacterData(text: "character data"),
-          uniqueTestName: "Character Data"
-        )
-      #endif
     #endif
   }
 
   func testXMLCoderArray() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: ["A", "B", "C"],
-        specification: "Array",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: ["A", "B", "C"],
+      specification: "Array",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   class Superclass: Codable {
@@ -161,13 +153,11 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClass() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: Subclass(a: "A", b: "B", c: "C", d: "D"),
-        specification: "Class",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: Subclass(a: "A", b: "B", c: "C", d: "D"),
+      specification: "Class",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   final class UnkeyedSubclass: Superclass, Equatable {
@@ -195,13 +185,11 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClassUnkeyed() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
-        specification: "Unkeyed Class",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
+      specification: "Unkeyed Class",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderCustomized() throws {
@@ -260,27 +248,23 @@ class APITests: TestCase {
         _ = unkeyed.codingPath
       }
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: Customized(),
-        specification: "Customized",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: Customized(),
+      specification: "Customized",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderDictionary() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: [
-          "key": "value",
-          "Schlüssel": "Wert",
-          "clef": "valeur",
-        ],
-        specification: "Dictionary",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: [
+        "key": "value",
+        "Schlüssel": "Wert",
+        "clef": "valeur",
+      ],
+      specification: "Dictionary",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderKeyedNil() throws {
@@ -314,13 +298,11 @@ class APITests: TestCase {
         try container.encodeNil(forKey: .d)
       }
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: WithNil(a: "A", b: nil, c: "C"),
-        specification: "With Keyed Nil",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: WithNil(a: "A", b: nil, c: "C"),
+      specification: "With Keyed Nil",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderNil() throws {
@@ -350,13 +332,11 @@ class APITests: TestCase {
         try container.encode("non‐nil")
       }
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: WithNil(a: "A", b: nil, c: "C"),
-        specification: "With Nil",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: WithNil(a: "A", b: nil, c: "C"),
+      specification: "With Nil",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderSingleValue() throws {
@@ -380,13 +360,11 @@ class APITests: TestCase {
         _ = container.codingPath
       }
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: SingleValue(value: Nested()),
-        specification: "Single Value",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: SingleValue(value: Nested()),
+      specification: "Single Value",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderString() throws {
@@ -419,13 +397,11 @@ class APITests: TestCase {
       var float: Float = 0
       var nested: Nested = Nested()
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      try SDGXMLTests.testXML(
-        of: Structure(),
-        specification: "Structure",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    try SDGXMLTests.testXML(
+      of: Structure(),
+      specification: "Structure",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLCoderUnkeyed() throws {
@@ -487,122 +463,114 @@ class APITests: TestCase {
         try container.encode(nested)
       }
     }
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
+    try SDGXMLTests.testXML(
+      of: Unkeyed(),
+      specification: "Unkeyed",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLCoderXML() throws {
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLProperty: Codable, Equatable {
+        var element: XML.Element
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(
+            XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+          ),
+        ]
+      )
       try SDGXMLTests.testXML(
-        of: Unkeyed(),
-        specification: "Unkeyed",
+        of: XMLProperty(element: xml),
+        specification: "XML",
         overwriteSpecificationInsteadOfFailing: false
       )
     #endif
   }
 
-  func testXMLCoderXML() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        struct XMLProperty: Codable, Equatable {
-          var element: XML.Element
-        }
-        let xml = XML.Element(
-          name: "element",
-          attributes: [
-            "attribute": "value",
-            "Eigenschaft": "Wert",
-            "attribut": "valeur",
-            "ιδιότητα": "τιμή",
-          ],
-          content: [
-            .characterData(XML.CharacterData(text: "A mix of text ")),
-            .element(XML.Element(name: "and")),
-            .element(XML.Element(name: "elements")),
-            .characterData(
-              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
-            ),
-          ]
-        )
-        try SDGXMLTests.testXML(
-          of: XMLProperty(element: xml),
-          specification: "XML",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
-    #endif
-  }
-
   func testXMLCoderXMLUnkeyed() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        struct XMLPropertyUnkeyed: Codable, Equatable {
-          var properties: [XML.Element]
-        }
-        let xml = XML.Element(
-          name: "element",
-          attributes: [
-            "attribute": "value",
-            "Eigenschaft": "Wert",
-            "attribut": "valeur",
-            "ιδιότητα": "τιμή",
-          ],
-          content: [
-            .characterData(XML.CharacterData(text: "A mix of text ")),
-            .element(XML.Element(name: "and")),
-            .element(XML.Element(name: "elements")),
-            .characterData(
-              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
-            ),
-          ]
-        )
-        try SDGXMLTests.testXML(
-          of: XMLPropertyUnkeyed(properties: [xml, xml]),
-          specification: "XML Unkeyed",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLPropertyUnkeyed: Codable, Equatable {
+        var properties: [XML.Element]
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(
+            XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+          ),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: XMLPropertyUnkeyed(properties: [xml, xml]),
+        specification: "XML Unkeyed",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
   func testXMLCoderXMLSingleValue() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        struct XMLPropertySingleValue: Codable, Equatable {
-          init(property: XML.Element) {
-            self.property = property
-          }
-          var property: XML.Element
-          init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            self.property = try container.decode(XML.Element.self)
-          }
-          func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(property)
-          }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLPropertySingleValue: Codable, Equatable {
+        init(property: XML.Element) {
+          self.property = property
         }
-        struct Parent: Codable, Equatable {
-          var element: XMLPropertySingleValue
+        var property: XML.Element
+        init(from decoder: Decoder) throws {
+          let container = try decoder.singleValueContainer()
+          self.property = try container.decode(XML.Element.self)
         }
-        let xml = XML.Element(
-          name: "element",
-          attributes: [
-            "attribute": "value",
-            "Eigenschaft": "Wert",
-            "attribut": "valeur",
-            "ιδιότητα": "τιμή",
-          ],
-          content: [
-            .characterData(XML.CharacterData(text: "A mix of text ")),
-            .element(XML.Element(name: "and")),
-            .element(XML.Element(name: "elements")),
-            .characterData(
-              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
-            ),
-          ]
-        )
-        try SDGXMLTests.testXML(
-          of: Parent(element: XMLPropertySingleValue(property: xml)),
-          specification: "XML Single Value",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+        func encode(to encoder: Encoder) throws {
+          var container = encoder.singleValueContainer()
+          try container.encode(property)
+        }
+      }
+      struct Parent: Codable, Equatable {
+        var element: XMLPropertySingleValue
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(
+            XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+          ),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: Parent(element: XMLPropertySingleValue(property: xml)),
+        specification: "XML Single Value",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -713,40 +681,38 @@ class APITests: TestCase {
   }
 
   func testXMLDecoderTypeMismatch() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      struct Nested: Decodable {
-        var property: Int
-      }
-      struct Placeholder: Decodable {
-        var nested: Nested
-      }
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        try testErrorDecsription(
-          triggerError: { () -> String in
-            var caughtError: String = ""
-            XCTAssertThrowsError(
-              try XML.Decoder().decode(
-                Placeholder.self,
-                from: "<placeholder><nested><property>A</property></nested></placeholder>"
-              )
-            ) { error in
-              if let decoding = error as? DecodingError,
-                case .typeMismatch(let type, let context) = decoding
-              {
-                XCTAssert(type == Int.self, "Wrong type: \(type)")
-                // JSONEncoder’s comparable error does include the key in the context.
-                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
-                caughtError = context.debugDescription
-              } else {
-                XCTFail("Wrong kind of error: \(error)")
-              }
+    struct Nested: Decodable {
+      var property: Int
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><property>A</property></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the key in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
             }
-            return caughtError
-          },
-          specification: "Type Mismatch",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+          }
+          return caughtError
+        },
+        specification: "Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -834,33 +800,31 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-        try testErrorDecsription(
-          triggerError: { () -> String in
-            var caughtError: String = ""
-            XCTAssertThrowsError(
-              try XML.Decoder().decode(
-                Placeholder.self,
-                from: "<placeholder><nested><first>A</first></nested></placeholder>"
-              )
-            ) { error in
-              if let decoding = error as? DecodingError,
-                case .typeMismatch(let type, let context) = decoding
-              {
-                XCTAssert(type == Int.self, "Wrong type: \(type)")
-                // JSONEncoder’s comparable error does include the index in the context.
-                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
-                caughtError = context.debugDescription
-              } else {
-                XCTFail("Wrong kind of error: \(error)")
-              }
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><first>A</first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
             }
-            return caughtError
-          },
-          specification: "Keyless Type Mismatch",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+          }
+          return caughtError
+        },
+        specification: "Keyless Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -954,33 +918,31 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-        try testErrorDecsription(
-          triggerError: { () -> String in
-            var caughtError: String = ""
-            XCTAssertThrowsError(
-              try XML.Decoder().decode(
-                Placeholder.self,
-                from: "<placeholder><nested><first><child/></first></nested></placeholder>"
-              )
-            ) { error in
-              if let decoding = error as? DecodingError,
-                case .typeMismatch(let type, let context) = decoding
-              {
-                XCTAssert(type == String.self, "Wrong type: \(type)")
-                // JSONEncoder’s comparable error does include the index in the context.
-                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
-                caughtError = context.debugDescription
-              } else {
-                XCTFail("Wrong kind of error: \(error)")
-              }
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><first><child/></first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
             }
-            return caughtError
-          },
-          specification: "Unkeyed Complexity Type Mismatch",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+          }
+          return caughtError
+        },
+        specification: "Unkeyed Complexity Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -998,96 +960,90 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-        try testErrorDecsription(
-          triggerError: { () -> String in
-            var caughtError: String = ""
-            XCTAssertThrowsError(
-              try XML.Decoder().decode(
-                Placeholder.self,
-                // Element names should be irrelevant in an unkeyed container.
-                from: "<placeholder><nested><first>some string</first></nested></placeholder>"
-              )
-            ) { error in
-              if let decoding = error as? DecodingError,
-                case .valueNotFound(let type, let context) = decoding
-              {
-                XCTAssert(type == String.self, "Wrong type: \(type)")
-                // JSONEncoder’s comparable error does include the index in the context.
-                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
-                caughtError = context.debugDescription
-              } else {
-                XCTFail("Wrong kind of error: \(error)")
-              }
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              // Element names should be irrelevant in an unkeyed container.
+              from: "<placeholder><nested><first>some string</first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .valueNotFound(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
             }
-            return caughtError
-          },
-          specification: "Container End",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+          }
+          return caughtError
+        },
+        specification: "Container End",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
   func testXMLDocument() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      testCustomStringConvertibleConformance(
+    testCustomStringConvertibleConformance(
+      of: XML.Document(rootElement: XML.Element(name: "root")),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Document",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
         of: XML.Document(rootElement: XML.Element(name: "root")),
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "Document",
-        overwriteSpecificationInsteadOfFailing: false
+        uniqueTestName: "Document"
       )
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        testCodableConformance(
-          of: XML.Document(rootElement: XML.Element(name: "root")),
-          uniqueTestName: "Document"
-        )
-        testFileConvertibleConformance(
-          of: XML.Document(rootElement: XML.Element(name: "document")),
-          uniqueTestName: "Document"
-        )
-        testFileConvertibleConformance(
-          of: XML.Document(
-            dtd: .system("file://localhost/Some/File.dtd"),
-            rootElement: XML.Element(name: "document")
-          ),
-          uniqueTestName: "DTD"
-        )
-      #endif
-      #if !PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT
-        XCTAssertNil(
-          try? XML.Document(dtd: .system("no such DTD"), rootElement: XML.Element(name: "document"))
-            .validate()
-        )
-      #endif
+      testFileConvertibleConformance(
+        of: XML.Document(rootElement: XML.Element(name: "document")),
+        uniqueTestName: "Document"
+      )
+      testFileConvertibleConformance(
+        of: XML.Document(
+          dtd: .system("file://localhost/Some/File.dtd"),
+          rootElement: XML.Element(name: "document")
+        ),
+        uniqueTestName: "DTD"
+      )
+    #endif
+    #if !PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT
+      XCTAssertNil(
+        try? XML.Document(dtd: .system("no such DTD"), rootElement: XML.Element(name: "document"))
+          .validate()
+      )
     #endif
   }
 
   func testXMLElement() throws {
-    #if !PLATFORM_SUFFERS_SEGMENTATION_FAULTS
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        XCTAssertNil(try? XML.Element(source: "<element>"))
-        XCTAssertEqual(
-          try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
-          XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
-        )
-      #endif
-      testCustomStringConvertibleConformance(
-        of: XML.Element(name: "element"),
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "Document",
-        overwriteSpecificationInsteadOfFailing: false
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      XCTAssertNil(try? XML.Element(source: "<element>"))
+      XCTAssertEqual(
+        try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
+        XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
       )
-      #if !PLATFORM_LACKS_FOUNDATION_XML
-        testCodableConformance(
-          of: XML.Element(
-            name: "name",
-            attributes: ["attribute": "value"],
-            content: [.element(XML.Element(name: "child"))]
-          ),
-          uniqueTestName: "Element"
-        )
-      #endif
+    #endif
+    testCustomStringConvertibleConformance(
+      of: XML.Element(name: "element"),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Document",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.Element(
+          name: "name",
+          attributes: ["attribute": "value"],
+          content: [.element(XML.Element(name: "child"))]
+        ),
+        uniqueTestName: "Element"
+      )
     #endif
   }
 
