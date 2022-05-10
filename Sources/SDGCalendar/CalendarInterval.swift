@@ -291,23 +291,10 @@ where Scalar: RationalArithmetic {
 
   // MARK: - Measurement
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(Measurement.init(rawValue:))
-  /// Creates a measurement from a raw value in undefined but consistent units.
-  ///
-  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-  ///
-  /// - Parameters:
-  ///     - rawValue: The raw value.
   public init(rawValue: Scalar) {
     inUnits = rawValue
   }
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(Measurement.rawValue)
-  /// A raw value in undefined but consistent units.
-  ///
-  /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
   public var rawValue: Scalar {
     get {
       return inUnits

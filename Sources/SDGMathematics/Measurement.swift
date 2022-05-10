@@ -29,8 +29,6 @@ where Scalar: RationalArithmetic {
 
   // MARK: - Internal Values
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(Measurement.init(rawValue:))
   /// Creates a measurement from a raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -39,8 +37,6 @@ where Scalar: RationalArithmetic {
   ///     - rawValue: The raw value.
   init(rawValue: Scalar)
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // @documentation(Measurement.rawValue)
   /// A raw value in undefined but consistent units.
   ///
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -353,33 +349,27 @@ extension Measurement {
 
   // MARK: - NumericAdditiveArithmetic
 
-  @inlinable public var isPositive: Bool {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public var isPositive: Bool {
     return rawValue.isPositive
   }
 
-  @inlinable public var isNegative: Bool {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public var isNegative: Bool {
     return rawValue.isNegative
   }
 
-  @inlinable public var isNonNegative: Bool {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public var isNonNegative: Bool {
     return rawValue.isNonNegative
   }
 
-  @inlinable public var isNonPositive: Bool {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public var isNonPositive: Bool {
     return rawValue.isNonPositive
   }
 
-  @inlinable public var absoluteValue: Self {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public var absoluteValue: Self {
     return Self(rawValue: rawValue.absoluteValue)
   }
 
-  @inlinable public mutating func formAbsoluteValue() {  // @exempt(from: tests)
-    // #workaround(Swift 5.5.3, Test exemption only due to overrides for SR‐15734.)
+  @inlinable public mutating func formAbsoluteValue() {
     rawValue.formAbsoluteValue()
   }
 

@@ -126,20 +126,10 @@ extension Int: IntFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 
   // MARK: - Subtractible
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(SDGCornerstone.Subtractible.−(_:_:))
-  /// Returns the difference of the preceding value minus the following value.
-  ///
-  /// - Parameters:
-  ///     - precedingValue: The starting value.
-  ///     - followingValue: The value to subtract.
   @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
@@ -148,35 +138,23 @@ extension Int64: IntXFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension Int32: IntXFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension Int16: IntXFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
 extension Int8: IntXFamily {
 
   // MARK: - PointProtocol
 
-  // #workaround(Swift 5.5.3, Documentation must be inherited manually due to SR‐15734 evasion.)
-  // #documentation(PointProtocol.Vector)
-  /// The type to be used as a vector.
   public typealias Vector = Stride
 }
