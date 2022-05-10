@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.4.2, Should be “מין־דקדוקי.swift” but for Windows bug.)
+// #workaround(Swift 5.6.1, Should be “מין־דקדוקי.swift” but for Windows bug.)
 
 import SDGCollections
 
