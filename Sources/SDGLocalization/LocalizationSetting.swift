@@ -16,6 +16,9 @@ import Foundation
 #if canImport(WinSDK)
   import WinSDK
 #endif
+#if os(WASI)
+  import JavaScriptKit
+#endif
 
 import SDGControlFlow
 import SDGLogic
@@ -73,6 +76,20 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }
   #endif
 
+  #warning("FatalErrors for debugging...")
+  #if os(WASI)
+    private static func queryWebLanguages() -> [String]? {
+      guard let window = JSObject.global.window.object,
+        let navigator = window.navigator.object,
+        let code = navigator.language.jsValue().string else {
+        fatalError("Failed.")
+        return nil
+      }
+      fatalError(code)
+      return [code]
+    }
+  #endif
+
   internal static let osSystemWidePreferences: Shared<Preference> = {
     let preferences: Shared<Preference>
     #if APPLE_PLATFORM
@@ -88,7 +105,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
       preferences = Shared(Preference.mock())
-      preferences.value.set(to: nil)
+      preferences.value.set(to: queryWebLanguages())
 
     #elseif os(Linux)
 
@@ -152,20 +169,14 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       preferences = PreferenceSet.applicationPreferences[applePreferenceKey]
 
-    #elseif os(WASI)
-
-      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
-      preferences = Shared(Preference.mock())
-      preferences.value.set(to: nil)
-
     #elseif os(Windows)
 
       preferences = Shared(Preference.mock())
       preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
 
-    #elseif os(Linux)
+    #elseif os(WASI) || os(Linux)
 
-      // This is does not exist on Linux anyway.
+      // This is does not exist anyway.
       preferences = Shared(Preference.mock())
 
     #elseif os(Android)

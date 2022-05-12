@@ -1,25 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "swift-collections",
-        "repositoryURL": "https://github.com/apple/swift-collections",
-        "state": {
-          "branch": null,
-          "revision": "07e47b1e93e5a1e0ef0c50fcb2d6739fb6be4003",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "swift-numerics",
-        "repositoryURL": "https://github.com/apple/swift-numerics",
-        "state": {
-          "branch": null,
-          "revision": "1e5cbc4e2142677d6695036a748344c8edb83e5c",
-          "version": "1.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "javascriptkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftwasm/JavaScriptKit.git",
+      "state" : {
+        "revision" : "9a3b7d5f316e6d1709bd25e3e0392efca357f525",
+        "version" : "0.14.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections",
+      "state" : {
+        "revision" : "07e47b1e93e5a1e0ef0c50fcb2d6739fb6be4003",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics",
+      "state" : {
+        "revision" : "1e5cbc4e2142677d6695036a748344c8edb83e5c",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
 }
