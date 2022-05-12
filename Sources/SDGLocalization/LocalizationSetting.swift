@@ -73,6 +73,21 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }
   #endif
 
+  #if os(WASI)
+    private static func queryWebLanguages() -> [String]? {
+      // #workaround(Swift 5.6, Should presumably be the following, but JavaScriptKit does not work.)
+      return nil
+      /*
+      guard let window = JSObject.global.window.object,
+        let navigator = window.navigator.object,
+        let code = navigator.language.jsValue.string else {
+          return nil
+      }
+      return [code]
+      */
+    }
+  #endif
+
   internal static let osSystemWidePreferences: Shared<Preference> = {
     let preferences: Shared<Preference>
     #if APPLE_PLATFORM
@@ -86,9 +101,11 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(WASI)
 
-      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
       preferences = Shared(Preference.mock())
-      preferences.value.set(to: nil)
+      let queried = queryWebLanguages()
+      #if !PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER
+        preferences.value.set(to: queryWebLanguages())
+      #endif
 
     #elseif os(Linux)
 
@@ -152,20 +169,14 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       preferences = PreferenceSet.applicationPreferences[applePreferenceKey]
 
-    #elseif os(WASI)
-
-      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
-      preferences = Shared(Preference.mock())
-      preferences.value.set(to: nil)
-
     #elseif os(Windows)
 
       preferences = Shared(Preference.mock())
       preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
 
-    #elseif os(Linux)
+    #elseif os(WASI) || os(Linux)
 
-      // This is does not exist on Linux anyway.
+      // This is does not exist anyway.
       preferences = Shared(Preference.mock())
 
     #elseif os(Android)
