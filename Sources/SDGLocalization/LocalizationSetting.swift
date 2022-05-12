@@ -16,7 +16,7 @@ import Foundation
 #if canImport(WinSDK)
   import WinSDK
 #endif
-#if os(WASI)
+#if canImport(JavaScriptKit)
   import JavaScriptKit
 #endif
 
@@ -81,7 +81,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     private static func queryWebLanguages() -> [String]? {
       guard let window = JSObject.global.window.object,
         let navigator = window.navigator.object,
-        let code = navigator.language.jsValue().string else {
+        let code = navigator.language.jsValue.string else {
         fatalError("Failed.")
         return nil
       }
