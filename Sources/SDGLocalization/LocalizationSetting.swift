@@ -16,9 +16,6 @@ import Foundation
 #if canImport(WinSDK)
   import WinSDK
 #endif
-#if canImport(JavaScriptKit)
-  import JavaScriptKit
-#endif
 
 import SDGControlFlow
 import SDGLogic
@@ -76,18 +73,18 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }
   #endif
 
-  #warning("FatalErrors for debugging...")
-  #if canImport(JavaScriptKit)
+  #if os(WASI)
     private static func queryWebLanguages() -> [String]? {
-      //fatalError("\(JSObject.global)")
-      /*guard let window = JSObject.global.window.object/*,
+      // #workaround(Swift 5.6, Should presumably be the following, but JavaScriptKit does not work.)
+      return nil
+      /*
+      guard let window = JSObject.global.window.object,
         let navigator = window.navigator.object,
-        let code = navigator.language.jsValue.string*/ else {
-        fatalError("Failed.")
-        return nil
+        let code = navigator.language.jsValue.string else {
+          return nil
       }
-      fatalError("\(window)")*/
-      return [/*code*/]
+      return [code]
+      */
     }
   #endif
 

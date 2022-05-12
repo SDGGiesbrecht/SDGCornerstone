@@ -277,10 +277,6 @@ let package = Package(
       url: "https://github.com/apple/swift\u{2D}collections",
       from: Version(1, 0, 0)
     ),
-    .package(
-      url: "https://github.com/swiftwasm/JavaScriptKit.git",
-      .upToNextMinor(from: Version(0, 14, 0))
-    ),
   ],
   targets: [
 
@@ -437,11 +433,6 @@ let package = Package(
         "SDGCollections",
         "SDGText",
         "SDGPersistence",
-        .product(
-          name: "JavaScriptKit",
-          package: "JavaScriptKit",
-          condition: .when(platforms: [.wasi])
-        ),
       ]
     ),
     // @documentation(SDGLocalizationTestUtilities)
