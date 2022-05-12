@@ -103,9 +103,11 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(WASI)
 
-      // #workaround(Swift 5.3.3, Unable to interact with JavaScript.)
       preferences = Shared(Preference.mock())
-      preferences.value.set(to: queryWebLanguages())
+      let queried = queryWebLanguages()
+      #if !PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER
+        preferences.value.set(to: queryWebLanguages())
+      #endif
 
     #elseif os(Linux)
 
