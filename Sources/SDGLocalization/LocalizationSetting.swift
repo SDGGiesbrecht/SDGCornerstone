@@ -79,7 +79,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   #warning("FatalErrors for debugging...")
   #if canImport(JavaScriptKit)
     private static func queryWebLanguages() -> [String]? {
-      fatalError("\(JSObject.global)")
+      //fatalError("\(JSObject.global)")
       /*guard let window = JSObject.global.window.object/*,
         let navigator = window.navigator.object,
         let code = navigator.language.jsValue.string*/ else {
