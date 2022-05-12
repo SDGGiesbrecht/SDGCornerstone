@@ -77,7 +77,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   #endif
 
   #warning("FatalErrors for debugging...")
-  #if os(WASI)
+  #if canImport(JavaScriptKit)
     private static func queryWebLanguages() -> [String]? {
       guard let window = JSObject.global.window.object,
         let navigator = window.navigator.object,
