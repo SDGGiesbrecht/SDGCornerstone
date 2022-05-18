@@ -34,9 +34,12 @@ extension IntFamily {
 
   // MARK: - Negatable
 
+  @inlinable internal static func negate<Number>(_ operand: Number) -> Number
+  where Number: SignedNumeric {
+    return -operand  // @exempt(from: unicode)
+  }
   @inlinable public static prefix func − (operand: Self) -> Self {
-    // #workaround(Swift 5.5, Should just be negative instead of minus, but for compiler bug.)
-    return 0 - operand  // @exempt(from: unicode)
+    return negate(operand)
   }
 
   // MARK: - NumericAdditiveArithmetic
