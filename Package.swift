@@ -802,14 +802,14 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(Swift 5.6, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.6, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.6, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.6, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.6, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.6, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.6, FoundationXML is broken for web.)
-    // #workaround(Swift 5.6, FoundationXML is broken on Android.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.6.1, FoundationXML is broken for web.)
+    // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.6, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
