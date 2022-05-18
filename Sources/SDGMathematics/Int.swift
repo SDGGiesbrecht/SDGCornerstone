@@ -34,8 +34,12 @@ extension IntFamily {
 
   // MARK: - Negatable
 
-  @inlinable public static prefix func − (operand: Self) -> Self {
+  @inlinable internal static func negate<Number>(_ operand: Number) -> Number
+  where Number: SignedNumeric {
     return -operand  // @exempt(from: unicode)
+  }
+  @inlinable public static prefix func − (operand: Self) -> Self {
+    return negate(operand)
   }
 
   // MARK: - NumericAdditiveArithmetic
