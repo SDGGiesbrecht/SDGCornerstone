@@ -833,15 +833,15 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.6, Web lacks Dispatch.)
+    // #workaround(Swift 5.6.1, Web lacks Dispatch.)
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6, Web lacks Foundation.Thread.)
+    // #workaround(Swift 5.6.1, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6, Android lacks FoundationNetworking.)
+    // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
-    // #workaround(Swift 5.6, Web lacks XCTest.XCTestExpectation.)
+    // #workaround(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
