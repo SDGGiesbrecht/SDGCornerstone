@@ -75,7 +75,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   #if os(WASI)
     private static func queryWebLanguages() -> [String]? {
-      // #workaround(Swift 5.6, Should presumably be the following, but JavaScriptKit does not work.)
+      // #workaround(Swift 5.6.1, Should presumably be the following, but JavaScriptKit does not work.)
       return nil
       /*
       guard let window = JSObject.global.window.object,

@@ -810,7 +810,7 @@ for target in package.targets {
     // #workaround(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
     // #workaround(Swift 5.6.1, FoundationXML is broken for web.)
     // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
-    // #workaround(Swift 5.6, macOS lacks Swift.Float16 for some architectures.)
+    // #workaround(Swift 5.6.1, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
