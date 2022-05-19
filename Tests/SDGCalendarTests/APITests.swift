@@ -257,7 +257,7 @@ class APITests: TestCase {
     if let timeZone = timeZone {
       let adjustedToZone = utc.adjusted(to: timeZone)
       let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
-      // #workaround(Swift 5.6, Windows time zone information is incorrect.)
+      // #workaround(Swift 5.6.1, Windows time zone information is incorrect.)
       #if !os(Windows)
         XCTAssertEqual(
           adjustedToZone.gregorianDateInAmericanEnglish(),
