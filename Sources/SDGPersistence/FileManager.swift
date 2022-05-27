@@ -146,8 +146,8 @@ import SDGLogic
     ) rethrows -> Result {
       var directory: URL
 
-      #if false//os(Android)
-        // #warning(Swift 5.3.2, .itemReplacementDirectory leads to illegal instruction.)
+      #if os(Android)
+        // #workaround(Swift 5.6.1, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
       #else
         let volume = try? url(
