@@ -170,6 +170,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
         } else {
           process.launchPath = executable.path
         }
+      // #warning(Debugging...)
       #elseif os(Windows)
         process.launchPath = executable.path
       #else
