@@ -27,7 +27,7 @@ class RegressionTests: TestCase {
     #if os(Windows)
       //#if !os(Windows)  // #warning(Swift 5.4.2, Process’s executableURL breaks slashes.)
       let swift = ExternalProcess(at: URL(fileURLWithPath: #"C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain\usr\bin\swift.exe"#))
-      let swiftHelp = try process.run(["--version"]).get()
+      let swiftHelp = try swift.run(["--version"]).get()
       XCTAssert(¬swiftHelp.contains("MKDIR"), "Wrong command:\n\(help)")
         let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
         let help = try process.run(["/?"]).get()
