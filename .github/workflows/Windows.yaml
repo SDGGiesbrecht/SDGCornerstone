@@ -35,8 +35,5 @@ jobs:
       shell: cmd
       run: |
         echo on
-        where swift
-        where cmd
-        C:\Windows\System32\cmd.exe /?
         set TARGETING_WINDOWS=true
         swift test
