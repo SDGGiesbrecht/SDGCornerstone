@@ -25,7 +25,9 @@ class RegressionTests: TestCase {
     // Untracked.
 
     #if os(Windows)
-      #if !os(Windows)  // #workaround(Swift 5.6.1, Something is wrong with Process’s executableURL.)
+      // #workaround(Swift 5.6.1, Something is wrong with Process’s executableURL.)
+      // The path below works directly from the terminal, and other paths such as that of the swift compiler work fine with Process, but the shell path below somehow launches mkdir instead.)
+      #if !os(Windows)
         let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
         let help = try process.run(["/?"]).get()
         XCTAssert(¬help.contains("MKDIR"), "Wrong command:\n\(help)")
