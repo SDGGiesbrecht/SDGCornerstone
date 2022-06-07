@@ -42,23 +42,21 @@ class APITests: TestCase {
       #endif
       #if !PLATFORM_LACKS_SWIFT_COMPILER
         // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
-        var windowsWorkaround: [String] = []
-        #if os(Windows)
-          windowsWorkaround.append(#"do not know yet"#)
+        #if !os(Windows)
+          XCTAssertEqual(
+            ExternalProcess(
+              searching: [
+                "/no/such/file",
+                "/tmp",  // Directory
+                "/.file",  // Not executable
+              ].map({ URL(fileURLWithPath: $0) }),
+              commandName: "swift",
+              validate: { _ in true }
+            )?.executable.deletingPathExtension().lastPathComponent,
+            "swift",
+            "Failed to find with “which” (or “where” on Windows)."
+          )
         #endif
-        XCTAssertEqual(
-          ExternalProcess(
-            searching: ([
-              "/no/such/file",
-              "/tmp",  // Directory
-              "/.file",  // Not executable
-            ] + windowsWorkaround).map({ URL(fileURLWithPath: $0) }),
-            commandName: "swift",
-            validate: { _ in true }
-          )?.executable.deletingPathExtension().lastPathComponent,
-          "swift",
-          "Failed to find with “which” (or “where” on Windows)."
-        )
       #endif
       XCTAssertNil(
         ExternalProcess(
