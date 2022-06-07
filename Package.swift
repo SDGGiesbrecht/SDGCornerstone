@@ -590,7 +590,7 @@ let package = Package(
 
     // Internal utilities.
 
-    // #workaround(xcodebuild -version 13.4, Should be executable, but for interference with tvOS, etc.) @exempt(from: unicode)
+    // #workaround(xcodebuild -version 13.4.1, Should be executable, but for interference with tvOS, etc.) @exempt(from: unicode)
     .testTarget(
       name: "SDGRootCollationGeneratorTests",
       dependencies: [
