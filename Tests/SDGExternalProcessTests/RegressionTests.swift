@@ -38,7 +38,8 @@ class RegressionTests: TestCase {
   func testDelayedShellOutput() throws {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3.2, Shell misbehaves.)
+    // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
         #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           let longCommand = [
@@ -58,7 +59,8 @@ class RegressionTests: TestCase {
 
     #if !PLATFORM_LACKS_GIT
       #if !PLATFORM_LACKS_FOUNDATION_PROCESS
-        #if !os(Windows)  // #workaround(Fails and needs debugging.)
+        // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+        #if !os(Windows)
           XCTAssertNotNil(
             ExternalProcess(
               searching: [],

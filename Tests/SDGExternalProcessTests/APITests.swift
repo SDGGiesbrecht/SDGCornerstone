@@ -41,21 +41,24 @@ class APITests: TestCase {
         )
       #endif
       #if !PLATFORM_LACKS_SWIFT_COMPILER
-        #if !os(Windows)  // #workaround(Fails and needs debugging.)
-          XCTAssertEqual(
-            ExternalProcess(
-              searching: [
-                "/no/such/file",
-                "/tmp",  // Directory
-                "/.file",  // Not executable
-              ].map({ URL(fileURLWithPath: $0) }),
-              commandName: "swift",
-              validate: { _ in true }
-            )?.executable.deletingPathExtension().lastPathComponent,
-            "swift",
-            "Failed to find with “which” (or “where” on Windows)."
-          )
+        // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+        var windowsWorkaround: [String] = []
+        #if os(Windows)
+          windowsWorkaround.append(#"do not know yet"#)
         #endif
+        XCTAssertEqual(
+          ExternalProcess(
+            searching: ([
+              "/no/such/file",
+              "/tmp",  // Directory
+              "/.file",  // Not executable
+            ] + windowsWorkaround).map({ URL(fileURLWithPath: $0) }),
+            commandName: "swift",
+            validate: { _ in true }
+          )?.executable.deletingPathExtension().lastPathComponent,
+          "swift",
+          "Failed to find with “which” (or “where” on Windows)."
+        )
       #endif
       XCTAssertNil(
         ExternalProcess(
@@ -99,7 +102,7 @@ class APITests: TestCase {
       return output
     }
 
-    // #workaround(Swift 5.3.2, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
         let directory: URL?
