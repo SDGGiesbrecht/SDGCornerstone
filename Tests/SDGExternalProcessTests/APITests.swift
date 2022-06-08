@@ -41,7 +41,8 @@ class APITests: TestCase {
         )
       #endif
       #if !PLATFORM_LACKS_SWIFT_COMPILER
-        #if !os(Windows)  // #workaround(Fails and needs debugging.)
+        // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+        #if !os(Windows)
           XCTAssertEqual(
             ExternalProcess(
               searching: [
@@ -99,7 +100,7 @@ class APITests: TestCase {
       return output
     }
 
-    // #workaround(Swift 5.3.2, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
         let directory: URL?

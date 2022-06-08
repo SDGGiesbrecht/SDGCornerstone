@@ -28,7 +28,8 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
-    #if !os(Windows)  // #workaround(Shell is misbehaving.)
+    // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    #if !os(Windows)
       #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
           // @example(readMe🇨🇦EN)
