@@ -43,19 +43,32 @@ class APITests: TestCase {
       #if !PLATFORM_LACKS_SWIFT_COMPILER
         // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
         #if !os(Windows)
+          let swift = ExternalProcess(
+            searching: [
+              "/no/such/file",
+              "/tmp",  // Directory
+              "/.file",  // Not executable
+            ].map({ URL(fileURLWithPath: $0) }),
+            commandName: "swift",
+            validate: { _ in true }
+          )
           XCTAssertEqual(
-            ExternalProcess(
-              searching: [
-                "/no/such/file",
-                "/tmp",  // Directory
-                "/.file",  // Not executable
-              ].map({ URL(fileURLWithPath: $0) }),
-              commandName: "swift",
-              validate: { _ in true }
-            )?.executable.deletingPathExtension().lastPathComponent,
+            swift?.executable.deletingPathExtension().lastPathComponent,
             "swift",
             "Failed to find with “which” (or “where” on Windows)."
           )
+
+          switch swift?.run(["no", "such", "arguments"], ignoreStandardError: true) {
+          case .failure(let failure):
+            switch failure {
+            case .processError(code: _, let output):
+              XCTAssertEqual(output, "", "Failed to filter standard error from output.")
+            default:
+              XCTFail("Failed to cause process error.")
+            }
+          default:
+            XCTFail("Failed to cause error.")
+          }
         #endif
       #endif
       XCTAssertNil(
