@@ -88,7 +88,10 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
         searchCommand = "which"
       #endif
       if let name = commandName,
-        let searchResult = try? Shell.default.run(command: [searchCommand, name]).get()
+        let searchResult = try? Shell.default.run(
+          command: [searchCommand, name],
+          ignoreStandardError: true
+        ).get()
       {  // @exempt(from: tests) Unreachable from CentOS.
         let locations: [String]
         #if os(Windows)
@@ -149,6 +152,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
     ///     - arguments: The arguments.
     ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
     ///     - environment: Optional. A different environment to use instead of that of the current process.
+    ///     - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
     ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
     ///     - line: The line of output.
     ///
@@ -157,6 +161,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       _ arguments: [String],
       in workingDirectory: URL? = nil,
       with environment: [String: String]? = nil,
+      ignoreStandardError: Bool = false,
       reportProgress: (_ line: String) -> Void = { _ in }
     ) -> Result<String, ExternalProcess.Error> {
 
@@ -195,7 +200,11 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
 
       let pipe = Pipe()
       process.standardOutput = pipe
-      process.standardError = pipe
+      if ignoreStandardError {
+        process.standardError = FileHandle.nullDevice
+      } else {
+        process.standardError = pipe
+      }
 
       process.qualityOfService = Thread.current.qualityOfService
 
