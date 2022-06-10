@@ -23,8 +23,8 @@ import SDGPersistence
 
 import XCTest
 
-import SDGXCTestUtilities
 import SDGPersistenceTestUtilities
+import SDGXCTestUtilities
 
 class RegressionTests: TestCase {
 
