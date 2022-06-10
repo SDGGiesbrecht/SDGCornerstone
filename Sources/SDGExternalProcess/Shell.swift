@@ -93,6 +93,7 @@ public final class Shell: TransparentWrapper {
     ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
     ///     - environment: Optional. A different environment to use instead of that of the current process.
     ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
+    ///     - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
     ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
     ///     - line: The line of output.
     ///
@@ -102,6 +103,7 @@ public final class Shell: TransparentWrapper {
       in workingDirectory: URL? = nil,
       with environment: [String: String]? = nil,
       autoquote: Bool = true,
+      ignoreStandardError: Bool = false,
       reportProgress: (_ line: String) -> Void = { _ in }
     ) -> Result<String, ExternalProcess.Error> {  // @exempt(from: tests)
 
