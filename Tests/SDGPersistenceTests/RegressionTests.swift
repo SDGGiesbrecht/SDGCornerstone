@@ -78,8 +78,9 @@ class RegressionTests: TestCase {
     // Untracked
 
     testFileConvertibleConformance(
-      of: "Each\nword\nos\non\nits\nown\nline\n.",
-      uniqueTestName: "Line Endings"
+      of: "Each\nword\nis\non\nits\nown\nline\n.",
+      uniqueTestName: "Line Endings",
+      normalizeLineEndings: true
     )
   }
 
