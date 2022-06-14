@@ -30,11 +30,13 @@ import SDGTesting
 /// - Parameters:
 ///     - instance: An instance to save and load.
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
+///     - normalizeLineEndings: Treats the file as text and converts the line endings of loaded specifications from CR + LF into LF before comparison. This can be used to work around alterations caused by source control systems.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 public func testFileConvertibleConformance<T>(
   of instance: T,
   uniqueTestName: StrictString,
+  normalizeLineEndings: Bool = false,
   file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Equatable, T: FileConvertible {
@@ -55,7 +57,10 @@ public func testFileConvertibleConformance<T>(
       where specificationURL.lastPathComponent ≠ ".DS_Store" {
         try purgingAutoreleased {
 
-          let specification = try Data(from: specificationURL)
+          var specification = try Data(from: specificationURL)
+          if normalizeLineEndings {
+            specification.replaceMatches(for: "\r\n".utf8, with: "\n".utf8)
+          }
           specifications.insert(specification)
           let decoded = try T(file: specification, origin: specificationURL)
           test(

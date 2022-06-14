@@ -23,6 +23,7 @@ import SDGPersistence
 
 import XCTest
 
+import SDGPersistenceTestUtilities
 import SDGXCTestUtilities
 
 class RegressionTests: TestCase {
@@ -71,6 +72,16 @@ class RegressionTests: TestCase {
         )
       }
     #endif
+  }
+
+  func testFileConvertibleLineEndings() throws {
+    // Untracked
+
+    testFileConvertibleConformance(
+      of: "Each\nword\nis\non\nits\nown\nline\n.",
+      uniqueTestName: "Line Endings",
+      normalizeLineEndings: true
+    )
   }
 
   func testPercentEncodingIsNotDoubled() {
