@@ -170,7 +170,7 @@ import PackageDescription
 /// ```
 let package = Package(
   name: "SDGCornerstone",
-  products: [
+  products: [/* #warning(Temporarily disabled.)
 
     // #documentation(SDGControlFlow)
     /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -269,7 +269,7 @@ let package = Package(
 
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
-    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
+    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),*/
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
@@ -286,10 +286,10 @@ let package = Package(
 
     // @documentation(SDGLogic)
     /// Extensions to related to Boolean logic.
-    .target(name: "SDGLogic", dependencies: []),
+    .target(name: "SDGLogic", dependencies: []),/* #warning(Temporarily disabled.)
     // @documentation(SDGLogicTestUtilities)
     /// Utilities for testing code which uses `SDGLogic`.
-    .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
+    .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),*/
 
     // @documentation(SDGMathematics)
     /// A hierarchy of mathematical protocols and extensions to number types.
@@ -300,7 +300,7 @@ let package = Package(
         "SDGLogic",
         .product(name: "RealModule", package: "swift\u{2D}numerics"),
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     // @documentation(SDGMathematicsTestUtilities)
     /// Utilities for testing code which uses `SDGMathematics`.
     .target(
@@ -312,7 +312,7 @@ let package = Package(
         "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
       ]
-    ),
+    ),*/
 
     // @documentation(SDGCollections)
     /// Pattern searching, set logic, and other extensions to collection types.
@@ -324,7 +324,7 @@ let package = Package(
         "SDGMathematics",
         .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     // @documentation(SDGCollectionsTestUtilities)
     /// Utilities for testing code which uses `SDGCollections`.
     .target(
@@ -794,7 +794,7 @@ let package = Package(
         "SDGPersistenceTestUtilities",
         "SDGXCTestUtilities",
       ]
-    ),
+    ),*/
   ]
 )
 
