@@ -354,7 +354,6 @@ let package = Package(
         "Ordered/RangeReplaceableCollection.swift",
         "Ordered/ReversedCollection.swift",
         "Ordered/SearchableBidirectionalCollection.swift",
-        "Ordered/SearchableCollection.swift",
         "Ordered/Slice.swift",
         "Unordered",
         "Addable.swift",

@@ -17,9 +17,11 @@ import SDGLogic
 import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableCollection: Collection, Pattern
+public protocol SearchableCollection: Collection/*, Pattern */
 where SubSequence: SearchableCollection {
+  #warning("Conformance temporarily disabled.")
 
+  #warning("Requirements temporarily disabled.")/*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
   /// Returns the first match for `pattern` in the collection.
   ///
@@ -257,9 +259,10 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func changes(from other: Self) -> CollectionDifference<Element>
+  func changes(from other: Self) -> CollectionDifference<Element>*/
 }
 
+#warning("Temporarily disabled.")/*
 extension SearchableCollection {
 
   @inlinable internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
@@ -931,4 +934,4 @@ extension SearchableCollection where Self: RangeReplaceableCollection {
   ) -> Self where C.Element == Self.Element {
     return _mutatingMatches(for: pattern, mutation: mutation)
   }
-}
+}*/
