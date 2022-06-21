@@ -335,7 +335,6 @@ let package = Package(
         "Ordered/Patterns/NaryConcatenatedPatterns.swift",
         "Ordered/Patterns/NegatedPattern.swift",
         "Ordered/Patterns/NestingLevel.swift",
-        "Ordered/Patterns/Pattern.swift",
         "Ordered/Patterns/PatternConsumption.swift",
         "Ordered/Patterns/RepetitionPattern.swift",
         "Ordered/AnyCollection.swift",

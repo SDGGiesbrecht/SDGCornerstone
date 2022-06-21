@@ -17,7 +17,7 @@ public protocol PatternMatch {
 
   // MARK: - Associated Types
 
-  /// The searchable collection.
+  /// The searched collection.
   associatedtype Searched: SearchableCollection
 
   // MARK: - Properties
