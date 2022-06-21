@@ -323,6 +323,15 @@ let package = Package(
         "SDGLogic",
         "SDGMathematics",
         .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+      ],
+      exclude: [// #warning(Temporarily disabled.)
+        "Associative",
+        "Conformances",
+        "Ordered",
+        "Unordered",
+        "Addable.swift",
+        "LegacyMode.swift",
+        "Operators.swift"
       ]
     ),/* #warning(Temporarily disabled.)
     // @documentation(SDGCollectionsTestUtilities)
