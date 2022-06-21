@@ -18,7 +18,7 @@ import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection/*, Pattern */
-where SubSequence: SearchableCollection {
+where Element: Equatable, SubSequence: SearchableCollection {
   #warning("Conformance temporarily disabled.")
 
   #warning("Requirements temporarily disabled.")/*
@@ -262,9 +262,9 @@ where SubSequence: SearchableCollection {
   func changes(from other: Self) -> CollectionDifference<Element>*/
 }
 
-#warning("Temporarily disabled.")/*
 extension SearchableCollection {
 
+  #warning("Temporarily disabled.")/*
   @inlinable internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
   where P: Pattern, P.Element == Element {
     var i = startIndex
@@ -531,13 +531,14 @@ extension SearchableCollection {
     from other: Self
   ) -> CollectionDifference<Element> {
     return forwardDifference(from: other)
-  }
+  }*/
 
   // MARK: - Pattern
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
+  @inlinable public func matches(
+    in collection: Self,
+    at location: Index
+  ) -> [AtomicPatternMatch<Self>] {
     if let match = primaryMatch(in: collection, at: location) {
       return [match]
     } else {
@@ -545,10 +546,10 @@ extension SearchableCollection {
     }
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
+  @inlinable public func primaryMatch(
+    in collection: Self,
+    at location: Index
+  ) -> AtomicPatternMatch<Self>? {
 
     var checkingIndex = self.startIndex
     var collectionIndex = location
@@ -567,10 +568,11 @@ extension SearchableCollection {
       collectionIndex = collection.index(after: collectionIndex)
     }
 
-    return location..<collectionIndex
+    return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
   }
 }
 
+#warning("Temporarily disabled.")/*
 extension SearchableCollection where Self: RangeReplaceableCollection {
 
   @inlinable internal mutating func _truncate<P>(before pattern: P)
