@@ -29,6 +29,7 @@ public struct AtomicPatternMatch<Searched: SearchableCollection>: PatternMatch {
 
   // MARK: - Conversions
 
+  #warning("Does this need to be part of the protocol?")
   /// Returns the same match in another collection whose indices are shared with the collection originally searched; this is intended for converting a match found in a subsequence into a match in the base collection or vice versa.
   ///
   /// - Requires: The range is valid for the target collection and points to the same elements.
