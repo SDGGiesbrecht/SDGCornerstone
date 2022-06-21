@@ -326,7 +326,9 @@ let package = Package(
       ],
       exclude: [// #warning(Temporarily disabled.)
         "Associative",
-        "Conformances",
+        "Conformances/CharacterSet.swift",
+        "Conformances/Data.swift",
+        "Conformances/StringProtocol.swift",
         "Ordered/Patterns/AlternativePatterns.swift",
         "Ordered/Patterns/AnyPattern.swift",
         "Ordered/Patterns/ConcatenatedPatterns.swift",
