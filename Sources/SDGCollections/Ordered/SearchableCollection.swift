@@ -18,7 +18,7 @@ import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, SubSequence: SearchableCollection {
+where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
   #warning("Requirements temporarily disabled.")/*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
@@ -263,26 +263,26 @@ where Element: Equatable, SubSequence: SearchableCollection {
 
 extension SearchableCollection {
 
-  #warning("Temporarily disabled.")/*
-  @inlinable internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
+  @inlinable internal func _firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
     var i = startIndex
     while i ≠ endIndex {
-      if let range = pattern.primaryMatch(in: self, at: i) {
-        return PatternMatch(range: range, in: self)
+      if let match = pattern.primaryMatch(in: self, at: i) {
+        return match
       }
       i = index(after: i)
     }
     return nil
   }
-  @inlinable public func firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
+  @inlinable public func firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
     return _firstMatch(for: pattern)
   }
-  @inlinable public func firstMatch(for pattern: Self) -> PatternMatch<Self>? {
+  @inlinable public func firstMatch(for pattern: Self) -> Match? {
     return _firstMatch(for: pattern)
   }
 
+  #warning("Temporarily disabled.")/*
   @inlinable internal func _matches<P>(for pattern: P) -> [PatternMatch<Self>]
   where P: Pattern, P.Element == Element {
     var accountedFor = startIndex
@@ -537,7 +537,7 @@ extension SearchableCollection {
   @inlinable public func matches(
     in collection: Self,
     at location: Index
-  ) -> [AtomicPatternMatch<Self>] {
+  ) -> [Match] {
     if let match = primaryMatch(in: collection, at: location) {
       return [match]
     } else {
