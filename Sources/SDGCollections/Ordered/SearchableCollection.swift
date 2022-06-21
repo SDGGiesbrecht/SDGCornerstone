@@ -17,9 +17,8 @@ import SDGLogic
 import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableCollection: Collection/*, Pattern */
+public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, SubSequence: SearchableCollection {
-  #warning("Conformance temporarily disabled.")
 
   #warning("Requirements temporarily disabled.")/*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
