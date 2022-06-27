@@ -325,6 +325,10 @@ let package = Package(
         .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
       ]
     ),
+    // #workaround(Partially implemented updates to SDGCollections that do not yet support its entire API.)
+    .target(
+      name: "SDGCollections2"
+    ),
     // @documentation(SDGCollectionsTestUtilities)
     /// Utilities for testing code which uses `SDGCollections`.
     .target(
@@ -651,6 +655,12 @@ let package = Package(
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
         .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+      ]
+    ),
+    .testTarget(
+      name: "SDGCollections2Tests",
+      dependencies: [
+        "SDGCollections"
       ]
     ),
     .testTarget(
