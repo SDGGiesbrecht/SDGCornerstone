@@ -15,12 +15,7 @@
 import SDGLogic
 
 /// A pattern that can be searched for in collections with equatable elements.
-public protocol Pattern
-where Searchable == Match.Searched {
-
-  #warning("Is this necessary? (It is just an alias anyway.)")
-  /// The searchable collection
-  associatedtype Searchable
+public protocol Pattern {
 
   /// The type of a match for the pattern.
   associatedtype Match: PatternMatch
@@ -36,7 +31,7 @@ where Searchable == Match.Searched {
   /// - Parameters:
   ///     - collection: The collection in which to search.
   ///     - location: The index at which to check for the beginning of a match.
-  func matches(in collection: Searchable, at location: Searchable.Index) -> [Match]
+  func matches(in collection: Match.Searched, at location: Match.Searched.Index) -> [Match]
 
   /// Returns the primary match beginning at the specified index in the collection.
   ///
@@ -46,8 +41,8 @@ where Searchable == Match.Searched {
   ///     - collection: The collection in which to search.
   ///     - location: The index at which to check for the beginning of a match.
   func primaryMatch(
-    in collection: Searchable,
-    at location: Searchable.Index
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
   ) -> Match?
 
   #warning("Deferred.")/*
@@ -60,8 +55,8 @@ where Searchable == Match.Searched {
 extension Pattern {
 
   @inlinable public func primaryMatch(
-    in collection: Searchable,
-    at location: Searchable.Index
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
   ) -> Match? {
     return matches(in: collection, at: location).first
   }

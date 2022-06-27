@@ -18,7 +18,7 @@ import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
+where Element: Equatable, Match.Searched == Self, SubSequence: SearchableCollection {
 
   #warning("Requirements temporarily disabled.")/*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
@@ -264,7 +264,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
 extension SearchableCollection {
 
   @inlinable internal func _firstMatch<P>(for pattern: P) -> P.Match?
-  where P: Pattern, P.Searchable == Self {
+  where P: Pattern, P.Match.Searched == Self {
     var i = startIndex
     while i ≠ endIndex {
       if let match = pattern.primaryMatch(in: self, at: i) {
@@ -275,7 +275,7 @@ extension SearchableCollection {
     return nil
   }
   @inlinable public func firstMatch<P>(for pattern: P) -> P.Match?
-  where P: Pattern, P.Searchable == Self {
+  where P: Pattern, P.Match.Searched == Self {
     return _firstMatch(for: pattern)
   }
   @inlinable public func firstMatch(for pattern: Self) -> Match? {
@@ -283,7 +283,7 @@ extension SearchableCollection {
   }
 
   @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
-  where P: Pattern, P.Searchable == SubSequence {
+  where P: Pattern, P.Match.Searched == SubSequence {
     var accountedFor = startIndex
     var results: [P.Match] = []
     while let match = self[accountedFor...].firstMatch(for: pattern) {
