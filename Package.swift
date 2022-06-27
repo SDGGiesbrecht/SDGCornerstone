@@ -674,10 +674,12 @@ let package = Package(
         "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGLogic",
       ]
-    ),
+    ),*/
     .testTarget(
       name: "SDGCollectionsTests",
       dependencies: [
+        "SDGCollections",
+        /* #warning(Temporarily disabled.)
         "SDGCollections", "SDGCollectionsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGLogic",
         "SDGMathematics",
@@ -685,9 +687,16 @@ let package = Package(
         "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
-        .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+        .product(name: "OrderedCollections", package: "swift\u{2D}collections"),*/
+      ],
+      exclude: [
+        // #warning(Temporarily disabled.)
+        "AnyForwardCollection.swift",
+        "APITests.swift",
+        "LegacyMode.swift",
+        "RegressionTests.swift",
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     .testTarget(
       name: "SDGTextTests",
       dependencies: [
