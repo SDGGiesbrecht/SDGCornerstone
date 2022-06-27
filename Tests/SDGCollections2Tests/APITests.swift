@@ -12,7 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections2
+
 import XCTest
 
 final class APITests: XCTestCase {
+
+  func testAtomicPatternMatch() {
+    let string = "Hello!"
+    let match = AtomicPatternMatch(range: string.bounds, in: string)
+    XCTAssertEqual(match.contents, string[...])
+  }
 }
