@@ -17,11 +17,15 @@ import SDGLogic
 /// A pattern that can be searched for in collections with equatable elements.
 public protocol Pattern {
 
-  /// The type of the pattern elements.
-  associatedtype Element: Equatable
+  /// The searchable collection
+  associatedtype Searchable: SearchableCollection
 
+  /// The type of a match for the pattern.
+  associatedtype Match: PatternMatch
+
+  #warning("Deferred.")/*
   /// The type of the reverse pattern.
-  associatedtype Reversed: Pattern where Reversed.Element == Self.Element
+  associatedtype Reversed: Pattern where Reversed.Element == Self.Element*/
 
   /// Returns the ranges of possible matches beginning at the specified index in the collection.
   ///
@@ -30,8 +34,7 @@ public protocol Pattern {
   /// - Parameters:
   ///     - collection: The collection in which to search.
   ///     - location: The index at which to check for the beginning of a match.
-  func matches<C: SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>]
-  where C.Element == Element
+  func matches(in collection: Searchable, at location: Searchable.Index) -> [Match]
 
   /// Returns the primary match beginning at the specified index in the collection.
   ///
@@ -40,27 +43,30 @@ public protocol Pattern {
   /// - Parameters:
   ///     - collection: The collection in which to search.
   ///     - location: The index at which to check for the beginning of a match.
-  func primaryMatch<C: SearchableCollection>(in collection: C, at location: C.Index) -> Range<
-    C.Index
-  >? where C.Element == Element
+  func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> Match?
 
+  #warning("Deferred.")/*
   /// Retruns a pattern that checks for the reverse pattern.
   ///
   /// This is suitable for performing backward searches by applying it to the reversed collection.
-  func reversed() -> Reversed
+  func reversed() -> Reversed*/
 }
 
 extension Pattern {
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> Match? {
     return matches(in: collection, at: location).first
   }
 
   // MARK: - Composition
 
+  #warning("Temporarily disabled.")/*
   /// Combines two patterns into a single pattern by concatenating them.
   ///
   /// See the `ConcatenatedPatterns` type for details.
@@ -97,10 +103,11 @@ extension Pattern {
   ///     - operand: The pattern to negate.
   @inlinable public static prefix func ¬ (operand: Self) -> NegatedPattern<Self> {
     return NegatedPattern(operand)
-  }
+  }*/
 
   // MARK: - Switch Expression Pattern
 
+  #warning("Temporarily disabled.")/*
   // #example(1, patternSwitch)
   /// Enables use of any set pattern in switch cases.
   ///
@@ -121,5 +128,5 @@ extension Pattern {
   @inlinable public static func ~= <C: SearchableCollection>(pattern: Self, value: C) -> Bool
   where C.Element == Element {
     return value.isMatch(for: pattern)
-  }
+  }*/
 }

@@ -170,7 +170,7 @@ import PackageDescription
 /// ```
 let package = Package(
   name: "SDGCornerstone",
-  products: [
+  products: [/* #warning(Temporarily disabled.)
 
     // #documentation(SDGControlFlow)
     /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -269,7 +269,7 @@ let package = Package(
 
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
-    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
+    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),*/
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
@@ -286,10 +286,10 @@ let package = Package(
 
     // @documentation(SDGLogic)
     /// Extensions to related to Boolean logic.
-    .target(name: "SDGLogic", dependencies: []),
+    .target(name: "SDGLogic", dependencies: []),/* #warning(Temporarily disabled.)
     // @documentation(SDGLogicTestUtilities)
     /// Utilities for testing code which uses `SDGLogic`.
-    .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
+    .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),*/
 
     // @documentation(SDGMathematics)
     /// A hierarchy of mathematical protocols and extensions to number types.
@@ -300,7 +300,7 @@ let package = Package(
         "SDGLogic",
         .product(name: "RealModule", package: "swift\u{2D}numerics"),
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     // @documentation(SDGMathematicsTestUtilities)
     /// Utilities for testing code which uses `SDGMathematics`.
     .target(
@@ -312,7 +312,7 @@ let package = Package(
         "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
       ]
-    ),
+    ),*/
 
     // @documentation(SDGCollections)
     /// Pattern searching, set logic, and other extensions to collection types.
@@ -323,8 +323,43 @@ let package = Package(
         "SDGLogic",
         "SDGMathematics",
         .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+      ],
+      exclude: [// #warning(Temporarily disabled.)
+        "Associative",
+        "Conformances/CharacterSet.swift",
+        "Conformances/Data.swift",
+        "Conformances/StringProtocol.swift",
+        "Ordered/Patterns/AlternativePatterns.swift",
+        "Ordered/Patterns/AnyPattern.swift",
+        "Ordered/Patterns/ConcatenatedPatterns.swift",
+        "Ordered/Patterns/ConditionalPattern.swift",
+        "Ordered/Patterns/NaryAlternativePatterns.swift",
+        "Ordered/Patterns/NaryConcatenatedPatterns.swift",
+        "Ordered/Patterns/NegatedPattern.swift",
+        "Ordered/Patterns/NestingLevel.swift",
+        "Ordered/Patterns/PatternConsumption.swift",
+        "Ordered/Patterns/RepetitionPattern.swift",
+        "Ordered/AnyCollection.swift",
+        "Ordered/Array.swift",
+        "Ordered/BidirectionalCollection.swift",
+        "Ordered/CollectionDifference.swift",
+        "Ordered/CollectionDifferenceChange.swift",
+        "Ordered/FillDirection.swift",
+        "Ordered/LexicographicalComparison.swift",
+        "Ordered/OrderedSet.SubSequence.swift",
+        "Ordered/OrderedSet.swift",
+        "Ordered/Range.swift",
+        "Ordered/RangeExpression.swift",
+        "Ordered/RangeReplaceableCollection.swift",
+        "Ordered/ReversedCollection.swift",
+        "Ordered/SearchableBidirectionalCollection.swift",
+        "Ordered/Slice.swift",
+        "Unordered",
+        "Addable.swift",
+        "LegacyMode.swift",
+        "Operators.swift"
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     // @documentation(SDGCollectionsTestUtilities)
     /// Utilities for testing code which uses `SDGCollections`.
     .target(
@@ -639,10 +674,12 @@ let package = Package(
         "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGLogic",
       ]
-    ),
+    ),*/
     .testTarget(
       name: "SDGCollectionsTests",
       dependencies: [
+        "SDGCollections",
+        /* #warning(Temporarily disabled.)
         "SDGCollections", "SDGCollectionsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGLogic",
         "SDGMathematics",
@@ -650,9 +687,16 @@ let package = Package(
         "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
-        .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+        .product(name: "OrderedCollections", package: "swift\u{2D}collections"),*/
+      ],
+      exclude: [
+        // #warning(Temporarily disabled.)
+        "AnyForwardCollection.swift",
+        "APITests.swift",
+        "LegacyMode.swift",
+        "RegressionTests.swift",
       ]
-    ),
+    ),/* #warning(Temporarily disabled.)
     .testTarget(
       name: "SDGTextTests",
       dependencies: [
@@ -794,7 +838,7 @@ let package = Package(
         "SDGPersistenceTestUtilities",
         "SDGXCTestUtilities",
       ]
-    ),
+    ),*/
   ]
 )
 

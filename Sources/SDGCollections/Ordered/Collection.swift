@@ -57,6 +57,7 @@ extension Collection {
     return table
   }
 
+  #warning("Temporarily disabled.")/*
   @inlinable internal func traceDifference<C>(
     _ table: [[Int]],
     other: C,
@@ -152,7 +153,7 @@ extension Collection {
       otherIndexMapping: otherIndexMapping
     )
     return differenceUnderConstruction
-  }
+  }*/
 }
 
 extension Collection where Index: Hashable {
@@ -167,6 +168,7 @@ extension Collection where Index: Hashable {
   }
 }
 
+#warning("Temporarily disabled.")/*
 extension Collection where Element: Hashable, Index: Hashable {
 
   /// Returns the collection as a `BjectiveMapping` between the indices and values.
@@ -175,4 +177,4 @@ extension Collection where Element: Hashable, Index: Hashable {
   @inlinable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
     return BijectiveMapping(indexMapping)
   }
-}
+}*/

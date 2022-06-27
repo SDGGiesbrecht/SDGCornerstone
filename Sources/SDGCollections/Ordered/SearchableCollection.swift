@@ -18,8 +18,9 @@ import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
-where SubSequence: SearchableCollection {
+where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
+  #warning("Requirements temporarily disabled.")/*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
   /// Returns the first match for `pattern` in the collection.
   ///
@@ -257,30 +258,31 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func changes(from other: Self) -> CollectionDifference<Element>
+  func changes(from other: Self) -> CollectionDifference<Element>*/
 }
 
 extension SearchableCollection {
 
-  @inlinable internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
+  @inlinable internal func _firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
     var i = startIndex
     while i ≠ endIndex {
-      if let range = pattern.primaryMatch(in: self, at: i) {
-        return PatternMatch(range: range, in: self)
+      if let match = pattern.primaryMatch(in: self, at: i) {
+        return match
       }
       i = index(after: i)
     }
     return nil
   }
-  @inlinable public func firstMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
+  @inlinable public func firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
     return _firstMatch(for: pattern)
   }
-  @inlinable public func firstMatch(for pattern: Self) -> PatternMatch<Self>? {
+  @inlinable public func firstMatch(for pattern: Self) -> Match? {
     return _firstMatch(for: pattern)
   }
 
+  #warning("Temporarily disabled.")/*
   @inlinable internal func _matches<P>(for pattern: P) -> [PatternMatch<Self>]
   where P: Pattern, P.Element == Element {
     var accountedFor = startIndex
@@ -528,13 +530,14 @@ extension SearchableCollection {
     from other: Self
   ) -> CollectionDifference<Element> {
     return forwardDifference(from: other)
-  }
+  }*/
 
   // MARK: - Pattern
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
+  @inlinable public func matches(
+    in collection: Self,
+    at location: Index
+  ) -> [Match] {
     if let match = primaryMatch(in: collection, at: location) {
       return [match]
     } else {
@@ -542,10 +545,10 @@ extension SearchableCollection {
     }
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
+  @inlinable public func primaryMatch(
+    in collection: Self,
+    at location: Index
+  ) -> AtomicPatternMatch<Self>? {
 
     var checkingIndex = self.startIndex
     var collectionIndex = location
@@ -564,10 +567,11 @@ extension SearchableCollection {
       collectionIndex = collection.index(after: collectionIndex)
     }
 
-    return location..<collectionIndex
+    return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
   }
 }
 
+#warning("Temporarily disabled.")/*
 extension SearchableCollection where Self: RangeReplaceableCollection {
 
   @inlinable internal mutating func _truncate<P>(before pattern: P)
@@ -931,4 +935,4 @@ extension SearchableCollection where Self: RangeReplaceableCollection {
   ) -> Self where C.Element == Self.Element {
     return _mutatingMatches(for: pattern, mutation: mutation)
   }
-}
+}*/

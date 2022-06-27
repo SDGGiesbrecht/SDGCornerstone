@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#warning("Temporary.")
+typealias SearchableBidirectionalCollection = SearchableCollection
+
 extension String: SearchableBidirectionalCollection {}
 extension String.UnicodeScalarView: SearchableBidirectionalCollection {}
 extension String.UTF8View: SearchableBidirectionalCollection {}
