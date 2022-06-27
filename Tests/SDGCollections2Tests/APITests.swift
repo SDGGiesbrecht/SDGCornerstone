@@ -22,5 +22,6 @@ final class APITests: XCTestCase {
     let string = "Hello!"
     let match = AtomicPatternMatch(range: string.bounds, in: string)
     XCTAssertEqual(match.contents, string[...])
+    XCTAssertEqual(match.range, string.bounds)
   }
 }
