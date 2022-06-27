@@ -283,7 +283,7 @@ extension SearchableCollection {
   }
 
   @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
-  where P: Pattern, P.Match.Searched == SubSequence {
+  where P: Pattern, P.Match.Searched == Self.SubSequence {
     var accountedFor = startIndex
     var results: [P.Match] = []
     while let match = self[accountedFor...].firstMatch(for: pattern) {
