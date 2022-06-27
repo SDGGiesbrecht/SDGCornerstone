@@ -15,10 +15,12 @@
 import SDGLogic
 
 /// A pattern that can be searched for in collections with equatable elements.
-public protocol Pattern {
+public protocol Pattern
+where Searchable == Match.Searched {
 
+  #warning("Is this necessary? (It is just an alias anyway.)")
   /// The searchable collection
-  typealias Searchable = Match.Searched
+  associatedtype Searchable
 
   /// The type of a match for the pattern.
   associatedtype Match: PatternMatch
