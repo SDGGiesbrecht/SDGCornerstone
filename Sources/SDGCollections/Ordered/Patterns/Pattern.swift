@@ -18,7 +18,7 @@ import SDGLogic
 public protocol Pattern {
 
   /// The searchable collection
-  associatedtype Searchable: SearchableCollection
+  typealias Searchable = Match.Searched
 
   /// The type of a match for the pattern.
   associatedtype Match: PatternMatch

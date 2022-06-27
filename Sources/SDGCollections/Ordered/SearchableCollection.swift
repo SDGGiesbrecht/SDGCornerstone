@@ -282,22 +282,24 @@ extension SearchableCollection {
     return _firstMatch(for: pattern)
   }
 
-  #warning("Temporarily disabled.")/*
-  @inlinable internal func _matches<P>(for pattern: P) -> [PatternMatch<Self>]
-  where P: Pattern, P.Element == Element {
+  @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == SubSequence {
     var accountedFor = startIndex
-    var results: [PatternMatch<Self>] = []
+    var results: [P.Match] = []
     while let match = self[accountedFor...].firstMatch(for: pattern) {
       accountedFor = match.range.upperBound
-      results.append(match.in(self))
+      #warning("Can this be made to work on Self instead of SubSequence?")
+      results.append(match)
+      //results.append(match.in(self))
     }
     return results
   }
-  @inlinable public func matches<P>(for pattern: P) -> [PatternMatch<Self>]
-  where P: Pattern, P.Element == Element {
+  #warning("Temporarily disabled.")/*
+  @inlinable public func matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self {
     return _matches(for: pattern)
   }
-  @inlinable public func matches(for pattern: Self) -> [PatternMatch<Self>] {
+  @inlinable public func matches(for pattern: Self) -> [Match] {
     return _matches(for: pattern)
   }
 
