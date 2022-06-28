@@ -24,4 +24,16 @@ final class APITests: XCTestCase {
     XCTAssertEqual(match.contents, string[...])
     XCTAssertEqual(match.range, string.bounds)
   }
+
+  func testPattern() {
+    let string = "Hello!"
+    let match = string.primaryMatch(in: string, at: string.startIndex)
+    XCTAssertEqual(match?.contents, string[...])
+
+    let incomplete = "H"
+    XCTAssertNil(string.primaryMatch(in: incomplete, at: incomplete.startIndex))
+
+    let mismatched = "Bonjour !"
+    XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
+  }
 }

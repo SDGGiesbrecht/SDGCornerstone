@@ -327,7 +327,10 @@ let package = Package(
     ),
     // #workaround(Partially implemented updates to SDGCollections that do not yet support its entire API.)
     .target(
-      name: "SDGCollections2"
+      name: "SDGCollections2",
+      dependencies: [
+        "SDGLogic"
+      ]
     ),
     // @documentation(SDGCollectionsTestUtilities)
     /// Utilities for testing code which uses `SDGCollections`.
