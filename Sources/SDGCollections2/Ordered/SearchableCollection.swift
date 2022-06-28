@@ -13,6 +13,6 @@
  */
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableCollection: Collection
-where Element: Equatable {
+public protocol SearchableCollection: Collection, Pattern
+where Element: Equatable, Searchable == Self {
 }
