@@ -329,7 +329,7 @@ let package = Package(
     .target(
       name: "SDGCollections2",
       dependencies: [
-        "SDGLogic",
+        "SDGLogic"
       ]
     ),
     // @documentation(SDGCollectionsTestUtilities)
