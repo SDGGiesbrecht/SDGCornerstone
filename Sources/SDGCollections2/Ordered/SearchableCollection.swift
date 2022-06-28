@@ -12,7 +12,39 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self {
+}
+
+extension SearchableCollection {
+
+  // MARK: - Pattern
+
+  @inlinable public func primaryMatch(
+    in collection: Self,
+    at location: Index
+  ) -> AtomicPatternMatch<Self>? {
+
+    var checkingIndex = self.startIndex
+    var collectionIndex = location
+    while checkingIndex ≠ self.endIndex {
+      guard collectionIndex ≠ collection.endIndex else {
+        // Ran out of space to check.
+        return nil
+      }
+
+      if self[checkingIndex] ≠ collection[collectionIndex] {
+        // Mis‐match.
+        return nil
+      }
+
+      checkingIndex = self.index(after: checkingIndex)
+      collectionIndex = collection.index(after: collectionIndex)
+    }
+
+    return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
+  }
 }
