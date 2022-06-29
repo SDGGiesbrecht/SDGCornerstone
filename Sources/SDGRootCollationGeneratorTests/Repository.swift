@@ -17,5 +17,5 @@ import Foundation
 let repositoryRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
   .deletingLastPathComponent().deletingLastPathComponent()
 
-let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
-let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")
+let sourcesDirectory = repositoryRoot.appendingPathComponent("Sources")
+let collationTargetDirectory = sourcesDirectory.appendingPathComponent("SDGCollation")
