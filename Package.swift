@@ -378,6 +378,9 @@ let package = Package(
         "SDGCollections",
         "SDGText",
         "SDGPersistence",
+      ],
+      resources: [
+        .copy("Root")
       ]
     ),
 

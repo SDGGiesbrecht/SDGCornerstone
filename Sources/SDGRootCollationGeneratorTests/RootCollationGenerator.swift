@@ -19,7 +19,7 @@ enum RootCollationGenerator {
   static func main() throws {
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       let root = try CollationOrder.generateRoot()
-      try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
+      try root.save(to: collationTargetDirectory.appendingPathComponent("Root"))
     #endif
   }
 }
