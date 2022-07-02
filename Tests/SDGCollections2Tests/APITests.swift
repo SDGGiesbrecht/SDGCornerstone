@@ -41,7 +41,10 @@ final class APITests: XCTestCase {
     XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
 
     struct Nothing: SDGCollections2.Pattern {
-      func matches(in collection: String, at location: String.Index) -> [AtomicPatternMatch<String>] {
+      func matches(
+        in collection: String,
+        at location: String.Index
+      ) -> [AtomicPatternMatch<String>] {
         return []
       }
     }
