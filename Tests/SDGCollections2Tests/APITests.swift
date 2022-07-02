@@ -39,5 +39,12 @@ final class APITests: XCTestCase {
 
     let mismatched = "Bonjour !"
     XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
+
+    struct Nothing: SDGCollections2.Pattern {
+      func matches(in collection: String, at location: String.Index) -> [AtomicPatternMatch<String>] {
+        return []
+      }
+    }
+    XCTAssertNil(Nothing().primaryMatch(in: string, at: string.startIndex))
   }
 }
