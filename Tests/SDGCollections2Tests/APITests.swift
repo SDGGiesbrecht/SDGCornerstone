@@ -29,6 +29,10 @@ final class APITests: XCTestCase {
     let string = "Hello!"
     let match = string.primaryMatch(in: string, at: string.startIndex)
     XCTAssertEqual(match?.contents, string[...])
+    let matchesAtStart = string.matches(in: string, at: string.startIndex)
+    XCTAssertEqual(matchesAtStart.count, 1)
+    let matchesInMiddle = string.matches(in: string, at: string.index(after: string.startIndex))
+    XCTAssertEqual(matchesInMiddle.count, 0)
 
     let incomplete = "H"
     XCTAssertNil(string.primaryMatch(in: incomplete, at: incomplete.startIndex))
