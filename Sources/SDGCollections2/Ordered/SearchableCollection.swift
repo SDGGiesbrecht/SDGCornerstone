@@ -58,4 +58,15 @@ extension SearchableCollection {
 
     return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
   }
+
+  @inlinable public func forSubSequence() -> SubSequence {
+    return self[...]
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: SubSequencePattern.Match,
+    in collection: Searchable
+  ) -> AtomicPatternMatch<Self> {
+    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+  }
 }
