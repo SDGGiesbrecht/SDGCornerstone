@@ -23,6 +23,17 @@ extension SearchableCollection {
 
   // MARK: - Pattern
 
+  @inlinable public func matches(
+    in collection: Self,
+    at location: Index
+  ) -> [Match] {
+    if let match = primaryMatch(in: collection, at: location) {
+      return [match]
+    } else {
+      return []
+    }
+  }
+
   @inlinable public func primaryMatch(
     in collection: Self,
     at location: Index
