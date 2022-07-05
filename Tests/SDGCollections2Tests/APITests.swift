@@ -23,6 +23,7 @@ final class APITests: XCTestCase {
     let match = AtomicPatternMatch(range: string.bounds, in: string)
     XCTAssertEqual(match.contents, string[...])
     XCTAssertEqual(match.range, string.bounds)
+    XCTAssertEqual(match.contents, match.in(string[...]).contents)
   }
 
   func testPattern() {
