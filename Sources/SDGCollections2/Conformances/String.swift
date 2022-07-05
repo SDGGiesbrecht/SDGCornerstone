@@ -12,7 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String: SearchableBidirectionalCollection {}
+extension String: SearchableBidirectionalCollection {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<String>
+  public typealias SubSequencePattern = Substring
+}
 extension String.UnicodeScalarView: SearchableBidirectionalCollection {}
 extension String.UTF8View: SearchableBidirectionalCollection {}
 extension String.UTF16View: SearchableBidirectionalCollection {}
