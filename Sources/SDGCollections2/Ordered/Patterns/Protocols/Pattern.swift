@@ -22,7 +22,8 @@ public protocol Pattern {
   associatedtype Match: PatternMatch
 
   /// The type of pattern for matching against sub‐sequences of the target collection.
-  associatedtype SubSequencePattern: Pattern where SubSequencePattern.Searchable == Searchable.SubSequence
+  associatedtype SubSequencePattern: Pattern
+  where SubSequencePattern.Searchable == Searchable.SubSequence
 
   /// Returns the ranges of possible matches beginning at the specified index in the collection.
   ///
