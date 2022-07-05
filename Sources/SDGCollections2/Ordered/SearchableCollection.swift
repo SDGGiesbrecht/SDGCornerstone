@@ -16,7 +16,7 @@ import SDGLogic
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, Searchable == Self {
+where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 }
 
 extension SearchableCollection {
@@ -67,6 +67,8 @@ extension SearchableCollection {
     from subSequenceMatch: AtomicPatternMatch<SubSequence>,
     in collection: Self
   ) -> AtomicPatternMatch<Self> {
+    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
     return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    // return subSequenceMatch.in(collection)
   }
 }

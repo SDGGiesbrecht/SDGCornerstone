@@ -54,7 +54,7 @@ final class APITests: XCTestCase {
         from subSequenceMatch: AtomicPatternMatch<Substring>,
         in collection: Substring
       ) -> AtomicPatternMatch<Substring> {
-        return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+        return subSequenceMatch.in(collection)
       }
     }
     struct Nothing: SDGCollections2.Pattern {
@@ -71,7 +71,7 @@ final class APITests: XCTestCase {
         from subSequenceMatch: AtomicPatternMatch<Substring>,
         in collection: String
       ) -> AtomicPatternMatch<String> {
-        return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+        return subSequenceMatch.in(collection)
       }
     }
     XCTAssertNil(Nothing().primaryMatch(in: string, at: string.startIndex))

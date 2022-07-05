@@ -30,4 +30,19 @@ public struct AtomicPatternMatch<Searched: SearchableCollection>: PatternMatch {
   // MARK: - PatternMatch
 
   public let contents: Searched.SubSequence
+
+  // MARK: - Conversions
+
+  /// Returns the match converts to a different view of the same collection, such as from a slice to its base collection or vice versa.
+  ///
+  /// - Requires: All indices within the match must be valid for the target collection and point at the same elements.
+  ///
+  /// - Parameters:
+  ///     - context: The new context of the match.
+  @inlinable public func `in`<Context>(
+    _ context: Context
+  ) -> AtomicPatternMatch<Context>
+  where Context: SearchableCollection, Context.Index == Searched.Index {
+    return AtomicPatternMatch<Context>(range: range, in: context)
+  }
 }
