@@ -13,7 +13,8 @@
  */
 
 /// A simple pattern match that cannot be further decomposed and contains no extra information.
-public struct AtomicPatternMatch<Searched: SearchableCollection>: PatternMatch {
+public struct AtomicPatternMatch<Searched>: PatternMatch
+where Searched: Collection /* SearchableCollection */ {
 
   // MARK: - Initialization
 
