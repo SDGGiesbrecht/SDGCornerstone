@@ -14,7 +14,7 @@
 
 /// A simple pattern match that cannot be further decomposed and contains no extra information.
 public struct AtomicPatternMatch<Searched>: PatternMatch
-where Searched: Collection /* SearchableCollection */ {
+where Searched: SearchableCollection {
 
   // MARK: - Initialization
 

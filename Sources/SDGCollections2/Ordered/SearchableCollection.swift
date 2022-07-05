@@ -16,7 +16,7 @@ import SDGLogic
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, Searchable == Self {
+where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 }
 
 extension SearchableCollection {
