@@ -18,7 +18,10 @@ public protocol PatternMatch {
   // MARK: - Associated Types
 
   /// The searched collection.
-  associatedtype Searched: SearchableCollection
+  ///
+  /// - Requires: This type must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
+  associatedtype Searched: Collection  // SearchableCollection
+  // #workaround(Swift 5.6.1, Should be SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Properties
 
