@@ -24,6 +24,25 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
 
 extension SearchableCollection {
 
+  @inlinable internal func _firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
+    var i = startIndex
+    while i ≠ endIndex {
+      if let match = pattern.primaryMatch(in: self, at: i) {
+        return match
+      }
+      i = index(after: i)
+    }
+    return nil
+  }
+  @inlinable public func firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self {
+    return _firstMatch(for: pattern)
+  }
+  @inlinable public func firstMatch(for pattern: Self) -> Match? {
+    return _firstMatch(for: pattern)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(
