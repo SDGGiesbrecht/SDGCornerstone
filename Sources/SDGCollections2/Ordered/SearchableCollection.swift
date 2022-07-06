@@ -15,8 +15,11 @@
 import SDGLogic
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
+///
+/// - Requires: `SubSequence` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, Searchable == Self {
+where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollection */ {
+  // #workaround(Swift 5.6.1, Should require SubSequence: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 }
 
 extension SearchableCollection {
@@ -57,5 +60,18 @@ extension SearchableCollection {
     }
 
     return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
+  }
+
+  @inlinable public func forSubSequence() -> SubSequence {
+    return self[...]
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<SubSequence>,
+    in collection: Self
+  ) -> AtomicPatternMatch<Self> {
+    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
+    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    // return subSequenceMatch.in(collection)
   }
 }

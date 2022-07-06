@@ -23,6 +23,7 @@ final class APITests: XCTestCase {
     let match = AtomicPatternMatch(range: string.bounds, in: string)
     XCTAssertEqual(match.contents, string[...])
     XCTAssertEqual(match.range, string.bounds)
+    XCTAssertEqual(match.contents, match.in(string[...]).contents)
   }
 
   func testPattern() {
@@ -40,6 +41,23 @@ final class APITests: XCTestCase {
     let mismatched = "Bonjour !"
     XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
 
+    struct NothingSubPattern: SDGCollections2.Pattern {
+      func matches(
+        in collection: Substring,
+        at location: Substring.Index
+      ) -> [AtomicPatternMatch<Substring>] {
+        return []
+      }
+      func forSubSequence() -> NothingSubPattern {
+        return self
+      }
+      func convertMatch(
+        from subSequenceMatch: AtomicPatternMatch<Substring>,
+        in collection: Substring
+      ) -> AtomicPatternMatch<Substring> {
+        return subSequenceMatch.in(collection)
+      }
+    }
     struct Nothing: SDGCollections2.Pattern {
       func matches(
         in collection: String,
@@ -47,7 +65,23 @@ final class APITests: XCTestCase {
       ) -> [AtomicPatternMatch<String>] {
         return []
       }
+      func forSubSequence() -> NothingSubPattern {
+        return NothingSubPattern()
+      }
+      func convertMatch(
+        from subSequenceMatch: AtomicPatternMatch<Substring>,
+        in collection: String
+      ) -> AtomicPatternMatch<String> {
+        return subSequenceMatch.in(collection)
+      }
     }
     XCTAssertNil(Nothing().primaryMatch(in: string, at: string.startIndex))
+  }
+
+  func testSearchableCollection() {
+    let string = "Hello!"
+    let subMatch = string.forSubSequence().primaryMatch(in: string[...], at: string.startIndex)
+    let match = subMatch.map { string.convertMatch(from: $0, in: string) }
+    XCTAssertEqual(match?.contents, string[...])
   }
 }

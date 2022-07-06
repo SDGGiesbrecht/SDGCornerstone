@@ -13,7 +13,11 @@
  */
 
 /// A simple pattern match that cannot be further decomposed and contains no extra information.
-public struct AtomicPatternMatch<Searched: SearchableCollection>: PatternMatch {
+///
+/// - Requires: `Searched` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
+public struct AtomicPatternMatch<Searched>: PatternMatch
+where Searched: Collection /* SearchableCollection */ {
+  // #workaround(Swift 5.6.1, Should require Searched: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Initialization
 
@@ -30,4 +34,19 @@ public struct AtomicPatternMatch<Searched: SearchableCollection>: PatternMatch {
   // MARK: - PatternMatch
 
   public let contents: Searched.SubSequence
+
+  // MARK: - Conversions
+
+  /// Returns the match converts to a different view of the same collection, such as from a slice to its base collection or vice versa.
+  ///
+  /// - Requires: All indices within the match must be valid for the target collection and point at the same elements.
+  ///
+  /// - Parameters:
+  ///     - context: The new context of the match.
+  @inlinable public func `in`<Context>(
+    _ context: Context
+  ) -> AtomicPatternMatch<Context>
+  where Context: SearchableCollection, Context.Index == Searched.Index {
+    return AtomicPatternMatch<Context>(range: range, in: context)
+  }
 }
