@@ -41,40 +41,6 @@ final class APITests: XCTestCase {
     let mismatched = "Bonjour !"
     XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
 
-    struct NothingSubPattern: SDGCollections2.Pattern {
-      func matches(
-        in collection: Substring,
-        at location: Substring.Index
-      ) -> [AtomicPatternMatch<Substring>] {
-        return []
-      }
-      func forSubSequence() -> NothingSubPattern {
-        return self
-      }
-      func convertMatch(
-        from subSequenceMatch: AtomicPatternMatch<Substring>,
-        in collection: Substring
-      ) -> AtomicPatternMatch<Substring> {
-        return subSequenceMatch.in(collection)
-      }
-    }
-    struct Nothing: SDGCollections2.Pattern {
-      func matches(
-        in collection: String,
-        at location: String.Index
-      ) -> [AtomicPatternMatch<String>] {
-        return []
-      }
-      func forSubSequence() -> NothingSubPattern {
-        return NothingSubPattern()
-      }
-      func convertMatch(
-        from subSequenceMatch: AtomicPatternMatch<Substring>,
-        in collection: String
-      ) -> AtomicPatternMatch<String> {
-        return subSequenceMatch.in(collection)
-      }
-    }
     XCTAssertNil(Nothing().primaryMatch(in: string, at: string.startIndex))
   }
 
@@ -83,5 +49,8 @@ final class APITests: XCTestCase {
     let subMatch = string.forSubSequence().primaryMatch(in: string[...], at: string.startIndex)
     let match = subMatch.map { string.convertMatch(from: $0, in: string) }
     XCTAssertEqual(match?.contents, string[...])
+
+    XCTAssertEqual(string.firstMatch(for: "e")?.contents, "e"[...])
+    XCTAssertNil(string.firstMatch(for: Nothing()))
   }
 }
