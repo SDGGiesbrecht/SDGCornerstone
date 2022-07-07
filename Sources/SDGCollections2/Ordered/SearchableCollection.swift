@@ -43,6 +43,26 @@ extension SearchableCollection {
     return _firstMatch(for: pattern)
   }
 
+  @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self, SubSequence: SearchableCollection {
+    let subsequencePattern = pattern.forSubSequence()
+    var accountedFor = startIndex
+    var results: [P.Match] = []
+    while let match = self[accountedFor...].firstMatch(for: subsequencePattern) {
+      accountedFor = match.range.upperBound
+      results.append(pattern.convertMatch(from: match, in: self))
+    }
+    return results
+  }
+  @inlinable public func matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self, SubSequence: SearchableCollection {
+    return _matches(for: pattern)
+  }
+  @inlinable public func matches(for pattern: Self) -> [Match]
+  where SubSequence: SearchableCollection {
+    return _matches(for: pattern)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(

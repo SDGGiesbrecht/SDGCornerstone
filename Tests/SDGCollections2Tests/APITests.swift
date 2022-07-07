@@ -52,5 +52,8 @@ final class APITests: XCTestCase {
 
     XCTAssertEqual(string.firstMatch(for: "e")?.contents, "e"[...])
     XCTAssertNil(string.firstMatch(for: Nothing()))
+
+    XCTAssertEqual(string.matches(for: "l").count, 2)
+    XCTAssertEqual(string.matches(for: Nothing()).count, 0)
   }
 }
