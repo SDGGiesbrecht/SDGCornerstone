@@ -20,6 +20,10 @@ import SDGLogic
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollection */ {
   // #workaround(Swift 5.6.1, Should require SubSequence: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+
+  // #workaround(Swift 5.6.1, Needed to dodge Windows compiler bug; remove all conformances too.)
+  func firstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
+  where P: Pattern, P.Searchable == SubSequence
 }
 
 extension SearchableCollection {
@@ -44,18 +48,18 @@ extension SearchableCollection {
   }
 
   @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
-  where P: Pattern, P.Searchable == Self, SubSequence: SearchableCollection {
+  where P: Pattern, P.Searchable == Self {
     let subsequencePattern = pattern.forSubSequence()
     var accountedFor = startIndex
     var results: [P.Match] = []
-    while let match = self[accountedFor...].firstMatch(for: subsequencePattern) {
+    while let match = firstMatch(for: subsequencePattern, in: self[accountedFor...]) {
       accountedFor = match.range.upperBound
       results.append(pattern.convertMatch(from: match, in: self))
     }
     return results
   }
   @inlinable public func matches<P>(for pattern: P) -> [P.Match]
-  where P: Pattern, P.Searchable == Self, SubSequence: SearchableCollection {
+  where P: Pattern, P.Searchable == Self {
     return _matches(for: pattern)
   }
   @inlinable public func matches(for pattern: Self) -> [Match]
