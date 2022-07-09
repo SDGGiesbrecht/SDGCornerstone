@@ -14,49 +14,59 @@
 
 extension String: SearchableBidirectionalCollection {
   public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring) -> P.Match?
-  where P : Pattern, Substring == P.Match.Searched {
+  where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension String.UnicodeScalarView: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UnicodeScalarView) -> P.Match?
-  where P : Pattern, Substring.UnicodeScalarView == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Substring.UnicodeScalarView
+  ) -> P.Match?
+  where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension String.UTF8View: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF8View) -> P.Match?
-  where P : Pattern, Substring.UTF8View == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF8View)
+    -> P.Match?
+  where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension String.UTF16View: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF16View) -> P.Match?
-  where P : Pattern, Substring.UTF16View == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF16View)
+    -> P.Match?
+  where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension Substring: SearchableBidirectionalCollection {
   public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring) -> P.Match?
-  where P : Pattern, Substring == P.Match.Searched {
+  where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UnicodeScalarView) -> P.Match?
-  where P : Pattern, Substring.UnicodeScalarView == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Substring.UnicodeScalarView
+  ) -> P.Match?
+  where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension Substring.UTF8View: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF8View) -> P.Match?
-  where P : Pattern, Substring.UTF8View == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF8View)
+    -> P.Match?
+  where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
 extension Substring.UTF16View: SearchableBidirectionalCollection {
-  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF16View) -> P.Match?
-  where P : Pattern, Substring.UTF16View == P.Match.Searched {
+  public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring.UTF16View)
+    -> P.Match?
+  where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }

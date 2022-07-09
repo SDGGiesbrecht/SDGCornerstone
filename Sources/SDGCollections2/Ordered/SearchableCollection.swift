@@ -61,7 +61,10 @@ extension SearchableCollection {
     let subsequencePattern = pattern.forSubSequence()
     var accountedFor = startIndex
     var results: [P.Match] = []
-    while let match = windowsCompatibleFirstMatch(for: subsequencePattern, in: self[accountedFor...]) {
+    while let match = windowsCompatibleFirstMatch(
+      for: subsequencePattern,
+      in: self[accountedFor...]
+    ) {
       accountedFor = match.range.upperBound
       results.append(pattern.convertMatch(from: match, in: self))
     }
