@@ -22,8 +22,15 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   // #workaround(Swift 5.6.1, Should require SubSequence: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // #workaround(Swift 5.6.1, Needed to dodge Windows compiler bug; remove all conformances too.)
-  func firstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
+  func _firstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
   where P: Pattern, P.Searchable == SubSequence
+}
+
+extension SearchableCollection where SubSequence: SearchableCollection {
+  public func _firstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
+  where P : Pattern, SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
 }
 
 extension SearchableCollection {
@@ -52,7 +59,7 @@ extension SearchableCollection {
     let subsequencePattern = pattern.forSubSequence()
     var accountedFor = startIndex
     var results: [P.Match] = []
-    while let match = firstMatch(for: subsequencePattern, in: self[accountedFor...]) {
+    while let match = _firstMatch(for: subsequencePattern, in: self[accountedFor...]) {
       accountedFor = match.range.upperBound
       results.append(pattern.convertMatch(from: match, in: self))
     }
