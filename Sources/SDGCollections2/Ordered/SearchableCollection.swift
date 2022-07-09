@@ -26,7 +26,7 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   where P: Pattern, P.Searchable == SubSequence
 }
 
-extension SearchableCollection where SubSequence: SearchableCollection {
+extension Collection where SubSequence: SearchableCollection {
   public func _firstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
   where P : Pattern, SubSequence == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
