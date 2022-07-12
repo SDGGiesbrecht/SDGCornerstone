@@ -61,6 +61,7 @@ final class APITests: XCTestCase {
     let string = "Hello!"
     let slice = Slice(base: "Hello!", bounds: string.dropLast().bounds)
     XCTAssertEqual((slice.firstMatch(for: slice)?.contents).map({ Array($0) }), Array(slice))
+    XCTAssertEqual(slice[...].matches(for: slice[...]).count, 1)
   }
 
   func testString() {
