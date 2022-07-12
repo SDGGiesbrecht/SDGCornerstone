@@ -20,6 +20,19 @@ import SDGLogic
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollection */ {
   // #workaround(Swift 5.6.1, Should require SubSequence: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+
+  // #workaround(Swift 5.6.1, Needed to dodge Windows compiler bug; remove all conformances too.)
+  /// Returns the first match for the pattern in the sub‐sequence.
+  ///
+  /// The implementation of this method must be `return subSequence.firstMatch(for: pattern)`, which the Windows compiler is unable to do from a default implementation due to a compiler bug.
+  ///
+  /// - Warning: Never call this method directly. It will be removed from the protocol as soon as the compiler is repaired, and that will be versioned as a bug fix, not a breaking change.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  ///     - subSequence: The subSequence.
+  func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
+  where P: Pattern, P.Searchable == SubSequence
 }
 
 extension SearchableCollection {
@@ -41,6 +54,29 @@ extension SearchableCollection {
   }
   @inlinable public func firstMatch(for pattern: Self) -> Match? {
     return _firstMatch(for: pattern)
+  }
+
+  @inlinable internal func _matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self {
+    let subsequencePattern = pattern.forSubSequence()
+    var accountedFor = startIndex
+    var results: [P.Match] = []
+    while let match = windowsCompatibleFirstMatch(
+      for: subsequencePattern,
+      in: self[accountedFor...]
+    ) {
+      accountedFor = match.range.upperBound
+      results.append(pattern.convertMatch(from: match, in: self))
+    }
+    return results
+  }
+  @inlinable public func matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self {
+    return _matches(for: pattern)
+  }
+  @inlinable public func matches(for pattern: Self) -> [Match]
+  where SubSequence: SearchableCollection {
+    return _matches(for: pattern)
   }
 
   // MARK: - Pattern

@@ -52,5 +52,19 @@ final class APITests: XCTestCase {
 
     XCTAssertEqual(string.firstMatch(for: "e")?.contents, "e"[...])
     XCTAssertNil(string.firstMatch(for: Nothing()))
+
+    XCTAssertEqual(string.matches(for: "l").count, 2)
+    XCTAssertEqual(string.matches(for: Nothing()).count, 0)
+  }
+
+  func testString() {
+    let string = "Hello!"
+    XCTAssertEqual(string[...].matches(for: "l"[...]).count, 2)
+    XCTAssertEqual(string.unicodeScalars.matches(for: "l".unicodeScalars).count, 2)
+    XCTAssertEqual(string.unicodeScalars[...].matches(for: "l".unicodeScalars[...]).count, 2)
+    XCTAssertEqual(string.utf8.matches(for: "l".utf8).count, 2)
+    XCTAssertEqual(string.utf8[...].matches(for: "l".utf8[...]).count, 2)
+    XCTAssertEqual(string.utf16.matches(for: "l".utf16).count, 2)
+    XCTAssertEqual(string.utf16[...].matches(for: "l".utf16[...]).count, 2)
   }
 }
