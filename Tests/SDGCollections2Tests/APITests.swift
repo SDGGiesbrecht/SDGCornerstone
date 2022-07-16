@@ -51,6 +51,7 @@ final class APITests: XCTestCase {
       (reversed.firstMatch(for: reversed)?.contents).map({ Array($0) }),
       Array(reversed)
     )
+    XCTAssertEqual(reversed.matches(for: reversed).count, 1)
     XCTAssertEqual(reversed[...].matches(for: reversed[...]).count, 1)
   }
 
