@@ -13,7 +13,10 @@
  */
 
 extension String: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring) -> P.Match?
+  @inlinable public func windowsCompatibleFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Substring
+  ) -> P.Match?
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
@@ -46,7 +49,10 @@ extension String.UTF16View: SearchableBidirectionalCollection {
   }
 }
 extension Substring: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: Substring) -> P.Match?
+  @inlinable public func windowsCompatibleFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Substring
+  ) -> P.Match?
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
