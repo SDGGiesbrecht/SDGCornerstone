@@ -19,7 +19,7 @@ extension ReversedCollection: Pattern, SearchableCollection where Base: Searchab
   public typealias Match = AtomicPatternMatch<ReversedCollection<Base>>
   public typealias SubSequencePattern = Slice<ReversedCollection<Base>>
 
-  public func windowsCompatibleFirstMatch<P>(
+  @inlinable public func windowsCompatibleFirstMatch<P>(
     for pattern: P,
     in subSequence: Slice<ReversedCollection<Base>>
   ) -> P.Match? where P: Pattern, Slice<ReversedCollection<Base>> == P.Match.Searched {
