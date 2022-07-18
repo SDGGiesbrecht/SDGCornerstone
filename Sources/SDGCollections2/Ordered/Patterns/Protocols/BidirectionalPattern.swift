@@ -24,4 +24,27 @@ where Searchable: SearchableBidirectionalCollection {
   ///
   /// This is suitable for performing backward searches by applying it to the reversed collection.
   func reversed() -> Reversed
+
+  /// Converts the reversed match into a match in the forward collection.
+  ///
+  /// - Parameters:
+  ///     - reversedMatch: The reversed match.
+  ///     - forwardCollection: The forward collection.
+  func forward(
+    match reversedMatch: Reversed.Match,
+    in forwardCollection: Searchable
+  ) -> Match
+}
+
+extension BidirectionalPattern {
+
+  /// Converts a reversed range into a range in the forward collection.
+  ///
+  /// - Parameters:
+  ///     - reversedRange: The reversed range.
+  @inlinable public func forward(
+    _ reversedRange: Range<Reversed.Searchable.Index>
+  ) -> Range<Searchable.Index> {
+    return reversedRange.upperBound.base ..< reversedRange.lowerBound.base
+  }
 }

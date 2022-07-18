@@ -17,3 +17,15 @@ public protocol SearchableBidirectionalCollection: BidirectionalCollection, Bidi
   SearchableCollection
 {
 }
+
+extension SearchableBidirectionalCollection {
+
+  // MARK: - BidirectionalPattern
+
+  @inlinable public func forward(
+    match reversedMatch: AtomicPatternMatch<ReversedCollection<Self>>,
+    in forwardCollection: Self
+  ) -> AtomicPatternMatch<Self> {
+    return AtomicPatternMatch(range: forward(reversedMatch.range), in: forwardCollection)
+  }
+}
