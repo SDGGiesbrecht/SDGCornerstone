@@ -13,5 +13,7 @@
  */
 
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableBidirectionalCollection: BidirectionalCollection, SearchableCollection {
+public protocol SearchableBidirectionalCollection: BidirectionalCollection, BidirectionalPattern,
+  SearchableCollection
+{
 }

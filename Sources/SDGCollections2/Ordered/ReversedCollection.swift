@@ -26,5 +26,10 @@ extension ReversedCollection: Pattern, SearchableCollection where Base: Searchab
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension ReversedCollection: SearchableBidirectionalCollection
-where Base: SearchableBidirectionalCollection {}
+extension ReversedCollection: BidirectionalPattern, SearchableBidirectionalCollection
+where Base: SearchableBidirectionalCollection {
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+}
