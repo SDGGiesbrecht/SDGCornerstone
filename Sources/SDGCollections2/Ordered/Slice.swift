@@ -27,4 +27,10 @@ extension Slice: Pattern, SearchableCollection where Base: SearchableCollection 
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension Slice: SearchableBidirectionalCollection where Base: SearchableBidirectionalCollection {}
+extension Slice: BidirectionalPattern, SearchableBidirectionalCollection
+where Base: SearchableBidirectionalCollection {
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+}

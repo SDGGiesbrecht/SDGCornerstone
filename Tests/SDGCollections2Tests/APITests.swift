@@ -26,6 +26,18 @@ final class APITests: XCTestCase {
     XCTAssertEqual(match.contents, match.in(string[...]).contents)
   }
 
+  func testBidirectionalPattern() {
+    func useBidirectional<T>(pattern: T, searched: T.Searchable) where T: BidirectionalPattern {
+      let reversedPattern: T.Reversed = pattern.reversed()
+      let reversedSearchSpace: ReversedCollection<T.Searchable> = searched.reversed()
+      XCTAssertNotNil(reversedSearchSpace.firstMatch(for: reversedPattern))
+    }
+    useBidirectional(
+      pattern: "String",
+      searched: "Strings are bidirectional searchable collections."
+    )
+  }
+
   func testPattern() {
     let string = "Hello!"
     let match = string.primaryMatch(in: string, at: string.startIndex)
