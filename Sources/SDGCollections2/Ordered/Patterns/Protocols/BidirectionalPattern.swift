@@ -45,6 +45,6 @@ extension BidirectionalPattern {
   @inlinable public func forward(
     _ reversedRange: Range<Reversed.Searchable.Index>
   ) -> Range<Searchable.Index> {
-    return reversedRange.upperBound.base ..< reversedRange.lowerBound.base
+    return reversedRange.upperBound.base..<reversedRange.lowerBound.base
   }
 }
