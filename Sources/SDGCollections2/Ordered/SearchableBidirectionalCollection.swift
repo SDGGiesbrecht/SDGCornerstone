@@ -41,7 +41,7 @@ extension SearchableBidirectionalCollection {
     return _lastMatch(for: pattern)
   }
   // #workaround(Swift 5.6.1, The compiler cannot handle the generic signature of this method.)
-  /*@inlinable public func lastMatch(for pattern: Self) -> Match? {
+  /*@inlinable public func lastMatch(for pattern: Self) -> Match? {  @exempt(from: unicode)
     return _lastMatch(for: pattern)
   }*/
 
