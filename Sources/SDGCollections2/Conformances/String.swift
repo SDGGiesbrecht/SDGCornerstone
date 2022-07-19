@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String: SearchableBidirectionalCollection {
+extension String: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring
@@ -28,7 +28,7 @@ extension String: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension String.UnicodeScalarView: SearchableBidirectionalCollection {
+extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UnicodeScalarView
@@ -44,7 +44,7 @@ extension String.UnicodeScalarView: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension String.UTF8View: SearchableBidirectionalCollection {
+extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF8View
@@ -60,7 +60,7 @@ extension String.UTF8View: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension String.UTF16View: SearchableBidirectionalCollection {
+extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF16View
@@ -76,7 +76,7 @@ extension String.UTF16View: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension Substring: SearchableBidirectionalCollection {
+extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring
@@ -92,7 +92,7 @@ extension Substring: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
+extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UnicodeScalarView
@@ -108,7 +108,7 @@ extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension Substring.UTF8View: SearchableBidirectionalCollection {
+extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF8View
@@ -124,7 +124,7 @@ extension Substring.UTF8View: SearchableBidirectionalCollection {
     return reversed.firstMatch(for: pattern)
   }
 }
-extension Substring.UTF16View: SearchableBidirectionalCollection {
+extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF16View

@@ -67,6 +67,12 @@ final class APITests: XCTestCase {
     XCTAssertEqual(reversed[...].matches(for: reversed[...]).count, 1)
   }
 
+  func testSearchableBidirectionalCollection() {
+    let string = "Hello!"
+    let reverseMatch = string.lastMatch(for: string)
+    XCTAssertEqual(reverseMatch?.contents, string[...])
+  }
+
   func testSearchableCollection() {
     let string = "Hello!"
     let subMatch = string.forSubSequence().primaryMatch(in: string[...], at: string.startIndex)
