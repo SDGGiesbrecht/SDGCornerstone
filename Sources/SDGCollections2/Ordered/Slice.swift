@@ -33,12 +33,4 @@ where Base: SearchableBidirectionalCollection {
   // MARK: - BidirectionalPattern
 
   public typealias Reversed = ReversedCollection<Self>
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<Slice<Base>>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<Slice<Base>> {
-    return reversed.firstMatch(for: pattern)
-  }
 }

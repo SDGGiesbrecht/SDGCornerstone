@@ -19,20 +19,6 @@ public protocol SearchableBidirectionalCollection: BidirectionalCollection, /*Bi
   // #workaround(Swift 5.6.1, The compiler cannot handle the commented constraint. Remove “requires” documentation too when fixed.)
   SearchableCollection
 {
-
-  #warning("Is this actually needed?")
-  // #workaround(Swift 5.6.1, Needed to dodge compiler bug; remove all conformances too.)
-  /// Returns the first match for the pattern in the reversed collection.
-  ///
-  /// The implementation of this method must be `return reversed.firstMatch(for: pattern)`, which the compiler is unable to do from a default implementation due to a bug.
-  ///
-  /// - Warning: Never call this method directly. It will be removed from the protocol as soon as the compiler is repaired, and that will be versioned as a bug fix, not a breaking change.
-  ///
-  /// - Parameters:
-  ///     - pattern: The pattern to search for.
-  ///     - reversed: The reversed collection.
-  func temporaryWorkaroundFirstMatch<P>(for pattern: P, in reversed: ReversedCollection<Self>) -> P.Match?
-  where P: Pattern, P.Searchable == ReversedCollection<Self>
 }
 
 extension SearchableBidirectionalCollection {
@@ -41,7 +27,7 @@ extension SearchableBidirectionalCollection {
   where P: BidirectionalPattern, P.Searchable == Self {
     let reversedCollection: ReversedCollection<Self> = reversed()
     let reversedPattern: P.Reversed = pattern.reversed()
-    guard let match = temporaryWorkaroundFirstMatch(for: reversedPattern, in: reversedCollection) else {
+    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
       return nil
     }
     return pattern.forward(match: match, in: self)

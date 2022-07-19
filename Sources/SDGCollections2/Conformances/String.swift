@@ -20,13 +20,6 @@ extension String: BidirectionalPattern, SearchableBidirectionalCollection {
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<String>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<String> {
-    return reversed.firstMatch(for: pattern)
-  }
 }
 extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -35,13 +28,6 @@ extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectiona
   ) -> P.Match?
   where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
-  }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<String.UnicodeScalarView>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<String.UnicodeScalarView> {
-    return reversed.firstMatch(for: pattern)
   }
 }
 extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -52,13 +38,6 @@ extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollecti
   where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<String.UTF8View>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<String.UTF8View> {
-    return reversed.firstMatch(for: pattern)
-  }
 }
 extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -67,13 +46,6 @@ extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollect
   ) -> P.Match?
   where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
-  }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<String.UTF16View>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<String.UTF16View> {
-    return reversed.firstMatch(for: pattern)
   }
 }
 extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -84,13 +56,6 @@ extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<Substring>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<Substring> {
-    return reversed.firstMatch(for: pattern)
-  }
 }
 extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -99,13 +64,6 @@ extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirecti
   ) -> P.Match?
   where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
-  }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<Substring.UnicodeScalarView>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<Substring.UnicodeScalarView> {
-    return reversed.firstMatch(for: pattern)
   }
 }
 extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -116,13 +74,6 @@ extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalColle
   where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<Substring.UTF8View>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<Substring.UTF8View> {
-    return reversed.firstMatch(for: pattern)
-  }
 }
 extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -131,12 +82,5 @@ extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalColl
   ) -> P.Match?
   where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
-  }
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in reversed: ReversedCollection<Substring.UTF16View>
-  ) -> P.Match?
-  where P : Pattern, P.Match.Searched == ReversedCollection<Substring.UTF16View> {
-    return reversed.firstMatch(for: pattern)
   }
 }
