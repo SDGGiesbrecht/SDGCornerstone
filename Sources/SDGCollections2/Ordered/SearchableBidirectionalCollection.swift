@@ -20,6 +20,7 @@ public protocol SearchableBidirectionalCollection: BidirectionalCollection, /*Bi
   SearchableCollection
 {
 
+  #warning("Is this actually needed?")
   // #workaround(Swift 5.6.1, Needed to dodge compiler bug; remove all conformances too.)
   /// Returns the first match for the pattern in the reversed collection.
   ///
