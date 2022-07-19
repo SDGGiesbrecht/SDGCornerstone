@@ -67,6 +67,7 @@ final class APITests: XCTestCase {
     )
     XCTAssertEqual(reversed.matches(for: reversed).count, 1)
     XCTAssertEqual(reversed[...].matches(for: reversed[...]).count, 1)
+    XCTAssertNotNil(reversed.lastMatch(for: reversed))
   }
 
   func testSearchableBidirectionalCollection() {
@@ -76,6 +77,9 @@ final class APITests: XCTestCase {
 
     let mismatched = "Bonjour !"
     XCTAssertNil(string.lastMatch(for: mismatched))
+
+    let literalExpressible: Substring = "Hello?"
+    XCTAssertNil(literalExpressible.lastMatch(for: "Hello!"))
   }
 
   func testSearchableCollection() {
@@ -96,10 +100,12 @@ final class APITests: XCTestCase {
     let slice = Slice(base: "Hello!", bounds: string.dropLast().bounds)
     XCTAssertEqual((slice.firstMatch(for: slice)?.contents).map({ Array($0) }), Array(slice))
     XCTAssertEqual(slice[...].matches(for: slice[...]).count, 1)
+    XCTAssertNotNil(slice.lastMatch(for: slice))
   }
 
   func testString() {
     let string = "Hello!"
+
     XCTAssertEqual(string[...].matches(for: "l"[...]).count, 2)
     XCTAssertEqual(string.unicodeScalars.matches(for: "l".unicodeScalars).count, 2)
     XCTAssertEqual(string.unicodeScalars[...].matches(for: "l".unicodeScalars[...]).count, 2)
@@ -107,5 +113,14 @@ final class APITests: XCTestCase {
     XCTAssertEqual(string.utf8[...].matches(for: "l".utf8[...]).count, 2)
     XCTAssertEqual(string.utf16.matches(for: "l".utf16).count, 2)
     XCTAssertEqual(string.utf16[...].matches(for: "l".utf16[...]).count, 2)
+
+    XCTAssertNotNil(string.lastMatch(for: "l"))
+    XCTAssertNotNil(string[...].lastMatch(for: "l"[...]))
+    XCTAssertNotNil(string.unicodeScalars.lastMatch(for: "l".unicodeScalars))
+    XCTAssertNotNil(string.unicodeScalars[...].lastMatch(for: "l".unicodeScalars[...]))
+    XCTAssertNotNil(string.utf8.lastMatch(for: "l".utf8))
+    XCTAssertNotNil(string.utf8[...].lastMatch(for: "l".utf8[...]))
+    XCTAssertNotNil(string.utf16.lastMatch(for: "l".utf16))
+    XCTAssertNotNil(string.utf16[...].lastMatch(for: "l".utf16[...]))
   }
 }

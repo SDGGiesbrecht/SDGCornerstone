@@ -20,6 +20,10 @@ extension String: BidirectionalPattern, SearchableBidirectionalCollection {
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
 }
 extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -28,6 +32,10 @@ extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectiona
   ) -> P.Match?
   where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
+  }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
   }
 }
 extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -38,6 +46,10 @@ extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollecti
   where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
 }
 extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -46,6 +58,10 @@ extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollect
   ) -> P.Match?
   where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
+  }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
   }
 }
 extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -56,6 +72,10 @@ extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
   where P: Pattern, Substring == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
 }
 extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -64,6 +84,10 @@ extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirecti
   ) -> P.Match?
   where P: Pattern, Substring.UnicodeScalarView == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
+  }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
   }
 }
 extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
@@ -74,6 +98,10 @@ extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalColle
   where P: Pattern, Substring.UTF8View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
 }
 extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
@@ -82,5 +110,9 @@ extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalColl
   ) -> P.Match?
   where P: Pattern, Substring.UTF16View == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
+  }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
   }
 }

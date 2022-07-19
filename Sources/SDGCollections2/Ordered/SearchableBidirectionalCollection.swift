@@ -20,6 +20,8 @@ public protocol SearchableBidirectionalCollection:
   // #workaround(Swift 5.6.1, The compiler cannot handle the commented constraint. Remove “requires” documentation too when fixed.)
   SearchableCollection
 {
+
+  func lastMatch(for pattern: Self) -> Match?
 }
 
 extension SearchableBidirectionalCollection {
@@ -34,9 +36,14 @@ extension SearchableBidirectionalCollection {
     return pattern.forward(match: match, in: self)
   }
   @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
-  where P: BidirectionalPattern, P.Searchable == Self {
+  where P: BidirectionalPattern, P.Searchable == Self {  // @exempt(from: tests)
+    // #workaround(Temporarily @exempt(from: tests) because all conformers override it.)
     return _lastMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, The compiler cannot handle the generic signature of this method.)
+  /*@inlinable public func lastMatch(for pattern: Self) -> Match? {  @exempt(from: unicode)
+    return _lastMatch(for: pattern)
+  }*/
 
   // MARK: - BidirectionalPattern
 
