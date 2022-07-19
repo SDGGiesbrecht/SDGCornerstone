@@ -34,6 +34,8 @@ final class APITests: XCTestCase {
       XCTFail("Failed to match.")
       return
     }
+    let forwardRange = string.forward(reversedMatch.range)
+    XCTAssertEqual(forwardRange, string.bounds)
     let forwardMatch = string.forward(match: reversedMatch, in: string)
     XCTAssertEqual(forwardMatch.contents, string[...])
   }
@@ -65,6 +67,15 @@ final class APITests: XCTestCase {
     )
     XCTAssertEqual(reversed.matches(for: reversed).count, 1)
     XCTAssertEqual(reversed[...].matches(for: reversed[...]).count, 1)
+  }
+
+  func testSearchableBidirectionalCollection() {
+    let string = "Hello!"
+    let reverseMatch = string.lastMatch(for: string)
+    XCTAssertEqual(reverseMatch?.contents, string[...])
+
+    let mismatched = "Bonjour !"
+    XCTAssertNil(string.lastMatch(for: mismatched))
   }
 
   func testSearchableCollection() {

@@ -31,7 +31,7 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   /// - Parameters:
   ///     - pattern: The pattern to search for.
   ///     - subSequence: The subSequence.
-  func windowsCompatibleFirstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
+  func temporaryWorkaroundFirstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
   where P: Pattern, P.Searchable == SubSequence
 }
 
@@ -61,7 +61,7 @@ extension SearchableCollection {
     let subsequencePattern = pattern.forSubSequence()
     var accountedFor = startIndex
     var results: [P.Match] = []
-    while let match = windowsCompatibleFirstMatch(
+    while let match = temporaryWorkaroundFirstMatch(
       for: subsequencePattern,
       in: self[accountedFor...]
     ) {

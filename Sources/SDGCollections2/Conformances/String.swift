@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension String: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring
   ) -> P.Match?
@@ -21,8 +21,8 @@ extension String: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension String.UnicodeScalarView: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UnicodeScalarView
   ) -> P.Match?
@@ -30,8 +30,8 @@ extension String.UnicodeScalarView: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension String.UTF8View: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF8View
   ) -> P.Match?
@@ -39,8 +39,8 @@ extension String.UTF8View: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension String.UTF16View: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF16View
   ) -> P.Match?
@@ -48,8 +48,8 @@ extension String.UTF16View: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension Substring: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring
   ) -> P.Match?
@@ -57,8 +57,8 @@ extension Substring: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UnicodeScalarView
   ) -> P.Match?
@@ -66,8 +66,8 @@ extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension Substring.UTF8View: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF8View
   ) -> P.Match?
@@ -75,8 +75,8 @@ extension Substring.UTF8View: SearchableBidirectionalCollection {
     return subSequence.firstMatch(for: pattern)
   }
 }
-extension Substring.UTF16View: SearchableBidirectionalCollection {
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Substring.UTF16View
   ) -> P.Match?

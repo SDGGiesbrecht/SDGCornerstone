@@ -19,7 +19,7 @@ extension Slice: Pattern, SearchableCollection where Base: SearchableCollection 
   public typealias Match = AtomicPatternMatch<Slice<Base>>
   public typealias SubSequencePattern = Slice<Base>
 
-  @inlinable public func windowsCompatibleFirstMatch<P>(
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
     for pattern: P,
     in subSequence: Slice<Base>
   ) -> P.Match?
