@@ -36,7 +36,7 @@ extension SearchableBidirectionalCollection {
     return pattern.forward(match: match, in: self)
   }
   @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
-  where P: BidirectionalPattern, P.Searchable == Self {
+  where P: BidirectionalPattern, P.Searchable == Self {  // @exempt(from: tests)
     // #workaround(Temporarily @exempt(from: tests) because all conformers override it.)
     return _lastMatch(for: pattern)
   }
