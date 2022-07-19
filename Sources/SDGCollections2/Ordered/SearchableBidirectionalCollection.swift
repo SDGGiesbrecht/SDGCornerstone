@@ -15,7 +15,8 @@
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
 ///
 /// - Requires: Must also conform to `BidirectionalPattern` even though the compiler is currently incapable of enforcing it.
-public protocol SearchableBidirectionalCollection: BidirectionalCollection, /*BidirectionalPattern,*/
+public protocol SearchableBidirectionalCollection:
+  BidirectionalCollection, /*BidirectionalPattern,*/
   // #workaround(Swift 5.6.1, The compiler cannot handle the commented constraint. Remove “requires” documentation too when fixed.)
   SearchableCollection
 {
@@ -44,6 +45,9 @@ extension SearchableBidirectionalCollection {
     in forwardCollection: Self
   ) -> AtomicPatternMatch<Self> {
     let range = reversedMatch.range
-    return AtomicPatternMatch(range: range.upperBound.base..<range.lowerBound.base, in: forwardCollection)
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }
