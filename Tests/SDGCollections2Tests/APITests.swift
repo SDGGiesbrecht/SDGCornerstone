@@ -93,6 +93,8 @@ final class APITests: XCTestCase {
 
     XCTAssertEqual(string.matches(for: "l").count, 2)
     XCTAssertEqual(string.matches(for: Nothing()).count, 0)
+
+    XCTAssertEqual(string.prefix(upTo: "l")?.contents, string.dropLast(4))
   }
 
   func testSlice() {
