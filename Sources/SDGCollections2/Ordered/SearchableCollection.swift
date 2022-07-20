@@ -65,7 +65,6 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   /// - Parameters:
   ///     - pattern: The pattern to search for.
   func matches(for pattern: Self) -> [Match]
-  where SubSequence: SearchableCollection
 }
 
 extension SearchableCollection {
