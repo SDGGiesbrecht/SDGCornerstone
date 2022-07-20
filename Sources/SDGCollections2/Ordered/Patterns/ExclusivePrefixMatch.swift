@@ -25,7 +25,10 @@ where Match: PatternMatch {
   ///   - searched: The searched collection.
   public init(match: Match, in searched: Match.Searched) {
     self.match = match
-    let prefixMatch = AtomicPatternMatch(range: searched.startIndex..<match.range.lowerBound, in: searched)
+    let prefixMatch = AtomicPatternMatch(
+      range: searched.startIndex..<match.range.lowerBound,
+      in: searched
+    )
     self.prefix = prefixMatch
   }
 
