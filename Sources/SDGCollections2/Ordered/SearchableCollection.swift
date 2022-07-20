@@ -33,6 +33,39 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   ///     - subSequence: The subSequence.
   func temporaryWorkaroundFirstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
   where P: Pattern, P.Searchable == SubSequence
+
+  // @documentation(SDGCornerstone.Collection.firstMatch(for:))
+  /// Returns the first match for `pattern` in the collection.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func firstMatch<P>(for pattern: P) -> P.Match?
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.firstMatch(for:))
+  /// Returns the first match for `pattern` in the collection.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func firstMatch(for pattern: Self) -> Match?
+
+  // @documentation(SDGCornerstone.Collection.matches(for:))
+  /// Returns a list of all matches for `pattern` in the collection.
+  ///
+  /// This does not check for overlapping matches.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func matches<P>(for pattern: P) -> [P.Match]
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.matches(for:))
+  /// Returns a list of all matches for `pattern` in the collection.
+  ///
+  /// This does not check for overlapping matches.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func matches(for pattern: Self) -> [Match]
+  where SubSequence: SearchableCollection
 }
 
 extension SearchableCollection {
