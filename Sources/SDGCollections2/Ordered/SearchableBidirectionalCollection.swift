@@ -36,8 +36,7 @@ extension SearchableBidirectionalCollection {
     return pattern.forward(match: match, in: self)
   }
   @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
-  where P: BidirectionalPattern, P.Searchable == Self {  // @exempt(from: tests)
-    // #workaround(Temporarily @exempt(from: tests) because all conformers override it.)
+  where P: BidirectionalPattern, P.Searchable == Self {
     return _lastMatch(for: pattern)
   }
   // #workaround(Swift 5.6.1, The compiler cannot handle the generic signature of this method.)

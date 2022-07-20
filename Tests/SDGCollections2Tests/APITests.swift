@@ -77,6 +77,7 @@ final class APITests: XCTestCase {
 
     let mismatched = "Bonjour !"
     XCTAssertNil(string.lastMatch(for: mismatched))
+    XCTAssertNil(string.lastMatch(for: Nothing()))
 
     let literalExpressible: Substring = "Hello?"
     XCTAssertNil(literalExpressible.lastMatch(for: "Hello!"))
@@ -95,6 +96,7 @@ final class APITests: XCTestCase {
     XCTAssertEqual(string.matches(for: Nothing()).count, 0)
 
     XCTAssertEqual(string.prefix(upTo: "l")?.contents, string.dropLast(4))
+    XCTAssertNil(string.prefix(upTo: Nothing()))
   }
 
   func testSlice() {

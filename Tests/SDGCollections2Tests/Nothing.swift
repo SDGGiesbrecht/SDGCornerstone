@@ -31,7 +31,41 @@ struct NothingSubPattern: SDGCollections2.Pattern {
     return subSequenceMatch.in(collection)
   }
 }
-struct Nothing: SDGCollections2.Pattern {
+struct ReversedNothingSubPattern: SDGCollections2.Pattern {
+  func matches(
+    in collection: Slice<ReversedCollection<String>>,
+    at location: Slice<ReversedCollection<String>>.Index
+  ) -> [AtomicPatternMatch<Slice<ReversedCollection<String>>>] {
+    return []
+  }
+  func forSubSequence() -> ReversedNothingSubPattern {
+    return self
+  }
+  func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<Slice<ReversedCollection<String>>>,
+    in collection: Slice<ReversedCollection<String>>
+  ) -> AtomicPatternMatch<Slice<ReversedCollection<String>>> {
+    return subSequenceMatch.in(collection)
+  }
+}
+struct ReversedNothingPattern: SDGCollections2.Pattern {
+  func matches(
+    in collection: ReversedCollection<String>,
+    at location: ReversedCollection<String>.Index
+  ) -> [AtomicPatternMatch<ReversedCollection<String>>] {
+    return []
+  }
+  func forSubSequence() -> ReversedNothingSubPattern {
+    return ReversedNothingSubPattern()
+  }
+  func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<Slice<ReversedCollection<String>>>,
+    in collection: ReversedCollection<String>
+  ) -> AtomicPatternMatch<ReversedCollection<String>> {
+    return subSequenceMatch.in(collection)
+  }
+}
+struct Nothing: SDGCollections2.BidirectionalPattern, SDGCollections2.Pattern {
   func matches(
     in collection: String,
     at location: String.Index
@@ -46,5 +80,18 @@ struct Nothing: SDGCollections2.Pattern {
     in collection: String
   ) -> AtomicPatternMatch<String> {
     return subSequenceMatch.in(collection)
+  }
+  func reversed() -> ReversedNothingPattern {
+    return ReversedNothingPattern()
+  }
+  func forward(
+    match reversedMatch: AtomicPatternMatch<ReversedCollection<String>>,
+    in forwardCollection: String
+  ) -> AtomicPatternMatch<String> {
+    let range = reversedMatch.range
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }
