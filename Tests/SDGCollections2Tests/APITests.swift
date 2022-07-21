@@ -40,6 +40,14 @@ final class APITests: XCTestCase {
     XCTAssertEqual(forwardMatch.contents, string[...])
   }
 
+  func testConcatenatedPatterns() {
+    let string = "Hello!"
+    let pattern: ConcatenatedPatterns<String, String> = "Hello" + "!"
+    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string[string.bounds])
+    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string[string.bounds])
+    XCTAssertEqual(string.matches(for: pattern).count, 1)
+  }
+
   func testPattern() {
     let string = "Hello!"
     let match = string.primaryMatch(in: string, at: string.startIndex)

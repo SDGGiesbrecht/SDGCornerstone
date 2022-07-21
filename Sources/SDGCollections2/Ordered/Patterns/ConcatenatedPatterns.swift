@@ -63,12 +63,19 @@ where First: Pattern, Second: Pattern, First.Searchable == Second.Searchable {
     return nil
   }
 
-  @inlinable public func forSubSequence() -> ConcatenatedPatterns<First.SubSequencePattern, Second.SubSequencePattern> {
-    return ConcatenatedPatterns<First.SubSequencePattern, Second.SubSequencePattern>(first.forSubSequence(), second.forSubSequence())
+  @inlinable public func forSubSequence() -> ConcatenatedPatterns<
+    First.SubSequencePattern, Second.SubSequencePattern
+  > {
+    return ConcatenatedPatterns<First.SubSequencePattern, Second.SubSequencePattern>(
+      first.forSubSequence(),
+      second.forSubSequence()
+    )
   }
 
   @inlinable public func convertMatch(
-    from subSequenceMatch: ConcatenatedMatch<First.SubSequencePattern.Match, Second.SubSequencePattern.Match>,
+    from subSequenceMatch: ConcatenatedMatch<
+      First.SubSequencePattern.Match, Second.SubSequencePattern.Match
+    >,
     in collection: Searchable
   ) -> ConcatenatedMatch<First.Match, Second.Match> {
     return ConcatenatedMatch(
