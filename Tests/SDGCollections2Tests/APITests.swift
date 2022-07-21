@@ -46,6 +46,9 @@ final class APITests: XCTestCase {
     XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string[string.bounds])
     XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string[string.bounds])
     XCTAssertEqual(string.matches(for: pattern).count, 1)
+    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 1)
+    XCTAssertEqual("Hello".matches(for: pattern).count, 0)
+    _ = pattern.description
   }
 
   func testPattern() {
