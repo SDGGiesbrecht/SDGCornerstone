@@ -68,4 +68,21 @@ extension Pattern {
   ) -> Match? {
     return matches(in: collection, at: location).first
   }
+
+  // MARK: - Composition
+
+  /// Combines two patterns into a single pattern by concatenating them.
+  ///
+  /// See the `ConcatenatedPatterns` type for details.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The first pattern.
+  ///     - followingValue: The second pattern.
+  @inlinable public static func + <Other>(
+    precedingValue: Self,
+    followingValue: Other
+  ) -> ConcatenatedPatterns<Self, Other>
+  where Other: Pattern, Other.Searchable == Self.Searchable {
+    return ConcatenatedPatterns(precedingValue, followingValue)
+  }
 }
