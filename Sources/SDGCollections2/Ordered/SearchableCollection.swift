@@ -65,6 +65,20 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   /// - Parameters:
   ///     - pattern: The pattern to search for.
   func matches(for pattern: Self) -> [Match]
+
+  // @documentation(SDGCornerstone.Collection.prefix(upTo:))
+  /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func prefix<P>(upTo pattern: P) -> ExclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.prefix(upTo:))
+  /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func prefix(upTo pattern: Self) -> ExclusivePrefixMatch<Match>?
 }
 
 extension SearchableCollection {
@@ -109,6 +123,21 @@ extension SearchableCollection {
   @inlinable public func matches(for pattern: Self) -> [Match]
   where SubSequence: SearchableCollection {
     return _matches(for: pattern)
+  }
+
+  @inlinable internal func _prefix<P>(upTo pattern: P) -> ExclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    guard let match = firstMatch(for: pattern) else {
+      return nil
+    }
+    return ExclusivePrefixMatch(match: match, in: self)
+  }
+  @inlinable public func prefix<P>(upTo pattern: P) -> ExclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    return _prefix(upTo: pattern)
+  }
+  @inlinable public func prefix(upTo pattern: Self) -> ExclusivePrefixMatch<Match>? {
+    return _prefix(upTo: pattern)
   }
 
   // MARK: - Pattern
