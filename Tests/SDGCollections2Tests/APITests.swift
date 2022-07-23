@@ -64,6 +64,17 @@ final class APITests: XCTestCase {
     _ = pattern.description
   }
 
+  func testNegatedPattern() {
+    let string = "Hello!"
+    let pattern: NegatedPattern<String> = ¬"Hello"
+    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropFirst().dropLast(4))
+    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
+    XCTAssertEqual(string.matches(for: pattern).count, 5)
+    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 0)
+    XCTAssertEqual("Hello".matches(for: pattern).count, 4)
+    _ = pattern.description
+  }
+
   func testPattern() {
     let string = "Hello!"
     let match = string.primaryMatch(in: string, at: string.startIndex)
