@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 /// A pattern that can be searched for in collections with equatable elements.
 public protocol Pattern {
 
@@ -84,5 +86,30 @@ extension Pattern {
   ) -> ConcatenatedPatterns<Self, Other>
   where Other: Pattern, Other.Searchable == Self.Searchable {
     return ConcatenatedPatterns(precedingValue, followingValue)
+  }
+
+  /// Combines two patterns into a single pattern that will match either.
+  ///
+  /// See the `AlternativePatterns` type for details.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The first pattern.
+  ///     - followingValue: The second pattern.
+  @inlinable public static func ∨ <Other>(
+    precedingValue: Self,
+    followingValue: Other
+  ) -> AlternativePatterns<Self, Other>
+  where Other: Pattern, Other.Searchable == Self.Searchable {
+    return AlternativePatterns(precedingValue, followingValue)
+  }
+
+  /// Creates a negated pattern from another pattern.
+  ///
+  /// See the `NegatedPattern` type for details.
+  ///
+  /// - Parameters:
+  ///     - operand: The pattern to negate.
+  @inlinable public static prefix func ¬ (operand: Self) -> NegatedPattern<Self> {
+    return NegatedPattern(operand)
   }
 }
