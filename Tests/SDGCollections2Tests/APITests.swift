@@ -25,6 +25,7 @@ final class APITests: XCTestCase {
     let pattern: AlternativePatterns<String, String> = "Hello" ∨ "!"
     XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropLast())
     XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
+    XCTAssertEqual(string.dropLast().lastMatch(for: pattern.forSubSequence())?.contents, string.dropLast())
     XCTAssertEqual(string.matches(for: pattern).count, 2)
     XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 1)
     XCTAssertEqual(pattern.matches(in: string, at: string.indices.last!).count, 1)
@@ -72,6 +73,7 @@ final class APITests: XCTestCase {
     XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
     XCTAssertEqual(string.matches(for: pattern).count, 5)
     XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 0)
+    XCTAssertEqual(pattern.matches(in: string, at: string.dropFirst().startIndex).count, 1)
     XCTAssertEqual("Hello".matches(for: pattern).count, 4)
     _ = pattern.description
   }
