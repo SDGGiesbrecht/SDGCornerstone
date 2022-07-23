@@ -12,11 +12,24 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 import SDGCollections2
 
 import XCTest
 
 final class APITests: XCTestCase {
+
+  func testAlternativePatterns() {
+    let string = "Hello!"
+    let pattern: AlternativePatterns<String, String> = "Hello" ∨ "!"
+    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropLast())
+    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
+    XCTAssertEqual(string.matches(for: pattern).count, 2)
+    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 1)
+    XCTAssertEqual("Hello".matches(for: pattern).count, 1)
+    _ = pattern.description
+  }
 
   func testAtomicPatternMatch() {
     let string = "Hello!"
