@@ -667,7 +667,8 @@ let package = Package(
     .testTarget(
       name: "SDGCollections2Tests",
       dependencies: [
-        "SDGCollections2"
+        "SDGLogic",
+        "SDGCollections2",
       ]
     ),
     .testTarget(
