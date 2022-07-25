@@ -1,5 +1,5 @@
 /*
- ExclusivePrefixMatch.swift
+ ExclusiveSuffixMatch.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,37 +12,37 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// The prefix up to but excluding a pattern match.
-public struct ExclusivePrefixMatch<Match>: PatternMatch
+/// The suffix from the end of a pattern match.
+public struct ExclusiveSuffixMatch<Match>: PatternMatch
 where Match: PatternMatch {
 
   // MARK: - Initialization
 
-  /// Creates an exclusive prefix match.
+  /// Creates an exclusive suffix match.
   ///
   /// - Parameters:
-  ///   - match: The terminating pattern match.
+  ///   - match: The starting pattern match.
   ///   - searched: The searched collection.
   @inlinable public init(match: Match, in searched: Match.Searched) {
     self.match = match
-    let prefixMatch = AtomicPatternMatch(
-      range: searched.startIndex..<match.range.lowerBound,
+    let suffixMatch = AtomicPatternMatch(
+      range: match.range.upperBound..<searched.endIndex,
       in: searched
     )
-    self.prefix = prefixMatch
+    self.suffix = suffixMatch
   }
 
   // MARK: - Properties
 
-  /// The prefix.
-  public let prefix: AtomicPatternMatch<Match.Searched>
-  /// The terminating pattern match.
+  /// The suffix.
+  public let suffix: AtomicPatternMatch<Match.Searched>
+  /// The starting pattern match.
   public let match: Match
 
   // MARK: - PatternMatch
 
   public typealias Searched = Match.Searched
-  @inlinable public var contents: Match.Searched.SubSequence {
-    return prefix.contents
+  public var contents: Match.Searched.SubSequence {
+    return suffix.contents
   }
 }

@@ -140,6 +140,51 @@ extension SearchableCollection {
     return _prefix(upTo: pattern)
   }
 
+  @inlinable internal func _prefix<P>(through pattern: P) -> InclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    guard let match = firstMatch(for: pattern) else {
+      return nil
+    }
+    return InclusivePrefixMatch(match: match, in: self)
+  }
+  @inlinable public func prefix<P>(through pattern: P) -> InclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    return _prefix(through: pattern)
+  }
+  @inlinable public func prefix(through pattern: Self) -> InclusivePrefixMatch<Match>? {
+    return _prefix(through: pattern)
+  }
+
+  @inlinable internal func _suffix<P>(from pattern: P) -> InclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    guard let match = firstMatch(for: pattern) else {
+      return nil
+    }
+    return InclusiveSuffixMatch(match: match, in: self)
+  }
+  @inlinable public func suffix<P>(from pattern: P) -> InclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    return _suffix(from: pattern)
+  }
+  @inlinable public func suffix(from pattern: Self) -> InclusiveSuffixMatch<Match>? {
+    return _suffix(from: pattern)
+  }
+
+  @inlinable internal func _suffix<P>(after pattern: P) -> ExclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    guard let match = firstMatch(for: pattern) else {
+      return nil
+    }
+    return ExclusiveSuffixMatch(match: match, in: self)
+  }
+  @inlinable public func suffix<P>(after pattern: P) -> ExclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self {
+    return _suffix(after: pattern)
+  }
+  @inlinable public func suffix(after pattern: Self) -> ExclusiveSuffixMatch<Match>? {
+    return _suffix(after: pattern)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(

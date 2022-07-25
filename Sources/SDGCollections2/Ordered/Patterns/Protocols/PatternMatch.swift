@@ -32,7 +32,7 @@ public protocol PatternMatch {
 extension PatternMatch {
 
   /// The range.
-  public var range: Range<Searched.Index> {
+  @inlinable public var range: Range<Searched.Index> {
     return contents.bounds
   }
 }

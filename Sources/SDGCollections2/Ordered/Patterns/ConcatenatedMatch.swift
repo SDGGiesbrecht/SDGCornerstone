@@ -24,7 +24,7 @@ where First: PatternMatch, Second: PatternMatch, First.Searched == Second.Search
   ///   - first: The first match.
   ///   - second: The second match.
   ///   - searched: The searched collection.
-  public init(first: First, second: Second, in searched: Searched) {
+  @inlinable public init(first: First, second: Second, in searched: Searched) {
     self.first = first
     self.second = second
     contents = searched[first.range.lowerBound..<second.range.upperBound]
