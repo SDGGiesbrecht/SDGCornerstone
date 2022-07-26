@@ -185,6 +185,25 @@ extension SearchableCollection {
     return _suffix(after: pattern)
   }
 
+  @inlinable internal func _components<P>(separatedBy pattern: P) -> [SeparatedMatch<P.Match>]
+  where P: Pattern, P.Searchable == Self {
+    let separators = matches(for: pattern)
+    var previousIndex = startIndex
+    var components: [SeparatedMatch<P.Match>] = separators.map { separator in
+      defer { previousIndex = separator.range.upperBound }
+      return SeparatedMatch(start: previousIndex, match: separator, in: self)
+    }
+    components.append(SeparatedMatch(start: previousIndex, match: nil, in: self))
+    return components
+  }
+  @inlinable public func components<P>(separatedBy pattern: P) -> [SeparatedMatch<P.Match>]
+  where P: Pattern, P.Searchable == Self {
+    return _components(separatedBy: pattern)
+  }
+  @inlinable public func components(separatedBy pattern: Self) -> [SeparatedMatch<Match>] {
+    return _components(separatedBy: pattern)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(

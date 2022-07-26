@@ -58,6 +58,11 @@ final class APITests: XCTestCase {
     XCTAssertEqual(forwardMatch.contents, string[...])
   }
 
+  func testCollection() {
+    let string = "Hello!"
+    XCTAssertEqual(string.ranges(separatedBy: [string.bounds]).count, 2)
+  }
+
   func testConcatenatedPatterns() {
     let string = "Hello!"
     let pattern: ConcatenatedPatterns<String, String> = "Hello" + "!"
@@ -144,6 +149,12 @@ final class APITests: XCTestCase {
     XCTAssertNil(string.suffix(from: Nothing()))
     XCTAssertEqual(string.suffix(after: "l")?.contents, string.dropFirst(3))
     XCTAssertNil(string.suffix(after: Nothing()))
+    XCTAssertEqual(string.components(separatedBy: "l").count, 3)
+    XCTAssertEqual(
+      string.components(separatedBy: "l").filter({ $0.contents.contains("l") }).count,
+      0
+    )
+    XCTAssertEqual(string.components(separatedBy: Nothing()).count, 1)
   }
 
   func testSlice() {

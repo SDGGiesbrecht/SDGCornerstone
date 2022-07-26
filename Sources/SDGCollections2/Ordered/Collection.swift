@@ -20,4 +20,10 @@ extension Collection {
   @inlinable public var bounds: Range<Index> {
     return startIndex..<endIndex
   }
+
+  @inlinable public func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>] {
+    let startIndices = [startIndex] + separators.map({ $0.upperBound })
+    let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
+    return zip(startIndices, endIndices).map({ $0..<$1 })
+  }
 }
