@@ -1,5 +1,5 @@
 /*
- ExclusivePrefixMatch.swift
+ InclusivePrefixMatch.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// The prefix up to but excluding a pattern match.
-public struct ExclusivePrefixMatch<Match>: PatternMatch
+/// The prefix up to and including a pattern match.
+public struct InclusivePrefixMatch<Match>: PatternMatch
 where Match: PatternMatch {
 
   // MARK: - Initialization
 
-  /// Creates an exclusive prefix match.
+  /// Creates an inclusive prefix match.
   ///
   /// - Parameters:
   ///   - match: The terminating pattern match.
@@ -29,20 +29,19 @@ where Match: PatternMatch {
       range: searched.startIndex..<match.range.lowerBound,
       in: searched
     )
-    self.prefix = prefixMatch
+    self.exclusivePrefix = prefixMatch
+    self.contents = searched[searched.startIndex..<match.range.upperBound]
   }
 
   // MARK: - Properties
 
-  /// The prefix.
-  public let prefix: AtomicPatternMatch<Match.Searched>
+  /// The exclusive prefix.
+  public let exclusivePrefix: AtomicPatternMatch<Match.Searched>
   /// The terminating pattern match.
   public let match: Match
 
   // MARK: - PatternMatch
 
   public typealias Searched = Match.Searched
-  @inlinable public var contents: Match.Searched.SubSequence {
-    return prefix.contents
-  }
+  public let contents: Match.Searched.SubSequence
 }

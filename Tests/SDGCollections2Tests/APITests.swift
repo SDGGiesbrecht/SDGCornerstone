@@ -138,6 +138,12 @@ final class APITests: XCTestCase {
 
     XCTAssertEqual(string.prefix(upTo: "l")?.contents, string.dropLast(4))
     XCTAssertNil(string.prefix(upTo: Nothing()))
+    XCTAssertEqual(string.prefix(through: "l")?.contents, string.dropLast(3))
+    XCTAssertNil(string.prefix(through: Nothing()))
+    XCTAssertEqual(string.suffix(from: "l")?.contents, string.dropFirst(2))
+    XCTAssertNil(string.suffix(from: Nothing()))
+    XCTAssertEqual(string.suffix(after: "l")?.contents, string.dropFirst(3))
+    XCTAssertNil(string.suffix(after: Nothing()))
   }
 
   func testSlice() {

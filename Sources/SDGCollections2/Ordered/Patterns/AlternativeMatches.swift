@@ -27,7 +27,7 @@ where Preferred: PatternMatch, Fallback: PatternMatch, Preferred.Searched == Fal
   // MARK: - PatternMatch
 
   public typealias Searched = Preferred.Searched
-  public var contents: Preferred.Searched.SubSequence {
+  @inlinable public var contents: Preferred.Searched.SubSequence {
     switch self {
     case .preferred(let match):
       return match.contents
