@@ -79,6 +79,115 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   /// - Parameters:
   ///     - pattern: The pattern to search for.
   func prefix(upTo pattern: Self) -> ExclusivePrefixMatch<Match>?
+
+  // @documentation(SDGCornerstone.Collection.prefix(through:))
+  /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func prefix<P>(through pattern: P) -> InclusivePrefixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.prefix(through:))
+  /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func prefix(through pattern: Self) -> InclusivePrefixMatch<Match>?
+
+  // @documentation(SDGCornerstone.Collection.suffix(from:))
+  /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func suffix<P>(from pattern: P) -> InclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.suffix(from:))
+  /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func suffix(from pattern: Self) -> InclusiveSuffixMatch<Match>?
+
+  // @documentation(SDGCornerstone.Collection.suffix(after:))
+  /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func suffix<P>(after pattern: P) -> ExclusiveSuffixMatch<P.Match>?
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.suffix(after:))
+  /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func suffix(after pattern: Self) -> ExclusiveSuffixMatch<Match>?
+
+  // @documentation(SDGCornerstone.Collection.components(separatedBy:))
+  /// Returns the segments of `self` separated by instances of `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func components<P>(separatedBy pattern: P) -> [SeparatedMatch<P.Match>]
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.components(separatedBy:))
+  /// Returns the segments of `self` separated by instances of `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func components(separatedBy pattern: Self) -> [SeparatedMatch<Match>]
+
+  // @documentation(SDGCornerstone.Collection.contains(pattern:))
+  /// Returns `true` if `self` contains an match for `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func contains<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.contains(pattern:))
+  /// Returns `true` if `self` contains an match for `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
+  func contains(_ pattern: Self) -> Bool
+
+  // @documentation(SDGCornerstone.Collection.hasPrefix(_:))
+  /// Returns `true` if `self` begins with `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
+  func hasPrefix<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
+  /// Returns `true` if `self` begins with `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
+  func hasPrefix(_ pattern: Self) -> Bool
+
+  // @documentation(SDGCornerstone.Collection.isMatch(for:))
+  /// Returns `true` if the whole collection matches the specified pattern.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
+  func isMatch<P>(for pattern: P) -> Bool where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.isMatch(for:))
+  /// Returns `true` if the whole collection matches the specified pattern.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
+  func isMatch(for pattern: Self) -> Bool
+
+  // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///     - other: The other collection
+  func commonPrefix<C: SearchableCollection>(with other: C) -> AtomicPatternMatch<Self>
+  where C.Element == Self.Element
+  // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///     - other: The other collection
+  func commonPrefix(with other: Self) -> AtomicPatternMatch<Self>
 }
 
 extension SearchableCollection {
@@ -236,6 +345,29 @@ extension SearchableCollection {
   }
   @inlinable public func isMatch(for pattern: Self) -> Bool {
     return elementsEqual(pattern)
+  }
+
+  @inlinable internal func _commonPrefix<C: SearchableCollection>(
+    with other: C
+  ) -> AtomicPatternMatch<Self> where C.Element == Self.Element {
+    var end: Index = startIndex
+    for (ownIndex, otherIndex) in zip(indices, other.indices) {
+      if self[ownIndex] == other[otherIndex] {
+        end = index(after: end)
+      } else {
+        break
+      }
+    }
+    return AtomicPatternMatch(range: ..<end, in: self)
+  }
+  @inlinable public func commonPrefix<C: SearchableCollection>(
+    with other: C
+  ) -> AtomicPatternMatch<Self>
+  where C.Element == Self.Element {
+    return _commonPrefix(with: other)
+  }
+  @inlinable public func commonPrefix(with other: Self) -> AtomicPatternMatch<Self> {
+    return _commonPrefix(with: other)
   }
 
   // MARK: - Pattern
