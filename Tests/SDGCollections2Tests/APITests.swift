@@ -155,6 +155,15 @@ final class APITests: XCTestCase {
       0
     )
     XCTAssertEqual(string.components(separatedBy: Nothing()).count, 1)
+
+    XCTAssert(string.contains(string))
+    XCTAssert(string.hasPrefix(string))
+    XCTAssert(string.isMatch(for: string))
+    XCTAssertFalse(string.contains(Nothing()))
+    XCTAssertFalse(string.hasPrefix(Nothing()))
+    XCTAssertFalse(string.isMatch(for: Nothing()))
+    XCTAssert(string.unicodeScalars.hasPrefix(string.unicodeScalars))
+    XCTAssert(string.isMatch(for: "∅" ∨ string))
   }
 
   func testSlice() {
