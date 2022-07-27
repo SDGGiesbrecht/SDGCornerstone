@@ -102,6 +102,12 @@ final class APITests: XCTestCase {
     XCTAssertNil(string.primaryMatch(in: mismatched, at: mismatched.startIndex))
 
     XCTAssertNil(Nothing().primaryMatch(in: string, at: string.startIndex))
+    switch string {
+    case Nothing():
+      XCTFail()
+    default:
+      break
+    }
   }
 
   func testReversedCollection() {
