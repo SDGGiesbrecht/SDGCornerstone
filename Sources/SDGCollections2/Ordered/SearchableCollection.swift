@@ -204,6 +204,40 @@ extension SearchableCollection {
     return _components(separatedBy: pattern)
   }
 
+  @inlinable internal func _contains<P>(_ pattern: P) -> Bool
+  where P: Pattern, P.Searchable == Self {
+    return firstMatch(for: pattern) ≠ nil
+  }
+  @inlinable public func contains<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self {
+    return _contains(pattern)
+  }
+  @inlinable public func contains(_ pattern: Self) -> Bool {
+    return _contains(pattern)
+  }
+
+  @inlinable public func _hasPrefix<P>(_ pattern: P) -> Bool
+  where P: Pattern, P.Searchable == Self {
+    return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
+  }
+  @inlinable public func hasPrefix<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self {
+    return _hasPrefix(pattern)
+  }
+  @inlinable public func hasPrefix(_ pattern: Self) -> Bool {
+    return _hasPrefix(pattern)
+  }
+
+  @inlinable public func _isMatch<P>(for pattern: P) -> Bool
+  where P: Pattern, P.Searchable == Self {
+    return pattern.matches(in: self, at: startIndex)
+      .contains(where: { $0.range.upperBound == endIndex })
+  }
+  @inlinable public func isMatch<P>(for pattern: P) -> Bool where P: Pattern, P.Searchable == Self {
+    return _isMatch(for: pattern)
+  }
+  @inlinable public func isMatch(for pattern: Self) -> Bool {
+    return elementsEqual(pattern)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(
