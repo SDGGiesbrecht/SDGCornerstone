@@ -112,4 +112,28 @@ extension Pattern {
   @inlinable public static prefix func ¬ (operand: Self) -> NegatedPattern<Self> {
     return NegatedPattern(operand)
   }
+
+  // MARK: - Switch Expression Pattern
+
+  // #example(1, patternSwitch)
+  /// Enables use of any set pattern in switch cases.
+  ///
+  /// ```swift
+  /// switch "This is a string." {
+  /// case RepetitionPattern("."):
+  ///   XCTFail("This case does not match.")
+  /// case RepetitionPattern(¬".") + ".":
+  ///   print("This case does match.")
+  /// default:
+  ///   XCTFail("This case is never reached.")
+  /// }
+  /// ```
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to match against.
+  ///     - value: The value to check.
+  @inlinable public static func ~= (pattern: Self, value: Self.Match.Searched) -> Bool
+  where Self.Match.Searched: SearchableCollection {
+    return value.isMatch(for: pattern)
+  }
 }
