@@ -417,9 +417,9 @@ extension SearchableCollection {
     return elementsEqual(pattern)
   }
 
-  @inlinable internal func _commonPrefix<C: SearchableCollection>(with other: C) -> PatternMatch<
-    Self
-  > where C.Element == Self.Element {
+  @inlinable internal func _commonPrefix<C: SearchableCollection>(
+    with other: C
+  ) -> PatternMatch<Self> where C.Element == Self.Element {
     var end: Index = startIndex
     for (ownIndex, otherIndex) in zip(indices, other.indices) {
       if self[ownIndex] == other[otherIndex] {

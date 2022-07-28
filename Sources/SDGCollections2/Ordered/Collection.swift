@@ -21,6 +21,14 @@ extension Collection {
     return startIndex..<endIndex
   }
 
+  /// Returns an array of ranges representing the complement of those provided.
+  ///
+  /// - SeeAlso: `components(separatedBy:)`
+  ///
+  /// - Precondition: The provided ranges must be sorted and not overlap.
+  ///
+  /// - Parameters:
+  ///     - separators: The ranges of the separators.
   @inlinable public func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>] {
     let startIndices = [startIndex] + separators.map({ $0.upperBound })
     let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
