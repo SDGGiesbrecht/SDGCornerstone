@@ -50,7 +50,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
   public typealias Match = NestingMatch<Opening.Match, Closing.Match>
 
-  @inlinable static func unpack(
+  @inlinable internal static func unpack(
     concatenatedMatch match: ConcatenatedMatch<
       ConcatenatedMatch<
         Opening.Match, NestingMatchContents<Opening.Match, Closing.Match>
