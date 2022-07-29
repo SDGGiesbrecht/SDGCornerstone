@@ -73,8 +73,10 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   @inlinable public func forSubSequence() -> _NestingSegmentPattern<
     Opening.SubSequencePattern, Closing.SubSequencePattern
   > {
-    #warning("Not implemented yet.")
-    fatalError()
+    return _NestingSegmentPattern<Opening.SubSequencePattern, Closing.SubSequencePattern>(
+      opening: opening.forSubSequence(),
+      closing: closing.forSubSequence(),
+      parentNestingPattern: { parentNestingPattern().forSubSequence() })
   }
 
   @inlinable public func convertMatch(
@@ -83,8 +85,15 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     >,
     in collection: Searchable
   ) -> NestingMatchSegment<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    switch subSequenceMatch {
+    case .nested(let nested):
+      return .nested(parentNestingPattern().convertMatch(
+        from: nested,
+        in: collection
+      ))
+    case.other(let other):
+      return .other(AtomicPatternMatch(range: other.range, in: collection))
+    }
   }
 }
 
@@ -94,15 +103,29 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
   // MARK: - BidirectionalPattern
 
   @inlinable public func reversed() -> _NestingSegmentPattern<Closing.Reversed, Opening.Reversed> {
-    #warning("Not implemented yet.")
-    fatalError()
+    return _NestingSegmentPattern<Closing.Reversed, Opening.Reversed>(
+      opening: closing.reversed(),
+      closing: opening.reversed(),
+      parentNestingPattern: { parentNestingPattern().reversed() }
+    )
   }
 
   @inlinable public func forward(
     match reversedMatch: NestingMatchSegment<Closing.Reversed.Match, Opening.Reversed.Match>,
     in forwardCollection: Searchable
   ) -> NestingMatchSegment<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    switch reversedMatch {
+    case .nested(let nested):
+      return .nested(parentNestingPattern().forward(
+        match: nested,
+        in: forwardCollection
+      ))
+    case .other(let other):
+      let reversedMatchRange = other.range
+      return .other(AtomicPatternMatch(
+        range: reversedMatchRange.upperBound.base..<reversedMatchRange.lowerBound.base,
+        in: forwardCollection
+      ))
+    }
   }
 }
