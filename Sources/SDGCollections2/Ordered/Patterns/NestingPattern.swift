@@ -24,8 +24,11 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   ///     - opening: The opening pattern.
   ///     - closing: The closing pattern.
   @inlinable public init(opening: Opening, closing: Closing) {
-    #warning("Not implemented yet.")
-    fatalError()
+    self.opening = opening
+    let contents = _NestingContentsPattern(opening: opening, closing: closing)
+    self.contents = contents
+    self.closing = closing
+    self.concatenatedComponents = opening + contents + closing
   }
 
   // MARK: - Properties
@@ -33,27 +36,46 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   @usableFromInline internal var opening: Opening
   @usableFromInline internal var contents: _NestingContentsPattern<Opening, Closing>
   @usableFromInline internal var closing: Closing
+  @usableFromInline internal var concatenatedComponents:
+    ConcatenatedPatterns<
+      ConcatenatedPatterns<Opening, _NestingContentsPattern<Opening, Closing>>,
+      Closing
+    >
 
   // MARK: - Pattern
 
   public typealias Match = NestingMatch<Opening.Match, Closing.Match>
 
+  @inlinable static func unpack(
+    concatenatedMatch match: ConcatenatedMatch<
+      ConcatenatedMatch<
+        Opening.Match, NestingMatchContents<Opening.Match, Closing.Match>
+      >,
+      Closing.Match
+    >,
+    in collection: Searchable
+  ) -> NestingMatch<Opening.Match, Closing.Match> {
+    return NestingMatch<Opening.Match, Closing.Match>(
+      opening: match.first.first,
+      contents: match.first.second,
+      closing: match.second,
+      in: collection
+    )
+  }
   @inlinable public func matches(
     in collection: Match.Searched,
     at location: Match.Searched.Index
   ) -> [NestingMatch<Opening.Match, Closing.Match>] {
-    return opening.matches(in: collection, at: location).compactMap { opening in
-      #warning("Not implemented yet.")
-      return nil
-    }
+    return concatenatedComponents.matches(in: collection, at: location)
+      .map { Self.unpack(concatenatedMatch: $0, in: collection) }
   }
 
   @inlinable public func primaryMatch(
     in collection: Searchable,
     at location: Searchable.Index
   ) -> NestingMatch<Opening.Match, Closing.Match>? {
-    #warning("Not implemented yet.")
-    return nil
+    return concatenatedComponents.primaryMatch(in: collection, at: location)
+      .map { Self.unpack(concatenatedMatch: $0, in: collection) }
   }
 
   @inlinable public func forSubSequence() -> NestingPattern<
@@ -71,8 +93,12 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     >,
     in collection: Searchable
   ) -> NestingMatch<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    return NestingMatch<Opening.Match, Closing.Match>(
+      opening: opening.convertMatch(from: subSequenceMatch.opening, in: collection),
+      contents: contents.convertMatch(from: subSequenceMatch.levelContents, in: collection),
+      closing: closing.convertMatch(from: subSequenceMatch.closing, in: collection),
+      in: collection
+    )
   }
 }
 
