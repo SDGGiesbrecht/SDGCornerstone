@@ -117,7 +117,12 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
     match reversedMatch: NestingMatchContents<Closing.Reversed.Match, Opening.Reversed.Match>,
     in forwardCollection: Searchable
   ) -> NestingMatchContents<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    let reversedRange = reversedMatch.range
+    return NestingMatchContents<Opening.Match, Closing.Match>(
+      segments: reversedMatch.segments.lazy.reversed().map({ segment in
+        return segmentPattern.forward(match: segment, in: forwardCollection)
+      }),
+      contents: forwardCollection[reversedRange.upperBound.base..<reversedRange.lowerBound.base]
+    )
   }
 }
