@@ -21,32 +21,32 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   /// Creates a nesting match.
   ///
   /// - Parameters:
-  ///     - openingToken: The match for the opening token.
+  ///     - opening: The match for the opening pattern.
   ///     - contents: The contents of the nesting level.
-  ///     - closingToken: The match for the closing token.
+  ///     - closing: The match for the closing pattern.
   ///     - searched: The searched collection
   @inlinable public init(
-    openingToken: Opening,
+    opening: Opening,
     contents: NestingMatchContents<Opening, Closing>,
-    closingToken: Closing,
+    closing: Closing,
     in searched: Searched
   ) {
-    self.openingToken = openingToken
+    self.opening = opening
     self.levelContents = contents
-    self.closingToken = closingToken
-    self.contents = searched[openingToken.range.lowerBound..<self.closingToken.range.upperBound]
+    self.closing = closing
+    self.contents = searched[opening.range.lowerBound..<self.closing.range.upperBound]
   }
 
   // MARK: - Properties
 
-  /// The opening token.
-  public let openingToken: Opening
+  /// The match for the opening pattern.
+  public let opening: Opening
 
   /// The contents of the nesting level, excluding the opening and closing tokens.
   public let levelContents: NestingMatchContents<Opening, Closing>
 
-  /// The closing token.
-  public let closingToken: Closing
+  /// The match for closing pattern.
+  public let closing: Closing
 
   // MARK: - PatternMatch
 
