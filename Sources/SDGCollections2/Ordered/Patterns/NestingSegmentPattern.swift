@@ -32,8 +32,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     in collection: Match.Searched,
     at location: Match.Searched.Index
   ) -> [NestingMatchSegment<Opening.Match, Closing.Match>] {
-    #warning("Not implemented yet.")
-    return []
+    return primaryMatch(in: collection, at: location).map({ [$0] }) ?? []
   }
 
   @inlinable public func primaryMatch(
