@@ -89,7 +89,9 @@ final class APITests: XCTestCase {
   func testNestingPattern() {
     let string = "...(...(...(...)...(...)...)...(...)...)..."
     let pattern = NestingPattern(opening: "(", closing: ")")
-    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropFirst(3).dropLast(3))
+    let match = string.firstMatch(for: pattern)
+    XCTAssertEqual(match?.contents, string.dropFirst(3).dropLast(3))
+    XCTAssertEqual(match?.levelContents.contents, string.dropFirst(4).dropLast(4))
   }
 
   func testPattern() {
