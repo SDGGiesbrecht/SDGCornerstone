@@ -18,8 +18,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   // MARK: - Initialization
 
   @inlinable internal init(opening: Opening, closing: Closing) {
-    #warning("Not implemented yet.")
-    fatalError()
+    segmentPattern = _NestingSegmentPattern(opening: opening, closing: closing)
   }
 
   // MARK: - Properties
