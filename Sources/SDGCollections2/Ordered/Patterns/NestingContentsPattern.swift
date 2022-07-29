@@ -91,8 +91,12 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     >,
     in collection: Searchable
   ) -> NestingMatchContents<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    return NestingMatchContents<Opening.Match, Closing.Match>(
+      segments: subSequenceMatch.segments.lazy.reversed().map({ segment in
+        return segmentPattern.convertMatch(from: segment, in: collection)
+      }),
+      contents: subSequenceMatch.contents
+    )
   }
 }
 
