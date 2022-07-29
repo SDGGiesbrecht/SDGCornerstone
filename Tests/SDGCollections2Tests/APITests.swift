@@ -96,6 +96,8 @@ final class APITests: XCTestCase {
     XCTAssertEqual(reversedMatch?.contents, string.dropFirst(3).dropLast(3))
     XCTAssertEqual(reversedMatch?.levelContents.contents, string.dropFirst(4).dropLast(4))
     XCTAssertNotNil(pattern.primaryMatch(in: string, at: string.dropFirst(3).startIndex))
+    XCTAssertEqual(string.matches(for: pattern).count, 1)
+    XCTAssertEqual(pattern.matches(in: string, at: string.dropFirst(3).startIndex).count, 1)
   }
 
   func testPattern() {
