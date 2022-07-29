@@ -18,11 +18,15 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   // MARK: - Initialization
 
   @inlinable internal init(opening: Opening, closing: Closing) {
-    segmentPattern = _NestingSegmentPattern(opening: opening, closing: closing)
+    self.opening = opening
+    self.closing = closing
+    self.segmentPattern = _NestingSegmentPattern(opening: opening, closing: closing)
   }
 
   // MARK: - Properties
 
+  @usableFromInline internal var opening: Opening
+  @usableFromInline internal var closing: Closing
   @usableFromInline internal var segmentPattern: _NestingSegmentPattern<Opening, Closing>
 
   // MARK: - Pattern
@@ -62,8 +66,12 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   @inlinable public func forSubSequence() -> _NestingContentsPattern<
     Opening.SubSequencePattern, Closing.SubSequencePattern
   > {
-    #warning("Not implemented yet.")
-    fatalError()
+    return _NestingContentsPattern<
+      Opening.SubSequencePattern, Closing.SubSequencePattern
+    >(
+      opening: opening.forSubSequence(),
+      closing: closing.forSubSequence()
+    )
   }
 
   @inlinable public func convertMatch(
