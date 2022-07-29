@@ -17,16 +17,26 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
   // MARK: - Initialization
 
-  @inlinable internal init(opening: Opening, closing: Closing) {
+  @inlinable internal init(
+    opening: Opening,
+    closing: Closing,
+    parentNestingPattern: @escaping () -> NestingPattern<Opening, Closing>
+  ) {
     self.opening = opening
     self.closing = closing
-    self.segmentPattern = _NestingSegmentPattern(opening: opening, closing: closing)
+    self.parentNestingPattern = parentNestingPattern
+    self.segmentPattern = _NestingSegmentPattern(
+      opening: opening,
+      closing: closing,
+      parentNestingPattern: parentNestingPattern
+    )
   }
 
   // MARK: - Properties
 
   @usableFromInline internal var opening: Opening
   @usableFromInline internal var closing: Closing
+  @usableFromInline internal var parentNestingPattern: () -> NestingPattern<Opening, Closing>
   @usableFromInline internal var segmentPattern: _NestingSegmentPattern<Opening, Closing>
 
   // MARK: - Pattern
@@ -70,7 +80,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
       Opening.SubSequencePattern, Closing.SubSequencePattern
     >(
       opening: opening.forSubSequence(),
-      closing: closing.forSubSequence()
+      closing: closing.forSubSequence(),
+      parentNestingPattern: { self.parentNestingPattern().forSubSequence() }
     )
   }
 

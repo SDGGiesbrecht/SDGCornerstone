@@ -12,17 +12,28 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 public struct _NestingSegmentPattern<Opening, Closing>: Pattern
 where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchable {
 
   // MARK: - Initialization
 
-  @inlinable internal init(opening: Opening, closing: Closing) {
-    #warning("Not implemented yet.")
-    fatalError()
+  @inlinable internal init(
+    opening: Opening,
+    closing: Closing,
+    parentNestingPattern: @escaping () -> NestingPattern<Opening, Closing>
+  ) {
+    self.opening = opening
+    self.closing = closing
+    self.parentNestingPattern = parentNestingPattern
   }
 
   // MARK: - Properties
+
+  @usableFromInline internal var opening: Opening
+  @usableFromInline internal var closing: Closing
+  @usableFromInline internal var parentNestingPattern: () -> NestingPattern<Opening, Closing>
 
   // MARK: - Pattern
 
@@ -39,8 +50,24 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     in collection: Searchable,
     at location: Searchable.Index
   ) -> NestingMatchSegment<Opening.Match, Closing.Match>? {
-    #warning("Not implemented yet.")
-    return nil
+    if closing.primaryMatch(in: collection, at: location) ≠ nil {
+      return nil
+    } else if let nested = parentNestingPattern().primaryMatch(in: collection, at: location) {
+      return .nested(nested)
+    } else {
+      var cursor = location
+      while cursor ≠ collection.endIndex,
+        opening.primaryMatch(in: collection, at: cursor) == nil,
+        closing.primaryMatch(in: collection, at: cursor) == nil {
+        cursor = collection.index(after: cursor)
+      }
+      let range = location..<cursor
+      if range.isEmpty {
+        return nil
+      } else {
+        return .other(AtomicPatternMatch(range: range, in: collection))
+      }
+    }
   }
 
   @inlinable public func forSubSequence() -> _NestingSegmentPattern<

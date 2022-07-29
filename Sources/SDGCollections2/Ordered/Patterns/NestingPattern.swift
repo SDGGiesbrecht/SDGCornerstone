@@ -25,7 +25,11 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   ///     - closing: The closing pattern.
   @inlinable public init(opening: Opening, closing: Closing) {
     self.opening = opening
-    let contents = _NestingContentsPattern(opening: opening, closing: closing)
+    let contents = _NestingContentsPattern(
+      opening: opening,
+      closing: closing,
+      parentNestingPattern: { NestingPattern(opening: opening, closing: closing) }
+    )
     self.contents = contents
     self.closing = closing
     self.concatenatedComponents = opening + contents + closing
