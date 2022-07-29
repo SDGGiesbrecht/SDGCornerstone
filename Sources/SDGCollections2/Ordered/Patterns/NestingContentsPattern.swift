@@ -24,6 +24,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
   // MARK: - Properties
 
+  @usableFromInline internal var segmentPattern: _NestingSegmentPattern<Opening, Closing>
+
   // MARK: - Pattern
 
   public typealias Match = NestingMatchContents<Opening.Match, Closing.Match>
@@ -32,16 +34,30 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     in collection: Match.Searched,
     at location: Match.Searched.Index
   ) -> [NestingMatchContents<Opening.Match, Closing.Match>] {
-    #warning("Not implemented yet.")
-    return []
+    return [guaranteedPrimaryMatch(in: collection, at: location)]
   }
 
+  @inlinable public func guaranteedPrimaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> NestingMatchContents<Opening.Match, Closing.Match> {
+    // ( (   ( ) ( ) )  ( ) )
+    var segments: [NestingMatchSegment<Opening.Match, Closing.Match>] = []
+    var cursor = location
+    while let next = segmentPattern.primaryMatch(in: collection, at: cursor) {
+      segments.append(next)
+      cursor = next.range.upperBound
+    }
+    return NestingMatchContents(
+      segments: segments,
+      contents: collection[location..<cursor]
+    )
+  }
   @inlinable public func primaryMatch(
     in collection: Searchable,
     at location: Searchable.Index
   ) -> NestingMatchContents<Opening.Match, Closing.Match>? {
-    #warning("Not implemented yet.")
-    return nil
+    return guaranteedPrimaryMatch(in: collection, at: location)
   }
 
   @inlinable public func forSubSequence() -> _NestingContentsPattern<
