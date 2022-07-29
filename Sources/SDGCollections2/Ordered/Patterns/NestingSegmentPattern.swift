@@ -58,7 +58,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
       var cursor = location
       while cursor ≠ collection.endIndex,
         opening.primaryMatch(in: collection, at: cursor) == nil,
-        closing.primaryMatch(in: collection, at: cursor) == nil {
+        closing.primaryMatch(in: collection, at: cursor) == nil
+      {
         cursor = collection.index(after: cursor)
       }
       let range = location..<cursor
@@ -76,7 +77,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     return _NestingSegmentPattern<Opening.SubSequencePattern, Closing.SubSequencePattern>(
       opening: opening.forSubSequence(),
       closing: closing.forSubSequence(),
-      parentNestingPattern: { parentNestingPattern().forSubSequence() })
+      parentNestingPattern: { parentNestingPattern().forSubSequence() }
+    )
   }
 
   @inlinable public func convertMatch(
@@ -87,11 +89,13 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   ) -> NestingMatchSegment<Opening.Match, Closing.Match> {
     switch subSequenceMatch {
     case .nested(let nested):
-      return .nested(parentNestingPattern().convertMatch(
-        from: nested,
-        in: collection
-      ))
-    case.other(let other):
+      return .nested(
+        parentNestingPattern().convertMatch(
+          from: nested,
+          in: collection
+        )
+      )
+    case .other(let other):
       return .other(AtomicPatternMatch(range: other.range, in: collection))
     }
   }
@@ -116,16 +120,20 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
   ) -> NestingMatchSegment<Opening.Match, Closing.Match> {
     switch reversedMatch {
     case .nested(let nested):
-      return .nested(parentNestingPattern().forward(
-        match: nested,
-        in: forwardCollection
-      ))
+      return .nested(
+        parentNestingPattern().forward(
+          match: nested,
+          in: forwardCollection
+        )
+      )
     case .other(let other):
       let reversedMatchRange = other.range
-      return .other(AtomicPatternMatch(
-        range: reversedMatchRange.upperBound.base..<reversedMatchRange.lowerBound.base,
-        in: forwardCollection
-      ))
+      return .other(
+        AtomicPatternMatch(
+          range: reversedMatchRange.upperBound.base..<reversedMatchRange.lowerBound.base,
+          in: forwardCollection
+        )
+      )
     }
   }
 }

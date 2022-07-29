@@ -92,6 +92,9 @@ final class APITests: XCTestCase {
     let match = string.firstMatch(for: pattern)
     XCTAssertEqual(match?.contents, string.dropFirst(3).dropLast(3))
     XCTAssertEqual(match?.levelContents.contents, string.dropFirst(4).dropLast(4))
+    let reversedMatch = string.lastMatch(for: pattern)
+    XCTAssertEqual(reversedMatch?.contents, string.dropFirst(3).dropLast(3))
+    XCTAssertEqual(reversedMatch?.levelContents.contents, string.dropFirst(4).dropLast(4))
   }
 
   func testPattern() {
