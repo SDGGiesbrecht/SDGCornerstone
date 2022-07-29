@@ -92,7 +92,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
     in collection: Searchable
   ) -> NestingMatchContents<Opening.Match, Closing.Match> {
     return NestingMatchContents<Opening.Match, Closing.Match>(
-      segments: subSequenceMatch.segments.lazy.reversed().map({ segment in
+      segments: subSequenceMatch.segments.map({ segment in
         return segmentPattern.convertMatch(from: segment, in: collection)
       }),
       contents: subSequenceMatch.contents
@@ -106,8 +106,11 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
   // MARK: - BidirectionalPattern
 
   @inlinable public func reversed() -> _NestingContentsPattern<Closing.Reversed, Opening.Reversed> {
-    #warning("Not implemented yet.")
-    fatalError()
+    return _NestingContentsPattern<Closing.Reversed, Opening.Reversed>(
+      opening: closing.reversed(),
+      closing: opening.reversed(),
+      parentNestingPattern: { parentNestingPattern().reversed() }
+    )
   }
 
   @inlinable public func forward(
