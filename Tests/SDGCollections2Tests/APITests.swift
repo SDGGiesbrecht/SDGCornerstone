@@ -86,6 +86,20 @@ final class APITests: XCTestCase {
     _ = pattern.description
   }
 
+  func testNestingPattern() {
+    let string = "...(...(...(...)...(...)...)...(...)...)..."
+    let pattern = NestingPattern(opening: "(", closing: ")")
+    let match = string.firstMatch(for: pattern)
+    XCTAssertEqual(match?.contents, string.dropFirst(3).dropLast(3))
+    XCTAssertEqual(match?.levelContents.contents, string.dropFirst(4).dropLast(4))
+    let reversedMatch = string.lastMatch(for: pattern)
+    XCTAssertEqual(reversedMatch?.contents, string.dropFirst(3).dropLast(3))
+    XCTAssertEqual(reversedMatch?.levelContents.contents, string.dropFirst(4).dropLast(4))
+    XCTAssertNotNil(pattern.primaryMatch(in: string, at: string.dropFirst(3).startIndex))
+    XCTAssertEqual(string.matches(for: pattern).count, 1)
+    XCTAssertEqual(pattern.matches(in: string, at: string.dropFirst(3).startIndex).count, 1)
+  }
+
   func testPattern() {
     let string = "Hello!"
     let match = string.primaryMatch(in: string, at: string.startIndex)
