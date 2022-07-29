@@ -118,7 +118,11 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
     match reversedMatch: NestingMatch<Closing.Reversed.Match, Opening.Reversed.Match>,
     in forwardCollection: Searchable
   ) -> NestingMatch<Opening.Match, Closing.Match> {
-    #warning("Not implemented yet.")
-    fatalError()
+    return NestingMatch<Opening.Match, Closing.Match>(
+      opening: opening.forward(match: reversedMatch.closing, in: forwardCollection),
+      contents: contents.forward(match: reversedMatch.levelContents, in: forwardCollection),
+      closing: closing.forward(match: reversedMatch.opening, in: forwardCollection),
+      in: forwardCollection
+    )
   }
 }
