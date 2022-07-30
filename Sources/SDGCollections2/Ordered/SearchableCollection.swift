@@ -188,6 +188,26 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
   /// - Parameters:
   ///     - other: The other collection
   func commonPrefix(with other: Self) -> AtomicPatternMatch<Self>
+
+  // @documentation(SDGCornerstone.Collection.advance(_: over:))
+  /// Advances the index over the pattern.
+  ///
+  /// - Parameters:
+  ///     - index: The index to advance.
+  ///     - pattern: The pattern to advance over.
+  ///
+  /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+  @discardableResult func advance<P>(_ index: inout Index, over pattern: P) -> Bool
+  where P: Pattern, P.Searchable == Self
+  // #documentation(SDGCornerstone.Collection.advance(_: over:))
+  /// Advances the index over the pattern.
+  ///
+  /// - Parameters:
+  ///     - index: The index to advance.
+  ///     - pattern: The pattern to advance over.
+  ///
+  /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+  @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 }
 
 extension SearchableCollection {
@@ -368,6 +388,28 @@ extension SearchableCollection {
   }
   @inlinable public func commonPrefix(with other: Self) -> AtomicPatternMatch<Self> {
     return _commonPrefix(with: other)
+  }
+
+  @inlinable internal func _advance<P>(_ index: inout Index, over pattern: P) -> Bool
+  where P: Pattern, P.Searchable == Self {
+    if let match = pattern.primaryMatch(in: self, at: index) {
+      index = match.range.upperBound
+      return true
+    } else {
+      return false
+    }
+  }
+  @inlinable @discardableResult public func advance<P>(
+    _ index: inout Index,
+    over pattern: P
+  ) -> Bool where P: Pattern, P.Searchable == Self {
+    return _advance(&index, over: pattern)
+  }
+  @inlinable @discardableResult public func advance(
+    _ index: inout Index,
+    over pattern: Self
+  ) -> Bool {
+    return _advance(&index, over: pattern)
   }
 
   // MARK: - Pattern
