@@ -187,6 +187,11 @@ final class APITests: XCTestCase {
 
     XCTAssertEqual(string.commonPrefix(with: "Hallo!").contents, "H"[...])
     XCTAssertEqual(string.commonPrefix(with: "Hallo!"[...]).contents, "H"[...])
+
+    var index = string.startIndex
+    XCTAssertTrue(string.advance(&index, over: "Hello"))
+    XCTAssertEqual(string[index...], string.dropFirst(5))
+    XCTAssertFalse(string.advance(&index, over: Nothing()))
   }
 
   func testSlice() {
