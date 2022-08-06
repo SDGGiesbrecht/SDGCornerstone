@@ -23,6 +23,7 @@ extension StringProtocol {
 
 extension SearchableBidirectionalCollection where Self: StringProtocol {
 
+  #warning("Still necessary?")
   // Disambiguate between StringProtocol and SearchableBidirectionalCollection.
   @inlinable public func hasSuffix<Suffix>(
     _ suffix: Suffix
