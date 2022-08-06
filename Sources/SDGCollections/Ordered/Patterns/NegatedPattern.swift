@@ -35,38 +35,66 @@ where Base: Pattern {
 
   // MARK: - Pattern
 
-  public typealias Element = Base.Element
+  public typealias Match = AtomicPatternMatch<Base.Searchable>
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
-
-    if base.primaryMatch(in: collection, at: location) == nil {
-      return [(location...location).relative(to: collection)]
-    } else {
-      return []
-    }
+  @inlinable public func matches(
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
+  ) -> [AtomicPatternMatch<Searchable>] {
+    return primaryMatch(in: collection, at: location).map({ [$0] }) ?? []
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
-
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> AtomicPatternMatch<Searchable>? {
     if base.primaryMatch(in: collection, at: location) == nil {
-      return (location...location).relative(to: collection)
+      return AtomicPatternMatch(
+        range: (location...location).relative(to: collection),
+        in: collection
+      )
     } else {
       return nil
     }
   }
 
-  @inlinable public func reversed() -> NegatedPattern<Base.Reversed> {
-    return NegatedPattern<Base.Reversed>(base.reversed())
+  @inlinable public func forSubSequence() -> NegatedPattern<Base.SubSequencePattern> {
+    return NegatedPattern<Base.SubSequencePattern>(base.forSubSequence())
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<Searchable.SubSequence>,
+    in collection: Searchable
+  ) -> AtomicPatternMatch<Searchable> {
+    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
+    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    // return subSequenceMatch.in(collection)
   }
 
   // MARK: - CustomStringConvertible
 
   public var description: String {
     return "¬(" + String(describing: base) + ")"
+  }
+}
+
+extension NegatedPattern: BidirectionalPattern
+where Base: BidirectionalPattern {
+
+  // MARK: - BidirectionalPattern
+
+  @inlinable public func reversed() -> NegatedPattern<Base.Reversed> {
+    return NegatedPattern<Base.Reversed>(base.reversed())
+  }
+
+  @inlinable public func forward(
+    match reversedMatch: AtomicPatternMatch<Base.Reversed.Searchable>,
+    in forwardCollection: Searchable
+  ) -> AtomicPatternMatch<Base.Searchable> {
+    let range = reversedMatch.range
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }
