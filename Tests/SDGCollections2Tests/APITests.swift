@@ -147,6 +147,13 @@ final class APITests: XCTestCase {
 
     let literalExpressible: Substring = "Hello?"
     XCTAssertNil(literalExpressible.lastMatch(for: "Hello!"))
+
+    XCTAssert(string.hasSuffix(string))
+    XCTAssertFalse(string.hasSuffix(Nothing()))
+    XCTAssert(string[...].hasSuffix(string[...]))
+
+    XCTAssertEqual(string.commonSuffix(with: "Hallo!").contents, "llo!"[...])
+    XCTAssertEqual(string.commonSuffix(with: "Hallo!"[...]).contents, "llo!"[...])
   }
 
   func testSearchableCollection() {

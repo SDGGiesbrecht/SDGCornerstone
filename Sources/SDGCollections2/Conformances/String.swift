@@ -76,6 +76,10 @@ extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
+    return _hasSuffix(pattern)
+  }
 }
 extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
   @inlinable public func temporaryWorkaroundFirstMatch<P>(
