@@ -21,27 +21,31 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
 
   // MARK: - ComparableSet
 
-  @inlinable public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> Bool
-  {
+  @inlinable public static func ⊆ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> Bool {
     return precedingValue.isSubset(of: followingValue)
   }
 
-  @inlinable public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> Bool
-  {
+  @inlinable public static func ⊇ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> Bool {
     return precedingValue.isSuperset(of: followingValue)
   }
 
-  @inlinable public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> Bool
-  {
+  @inlinable public static func ⊊ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> Bool {
     return precedingValue.isStrictSubset(of: followingValue)
   }
 
-  @inlinable public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> Bool
-  {
+  @inlinable public static func ⊋ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> Bool {
     return precedingValue.isStrictSuperset(of: followingValue)
   }
 
@@ -51,9 +55,10 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
 
   // MARK: - MutableSet
 
-  @inlinable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> CharacterSet
-  {
+  @inlinable public static func ∩ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> CharacterSet {
     return precedingValue.intersection(followingValue)
   }
 
@@ -64,9 +69,10 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
     precedingValue.formIntersection(followingValue)
   }
 
-  @inlinable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> CharacterSet
-  {
+  @inlinable public static func ∪ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> CharacterSet {
     return precedingValue.union(followingValue)
   }
 
@@ -77,9 +83,10 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
     return precedingValue.formUnion(followingValue)
   }
 
-  @inlinable public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> CharacterSet
-  {
+  @inlinable public static func ∖ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> CharacterSet {
     return precedingValue.subtracting(followingValue)
   }
 
@@ -90,9 +97,10 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
     precedingValue.subtract(followingValue)
   }
 
-  @inlinable public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet)
-    -> CharacterSet
-  {
+  @inlinable public static func ∆ (
+    precedingValue: CharacterSet,
+    followingValue: CharacterSet
+  ) -> CharacterSet {
     return precedingValue.symmetricDifference(followingValue)
   }
 
