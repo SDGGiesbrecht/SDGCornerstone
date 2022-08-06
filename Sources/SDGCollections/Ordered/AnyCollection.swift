@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#warning("Audit.")
 extension AnyCollection: Pattern, SearchableCollection where Element: Equatable {}
 extension AnyBidirectionalCollection: Pattern, SearchableBidirectionalCollection,
   SearchableCollection
