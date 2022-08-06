@@ -17,55 +17,104 @@ import SDGControlFlow
 /// A pattern that matches against a pair of alternative patterns.
 ///
 /// The order of the alternatives is significant. If both alternatives match, preference will be given to the first one.
-public struct AlternativePatterns<First, Second>: CustomStringConvertible, Pattern,
+public struct AlternativePatterns<Preferred, Fallback>: CustomStringConvertible, Pattern,
   TextualPlaygroundDisplay
-where First: Pattern, Second: Pattern, First.Element == Second.Element {
+where Preferred: Pattern, Fallback: Pattern, Preferred.Searchable == Fallback.Searchable {
 
   // MARK: - Initialization
 
   /// Creates a pair of alternative patterns.
   ///
   /// - Parameters:
-  ///     - first: The first pattern.
-  ///     - second: The second pattern.
-  @inlinable public init(_ first: First, _ second: Second) {
-    self.first = first
-    self.second = second
+  ///     - preferred: The pattern to try first.
+  ///     - fallback: The pattern to try second.
+  @inlinable public init(_ preferred: Preferred, _ fallback: Fallback) {
+    self.preferred = preferred
+    self.fallback = fallback
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal var first: First
-  @usableFromInline internal var second: Second
+  @usableFromInline internal var preferred: Preferred
+  @usableFromInline internal var fallback: Fallback
 
   // MARK: - Pattern
 
-  public typealias Element = First.Element
+  public typealias Match = AlternativeMatch<Preferred.Match, Fallback.Match>
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
-    var results: [Range<C.Index>] = []
-    results.append(contentsOf: first.matches(in: collection, at: location))
-    results.append(contentsOf: second.matches(in: collection, at: location))
+  @inlinable public func matches(
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
+  ) -> [AlternativeMatch<Preferred.Match, Fallback.Match>] {
+    var results: [AlternativeMatch<Preferred.Match, Fallback.Match>] = []
+    results.append(
+      contentsOf: preferred.matches(in: collection, at: location).lazy.map({ .preferred($0) })
+    )
+    results.append(
+      contentsOf: fallback.matches(in: collection, at: location).lazy.map({ .fallback($0) })
+    )
     return results
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
-    return first.primaryMatch(in: collection, at: location)
-      ?? second.primaryMatch(in: collection, at: location)
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> AlternativeMatch<Preferred.Match, Fallback.Match>? {
+    return preferred.primaryMatch(in: collection, at: location).map({ .preferred($0) })
+      ?? fallback.primaryMatch(in: collection, at: location).map({ .fallback($0) })
   }
 
-  @inlinable public func reversed() -> AlternativePatterns<First.Reversed, Second.Reversed> {
-    return AlternativePatterns<First.Reversed, Second.Reversed>(first.reversed(), second.reversed())
+  @inlinable public func forSubSequence() -> AlternativePatterns<
+    Preferred.SubSequencePattern, Fallback.SubSequencePattern
+  > {
+    return AlternativePatterns<Preferred.SubSequencePattern, Fallback.SubSequencePattern>(
+      preferred.forSubSequence(),
+      fallback.forSubSequence()
+    )
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AlternativeMatch<
+      Preferred.SubSequencePattern.Match, Fallback.SubSequencePattern.Match
+    >,
+    in collection: Searchable
+  ) -> AlternativeMatch<Preferred.Match, Fallback.Match> {
+    switch subSequenceMatch {
+    case .preferred(let match):
+      return .preferred(preferred.convertMatch(from: match, in: collection))
+    case .fallback(let match):
+      return .fallback(fallback.convertMatch(from: match, in: collection))
+    }
   }
 
   // MARK: - CustomStringConvertible
 
   public var description: String {
-    return "(\(String(describing: first))) ∨ (\(String(describing: second)))"
+    return "(\(String(describing: preferred))) ∨ (\(String(describing: fallback)))"
+  }
+}
+
+extension AlternativePatterns: BidirectionalPattern
+where Preferred: BidirectionalPattern, Fallback: BidirectionalPattern {
+
+  // MARK: - BidirectionalPattern
+
+  @inlinable public func reversed() -> AlternativePatterns<Preferred.Reversed, Fallback.Reversed> {
+    return AlternativePatterns<Preferred.Reversed, Fallback.Reversed>(
+      preferred.reversed(),
+      fallback.reversed()
+    )
+  }
+
+  @inlinable public func forward(
+    match reversedMatch: AlternativeMatch<Preferred.Reversed.Match, Fallback.Reversed.Match>,
+    in forwardCollection: Searchable
+  ) -> AlternativeMatch<Preferred.Match, Fallback.Match> {
+    switch reversedMatch {
+    case .preferred(let match):
+      return .preferred(preferred.forward(match: match, in: forwardCollection))
+    case .fallback(let match):
+      return .fallback(fallback.forward(match: match, in: forwardCollection))
+    }
   }
 }
