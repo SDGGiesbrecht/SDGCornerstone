@@ -1,5 +1,5 @@
 /*
- NaryConcatenatedMatch.swift
+ RepetitionMatch.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A match for n‐ary concatenated patterns.
-public struct NaryConcatenatedMatch<Component>: PatternMatch
+/// A match for a repeteaded pattern.
+public struct RepetitionMatch<Component>: PatternMatch
 where Component: PatternMatch {
 
   // MARK: - Initialization
 
-  /// Creates an n‐ary concatenated match.
+  /// Creates a repetition match.
   ///
   /// - Parameters:
   ///   - components: The individual components.
