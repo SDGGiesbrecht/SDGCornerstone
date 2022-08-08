@@ -129,7 +129,7 @@ public protocol SearchableBidirectionalCollection:
 }
 
 extension SearchableBidirectionalCollection {
-  
+
   @inlinable internal func _lastMatch<P>(for pattern: P) -> P.Match?
   where P: BidirectionalPattern, P.Searchable == Self {
     let reversedCollection: ReversedCollection<Self> = reversed()

@@ -41,7 +41,7 @@ where Component: Pattern {
   }
 
   // MARK: - Pattern
-  
+
   public typealias Match = NaryConcatenatedMatch<Component.Match>
 
   @inlinable public func matches(
@@ -59,25 +59,30 @@ where Component: Pattern {
     var matches = first.matches(in: collection, at: location).map { [$0] }
     var remaining = components.dropFirst()
     while ¬matches.isEmpty,
-      let next = remaining.popFirst() {
-      matches = matches.flatMap { partial in
-        let cursor = partial.last?.range.upperBound
-          ?? location // @exempt(from: tests) Unreachable.
-        return next.matches(in: collection, at: cursor).map { appendix in
-          return partial.appending(appendix)
+      let next = remaining.popFirst()
+    {
+      matches =
+        matches
+        .flatMap { (partial: [Component.Match]) -> [[Component.Match]] in
+          let cursor =
+            partial.last?.range.upperBound
+            ?? location  // @exempt(from: tests) Unreachable.
+          return next.matches(in: collection, at: cursor).map { appendix in
+            return partial.appending(appendix)
+          }
         }
-      }
     }
     return matches.map { elements in
-      let contents: Searched.SubSequence
+      let contents: Searchable.SubSequence
       if let first = elements.first,
-        let last = elements.last {
-          contents = collection[first.range.lowerBound..<last.range.upperBound]
-      } else { // @exempt(from: tests) Unreachable.
+        let last = elements.last
+      {
+        contents = collection[first.range.lowerBound..<last.range.upperBound]
+      } else {  // @exempt(from: tests) Unreachable.
         contents = collection[location..<location]
       }
       return NaryConcatenatedMatch(
-        elements: elements,
+        components: elements,
         contents: contents
       )
     }
@@ -105,9 +110,9 @@ where Component: Pattern {
     in collection: Searchable
   ) -> NaryConcatenatedMatch<Component.Match> {
     return NaryConcatenatedMatch(
-      elements: subSequenceMatch.elements.map({ component in
-        components.convertMatch(from: component, in: collection)
-      })
+      components: zip(components, subSequenceMatch.components).map({ pattern, match in
+        return pattern.convertMatch(from: match, in: collection)
+      }),
       contents: collection[subSequenceMatch.range]
     )
   }
@@ -121,7 +126,7 @@ where Component: Pattern {
 }
 
 extension NaryConcatenatedPatterns: BidirectionalPattern
-where Components: BidirectionalPattern {
+where Component: BidirectionalPattern {
 
   // MARK: - BidirectionalPattern
 
@@ -135,12 +140,12 @@ where Components: BidirectionalPattern {
     match reversedMatch: NaryConcatenatedMatch<Component.Reversed.Match>,
     in forwardCollection: Searchable
   ) -> NaryConcatenatedMatch<Component.Match> {
-    let componentPattern = self.components
+    let forwardRange = reversedMatch.range
     return NaryConcatenatedMatch(
-      components: reversedMatch.components.lazy.map({ reversedComponent in
-        return componentPattern.forward(match: reversedComponent, in: forwardCollection)
-      }).reversed()
-      let forwardRange = reversedMatch.range
+      components: zip(components, reversedMatch.components.reversed())
+        .map { pattern, match in
+          return pattern.forward(match: match, in: forwardCollection)
+        },
       contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
     )
   }

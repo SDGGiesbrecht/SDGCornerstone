@@ -227,7 +227,7 @@ where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollecti
 }
 
 extension SearchableCollection {
-  
+
   @inlinable internal func _firstMatch<P>(for pattern: P) -> P.Match?
   where P: Pattern, P.Searchable == Self {
     var i = startIndex
@@ -456,7 +456,7 @@ extension SearchableCollection {
   ) -> CollectionDifference<Element> {
     return forwardDifference(from: other)
   }
-  
+
   // MARK: - Pattern
 
   @inlinable public func matches(
