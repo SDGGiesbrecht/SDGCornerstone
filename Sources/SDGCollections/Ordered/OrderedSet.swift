@@ -12,12 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Audit.")
 import OrderedCollections
 
 import SDGLogic
 
-extension OrderedCollections.OrderedSet: ComparableSet, FiniteSet,
+extension OrderedCollections.OrderedSet: ComparableSet, BidirectionalPattern, FiniteSet,
   SearchableBidirectionalCollection, SetDefinition
 {
 
@@ -55,6 +54,16 @@ extension OrderedCollections.OrderedSet: ComparableSet, FiniteSet,
 
   @inlinable public func overlaps(_ other: OrderedCollections.OrderedSet<Element>) -> Bool {
     return ¬isDisjoint(with: other)
+  }
+
+  // MARK: - SearchableCollection
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: OrderedSet.SubSequence
+  ) -> P.Match?
+  where P: Pattern, OrderedSet.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
   }
 
   // MARK: - SetDefinition
