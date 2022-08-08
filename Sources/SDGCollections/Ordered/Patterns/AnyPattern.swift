@@ -12,13 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Audit.")
 import SDGControlFlow
 
 /// A type‐erased pattern.
 ///
 /// - Note: The indirection used by `AnyPattern` can negatively affect performance. While use of `AnyPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
-public struct AnyPattern<Element>: Pattern, TransparentWrapper where Element: Equatable {
+public struct AnyPattern<Searchable>: Pattern, TransparentWrapper
+where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollection {
+  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 
@@ -26,83 +27,73 @@ public struct AnyPattern<Element>: Pattern, TransparentWrapper where Element: Eq
   ///
   /// - Parameters:
   ///     - pattern: The pattern.
-  @inlinable public init<P>(_ pattern: P) where P: Pattern, P.Element == Element {
-    matches = { pattern.matches(in: $0, at: $1) }
-    primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
+  @inlinable public init<PatternType>(_ pattern: PatternType)
+  where PatternType: Pattern, PatternType.Searchable == Searchable {
+    matchesClosure = { collection, index in
+      return pattern.matches(in: collection, at: index)
+        .map { AnyPatternMatch($0) }
+    }
+    primaryMatchClosure = { collection, index in
+      pattern.primaryMatch(in: collection, at: index)
+        .map { AnyPatternMatch($0) }
+    }
+    forSubSequenceClosure = { AnyPattern<Searchable.SubSequence>(pattern.forSubSequence()) }
+    convertMatchClosure = { match, collection in
+      guard let underlying = match.underlyingMatch as? PatternType.SubSequencePattern.Match else {
+        _preconditionFailure({ localization in
+          switch localization {
+          case .englishCanada:
+            return "Alien match encountered; only sub‐sequence matches can be converted."
+          }
+        })
+      }
+      return AnyPatternMatch(
+        pattern.convertMatch(
+          from: underlying,
+          in: collection
+        )
+      )
+    }
     wrappedInstance = pattern
-    reversedPattern = { AnyPattern(pattern.reversed()) }
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal let matches: (AnyCollection<Element>, AnyIndex) -> [Range<AnyIndex>]
-  @usableFromInline internal let primaryMatch:
-    (AnyCollection<Element>, AnyIndex) -> Range<AnyIndex>?
-  @usableFromInline internal let reversedPattern: () -> AnyPattern<Element>
+  @usableFromInline internal let matchesClosure:
+    (Searchable, Searchable.Index) -> [AnyPatternMatch<Searchable>]
+  @usableFromInline internal let primaryMatchClosure:
+    (Searchable, Searchable.Index) -> AnyPatternMatch<Searchable>?
+  @usableFromInline internal let forSubSequenceClosure: () -> AnyPattern<Searchable.SubSequence>
+  @usableFromInline internal let convertMatchClosure:
+    (AnyPatternMatch<Searchable.SubSequence>, Searchable) -> AnyPatternMatch<Searchable>
 
   // MARK: - Pattern
 
-  @inlinable internal func extract<C>(
-    index anyIndex: AnyIndex,
-    relativeTo equivalentIndices: (any: AnyIndex, concrete: C.Index),
-    in anyCollection: AnyCollection<Element>,
-    for collection: C
-  ) -> C.Index where C: SearchableCollection {
-    let offset = anyCollection.distance(from: equivalentIndices.any, to: anyIndex)
-    return collection.index(equivalentIndices.concrete, offsetBy: offset)
+  public typealias Match = AnyPatternMatch<Searchable>
+
+  @inlinable public func matches(
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
+  ) -> [AnyPatternMatch<Searchable>] {
+    return self.matchesClosure(collection, location)
   }
 
-  @inlinable internal func extract<C>(
-    range anyRange: Range<AnyIndex>,
-    relativeTo equivalentIndices: (any: AnyIndex, concrete: C.Index),
-    in anyCollection: AnyCollection<Element>,
-    for collection: C
-  ) -> Range<C.Index> where C: SearchableCollection {
-    return anyRange.map { anyIndex in
-      return extract(
-        index: anyIndex,
-        relativeTo: equivalentIndices,
-        in: anyCollection,
-        for: collection
-      )
-    }
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> AnyPatternMatch<Searchable>? {
+    return self.primaryMatchClosure(collection, location)
   }
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
-    let anyCollection = AnyCollection(collection)
-    let anyLocation = AnyIndex(location)
-    let anyResult = matches(anyCollection, anyLocation)
-    return anyResult.map { anyRange in
-      return extract(
-        range: anyRange,
-        relativeTo: (anyLocation, location),
-        in: anyCollection,
-        for: collection
-      )
-    }
+  @inlinable public func forSubSequence() -> AnyPattern<Searchable.SubSequence> {
+    return forSubSequenceClosure()
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
-    let anyCollection = AnyCollection(collection)
-    let anyLocation = AnyIndex(location)
-    let anyResult = primaryMatch(anyCollection, anyLocation)
-    return anyResult.map { anyRange in
-      return extract(
-        range: anyRange,
-        relativeTo: (anyLocation, location),
-        in: anyCollection,
-        for: collection
-      )
-    }
-  }
-
-  @inlinable public func reversed() -> AnyPattern<Element> {
-    return reversedPattern()
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AnyPatternMatch<Searchable.SubSequence>,
+    in collection: Searchable
+  ) -> AnyPatternMatch<Searchable> {
+    return convertMatchClosure(subSequenceMatch, collection)
   }
 
   // MARK: - TransparentWrapper

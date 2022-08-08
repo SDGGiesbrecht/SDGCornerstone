@@ -14,7 +14,9 @@
 
 import OrderedCollections
 
-extension OrderedCollections.OrderedSet.SubSequence: BidirectionalPattern, SearchableBidirectionalCollection {
+extension OrderedCollections.OrderedSet.SubSequence: BidirectionalPattern,
+  SearchableBidirectionalCollection
+{
 
   // MARK: - SearchableCollection
 
