@@ -15,7 +15,9 @@
 import SDGLogic
 
 /// A pattern that matches based on a condition.
-public struct ConditionalPattern<Element: Equatable>: Pattern {
+public struct ConditionalPattern<Searchable>: Pattern
+where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollection {
+  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 
@@ -24,43 +26,85 @@ public struct ConditionalPattern<Element: Equatable>: Pattern {
   /// - Parameters:
   ///     - condition: The condition an element must meet in order to match.
   ///     - element: An element to check.
-  @inlinable public init(_ condition: @escaping (_ element: Element) -> Bool) {
+  @inlinable public init(_ condition: @escaping (_ element: Searchable.Element) -> Bool) {
     self.condition = condition
   }
+
   // MARK: - Properties
 
-  @usableFromInline internal var condition: (Element) -> Bool
+  @usableFromInline internal var condition: (Searchable.Element) -> Bool
+
+  // MARK: - Conversions
+
+  /// Converts the pattern for use searching a different collection type containing the same elements.
+  ///
+  /// - Parameters:
+  ///   - searchTarget: The type of collection to search.
+  @inlinable public func converted<SearchTarget>(
+    for searchTarget: SearchTarget.Type
+  ) -> ConditionalPattern<SearchTarget>
+  where SearchTarget: SearchableCollection, SearchTarget.Element == Searchable.Element {
+    return ConditionalPattern<SearchTarget>(self.condition)
+  }
 
   // MARK: - Pattern
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
+  public typealias Match = AtomicPatternMatch<Searchable>
 
-    if location ≠ collection.endIndex,
-      condition(collection[location])
-    {
-      return [(location...location).relative(to: collection)]
-    } else {
-      return []
-    }
+  @inlinable public func matches(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> [AtomicPatternMatch<Searchable>] {
+    return primaryMatch(in: collection, at: location).map({ [$0] }) ?? []
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
-
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> AtomicPatternMatch<Searchable>? {
     if location ≠ collection.endIndex,
       condition(collection[location])
     {
-      return (location...location).relative(to: collection)
+      return AtomicPatternMatch(
+        range: (location...location).relative(to: collection),
+        in: collection
+      )
     } else {
       return nil
     }
   }
 
-  @inlinable public func reversed() -> ConditionalPattern<Element> {
-    return self
+  @inlinable public func forSubSequence() -> ConditionalPattern<Searchable.SubSequence> {
+    return converted(for: Searchable.SubSequence.self)
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<Searchable.SubSequence>,
+    in collection: Searchable
+  ) -> AtomicPatternMatch<Searchable> {
+    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
+    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    // return subSequenceMatch.in(collection)
+  }
+}
+
+extension ConditionalPattern: BidirectionalPattern
+where Searchable: SearchableBidirectionalCollection {
+
+  // MARK: - BidirectionalPattern
+
+  @inlinable public func reversed() -> ConditionalPattern<ReversedCollection<Searchable>> {
+    return converted(for: ReversedCollection<Searchable>.self)
+  }
+
+  @inlinable public func forward(
+    match reversedMatch: AtomicPatternMatch<ReversedCollection<Searchable>>,
+    in forwardCollection: Searchable
+  ) -> AtomicPatternMatch<Searchable> {
+    let range = reversedMatch.range
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }
