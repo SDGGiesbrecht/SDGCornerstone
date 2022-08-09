@@ -23,12 +23,83 @@ extension Array: ArrayFamily {}
 extension ArraySlice: ArrayFamily {}
 extension ContiguousArray: ArrayFamily {}
 
-extension Array: Pattern, SearchableBidirectionalCollection, SearchableCollection
-where Element: Equatable {}
-extension ArraySlice: Pattern, SearchableBidirectionalCollection, SearchableCollection
-where Element: Equatable {}
-extension ContiguousArray: Pattern, SearchableBidirectionalCollection, SearchableCollection
-where Element: Equatable {}
+extension Array: BidirectionalPattern, Pattern, SearchableBidirectionalCollection,
+  SearchableCollection
+where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<Array<Element>>
+  public typealias SubSequencePattern = Array<Element>.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Array<Element>.SubSequence
+  ) -> P.Match? where P: Pattern, Array<Element>.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
+}
+
+extension ArraySlice: BidirectionalPattern, Pattern, SearchableBidirectionalCollection,
+  SearchableCollection
+where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<ArraySlice>
+  public typealias SubSequencePattern = ArraySlice.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: ArraySlice.SubSequence
+  ) -> P.Match? where P: Pattern, ArraySlice.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
+}
+
+extension ContiguousArray: BidirectionalPattern, Pattern, SearchableBidirectionalCollection,
+  SearchableCollection
+where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<ContiguousArray>
+  public typealias SubSequencePattern = ContiguousArray.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: ContiguousArray.SubSequence
+  ) -> P.Match? where P: Pattern, ContiguousArray.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
+}
 
 extension ArrayFamily where Element: RangeReplaceableCollection {
 
