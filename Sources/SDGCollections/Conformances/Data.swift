@@ -16,24 +16,39 @@ import Foundation
 
 import SDGLogic
 
-extension Data: SearchableBidirectionalCollection {
+extension Data: BidirectionalPattern, SearchableBidirectionalCollection {
+
+  // MARK: - SearchableCollection
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Data.SubSequence
+  ) -> P.Match?
+  where P: Pattern, Data.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - SearchableBidirectionalCollection
 
   #warning("Still necessary?")
   // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
-  @inlinable public func lastMatch(
-    for pattern: Self
-  ) -> PatternMatch<Self>? {  // @exempt(from: tests)
-    let backwards: ReversedCollection<Self> = reversed()
-    guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {  // @exempt(from: tests)
+    let reversedCollection: ReversedCollection<Self> = reversed()
+    let reversedPattern: Self.Reversed = pattern.reversed()
+    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
       return nil
     }
-    return PatternMatch(range: forward(range), in: self)
+    return pattern.forward(match: match, in: self)
   }
 
   #warning("Still necessary?")
   // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
   @inlinable public func hasSuffix(_ pattern: Self) -> Bool {  // @exempt(from: tests)
-    let backwards: ReversedCollection<Self> = reversed()
-    return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+    let reversedCollection: ReversedCollection<Self> = reversed()
+    let reversedPattern: Self.Reversed = pattern.reversed()
+    return reversedPattern.primaryMatch(
+      in: reversedCollection,
+      at: reversedCollection.startIndex
+    ) ≠ nil
   }
 }
