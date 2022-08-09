@@ -12,7 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Audit.")
 extension RangeExpression where Self: SetDefinition {
 
   // #documentation(SDGCornerstone.ExpressionPattern.~=)
