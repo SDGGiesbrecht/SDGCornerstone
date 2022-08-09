@@ -17,7 +17,9 @@ import SDGCollections
 
 extension StrictString {
 
-  public struct ClusterView: BidirectionalCollection, BidirectionalPattern, Collection, ExtendedGraphemeClusterView, RangeReplaceableCollection, SearchableBidirectionalCollection, SearchableCollection, TransparentWrapper
+  public struct ClusterView: BidirectionalCollection, BidirectionalPattern, Collection,
+    ExtendedGraphemeClusterView, RangeReplaceableCollection, SearchableBidirectionalCollection,
+    SearchableCollection, TransparentWrapper
   {
 
     // MARK: - SearchableCollection

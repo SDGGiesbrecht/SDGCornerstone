@@ -42,8 +42,9 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     }
 
     let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
-    guard var previousNewline = base.scalars[..<scalar]
-      .lastMatch(for: subSequenceNewlinePattern)
+    guard
+      var previousNewline = base.scalars[..<scalar]
+        .lastMatch(for: subSequenceNewlinePattern)
     else {
       return startIndex
     }

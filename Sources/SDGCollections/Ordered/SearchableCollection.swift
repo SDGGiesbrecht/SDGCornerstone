@@ -457,12 +457,33 @@ extension SearchableCollection {
     return forwardDifference(from: other)
   }
 
+  /// Creates a literal for use searching a different collection type containing the same elements.
+  ///
+  /// - Parameters:
+  ///   - searchTarget: The type of collection to search.
+  @inlinable public func literal<SearchTarget>(
+    for searchTarget: SearchTarget.Type
+  ) -> LiteralPattern<Self, SearchTarget>
+  where SearchTarget: SearchableCollection, SearchTarget.Element == Element {
+    return LiteralPattern<Self, SearchTarget>(self)
+  }
+
+  /// Creates a literal for use searching a different collection type containing the same elements.
+  ///
+  /// - Parameters:
+  ///   - searchTarget: The type of collection to search.
+  @inlinable public func literal<SearchTarget>() -> LiteralPattern<Self, SearchTarget>
+  where SearchTarget: SearchableCollection, SearchTarget.Element == Element {
+    return literal(for: SearchTarget.self)
+  }
+
   // MARK: - Pattern
 
   @inlinable public func matches(
     in collection: Self,
     at location: Index
   ) -> [Match] {
+    #warning("This logic is duplicated from Literal.")
     if let match = primaryMatch(in: collection, at: location) {
       return [match]
     } else {
@@ -474,7 +495,7 @@ extension SearchableCollection {
     in collection: Self,
     at location: Index
   ) -> AtomicPatternMatch<Self>? {
-
+    #warning("This logic is duplicated from Literal.")
     var checkingIndex = self.startIndex
     var collectionIndex = location
     while checkingIndex ≠ self.endIndex {
