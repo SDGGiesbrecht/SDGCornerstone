@@ -36,7 +36,8 @@ where Searchable: SearchableBidirectionalCollection, Searchable.SubSequence: Sea
         _preconditionFailure({ localization in
           switch localization {
           case .englishCanada:
-            return "Alien match encountered; only matches from the reversed collection can be converted."
+            return
+              "Alien match encountered; only matches from the reversed collection can be converted."
           }
         })
       }
