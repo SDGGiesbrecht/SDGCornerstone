@@ -30,7 +30,6 @@ extension Data: BidirectionalPattern, SearchableBidirectionalCollection {
 
   // MARK: - SearchableBidirectionalCollection
 
-  #warning("Still necessary?")
   // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {  // @exempt(from: tests)
     let reversedCollection: ReversedCollection<Self> = reversed()
@@ -41,7 +40,6 @@ extension Data: BidirectionalPattern, SearchableBidirectionalCollection {
     return pattern.forward(match: match, in: self)
   }
 
-  #warning("Still necessary?")
   // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
   @inlinable public func hasSuffix(_ pattern: Self) -> Bool {  // @exempt(from: tests)
     let reversedCollection: ReversedCollection<Self> = reversed()
