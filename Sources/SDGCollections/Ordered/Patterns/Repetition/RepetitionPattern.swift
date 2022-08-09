@@ -12,7 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Audit.")
 import SDGControlFlow
 import SDGLogic
 import SDGMathematics
@@ -78,58 +77,70 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
 
   // MARK: - Pattern
 
-  public typealias Element = Base.Element
+  public typealias Match = RepetitionMatch<Base.Match>
 
-  @inlinable internal func checkNext<C: SearchableCollection>(
-    in collection: C,
-    at locations: inout [C.Index]
-  ) where C.Element == Element {
-    var result: [C.Index] = []
-    for location in locations {
-      if location ≠ collection.endIndex {
-        for new in pattern.matches(in: collection, at: location) {
-          result.append(new.upperBound)
-        }
+  @inlinable internal func checkNext(
+    in collection: Searchable,
+    after preceding: inout [[Base.Match]],
+    whichStartAt location: Searchable.Index
+  ) {
+    preceding =
+      preceding
+      .flatMap { (predecessors: [Base.Match]) -> [[Base.Match]] in
+        let cursor =
+          predecessors.last?.range.upperBound
+          ?? location
+        return pattern.matches(in: collection, at: cursor)
+          .map { (next: Base.Match) -> [Base.Match] in
+            return predecessors.appending(next)
+          }
       }
-    }
-    locations = result
   }
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Element
-  {
+  @inlinable public func matches(
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
+  ) -> [RepetitionMatch<Base.Match>] {
 
-    var locations: [C.Index] = [location]
+    var accumulator: [[Base.Match]] = [[]]
 
     for _ in 0..<count.lowerBound {
-      if locations.isEmpty {
+      if accumulator.isEmpty {
         // Finished (not a complete match yet)
         return []
       } else {
         // Continue
-        checkNext(in: collection, at: &locations)
+        checkNext(in: collection, after: &accumulator, whichStartAt: location)
       }
     }
 
-    var valid: [[C.Index]] = []
-    func cleanUp() -> [Range<C.Index>] {
+    var valid: [[Base.Match]] = []
+    func cleanUp() -> [RepetitionMatch<Base.Match>] {
       switch consumption {
       case .greedy:
         valid.reverse()
       case .lazy:
         break
       }
-      return valid.joined().map { location..<$0 }
+      return valid.map { (repetition: [Base.Match]) -> RepetitionMatch<Base.Match> in
+        if let start = repetition.first?.range.lowerBound,
+          let end = repetition.last?.range.upperBound
+        {
+          return RepetitionMatch(components: repetition, contents: collection[start..<end])
+        } else {
+          return RepetitionMatch(components: repetition, contents: collection[location..<location])
+        }
+      }
     }
 
     for _ in count {
-      if locations.isEmpty {
+      if accumulator.isEmpty {
         // Finished (nothing longer)
         return cleanUp()
       } else {
         // Continue
-        valid.append(locations)
-        checkNext(in: collection, at: &locations)
+        valid.append(contentsOf: accumulator)
+        checkNext(in: collection, after: &accumulator, whichStartAt: location)
       }
     }
 
@@ -137,41 +148,86 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
     return cleanUp()
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Element {
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> RepetitionMatch<Base.Match>? {
 
     switch consumption {
     case .greedy:
       return matches(in: collection, at: location).first
     case .lazy:
 
-      var locations: [C.Index] = [location]
+      var accumulator: [[Base.Match]] = [[]]
 
       for _ in 0..<count.lowerBound {
-        if locations.isEmpty {
+        if accumulator.isEmpty {
           // Finished (not a complete match yet)
           return nil
         } else {
           // Continue
-          checkNext(in: collection, at: &locations)
+          checkNext(in: collection, after: &accumulator, whichStartAt: location)
         }
       }
 
-      if let matchEnd = locations.first {
-        return location..<matchEnd
-      } else {
-        return nil
+      return accumulator.first.map { repetition in
+        if let start = repetition.first?.range.lowerBound,
+          let end = repetition.last?.range.upperBound
+        {
+          return RepetitionMatch(components: repetition, contents: collection[start..<end])
+        } else {
+          return RepetitionMatch(components: repetition, contents: collection[location..<location])
+        }
       }
     }
   }
+
+  @inlinable public func forSubSequence() -> RepetitionPattern<
+    Base.SubSequencePattern
+  > {
+    return RepetitionPattern<Base.SubSequencePattern>(
+      pattern.forSubSequence(),
+      count: count,
+      consumption: consumption
+    )
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: RepetitionMatch<Base.SubSequencePattern.Match>,
+    in collection: Searchable
+  ) -> RepetitionMatch<Base.Match> {
+    return RepetitionMatch(
+      components: subSequenceMatch.components.map({ match in
+        return pattern.convertMatch(from: match, in: collection)
+      }),
+      contents: collection[subSequenceMatch.range]
+    )
+  }
+}
+
+extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPattern {
+
+  // MARK: - BidirectionalPattern
 
   @inlinable public func reversed() -> RepetitionPattern<Base.Reversed> {
     return RepetitionPattern<Base.Reversed>(
       pattern.reversed(),
       count: count,
       consumption: consumption
+    )
+  }
+
+  @inlinable public func forward(
+    match reversedMatch: RepetitionMatch<Base.Reversed.Match>,
+    in forwardCollection: Searchable
+  ) -> RepetitionMatch<Base.Match> {
+    let forwardRange = reversedMatch.range
+    return RepetitionMatch(
+      components: reversedMatch.components.reversed()
+        .map { match in
+          return pattern.forward(match: match, in: forwardCollection)
+        },
+      contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
     )
   }
 }
