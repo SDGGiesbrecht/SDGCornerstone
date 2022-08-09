@@ -25,6 +25,7 @@ where IndividualMatch: PatternMatch {
   ///   - optionIndex: The index of the matched option.
   @inlinable public init(_ individual: IndividualMatch, optionIndex: Int) {
     self.individual = individual
+    self.optionIndex = optionIndex
   }
 
   // MARK: - Properties
