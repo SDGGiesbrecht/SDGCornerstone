@@ -30,6 +30,20 @@ where Searchable: SearchableBidirectionalCollection, Searchable.SubSequence: Sea
   @inlinable public init<PatternType>(_ pattern: PatternType)
   where PatternType: BidirectionalPattern, PatternType.Searchable == Searchable {
     forwardPattern = AnyPattern(pattern)
+    reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
+    forwardClosure = { reversedMatch, forwardCollection in
+      guard let underlying = reversedMatch.underlyingMatch as? PatternType.Reversed.Match else {
+        _preconditionFailure({ localization in
+          switch localization {
+          case .englishCanada:
+            return "Alien match encountered; only matches from the reversed collection can be converted."
+          }
+        })
+      }
+      return AnyPatternMatch<Searchable>(
+        pattern.forward(match: underlying, in: forwardCollection)
+      )
+    }
   }
 
   // MARK: - Properties
