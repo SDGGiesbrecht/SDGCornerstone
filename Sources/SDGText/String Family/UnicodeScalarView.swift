@@ -15,5 +15,5 @@
 import SDGCollections
 
 /// A view of a string’s contents as a collection of Unicode scalar values.
-public protocol UnicodeScalarView: RangeReplaceableCollection, SearchableBidirectionalCollection
+public protocol UnicodeScalarView: BidirectionalPattern, RangeReplaceableCollection, SearchableBidirectionalCollection
 where Element == Unicode.Scalar, Index == String.UnicodeScalarView.Index {}
