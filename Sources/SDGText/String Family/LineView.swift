@@ -40,24 +40,27 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     if scalar == base.scalars.endIndex {
       return endIndex
     }
-    guard var previousNewline = base.scalars[..<scalar].lastMatch(for: NewlinePattern.newline)
+
+    let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
+    guard var previousNewline = base.scalars[..<scalar]
+      .lastMatch(for: subSequenceNewlinePattern)
     else {
       return startIndex
     }
 
     var encounteredNewline: Range<String.ScalarView.Index>?
-    if let newline = NewlinePattern.newline.primaryMatch(
+    let newlinePattern = Newline.pattern(for: Base.ScalarView.self)
+    if let newline = newlinePattern.primaryMatch(
       in: base.scalars,
       at: previousNewline.range.lowerBound
-    ),
+    )?.range,
       newline.contains(scalar)
     {
       // Between CR and LF
 
       guard
-        let actualPreviousNewline = base.scalars[..<newline.lowerBound].lastMatch(
-          for: NewlinePattern.newline
-        )
+        let actualPreviousNewline = base.scalars[..<newline.lowerBound]
+          .lastMatch(for: subSequenceNewlinePattern)
       else {
         return startIndex
       }
@@ -79,10 +82,10 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     } else {
       let searchEnd = i.start ?? base.scalars.endIndex  // @exempt(from: tests)
       // `nil` ought to have been handled by “if i == endIndex” above.
+      let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
       guard
-        let found = base.scalars[..<searchEnd].lastMatch(
-          for: NewlinePattern.newline
-        )?.range
+        let found = base.scalars[..<searchEnd]
+          .lastMatch(for: subSequenceNewlinePattern)?.range
       else {
         _preconditionFailure({ (localization: _APILocalization) -> String in
           switch localization {
@@ -94,10 +97,10 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
       newline = found
     }
 
+    let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
     guard
-      let previousNewline = base.scalars[..<newline.lowerBound].lastMatch(
-        for: NewlinePattern.newline
-      )?.range
+      let previousNewline = base.scalars[..<newline.lowerBound]
+        .lastMatch(for: subSequenceNewlinePattern)?.range
     else {
       startIndex.cache.newline = newline
       return startIndex
