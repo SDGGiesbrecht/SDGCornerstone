@@ -17,5 +17,12 @@ import Foundation
 extension CharacterSet {
 
   /// A pattern representing any newline variant.
-  public static var newlinePattern: NewlinePattern { .newline }
+  ///
+  /// - Parameters:
+  ///   - searchableType: The collection type the pattern should target.
+  public static func newlinePattern<Searchable>(
+    for searchableType: Searchable.Type
+  ) -> NewlinePattern<Searchable> {
+    return Newline.pattern(for: searchableType)
+  }
 }
