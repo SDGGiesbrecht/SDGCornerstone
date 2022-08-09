@@ -62,7 +62,10 @@ public typealias StrengeZeichenkette = StrictString
 /// let something: Any = getError()
 /// strict = "Error: \(arbitraryDescriptionOf: something)"
 /// ```
-public struct StrictString: Addable, BidirectionalCollection, BidirectionalPattern, Collection, Comparable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable, TextualPlaygroundDisplay
+public struct StrictString: Addable, BidirectionalCollection, BidirectionalPattern, Collection,
+  Comparable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable,
+  RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream,
+  TextOutputStreamable, TextualPlaygroundDisplay
 {
 
   // MARK: - Static Properties
