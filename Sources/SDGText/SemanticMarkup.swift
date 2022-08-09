@@ -43,9 +43,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// private let beginSubscript: UnicodeScalar = "\u{107002}"
 /// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Decodable, Encodable,
-  Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable,
-  RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay
+public struct SemanticMarkup: Addable, BidirectionalCollection, BidirectionalPattern, Collection, Decodable, Encodable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization
@@ -305,5 +303,15 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
     with newElements: S
   ) where S.Element == Unicode.Scalar {
     source.replaceSubrange(subrange, with: newElements)
+  }
+
+  // MARK: - SearchableCollection
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: SemanticMarkup.SubSequence
+  ) -> P.Match?
+  where P: Pattern, SemanticMarkup.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
   }
 }
