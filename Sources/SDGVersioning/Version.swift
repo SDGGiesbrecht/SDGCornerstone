@@ -132,13 +132,13 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
     let versionSeparators: Set<Unicode.Scalar> = ["."]
     let versionScalars = versionDigits ∪ versionSeparators
     let versionPattern = RepetitionPattern(
-      ConditionalPattern({ (scalar: UnicodeScalar) in
+      ConditionalPattern<StrictString>({ (scalar: UnicodeScalar) in
         return scalar ∈ versionScalars
       }),
       count: 1..<Int.max
     )
     let components = StrictString(string).matches(for: versionPattern)
-      .lazy.map({ (match: PatternMatch<StrictString>) -> String in
+      .lazy.map({ match -> String in
         var component = StrictString(match.contents)
         // Remove trailing dots.
         while let last = component.last,
