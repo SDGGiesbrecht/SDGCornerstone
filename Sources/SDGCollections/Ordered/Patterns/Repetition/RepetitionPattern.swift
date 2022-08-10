@@ -90,10 +90,14 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
         let cursor =
           predecessors.last?.range.upperBound
           ?? location
-        return pattern.matches(in: collection, at: cursor)
-          .map { (next: Base.Match) -> [Base.Match] in
-            return predecessors.appending(next)
-          }
+        if cursor == collection.endIndex {
+          return []
+        } else {
+          return pattern.matches(in: collection, at: cursor)
+            .map { (next: Base.Match) -> [Base.Match] in
+              return predecessors.appending(next)
+            }
+        }
       }
   }
 
