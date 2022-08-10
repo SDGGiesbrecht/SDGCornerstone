@@ -65,7 +65,8 @@ extension CollationOrder {
           let charactersText = StrictString(halves[0].contents.unicodeScalars)
           let collationText = StrictString(halves[1].contents.unicodeScalars)
 
-          let scalarValues = charactersText
+          let scalarValues =
+            charactersText
             .components(separatedBy: " ".scalars.literal()).map { $0.contents }
           var scalarIntegers = [Int]()
           var characters = String.UnicodeScalarView()
