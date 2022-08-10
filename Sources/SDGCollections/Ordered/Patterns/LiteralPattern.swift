@@ -22,7 +22,7 @@ where
   Literal.Element == Searchable.Element,
   Searchable.SubSequence: SearchableCollection
 {
-  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 

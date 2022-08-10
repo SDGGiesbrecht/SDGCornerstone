@@ -19,7 +19,7 @@ import SDGControlFlow
 /// - Note: The indirection used by `AnyPattern` can negatively affect performance. While use of `AnyPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
 public struct AnyPattern<Searchable>: Pattern, TransparentWrapper
 where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollection {
-  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 

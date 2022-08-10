@@ -17,7 +17,7 @@ import SDGLogic
 /// A pattern that matches based on a condition.
 public struct ConditionalPattern<Searchable>: Pattern
 where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollection {
-  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 

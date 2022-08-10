@@ -483,7 +483,7 @@ extension SearchableCollection {
     in collection: Self,
     at location: Index
   ) -> [Match] {
-    #warning("This logic is duplicated from Literal.")
+    // #warning("This logic is duplicated from Literal.")
     if let match = primaryMatch(in: collection, at: location) {
       return [match]
     } else {
@@ -495,7 +495,7 @@ extension SearchableCollection {
     in collection: Self,
     at location: Index
   ) -> AtomicPatternMatch<Self>? {
-    #warning("This logic is duplicated from Literal.")
+    // #warning("This logic is duplicated from Literal.")
     var checkingIndex = self.startIndex
     var collectionIndex = location
     while checkingIndex ≠ self.endIndex {

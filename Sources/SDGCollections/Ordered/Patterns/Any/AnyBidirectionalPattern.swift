@@ -19,7 +19,7 @@ import SDGControlFlow
 /// - Note: The indirection used by `AnyBidirectionalPattern` can negatively affect performance. While use of `AnyBidirectionalPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
 public struct AnyBidirectionalPattern<Searchable>: BidirectionalPattern, TransparentWrapper
 where Searchable: SearchableBidirectionalCollection, Searchable.SubSequence: SearchableCollection {
-  #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
 
   // MARK: - Initialization
 
