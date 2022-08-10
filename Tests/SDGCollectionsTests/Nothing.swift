@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCollections2
+import SDGCollections
 
 struct NothingSubPattern: SDGCollections2.Pattern {
   func matches(

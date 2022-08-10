@@ -15,7 +15,7 @@
 #warning("Merge")
 import SDGLogic
 
-import SDGCollections2
+import SDGCollections
 
 import XCTest
 
