@@ -95,9 +95,46 @@ class APITests: TestCase {
     _ = pattern2.description
   }
 
+  func testAnyBidirectionalCollection() {
+    let collection = AnyBidirectionalCollection([1, 2, 3])
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
+    )
+    XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
+    XCTAssert(collection.hasSuffix(collection))
+  }
+
+  func testAnyCollection() {
+    let collection = AnyCollection([1, 2, 3])
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
+    )
+  }
+
   func testAnyPattern() {
     let pattern = AnyBidirectionalPattern([1, 2, 3])
     SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
+  }
+
+  func testAnyRandomAccessCollection() {
+    let collection = AnyRandomAccessCollection([1, 2, 3])
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
+    )
+    XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
+    XCTAssert(collection.hasSuffix(collection))
   }
 
   func testArray() {
@@ -110,6 +147,11 @@ class APITests: TestCase {
     array += [4, 5, 6]
 
     XCTAssertEqual(array, [1, 2, 3, 4, 5, 6])
+  }
+
+  func testArraySlice() {
+    let slice = [1, 2, 3][...]
+    XCTAssertEqual(slice.lastMatch(for: slice)?.range, slice.bounds)
   }
 
   func testAtomicPatternMatch() {
@@ -197,6 +239,22 @@ class APITests: TestCase {
 
     let bounds = collection.bounds
     XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
+
+    let forwardCollection = [1, 2, 3]
+    let reversedCollection: ReversedCollection<Array<Int>> = forwardCollection.reversed()
+    let reversedBounds = reversedCollection.bounds
+    func forwardAsBidirectionalCollection<C>(
+      collection: C,
+      range: Range<ReversedCollection<C>.Index>
+    ) -> Range<C.Index>
+    where C: BidirectionalCollection {
+      return collection.forward(range)
+    }
+    let forwardBounds = forwardAsBidirectionalCollection(
+      collection: forwardCollection,
+      range: reversedBounds
+    )
+    XCTAssertEqual(forwardBounds, forwardCollection.bounds)
   }
 
   func testBidirectionalPattern() {
@@ -738,6 +796,18 @@ class APITests: TestCase {
     XCTAssertEqual(unused.map(string), string)
   }
 
+  func testContiguousArray() {
+    let collection = ContiguousArray([1, 2, 3])
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
+    )
+    XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
+  }
+
   func testDictionary() {
     let numbers = [
       1: "1",
@@ -965,6 +1035,14 @@ class APITests: TestCase {
     )
   }
 
+  func testNaryAlternativePatterns() {
+    let pattern = NaryAlternativePatterns(["a", "b", "c"])
+    let collection = "b"
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: collection)
+    let mismatch = "d"
+    XCTAssertNil(pattern.primaryMatch(in: mismatch, at: mismatch.startIndex))
+  }
+
   func testNegatedPattern() {
     let pattern = ¬[1]
     SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [2])
@@ -1036,6 +1114,26 @@ class APITests: TestCase {
     testComparableConformance(
       less: LexicographicalComparison(set),
       greater: LexicographicalComparison(["m", "n", "o"])
+    )
+
+    let collection = OrderedSet([1, 2, 3])
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
+    )
+  }
+
+  func testOrderedSetSubSequence() {
+    let collection = OrderedSet([1, 2, 3])[...]
+    XCTAssertEqual(
+      collection.temporaryWorkaroundFirstMatch(
+        for: collection.forSubSequence(),
+        in: collection[...]
+      )?.range,
+      collection.bounds
     )
   }
 

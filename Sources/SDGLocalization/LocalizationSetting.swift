@@ -118,7 +118,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
         // @exempt(from: tests) Depends on host.
-        let entryMatches: [SeparatedMatch<AtomicPatternMatch<String>>] = languages
+        let entryMatches: [SeparatedMatch<AtomicPatternMatch<String>>] =
+          languages
           .components(separatedBy: ":")
         let converted = entryMatches.map { convert(locale: String($0.contents)) }
         preferences.value.set(to: converted)

@@ -51,4 +51,28 @@ public func testPattern<P>(
     file: file,
     line: line
   )
+
+  let result3 = pattern.forSubSequence().primaryMatch(in: match[...], at: match.startIndex)
+  test(
+    result3?.range == match.bounds,
+    {  // @exempt(from: tests)
+      return  // @exempt(from: tests)
+        "\(pattern).forSubSequence().primaryMatch(in: \(match)[...], at: \(match.startIndex)) → \(String(describing: result3)) ≠ \(match.bounds)"
+    }(),
+    file: file,
+    line: line
+  )
+
+  if let result3 = result3 {
+    let result4 = pattern.convertMatch(from: result3, in: match)
+    test(
+      result4.range == match.bounds,
+      {  // @exempt(from: tests)
+        return  // @exempt(from: tests)
+          "\(pattern).convertMatch(from: \(result3), in: \(match)) → \(String(describing: result4)) ≠ \(match.bounds)"
+      }(),
+      file: file,
+      line: line
+    )
+  }
 }
