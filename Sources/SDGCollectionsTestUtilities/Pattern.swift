@@ -16,24 +16,24 @@ import SDGCollections
 
 import SDGTesting
 
-/// Tests a subclass of Pattern.
+/// Tests a type that conforms to Pattern.
 ///
 /// - Parameters:
 ///     - pattern: A pattern.
 ///     - match: A collection expected to match the pattern exactly.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testPattern<P, C>(
+#warning("Temporary deprecation notice.")
+@available(*, deprecated) public func testPattern<P>(
   _ pattern: P,
-  match: C,
+  match: P.Searchable,
   file: StaticString = #filePath,
   line: UInt = #line
-)
-where P: Pattern, C: SearchableCollection, C.Element == P.Element {
+) where P: Pattern {
 
   let result = pattern.matches(in: match, at: match.startIndex).first
   test(
-    result == match.bounds,
+    result?.range == match.bounds,
     {  // @exempt(from: tests)
       return  // @exempt(from: tests)
         "\(pattern).matches(in: \(match), at: \(match.startIndex)).first → \(String(describing: result)) ≠ \(match.bounds)"
@@ -44,22 +44,10 @@ where P: Pattern, C: SearchableCollection, C.Element == P.Element {
 
   let result2 = pattern.primaryMatch(in: match, at: match.startIndex)
   test(
-    result2 == match.bounds,
+    result2?.range == match.bounds,
     {  // @exempt(from: tests)
       return  // @exempt(from: tests)
         "\(pattern).primaryMatch(in: \(match), at: \(match.startIndex)) → \(String(describing: result2)) ≠ \(match.bounds)"
-    }(),
-    file: file,
-    line: line
-  )
-
-  let reversedMatch: [C.Element] = match.reversed()
-  let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex)
-  test(
-    result3 == reversedMatch.bounds,
-    {  // @exempt(from: tests)
-      return  // @exempt(from: tests)
-        "\(pattern).reversed().primaryMatch(in: \(reversedMatch), at: \(reversedMatch.startIndex)) → \(String(describing: result3)) ≠ \(reversedMatch.bounds)"
     }(),
     file: file,
     line: line
