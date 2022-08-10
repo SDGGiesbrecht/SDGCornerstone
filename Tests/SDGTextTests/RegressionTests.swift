@@ -55,7 +55,8 @@ class RegressionTests: TestCase {
     let close: StrictString = "}"
     let start = nestString.index(nestString.startIndex, offsetBy: 1)
     let end = nestString.index(nestString.startIndex, offsetBy: 12)
-    let nestRange = nestString
+    let nestRange =
+      nestString
       .firstMatch(for: NestingPattern(opening: open, closing: close))?.range
     XCTAssertEqual(nestRange, start..<end)
   }

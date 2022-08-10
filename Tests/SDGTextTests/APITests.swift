@@ -273,9 +273,18 @@ class APITests: TestCase {
   }
 
   func testNewlinePattern() {
-    testBidirectionalPattern(CharacterSet.newlinePattern(for: String.ScalarView.self), match: "\n".scalars)
-    testBidirectionalPattern(CharacterSet.newlinePattern(for: String.ScalarView.self), match: "\u{D}\u{A}".scalars)
-    XCTAssert(CharacterSet.newlinePattern(for: Array<Unicode.Scalar>.self).matches(in: ["a", "b", "c"], at: 0).isEmpty)
+    testBidirectionalPattern(
+      CharacterSet.newlinePattern(for: String.ScalarView.self),
+      match: "\n".scalars
+    )
+    testBidirectionalPattern(
+      CharacterSet.newlinePattern(for: String.ScalarView.self),
+      match: "\u{D}\u{A}".scalars
+    )
+    XCTAssert(
+      CharacterSet.newlinePattern(for: Array<Unicode.Scalar>.self)
+        .matches(in: ["a", "b", "c"], at: 0).isEmpty
+    )
   }
 
   func testScalarView() {

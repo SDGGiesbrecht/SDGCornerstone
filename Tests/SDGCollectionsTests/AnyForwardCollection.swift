@@ -71,7 +71,7 @@ where Base: Equatable, Base: RangeReplaceableCollection, Base.Element: Equatable
     for pattern: P,
     in subSequence: Slice<AnyForwardCollection<Base>>
   ) -> P.Match?
-  where P : Pattern, Slice<AnyForwardCollection<Base>> == P.Match.Searched {
+  where P: Pattern, Slice<AnyForwardCollection<Base>> == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
 }
