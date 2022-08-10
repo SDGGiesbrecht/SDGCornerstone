@@ -98,7 +98,7 @@ extension CollationOrder {
                   separatedBy: ConditionalPattern({ $0 ∈ Set<UnicodeScalar>([".", "*"]) })
                 )
                 .filter({ ¬$0.range.isEmpty })
-                .map { (substring: SeparatedMatch<AtomicPatternMatch<StrictString>>) -> CollationIndex in
+                .map { (substring) -> CollationIndex in
 
                   let string = String(StrictString(substring.contents))
                   if let integer = CollationIndex(string, radix: 16) {
