@@ -23,8 +23,7 @@ import SDGTesting
 ///     - match: A collection expected to match the pattern exactly.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-#warning("Temporary deprecation notice.")
-@available(*, deprecated) public func testPattern<P>(
+public func testPattern<P>(
   _ pattern: P,
   match: P.Searchable,
   file: StaticString = #filePath,
