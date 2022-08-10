@@ -44,7 +44,7 @@ class RegressionTests: TestCase {
   func testMatchlessSearch() {
     // Untracked
 
-    XCTAssertNil(StrictString("...").firstMatch(for: "_".scalars))
+    XCTAssertNil(StrictString("...").firstMatch(for: "_".scalars.literal()))
   }
 
   func testNestingLevelLocation() {
@@ -55,8 +55,8 @@ class RegressionTests: TestCase {
     let close: StrictString = "}"
     let start = nestString.index(nestString.startIndex, offsetBy: 1)
     let end = nestString.index(nestString.startIndex, offsetBy: 12)
-    let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container
-      .range
+    let nestRange = nestString
+      .firstMatch(for: NestingPattern(opening: open, closing: close))?.range
     XCTAssertEqual(nestRange, start..<end)
   }
 
@@ -65,7 +65,7 @@ class RegressionTests: TestCase {
 
     let glitch = StrictString("x{a^a}")
     XCTAssertEqual(
-      glitch.lastMatch(for: "{".scalars)?.range,
+      glitch.lastMatch(for: "{".scalars.literal())?.range,
       glitch.index(
         after: glitch.startIndex
       )..<glitch.index(after: glitch.index(after: glitch.startIndex))
