@@ -39,25 +39,30 @@ class APITests: TestCase {
     )
   }
 
-  struct AddablePattern: Addable, SDGCollections.Pattern {
+  struct AddablePattern<C>: Addable, SDGCollections.Pattern
+  where C: SearchableCollection, C.SubSequence: SearchableCollection {
+    #warning("“C.SubSequence: SearchableCollection” could mean trouble.")
     static func += (precedingValue: inout AddablePattern, followingValue: AddablePattern) {}
-    typealias Element = Int
-    typealias Reversed = AddablePattern
-    func matches<C>(in collection: C, at location: C.Index) -> [Range<C.Index>]
-    where C: SearchableCollection, C.Element == Element {
+    func matches(in collection: C, at location: C.Index) -> [AtomicPatternMatch<C>] {
       return []
     }
-    func reversed() -> APITests.AddablePattern {
-      return self
+    func forSubSequence() -> AddablePattern<C.SubSequence> {
+      return AddablePattern<C.SubSequence>()
+    }
+    func convertMatch(
+      from subSequenceMatch: AtomicPatternMatch<C.SubSequence>,
+      in collection: Searchable
+    ) -> AtomicPatternMatch<C> {
+      return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
     }
   }
   func testAddable() {
-    _ = AddablePattern() + AddablePattern()
+    _ = AddablePattern<String>() + AddablePattern<String>()
   }
 
   func testAlternativePatterns() {
     let pattern = [1, 2, 3] ∨ [3, 2, 1]
-    testPattern(pattern, match: [1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
     testCustomStringConvertibleConformance(
       of: pattern,
       localizations: InterfaceLocalization.self,
@@ -66,7 +71,7 @@ class APITests: TestCase {
     )
 
     let naryPattern = NaryAlternativePatterns([[1, 2, 3], [3, 2, 1], [9, 8, 7]])
-    testPattern(naryPattern, match: [1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(naryPattern, match: [1, 2, 3])
     testCustomStringConvertibleConformance(
       of: naryPattern,
       localizations: InterfaceLocalization.self,
@@ -76,23 +81,23 @@ class APITests: TestCase {
     XCTAssertNil([1, 2].firstMatch(for: naryPattern))
 
     let string = "Hello!"
-    let pattern: AlternativePatterns<String, String> = "Hello" ∨ "!"
-    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropLast())
-    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
+    let pattern2: AlternativePatterns<String, String> = "Hello" ∨ "!"
+    XCTAssertEqual(string.firstMatch(for: pattern2)?.contents, string.dropLast())
+    XCTAssertEqual(string.lastMatch(for: pattern2)?.contents, string.dropFirst(5))
     XCTAssertEqual(
-      string.dropLast().lastMatch(for: pattern.forSubSequence())?.contents,
+      string.dropLast().lastMatch(for: pattern2.forSubSequence())?.contents,
       string.dropLast()
     )
-    XCTAssertEqual(string.matches(for: pattern).count, 2)
-    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 1)
-    XCTAssertEqual(pattern.matches(in: string, at: string.indices.last!).count, 1)
-    XCTAssertEqual("Hello".matches(for: pattern).count, 1)
-    _ = pattern.description
+    XCTAssertEqual(string.matches(for: pattern2).count, 2)
+    XCTAssertEqual(pattern2.matches(in: string, at: string.startIndex).count, 1)
+    XCTAssertEqual(pattern2.matches(in: string, at: string.indices.last!).count, 1)
+    XCTAssertEqual("Hello".matches(for: pattern2).count, 1)
+    _ = pattern2.description
   }
 
   func testAnyPattern() {
-    let pattern = AnyPattern([1, 2, 3])
-    testPattern(pattern, match: [1, 2, 3])
+    let pattern = AnyBidirectionalPattern([1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
   }
 
   func testArray() {
@@ -290,17 +295,16 @@ class APITests: TestCase {
       XCTAssertEqual(anotherTrap?.range, 0..<4)
 
       let equation = "2(3x − (y + 4)) = z"
-      let nestingLevel = equation.scalars.firstNestingLevel(
-        startingWith: "(".scalars,
-        endingWith: ")".scalars
+      let nestingLevel = equation.scalars.firstMatch(
+        for: NestingPattern(opening: "(".scalars, closing: ")".scalars)
       )!
-      XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-      XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+      XCTAssertEqual(String(nestingLevel.contents), "(3x − (y + 4))")
+      XCTAssertEqual(String(nestingLevel.levelContents.contents), "3x − (y + 4)")
       XCTAssertNil(
-        equation.scalars.firstNestingLevel(startingWith: "[".scalars, endingWith: "]".scalars)
+        equation.scalars.firstMatch(for: NestingPattern(opening: "[".scalars, closing: "]".scalars))
       )
       XCTAssertNil(
-        equation.scalars.firstNestingLevel(startingWith: "2".scalars, endingWith: "9".scalars)
+        equation.scalars.firstMatch(for: NestingPattern(opening: "2".scalars, closing: "9".scalars))
       )
 
       XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3] ∨ [3, 4])?.range, 0..<1)
@@ -355,21 +359,21 @@ class APITests: TestCase {
       XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
       XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4] ∨ [4, 3, 2, 1]))
       XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
-      XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
-      XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
-      XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
+      XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"].literal()))
+      XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"].literal()))
+      XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"].literal()))
 
       XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
       XCTAssert([1, 2, 3, 4].hasSuffix([3, 4] ∨ [5, 6]))
       XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
 
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4]))
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4] ∨ [5, 6]))
+      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4].literal()))
+      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4].literal() ∨ [5, 6].literal()))
       XCTAssert(
         AnyBidirectionalCollection([1, 2, 3, 4])
-          .hasSuffix([3, 4])
+          .hasSuffix([3, 4].literal())
       )
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))
+      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyBidirectionalCollection([1, 2, 3, 4]).literal()))
 
       XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
 
@@ -437,20 +441,20 @@ class APITests: TestCase {
         )
       )
 
-      XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"]).count, 1)
-      XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"])?.contents.count, 1)
-      XCTAssertEqual("ABCDE".scalars.prefix(through: ["B", "C"])?.contents.count, 3)
-      XCTAssertEqual("ABCDE".scalars.suffix(from: ["B", "C"])?.contents.count, 4)
-      XCTAssertEqual("ABCDE".scalars.suffix(after: ["B", "C"])?.contents.count, 2)
+      XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"].literal()).count, 1)
+      XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"].literal())?.contents.count, 1)
+      XCTAssertEqual("ABCDE".scalars.prefix(through: ["B", "C"].literal())?.contents.count, 3)
+      XCTAssertEqual("ABCDE".scalars.suffix(from: ["B", "C"].literal())?.contents.count, 4)
+      XCTAssertEqual("ABCDE".scalars.suffix(after: ["B", "C"].literal())?.contents.count, 2)
       XCTAssertEqual(
-        "ABCDE".scalars.firstNestingLevel(startingWith: ["B", "C"], endingWith: ["E"])?.contents
+        "ABCDE".scalars.firstMatch(for: NestingPattern(opening: ["B", "C"].literal(), closing: ["E"].literal()))?.levelContents
           .contents.count,
         1
       )
       let scalars = "ABCDE".scalars
       var mobileIndex = scalars.startIndex
-      XCTAssert(scalars.advance(&mobileIndex, over: ["A", "B"]))
-      XCTAssertFalse(scalars.advance(&mobileIndex, over: ["A", "B"]))
+      XCTAssert(scalars.advance(&mobileIndex, over: ["A", "B"].literal()))
+      XCTAssertFalse(scalars.advance(&mobileIndex, over: ["A", "B"].literal()))
       XCTAssert(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
       XCTAssertFalse(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
 
@@ -669,7 +673,7 @@ class APITests: TestCase {
 
   func testConcatenatedPatterns() {
     let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
-    testPattern(pattern, match: [1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
     testCustomStringConvertibleConformance(
       of: pattern,
       localizations: InterfaceLocalization.self,
@@ -678,7 +682,7 @@ class APITests: TestCase {
     )
 
     let naryPattern: NaryConcatenatedPatterns<[Int]> = [[1, 2], [3], [4, 5]]
-    testPattern(naryPattern, match: [1, 2, 3, 4, 5])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(naryPattern, match: [1, 2, 3, 4, 5])
     testCustomStringConvertibleConformance(
       of: naryPattern,
       localizations: InterfaceLocalization.self,
@@ -689,17 +693,17 @@ class APITests: TestCase {
     XCTAssertNil([1, 2, 4, 5].firstMatch(for: NaryConcatenatedPatterns([naryPattern])))
 
     let string = "Hello!"
-    let pattern: ConcatenatedPatterns<String, String> = "Hello" + "!"
-    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string[string.bounds])
-    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string[string.bounds])
-    XCTAssertEqual(string.matches(for: pattern).count, 1)
-    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 1)
-    XCTAssertEqual("Hello".matches(for: pattern).count, 0)
-    _ = pattern.description
+    let pattern2: ConcatenatedPatterns<String, String> = "Hello" + "!"
+    XCTAssertEqual(string.firstMatch(for: pattern2)?.contents, string[string.bounds])
+    XCTAssertEqual(string.lastMatch(for: pattern2)?.contents, string[string.bounds])
+    XCTAssertEqual(string.matches(for: pattern2).count, 1)
+    XCTAssertEqual(pattern2.matches(in: string, at: string.startIndex).count, 1)
+    XCTAssertEqual("Hello".matches(for: pattern2).count, 0)
+    _ = pattern2.description
   }
 
   func testConditionalPattern() {
-    testPattern(ConditionalPattern({ $0 < 10 }), match: [0])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(ConditionalPattern({ $0 < 10 }), match: [0])
     XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
   }
 
@@ -848,7 +852,7 @@ class APITests: TestCase {
 
   func testLiteralPattern() {
     let pattern = [1, 2, 3]
-    testPattern(pattern, match: [1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
     testCustomStringConvertibleConformance(
       of: pattern,
       localizations: InterfaceLocalization.self,
@@ -953,7 +957,7 @@ class APITests: TestCase {
 
   func testNegatedPattern() {
     let pattern = ¬[1]
-    testPattern(pattern, match: [2])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [2])
     XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)
 
     testCustomStringConvertibleConformance(
@@ -964,14 +968,14 @@ class APITests: TestCase {
     )
 
     let string = "Hello!"
-    let pattern: NegatedPattern<String> = ¬"Hello"
-    XCTAssertEqual(string.firstMatch(for: pattern)?.contents, string.dropFirst().dropLast(4))
-    XCTAssertEqual(string.lastMatch(for: pattern)?.contents, string.dropFirst(5))
-    XCTAssertEqual(string.matches(for: pattern).count, 5)
-    XCTAssertEqual(pattern.matches(in: string, at: string.startIndex).count, 0)
-    XCTAssertEqual(pattern.matches(in: string, at: string.dropFirst().startIndex).count, 1)
-    XCTAssertEqual("Hello".matches(for: pattern).count, 4)
-    _ = pattern.description
+    let pattern2: NegatedPattern<String> = ¬"Hello"
+    XCTAssertEqual(string.firstMatch(for: pattern2)?.contents, string.dropFirst().dropLast(4))
+    XCTAssertEqual(string.lastMatch(for: pattern2)?.contents, string.dropFirst(5))
+    XCTAssertEqual(string.matches(for: pattern2).count, 5)
+    XCTAssertEqual(pattern2.matches(in: string, at: string.startIndex).count, 0)
+    XCTAssertEqual(pattern2.matches(in: string, at: string.dropFirst().startIndex).count, 1)
+    XCTAssertEqual("Hello".matches(for: pattern2).count, 4)
+    _ = pattern2.description
   }
   
   func testNestingPattern() {
@@ -1049,21 +1053,37 @@ class APITests: TestCase {
     }
   }
 
-  struct CustomPattern: SDGCollections.Pattern {
-    let pattern = [1]
-    typealias Element = Int
-    func matches<C: SearchableCollection>(in collection: C, at location: C.Index) -> [Range<
-      C.Index
-    >]
-    where C.Element == Element {
+  struct CustomPattern<C>: BidirectionalPattern, SDGCollections.Pattern
+  where C: SearchableBidirectionalCollection, C.SubSequence: SearchableBidirectionalCollection, C.Element == Int {
+    #warning("“C.SubSequence: SearchableCollection” could mean trouble.")
+    let pattern = [1].literal(for: C.self)
+    func matches(in collection: C, at location: C.Index) -> [AtomicPatternMatch<C>] {
       return pattern.matches(in: collection, at: location)
     }
-    func reversed() -> CustomPattern {
-      return self
+    func forSubSequence() -> APITests.CustomPattern<C.SubSequence> {
+      return CustomPattern<C.SubSequence>()
+    }
+    func convertMatch(
+      from subSequenceMatch: AtomicPatternMatch<C.SubSequence>,
+      in collection: Searchable
+    ) -> AtomicPatternMatch<C> {
+      return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    }
+    func reversed() -> APITests.CustomPattern<ReversedCollection<C>> {
+      return CustomPattern<ReversedCollection<C>>()
+    }
+    func forward(
+      match reversedMatch: AtomicPatternMatch<ReversedCollection<C>>,
+      in forwardCollection: Searchable
+    ) -> AtomicPatternMatch<C> {
+      return AtomicPatternMatch(
+        range: reversedMatch.range.upperBound.base..<reversedMatch.range.lowerBound.base,
+        in: forwardCollection
+      )
     }
   }
   func testPatternClassCluster() {
-    testPattern(CustomPattern(), match: [1])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(CustomPattern(), match: [1])
   }
 
   func testRange() {
@@ -1256,21 +1276,21 @@ class APITests: TestCase {
 
     let scalars = "ABCDE".scalars
     var mutableScalars = scalars
-    mutableScalars.truncate(before: ["E"])
-    XCTAssert(scalars.truncated(before: ["E"]).elementsEqual("ABCD".scalars))
-    mutableScalars.truncate(after: ["C"])
-    XCTAssert(scalars.truncated(after: ["C"]).elementsEqual("ABC".scalars))
-    mutableScalars.drop(upTo: ["B"])
-    XCTAssert(scalars.dropping(upTo: ["B"]).elementsEqual("BCDE".scalars))
-    mutableScalars.drop(through: ["B"])
-    XCTAssert(scalars.dropping(through: ["B"]).elementsEqual("CDE".scalars))
+    mutableScalars.truncate(before: ["E"].literal())
+    XCTAssert(scalars.truncated(before: ["E"].literal()).elementsEqual("ABCD".scalars))
+    mutableScalars.truncate(after: ["C"].literal())
+    XCTAssert(scalars.truncated(after: ["C"].literal()).elementsEqual("ABC".scalars))
+    mutableScalars.drop(upTo: ["B"].literal())
+    XCTAssert(scalars.dropping(upTo: ["B"].literal()).elementsEqual("BCDE".scalars))
+    mutableScalars.drop(through: ["B"].literal())
+    XCTAssert(scalars.dropping(through: ["B"].literal()).elementsEqual("CDE".scalars))
     XCTAssert(
-      scalars.replacingMatches(for: ["B", "C"], with: "x".scalars).elementsEqual("AxDE".scalars)
+      scalars.replacingMatches(for: ["B", "C"].literal(), with: "x".scalars).elementsEqual("AxDE".scalars)
     )
-    mutableScalars.mutateMatches(for: ["C"]) { _ in "".scalars }
+    mutableScalars.mutateMatches(for: ["C"].literal()) { _ in "".scalars }
     XCTAssert(mutableScalars.elementsEqual([]))
     XCTAssert(
-      scalars.mutatingMatches(for: ["B", "C"], mutation: { _ in return "x".scalars }).elementsEqual(
+      scalars.mutatingMatches(for: ["B", "C"].literal(), mutation: { _ in return "x".scalars }).elementsEqual(
         "AxDE".scalars
       )
     )
@@ -1283,7 +1303,7 @@ class APITests: TestCase {
   }
 
   func testRepetitionPattern() {
-    testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
+    SDGCollectionsTestUtilities.testBidirectionalPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
   }
   
   func testReversedCollection() {
