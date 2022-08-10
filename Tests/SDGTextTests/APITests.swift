@@ -290,9 +290,8 @@ class APITests: TestCase {
   func testScalarView() {
     func runTests<S: StringFamily>(helloWorld: S) {
 
-      #warning("Needs debugging...")
-      /*XCTAssert(helloWorld.scalars.contains("world".scalars))
-      XCTAssert(¬helloWorld.scalars.contains("xyz".scalars))*/
+      XCTAssert(helloWorld.scalars.contains("world".scalars.literal()))
+      XCTAssert(¬helloWorld.scalars.contains("xyz".scalars.literal()))
 
       XCTAssertEqual(helloWorld.scalars[helloWorld.scalars.startIndex], "H")
 
