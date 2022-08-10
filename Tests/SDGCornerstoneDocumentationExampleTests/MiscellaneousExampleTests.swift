@@ -202,13 +202,11 @@ class MiscellaneousExampleTests: TestCase {
   func testNestingLevel() {
     // @example(nestingLevel)
     let equation = "2(3x − (y + 4)) = z"
-    let nestingLevel = equation.scalars.firstNestingLevel(
-      startingWith: "(".scalars,
-      endingWith: ")".scalars
-    )!
+    let nestingLevel = equation.scalars
+      .firstMatch(for: NestingPattern(opening: "(".scalars, closing: ")".scalars))!
 
-    XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+    XCTAssertEqual(String(nestingLevel.contents), "(3x − (y + 4))")
+    XCTAssertEqual(String(nestingLevel.levelContents.contents), "3x − (y + 4)")
     // @endExample
     _ = 0  // Prevents SwiftFormat from breaking the example.
   }
