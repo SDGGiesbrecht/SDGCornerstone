@@ -17,9 +17,11 @@ import SDGControlFlow
 /// A type‐erased bidirectional pattern.
 ///
 /// - Note: The indirection used by `AnyBidirectionalPattern` can negatively affect performance. While use of `AnyBidirectionalPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
+///
+/// - Requires: `Searchable` must conform to `SearchableBidirectionalCollection` even though the compiler is currently incapable of enforcing it.
 public struct AnyBidirectionalPattern<Searchable>: BidirectionalPattern, TransparentWrapper
-where Searchable: SearchableBidirectionalCollection, Searchable.SubSequence: SearchableCollection {
-  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+where Searchable: BidirectionalCollection /* SearchableBidirectionalCollection */ {
+  // #workaround(Swift 5.6.1, Should require Searchable: SearchableBidirectionalCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Initialization
 
