@@ -15,9 +15,11 @@
 import SDGLogic
 
 /// A pattern that matches based on a condition.
+///
+/// - Requires: `Searchable` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public struct ConditionalPattern<Searchable>: Pattern
-where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollection {
-  // #warning("“Searchable.SubSequence: SearchableCollection” might be problematic.")
+where Searchable: Collection /* SearchableCollection */ {
+  // #workaround(Swift 5.6.1, Should require Searchable: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Initialization
 
@@ -43,7 +45,7 @@ where Searchable: SearchableCollection, Searchable.SubSequence: SearchableCollec
   @inlinable public func converted<SearchTarget>(
     for searchTarget: SearchTarget.Type
   ) -> ConditionalPattern<SearchTarget>
-  where SearchTarget: SearchableCollection, SearchTarget.Element == Searchable.Element {
+  where SearchTarget: Collection, SearchTarget.Element == Searchable.Element {
     return ConditionalPattern<SearchTarget>(self.condition)
   }
 
