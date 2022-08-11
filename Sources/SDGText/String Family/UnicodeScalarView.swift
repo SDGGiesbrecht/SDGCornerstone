@@ -20,5 +20,13 @@ public protocol UnicodeScalarView: BidirectionalPattern, RangeReplaceableCollect
 where
   Element == Unicode.Scalar,
   Index == String.UnicodeScalarView.Index,
-  SubSequence: SearchableBidirectionalCollection
+  SubSequence: _SearchableBidirectionalCollection
 {}
+
+// #workaround(Swift 5.6.1, This protocol is redundant and can be removed when the compiler can handle its real counterpart as a constraint above.)
+public protocol _SearchableBidirectionalCollection {
+  func firstMatch<P>(for pattern: P) -> P.Match? where P: Pattern, P.Searchable == Self
+  func lastMatch<P>(for pattern: P) -> P.Match? where P: BidirectionalPattern, P.Searchable == Self
+}
+extension Slice: _SearchableBidirectionalCollection where Base: SearchableBidirectionalCollection {}
+extension Substring.UnicodeScalarView: _SearchableBidirectionalCollection {}
