@@ -40,8 +40,7 @@ class APITests: TestCase {
   }
 
   struct AddablePattern<C>: Addable, SDGCollections.Pattern
-  where C: SearchableCollection, C.SubSequence: SearchableCollection {
-    // #warning("“C.SubSequence: SearchableCollection” could mean trouble.")
+  where C: Collection {
     static func += (precedingValue: inout AddablePattern, followingValue: AddablePattern) {}
     func matches(in collection: C, at location: C.Index) -> [AtomicPatternMatch<C>] {
       return []
@@ -1163,11 +1162,9 @@ class APITests: TestCase {
 
   struct CustomPattern<C>: BidirectionalPattern, SDGCollections.Pattern
   where
-    C: SearchableBidirectionalCollection,
-    C.SubSequence: SearchableBidirectionalCollection,
+    C: BidirectionalCollection,
     C.Element == Int
   {
-    // #warning("“C.SubSequence: SearchableCollection” could mean trouble.")
     let pattern = [1].literal(for: C.self)
     func matches(in collection: C, at location: C.Index) -> [AtomicPatternMatch<C>] {
       return pattern.matches(in: collection, at: location)

@@ -464,7 +464,7 @@ extension SearchableCollection {
   @inlinable public func literal<SearchTarget>(
     for searchTarget: SearchTarget.Type
   ) -> LiteralPattern<Self, SearchTarget>
-  where SearchTarget: SearchableCollection, SearchTarget.Element == Element {
+  where SearchTarget: Collection, SearchTarget.Element == Element {
     return LiteralPattern<Self, SearchTarget>(self)
   }
 
