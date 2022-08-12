@@ -121,6 +121,13 @@ class APITests: TestCase {
   func testAnyPattern() {
     let pattern = AnyBidirectionalPattern([1, 2, 3])
     SDGCollectionsTestUtilities.testBidirectionalPattern(pattern, match: [1, 2, 3])
+    _ = pattern.wrappedInstance
+  }
+
+  func testAnyPatternMatch() {
+    let collection = "collection"
+    let match = AnyPatternMatch(AtomicPatternMatch(range: collection.bounds, in: collection))
+    _ = match.wrappedInstance
   }
 
   func testAnyRandomAccessCollection() {
@@ -938,6 +945,7 @@ class APITests: TestCase {
       uniqueTestName: "123",
       overwriteSpecificationInsteadOfFailing: false
     )
+    XCTAssertNil(pattern.literal(for: Array<Int>.self).primaryMatch(in: [1, 2], at: 0))
   }
 
   struct MutableSetExample: MutableSet {

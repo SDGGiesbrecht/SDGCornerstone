@@ -24,6 +24,8 @@ where Component: Pattern {
 
   /// Creates a repetition pattern from several component patterns.
   ///
+  /// - Requires: There must be at least one component.
+  ///
   /// - Parameters:
   ///     - components: The component pattern.
   @inlinable public init(_ components: [Component]) {
@@ -49,12 +51,9 @@ where Component: Pattern {
     at location: Match.Searched.Index
   ) -> [NaryConcatenatedMatch<Component.Match>] {
     guard let first = components.first else {
-      return [
-        NaryConcatenatedMatch<Component.Match>(
-          components: [],
-          contents: collection[location..<location]
-        )
-      ]
+      _preconditionFailure({ localization in
+        return "An n‐ary concatenated pattern is empty; searching for nothing is undefined."
+      })
     }
     var matches = first.matches(in: collection, at: location).map { [$0] }
     var remaining = components.dropFirst()

@@ -94,10 +94,6 @@ where Searchable: Collection, Searchable.Element == Unicode.Scalar {
     return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
     // return subSequenceMatch.in(collection)
   }
-
-  @inlinable public func reversed() -> NewlinePattern {
-    return NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
-  }
 }
 
 extension NewlinePattern: BidirectionalPattern

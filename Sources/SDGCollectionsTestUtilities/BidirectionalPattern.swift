@@ -42,4 +42,16 @@ public func testBidirectionalPattern<P>(
     file: file,
     line: line
   )
+
+  if let result3 = result3 {
+    test(
+      pattern.forward(match: result3, in: match).range == match.bounds,
+      {  // @exempt(from: tests)
+        return  // @exempt(from: tests)
+          "\(pattern).forward(match: \(result3), in: \(match)) → \(pattern.forward(match: result3, in: match)) ≠ \(match.bounds)"
+      }(),
+      file: file,
+      line: line
+    )
+  }
 }

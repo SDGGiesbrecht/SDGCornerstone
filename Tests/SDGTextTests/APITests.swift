@@ -364,6 +364,8 @@ class APITests: TestCase {
     XCTAssertNotEqual(power.source, power.rawTextApproximation())
     let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
     XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
+
+    XCTAssertEqual(markup.matches(for: markup).first?.range, markup.bounds)
   }
 
   func testStrictString() {
