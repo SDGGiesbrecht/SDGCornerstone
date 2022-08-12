@@ -549,6 +549,8 @@ class APITests: TestCase {
   func testStrictStringClusterView() {
     testBidirectionalCollectionConformance(of: StrictString("ABC").clusters)
     testRangeReplaceableCollectionConformance(of: StrictString.ClusterView.self, element: "A")
+    let clusters = StrictString("ABC").clusters
+    XCTAssertEqual(clusters.matches(for: clusters).first?.range, clusters.bounds)
   }
 
   func testString() {
