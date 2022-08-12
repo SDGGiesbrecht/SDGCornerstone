@@ -482,38 +482,15 @@ extension SearchableCollection {
   @inlinable public func matches(
     in collection: Self,
     at location: Index
-  ) -> [Match] {
-    // #warning("This logic is duplicated from Literal.")
-    if let match = primaryMatch(in: collection, at: location) {
-      return [match]
-    } else {
-      return []
-    }
+  ) -> [AtomicPatternMatch<Self>] {
+    return literal(for: Self.self).matches(in: collection, at: location)
   }
 
   @inlinable public func primaryMatch(
     in collection: Self,
     at location: Index
   ) -> AtomicPatternMatch<Self>? {
-    // #warning("This logic is duplicated from Literal.")
-    var checkingIndex = self.startIndex
-    var collectionIndex = location
-    while checkingIndex ≠ self.endIndex {
-      guard collectionIndex ≠ collection.endIndex else {
-        // Ran out of space to check.
-        return nil
-      }
-
-      if self[checkingIndex] ≠ collection[collectionIndex] {
-        // Mis‐match.
-        return nil
-      }
-
-      checkingIndex = self.index(after: checkingIndex)
-      collectionIndex = collection.index(after: collectionIndex)
-    }
-
-    return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
+    return literal(for: Self.self).primaryMatch(in: collection, at: location)
   }
 
   @inlinable public func forSubSequence() -> SubSequence {
