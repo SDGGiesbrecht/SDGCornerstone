@@ -28,6 +28,7 @@ where Searchable: BidirectionalCollection {
   /// This is suitable for performing backward searches by applying it to the reversed collection.
   func reversed() -> Reversed
 
+  // @documentation(BidirectionalPattern.forward(match:in:))
   /// Converts the reversed match into a match in the forward collection.
   ///
   /// - Parameters:

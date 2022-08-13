@@ -247,7 +247,7 @@ class APITests: TestCase {
     XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
 
     let forwardCollection = [1, 2, 3]
-    let reversedCollection: ReversedCollection<Array<Int>> = forwardCollection.reversed()
+    let reversedCollection: ReversedCollection<[Int]> = forwardCollection.reversed()
     let reversedBounds = reversedCollection.bounds
     func forwardAsBidirectionalCollection<C>(
       collection: C,

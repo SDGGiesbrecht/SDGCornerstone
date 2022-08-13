@@ -28,7 +28,7 @@ where Element: Equatable {
 
   // MARK: - Pattern
 
-  public typealias Match = AtomicPatternMatch<Array<Element>>
+  public typealias Match = AtomicPatternMatch<[Element]>
   public typealias SubSequencePattern = Array<Element>.SubSequence
 
   @inlinable public func temporaryWorkaroundFirstMatch<P>(

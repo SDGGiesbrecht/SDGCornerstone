@@ -77,7 +77,8 @@ where Component: Pattern {
         let last = elements.last
       {
         contents = collection[first.range.lowerBound..<last.range.upperBound]
-      } else {  // @exempt(from: tests) Unreachable.
+      } else {
+        // @exempt(from: tests) Unreachable.
         contents = collection[location..<location]
       }
       return NaryConcatenatedMatch(

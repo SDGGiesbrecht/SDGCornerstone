@@ -194,6 +194,12 @@ extension SearchableBidirectionalCollection {
 
   // MARK: - BidirectionalPattern
 
+  // #documentation(BidirectionalPattern.forward(match:in:))
+  /// Converts the reversed match into a match in the forward collection.
+  ///
+  /// - Parameters:
+  ///     - reversedMatch: The reversed match.
+  ///     - forwardCollection: The forward collection.
   @inlinable public func forward(
     match reversedMatch: AtomicPatternMatch<ReversedCollection<Self>>,
     in forwardCollection: Self

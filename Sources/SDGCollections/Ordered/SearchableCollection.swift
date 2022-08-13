@@ -469,9 +469,6 @@ extension SearchableCollection {
   }
 
   /// Creates a literal for use searching a different collection type containing the same elements.
-  ///
-  /// - Parameters:
-  ///   - searchTarget: The type of collection to search.
   @inlinable public func literal<SearchTarget>() -> LiteralPattern<Self, SearchTarget>
   where SearchTarget: SearchableCollection, SearchTarget.Element == Element {
     return literal(for: SearchTarget.self)
