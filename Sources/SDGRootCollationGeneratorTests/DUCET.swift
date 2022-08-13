@@ -65,7 +65,9 @@ extension CollationOrder {
           let charactersText = StrictString(halves[0].contents.unicodeScalars)
           let collationText = StrictString(halves[1].contents.unicodeScalars)
 
-          let scalarValues = charactersText.components(separatedBy: " ".scalars).map { $0.contents }
+          let scalarValues =
+            charactersText
+            .components(separatedBy: " ".scalars.literal()).map { $0.contents }
           var scalarIntegers = [Int]()
           var characters = String.UnicodeScalarView()
           for scalarValue in scalarValues {
@@ -91,15 +93,15 @@ extension CollationOrder {
               if ¬collationElementSubstring.isEmpty {
                 let collationElementText = StrictString(collationElementSubstring)
 
-                let isVariable = collationElementText.hasPrefix("*".unicodeScalars)
+                let isVariable = collationElementText.first == "*"
 
                 let ducetIndices = collationElementText.components(
                   separatedBy: ConditionalPattern({ $0 ∈ Set<UnicodeScalar>([".", "*"]) })
                 )
                 .filter({ ¬$0.range.isEmpty })
-                .map { (substring: PatternMatch<StrictString>) -> CollationIndex in
+                .map { (match) -> CollationIndex in
 
-                  let string = String(StrictString(substring.contents))
+                  let string = String(StrictString(match.contents))
                   if let integer = CollationIndex(string, radix: 16) {
                     ducetMaxIndex.increase(to: integer)
                     return integer

@@ -14,6 +14,7 @@
 
 import SDGControlFlow
 import SDGMathematics
+import SDGCollections
 
 // @localization(🇩🇪DE) @crossReference(StrictString)
 // #example(1, strengeInterpolation)
@@ -61,8 +62,8 @@ public typealias StrengeZeichenkette = StrictString
 /// let something: Any = getError()
 /// strict = "Error: \(arbitraryDescriptionOf: something)"
 /// ```
-public struct StrictString: Addable, BidirectionalCollection, Collection, Comparable, Equatable,
-  ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable,
+public struct StrictString: Addable, BidirectionalCollection, BidirectionalPattern, Collection,
+  Comparable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable,
   RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream,
   TextOutputStreamable, TextualPlaygroundDisplay
 {
@@ -309,6 +310,16 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
 
     let throughNew = StrictString.concatenateStrictStrings(preceding, replacement)
     self = StrictString.concatenateStrictStrings(throughNew, succeeding)
+  }
+
+  // MARK: - SearchableCollection
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: StrictString.SubSequence
+  ) -> P.Match?
+  where P: Pattern, StrictString.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
   }
 
   // MARK: - StringFamily

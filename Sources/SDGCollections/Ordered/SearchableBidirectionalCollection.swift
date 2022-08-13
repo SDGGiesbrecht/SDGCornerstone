@@ -16,8 +16,13 @@ import SDGLogic
 import SDGMathematics
 
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableBidirectionalCollection: BidirectionalCollection, SearchableCollection
-where SubSequence: SearchableBidirectionalCollection {
+///
+/// - Requires: Must also conform to `BidirectionalPattern` even though the compiler is currently incapable of enforcing it.
+public protocol SearchableBidirectionalCollection:
+  BidirectionalCollection, /*BidirectionalPattern,*/
+  // #workaround(Swift 5.6.1, The compiler cannot handle the commented constraint. Remove “requires” documentation too when fixed.)
+  SearchableCollection
+{
 
   // @documentation(SDGCornerstone.Collection.lastMatch(for:))
   // #example(1, lastMatchBackwardsDifferences1) #example(2, lastMatchBackwardsDifferences2)
@@ -48,7 +53,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - pattern: The pattern to search for.
-  func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P: Pattern, P.Element == Element
+  func lastMatch<P>(for pattern: P) -> P.Match? where P: BidirectionalPattern, P.Searchable == Self
   // #documentation(SDGCornerstone.Collection.lastMatch(for:))
   /// Returns the last match for `pattern` in the collection.
   ///
@@ -77,14 +82,14 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - pattern: The pattern to search for.
-  func lastMatch(for pattern: Self) -> PatternMatch<Self>?
+  func lastMatch(for pattern: Self) -> Match?
 
   // @documentation(SDGCornerstone.Collection.hasSuffix(_:))
   /// Returns `true` if `self` begins with `pattern`.
   ///
   /// - Parameters:
   ///     - pattern: The pattern to try.
-  func hasSuffix<P>(_ pattern: P) -> Bool where P: Pattern, P.Element == Element
+  func hasSuffix<P>(_ pattern: P) -> Bool where P: BidirectionalPattern, P.Searchable == Self
   // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
   /// Returns `true` if `self` begins with `pattern`.
   ///
@@ -97,14 +102,16 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection
-  func commonSuffix<C: SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self>
+  func commonSuffix<C: SearchableBidirectionalCollection>(
+    with other: C
+  ) -> AtomicPatternMatch<Self>
   where C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
   /// Returns the longest prefix subsequence shared with the other collection.
   ///
   /// - Parameters:
   ///     - other: The other collection
-  func commonSuffix(with other: Self) -> PatternMatch<Self>
+  func commonSuffix(with other: Self) -> AtomicPatternMatch<Self>
 
   // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
@@ -123,48 +130,53 @@ where SubSequence: SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-  @inlinable internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
-    let backwards: ReversedCollection<Self> = reversed()
-    guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
+  @inlinable internal func _lastMatch<P>(for pattern: P) -> P.Match?
+  where P: BidirectionalPattern, P.Searchable == Self {
+    let reversedCollection: ReversedCollection<Self> = reversed()
+    let reversedPattern: P.Reversed = pattern.reversed()
+    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
       return nil
     }
-    return PatternMatch(range: forward(range), in: self)
+    return pattern.forward(match: match, in: self)
   }
-  @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>?
-  where P: Pattern, P.Element == Element {
+  @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
+  where P: BidirectionalPattern, P.Searchable == Self {
     return _lastMatch(for: pattern)
   }
-  @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
+  // #workaround(Swift 5.6.1, The compiler cannot handle the generic signature of this method.)
+  /*@inlinable public func lastMatch(for pattern: Self) -> Match? { @exempt(from: unicode)
     return _lastMatch(for: pattern)
-  }
+  }*/
 
   @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool
-  where P: Pattern, P.Element == Element {
-    let backwards: ReversedCollection<Self> = reversed()
-    return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+  where P: BidirectionalPattern, P.Searchable == Self {
+    let reversedCollection: ReversedCollection<Self> = reversed()
+    let reversedPattern: P.Reversed = pattern.reversed()
+    return reversedPattern.primaryMatch(
+      in: reversedCollection,
+      at: reversedCollection.startIndex
+    ) ≠ nil
   }
-  @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P: Pattern, P.Element == Element {
+  @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool
+  where P: BidirectionalPattern, P.Searchable == Self {
     return _hasSuffix(pattern)
   }
-  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
+  // #workaround(Swift 5.6.1, The compiler cannot handle the generic signature of this method.)
+  /*@inlinable public func hasSuffix(_ pattern: Self) -> Bool { @exempt(from: unicode)
     return _hasSuffix(pattern)
-  }
+  }*/
 
   @inlinable internal func _commonSuffix<C: SearchableBidirectionalCollection>(
     with other: C
-  ) -> PatternMatch<Self> where C.Element == Self.Element {
-    return PatternMatch(
-      range: forward(reversed().commonPrefix(with: other.reversed()).range),
-      in: self
-    )
+  ) -> AtomicPatternMatch<Self> where C.Element == Self.Element {
+    return forward(match: reversed().commonPrefix(with: other.reversed()), in: self)
   }
   @inlinable public func commonSuffix<C: SearchableBidirectionalCollection>(
     with other: C
-  ) -> PatternMatch<Self> where C.Element == Self.Element {
+  ) -> AtomicPatternMatch<Self> where C.Element == Self.Element {
     return _commonSuffix(with: other)
   }
-  @inlinable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
+  @inlinable public func commonSuffix(with other: Self) -> AtomicPatternMatch<Self> {
     return _commonSuffix(with: other)
   }
 
@@ -178,5 +190,24 @@ extension SearchableBidirectionalCollection {
     from other: Self
   ) -> CollectionDifference<Element> {
     return shimmedDifference(from: other)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  // #documentation(BidirectionalPattern.forward(match:in:))
+  /// Converts the reversed match into a match in the forward collection.
+  ///
+  /// - Parameters:
+  ///     - reversedMatch: The reversed match.
+  ///     - forwardCollection: The forward collection.
+  @inlinable public func forward(
+    match reversedMatch: AtomicPatternMatch<ReversedCollection<Self>>,
+    in forwardCollection: Self
+  ) -> AtomicPatternMatch<Self> {
+    let range = reversedMatch.range
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }

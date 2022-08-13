@@ -64,4 +64,14 @@ where Base: Equatable, Base: RangeReplaceableCollection, Base.Element: Equatable
   where C: Collection, C.Element == Base.Element {
     base.replaceSubrange(subrange, with: newElements)
   }
+
+  // MARK: - SearchableCollection
+
+  func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: Slice<AnyForwardCollection<Base>>
+  ) -> P.Match?
+  where P: Pattern, Slice<AnyForwardCollection<Base>> == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
 }

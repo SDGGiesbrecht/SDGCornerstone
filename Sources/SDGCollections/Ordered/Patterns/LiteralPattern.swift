@@ -1,10 +1,10 @@
 /*
- ConditionalPattern.swift
+ LiteralPattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2022 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2022 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -14,27 +14,30 @@
 
 import SDGLogic
 
-/// A pattern that matches based on a condition.
+/// A pattern for using one collection as a literal pattern to search another.
 ///
 /// - Requires: `Searchable` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
-public struct ConditionalPattern<Searchable>: Pattern
-where Searchable: Collection /* SearchableCollection */ {
+public struct LiteralPattern<Literal, Searchable>: Pattern
+where
+  Literal: SearchableCollection,
+  Searchable: Collection /* SearchableCollection */,
+  Literal.Element == Searchable.Element
+{
   // #workaround(Swift 5.6.1, Should require Searchable: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Initialization
 
-  /// Creates an algorithmic pattern based on a condition.
+  /// Creates a literal pattern.
   ///
   /// - Parameters:
-  ///     - condition: The condition an element must meet in order to match.
-  ///     - element: An element to check.
-  @inlinable public init(_ condition: @escaping (_ element: Searchable.Element) -> Bool) {
-    self.condition = condition
+  ///     - literal: The literal to search for.
+  @inlinable public init(_ literal: Literal) {
+    self.literal = literal
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal var condition: (Searchable.Element) -> Bool
+  @usableFromInline internal var literal: Literal
 
   // MARK: - Conversions
 
@@ -44,9 +47,9 @@ where Searchable: Collection /* SearchableCollection */ {
   ///   - searchTarget: The type of collection to search.
   @inlinable public func converted<SearchTarget>(
     for searchTarget: SearchTarget.Type
-  ) -> ConditionalPattern<SearchTarget>
+  ) -> LiteralPattern<Literal, SearchTarget>
   where SearchTarget: Collection, SearchTarget.Element == Searchable.Element {
-    return ConditionalPattern<SearchTarget>(self.condition)
+    return LiteralPattern<Literal, SearchTarget>(self.literal)
   }
 
   // MARK: - Pattern
@@ -57,26 +60,38 @@ where Searchable: Collection /* SearchableCollection */ {
     in collection: Searchable,
     at location: Searchable.Index
   ) -> [AtomicPatternMatch<Searchable>] {
-    return primaryMatch(in: collection, at: location).map({ [$0] }) ?? []
+    if let match = primaryMatch(in: collection, at: location) {
+      return [match]
+    } else {
+      return []
+    }
   }
 
   @inlinable public func primaryMatch(
     in collection: Searchable,
     at location: Searchable.Index
   ) -> AtomicPatternMatch<Searchable>? {
-    if location ≠ collection.endIndex,
-      condition(collection[location])
-    {
-      return AtomicPatternMatch(
-        range: (location...location).relative(to: collection),
-        in: collection
-      )
-    } else {
-      return nil
+    var checkingIndex = literal.startIndex
+    var collectionIndex = location
+    while checkingIndex ≠ literal.endIndex {
+      guard collectionIndex ≠ collection.endIndex else {
+        // Ran out of space to check.
+        return nil
+      }
+
+      if literal[checkingIndex] ≠ collection[collectionIndex] {
+        // Mis‐match.
+        return nil
+      }
+
+      checkingIndex = literal.index(after: checkingIndex)
+      collectionIndex = collection.index(after: collectionIndex)
     }
+
+    return AtomicPatternMatch(range: location..<collectionIndex, in: collection)
   }
 
-  @inlinable public func forSubSequence() -> ConditionalPattern<Searchable.SubSequence> {
+  @inlinable public func forSubSequence() -> LiteralPattern<Literal, Searchable.SubSequence> {
     return converted(for: Searchable.SubSequence.self)
   }
 
@@ -90,13 +105,18 @@ where Searchable: Collection /* SearchableCollection */ {
   }
 }
 
-extension ConditionalPattern: BidirectionalPattern
-where Searchable: SearchableBidirectionalCollection {
+extension LiteralPattern: BidirectionalPattern
+where Literal: SearchableBidirectionalCollection, Searchable: SearchableBidirectionalCollection {
 
   // MARK: - BidirectionalPattern
 
-  @inlinable public func reversed() -> ConditionalPattern<ReversedCollection<Searchable>> {
-    return converted(for: ReversedCollection<Searchable>.self)
+  @inlinable public func reversed() -> LiteralPattern<
+    ReversedCollection<Literal>, ReversedCollection<Searchable>
+  > {
+    let reversedLiteral: ReversedCollection<Literal> = literal.reversed()
+    return LiteralPattern<ReversedCollection<Literal>, ReversedCollection<Searchable>>(
+      reversedLiteral
+    )
   }
 
   @inlinable public func forward(

@@ -13,12 +13,24 @@
  */
 
 import SDGControlFlow
+import SDGCollections
 
 extension StrictString {
 
-  public struct ClusterView: BidirectionalCollection, Collection, ExtendedGraphemeClusterView,
-    RangeReplaceableCollection, TransparentWrapper
+  public struct ClusterView: BidirectionalCollection, BidirectionalPattern, Collection,
+    ExtendedGraphemeClusterView, RangeReplaceableCollection, SearchableBidirectionalCollection,
+    SearchableCollection, TransparentWrapper
   {
+
+    // MARK: - SearchableCollection
+
+    @inlinable public func temporaryWorkaroundFirstMatch<P>(
+      for pattern: P,
+      in subSequence: Slice<StrictString.ClusterView>
+    ) -> P.Match?
+    where P: Pattern, Slice<StrictString.ClusterView> == P.Match.Searched {
+      return subSequence.firstMatch(for: pattern)
+    }
 
     // MARK: - Initialization
 
@@ -36,10 +48,10 @@ extension StrictString {
       return StrictString(string).clusters
     }
 
-    @inlinable internal static func normalize<S: Sequence>(_ sequence: S)
-      -> StrictString
-      .ClusterView where S.Element == ExtendedGraphemeCluster
-    {
+    @inlinable internal static func normalize<S: Sequence>(
+      _ sequence: S
+    ) -> StrictString.ClusterView
+    where S.Element == ExtendedGraphemeCluster {
       switch sequence {
 
       // Already normalized.

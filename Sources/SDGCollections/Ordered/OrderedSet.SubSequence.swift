@@ -14,4 +14,17 @@
 
 import OrderedCollections
 
-extension OrderedCollections.OrderedSet.SubSequence: SearchableBidirectionalCollection {}
+extension OrderedCollections.OrderedSet.SubSequence: BidirectionalPattern,
+  SearchableBidirectionalCollection
+{
+
+  // MARK: - SearchableCollection
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: OrderedSet.SubSequence
+  ) -> P.Match?
+  where P: Pattern, OrderedSet.SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+}

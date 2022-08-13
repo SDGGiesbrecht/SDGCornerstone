@@ -13,8 +13,11 @@
  */
 
 /// A pattern that can be searched for in reverse.
+///
+/// - Requires: `Searchable` must conform to `SearchableBidirectionalCollection` even though the compiler is currently incapable of enforcing it.
 public protocol BidirectionalPattern: Pattern
-where Searchable: SearchableBidirectionalCollection {
+where Searchable: BidirectionalCollection {
+  // #workaround(Swift 5.6.1, Should require Searchable: SearchableBidirectionalCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   /// The type of the reverse pattern.
   associatedtype Reversed: Pattern
@@ -25,6 +28,7 @@ where Searchable: SearchableBidirectionalCollection {
   /// This is suitable for performing backward searches by applying it to the reversed collection.
   func reversed() -> Reversed
 
+  // @documentation(BidirectionalPattern.forward(match:in:))
   /// Converts the reversed match into a match in the forward collection.
   ///
   /// - Parameters:

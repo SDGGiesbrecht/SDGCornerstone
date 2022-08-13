@@ -12,10 +12,84 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension AnyCollection: Pattern, SearchableCollection where Element: Equatable {}
-extension AnyBidirectionalCollection: Pattern, SearchableBidirectionalCollection,
+extension AnyCollection: Pattern, SearchableCollection where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<AnyCollection>
+  public typealias SubSequencePattern = AnyCollection.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: SubSequence
+  ) -> P.Match?
+  where P: Pattern, SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+}
+
+extension AnyBidirectionalCollection: BidirectionalPattern, Pattern,
+  SearchableBidirectionalCollection,
   SearchableCollection
-where Element: Equatable {}
-extension AnyRandomAccessCollection: Pattern, SearchableBidirectionalCollection,
+where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<AnyBidirectionalCollection>
+  public typealias SubSequencePattern = AnyBidirectionalCollection.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: SubSequence
+  ) -> P.Match?
+  where P: Pattern, SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
+    return _hasSuffix(pattern)
+  }
+}
+
+extension AnyRandomAccessCollection: BidirectionalPattern, Pattern,
+  SearchableBidirectionalCollection,
   SearchableCollection
-where Element: Equatable {}
+where Element: Equatable {
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<AnyRandomAccessCollection>
+  public typealias SubSequencePattern = AnyRandomAccessCollection.SubSequence
+
+  @inlinable public func temporaryWorkaroundFirstMatch<P>(
+    for pattern: P,
+    in subSequence: SubSequence
+  ) -> P.Match?
+  where P: Pattern, SubSequence == P.Match.Searched {
+    return subSequence.firstMatch(for: pattern)
+  }
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Self>
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func lastMatch(for pattern: Self) -> Match? {
+    return _lastMatch(for: pattern)
+  }
+
+  // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
+  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
+    return _hasSuffix(pattern)
+  }
+}

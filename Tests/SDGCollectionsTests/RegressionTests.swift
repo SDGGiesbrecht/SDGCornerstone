@@ -24,7 +24,7 @@ class RegressionTests: TestCase {
     // Untracked
 
     XCTAssertEqual(
-      [1, 1, 1][1..<2].matches(for: RepetitionPattern([1])).map({ $0.range }),
+      [1, 1, 1][1..<2].matches(for: RepetitionPattern([1].literal())).map({ $0.range }),
       [1..<2]
     )
   }

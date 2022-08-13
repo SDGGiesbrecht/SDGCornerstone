@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@testable import SDGCollections2
+@testable import SDGCollections
 
 import XCTest
 

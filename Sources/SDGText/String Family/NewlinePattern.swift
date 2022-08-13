@@ -12,22 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import struct Foundation.CharacterSet
-
 import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public struct NewlinePattern: Pattern {
-
-  // MARK: - Static Properties
-
-  private static let carriageReturn: Unicode.Scalar = "\u{D}"
-  private static let lineFeed: Unicode.Scalar = "\u{A}"
-  @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
-  @usableFromInline internal static let newline = NewlinePattern(
-    carriageReturnLineFeed: (carriageReturn, lineFeed)
-  )
+public struct NewlinePattern<Searchable>: Pattern
+where Searchable: Collection, Searchable.Element == Unicode.Scalar {
 
   // MARK: - Initialization
 
@@ -43,18 +33,17 @@ public struct NewlinePattern: Pattern {
 
   // MARK: - Pattern
 
-  public typealias Element = Unicode.Scalar
+  public typealias Match = AtomicPatternMatch<Searchable>
 
-  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
-    -> [Range<C.Index>] where C.Element == Unicode.Scalar
-  {
-
+  @inlinable public func matches(
+    in collection: Match.Searched,
+    at location: Match.Searched.Index
+  ) -> [AtomicPatternMatch<Searchable>] {
     let scalar = collection[location]
-    guard scalar ∈ NewlinePattern.newlineCharacters else {
+    guard scalar ∈ Newline.characters else {
       return []
     }
     var result = [(location...location).relative(to: collection)]
-
     if scalar == carriageReturn {
       let nextIndex = collection.index(after: location)
       if nextIndex ≠ collection.endIndex,
@@ -63,31 +52,69 @@ public struct NewlinePattern: Pattern {
         result.prepend(location..<collection.index(location, offsetBy: 2))
       }
     }
-    return result
+    return result.map { AtomicPatternMatch(range: $0, in: collection) }
   }
 
-  @inlinable public func primaryMatch<C: SearchableCollection>(
-    in collection: C,
-    at location: C.Index
-  ) -> Range<C.Index>? where C.Element == Unicode.Scalar {
-
+  @inlinable public func primaryMatch(
+    in collection: Searchable,
+    at location: Searchable.Index
+  ) -> AtomicPatternMatch<Searchable>? {
     let scalar = collection[location]
-    guard scalar ∈ NewlinePattern.newlineCharacters else {
+    guard scalar ∈ Newline.characters else {
       return nil
     }
-
     if scalar == carriageReturn {
       let nextIndex = collection.index(after: location)
       if nextIndex ≠ collection.endIndex,
         collection[nextIndex] == lineFeed
       {
-        return location..<collection.index(location, offsetBy: 2)
+        return AtomicPatternMatch(
+          range: location..<collection.index(location, offsetBy: 2),
+          in: collection
+        )
       }
     }
-    return (location...location).relative(to: collection)
+    return AtomicPatternMatch(
+      range: (location...location).relative(to: collection),
+      in: collection
+    )
   }
 
-  @inlinable public func reversed() -> NewlinePattern {
-    return NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
+  @inlinable public func forSubSequence() -> NewlinePattern<Searchable.SubSequence> {
+    return NewlinePattern<Searchable.SubSequence>(
+      carriageReturnLineFeed: (carriageReturn, lineFeed)
+    )
+  }
+
+  @inlinable public func convertMatch(
+    from subSequenceMatch: AtomicPatternMatch<Searchable.SubSequence>,
+    in collection: Searchable
+  ) -> AtomicPatternMatch<Searchable> {
+    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
+    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
+    // return subSequenceMatch.in(collection)
+  }
+}
+
+extension NewlinePattern: BidirectionalPattern
+where Searchable: BidirectionalCollection {
+
+  // MARK: - BidirectionalPattern
+
+  @inlinable public func reversed() -> NewlinePattern<ReversedCollection<Searchable>> {
+    return NewlinePattern<ReversedCollection<Searchable>>(
+      carriageReturnLineFeed: (lineFeed, carriageReturn)
+    )
+  }
+
+  @inlinable public func forward(
+    match reversedMatch: AtomicPatternMatch<ReversedCollection<Searchable>>,
+    in forwardCollection: Searchable
+  ) -> AtomicPatternMatch<Searchable> {
+    let range = reversedMatch.range
+    return AtomicPatternMatch(
+      range: range.upperBound.base..<range.lowerBound.base,
+      in: forwardCollection
+    )
   }
 }

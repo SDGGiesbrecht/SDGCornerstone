@@ -12,9 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCollections2
+import SDGCollections
 
-struct NothingSubPattern: SDGCollections2.Pattern {
+struct NothingSubPattern: SDGCollections.Pattern {
   func matches(
     in collection: Substring,
     at location: Substring.Index
@@ -31,7 +31,7 @@ struct NothingSubPattern: SDGCollections2.Pattern {
     return subSequenceMatch.in(collection)
   }
 }
-struct ReversedNothingSubPattern: SDGCollections2.Pattern {
+struct ReversedNothingSubPattern: SDGCollections.Pattern {
   func matches(
     in collection: Slice<ReversedCollection<String>>,
     at location: Slice<ReversedCollection<String>>.Index
@@ -48,7 +48,7 @@ struct ReversedNothingSubPattern: SDGCollections2.Pattern {
     return subSequenceMatch.in(collection)
   }
 }
-struct ReversedNothingPattern: SDGCollections2.Pattern {
+struct ReversedNothingPattern: SDGCollections.Pattern {
   func matches(
     in collection: ReversedCollection<String>,
     at location: ReversedCollection<String>.Index
@@ -65,7 +65,7 @@ struct ReversedNothingPattern: SDGCollections2.Pattern {
     return subSequenceMatch.in(collection)
   }
 }
-struct Nothing: SDGCollections2.BidirectionalPattern, SDGCollections2.Pattern {
+struct Nothing: SDGCollections.BidirectionalPattern, SDGCollections.Pattern {
   func matches(
     in collection: String,
     at location: String.Index

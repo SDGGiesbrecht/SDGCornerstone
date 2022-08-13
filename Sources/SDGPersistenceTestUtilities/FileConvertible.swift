@@ -59,7 +59,7 @@ public func testFileConvertibleConformance<T>(
 
           var specification = try Data(from: specificationURL)
           if normalizeLineEndings {
-            specification.replaceMatches(for: "\r\n".utf8, with: "\n".utf8)
+            specification.replaceMatches(for: "\r\n".utf8.literal(), with: "\n".utf8)
           }
           specifications.insert(specification)
           let decoded = try T(file: specification, origin: specificationURL)

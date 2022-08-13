@@ -46,14 +46,15 @@ public struct LineViewIndex: Comparable, Equatable {
 
   @usableFromInline internal let start: String.ScalarView.Index?  // nil indicates the end index
 
-  @inlinable internal func newline<S: UnicodeScalarView>(in scalars: S) -> Range<
-    String.ScalarView.Index
-  >? {
+  @inlinable internal func newline<S: UnicodeScalarView>(
+    in scalars: S
+  ) -> Range<String.ScalarView.Index>? {
     guard let startIndex = start else {
       return nil
     }
     return cached(in: &cache.newline) {
-      return scalars[startIndex...].firstMatch(for: NewlinePattern.newline)?.range
+      let newlinePattern = Newline.pattern(for: S.SubSequence.self)
+      return scalars[startIndex...].firstMatch(for: newlinePattern)?.range
         ?? scalars.endIndex..<scalars.endIndex
     }
   }

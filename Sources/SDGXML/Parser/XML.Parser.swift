@@ -87,14 +87,15 @@ extension XML {
       }
 
       private func parseDTD() {
-        if let doctypeStart = source.firstMatch(for: "<!DOCTYPE ".scalars),
-          let doctypeEnd = source[doctypeStart.range.upperBound...].firstMatch(for: ">".scalars)
+        if let doctypeStart = source.firstMatch(for: "<!DOCTYPE ".scalars.literal()),
+          let doctypeEnd = source[doctypeStart.range.upperBound...].firstMatch(
+            for: ">".scalars.literal()
+          )
         {
           let doctypeContents = source[doctypeStart.range.upperBound..<doctypeEnd.range.lowerBound]
-          if let systemStart = doctypeContents.firstMatch(for: " SYSTEM \u{22}".scalars),
-            let systemEnd = doctypeContents[systemStart.range.upperBound...].firstMatch(
-              for: "\u{22}".scalars
-            )
+          if let systemStart = doctypeContents.firstMatch(for: " SYSTEM \u{22}".scalars.literal()),
+            let systemEnd = doctypeContents[systemStart.range.upperBound...]
+              .firstMatch(for: "\u{22}".scalars.literal())
           {
             let identifier = StrictString(
               doctypeContents[systemStart.range.upperBound..<systemEnd.range.lowerBound]
