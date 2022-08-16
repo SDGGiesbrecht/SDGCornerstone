@@ -17,6 +17,10 @@
 
   // MARK: - Result Builder
 
+  /// Builds a collation tailoring from a list of rules.
+  ///
+  /// - Parameters:
+  ///   - components: The component rules.
   public static func buildBlock(_ components: CollationTailoring.Anchor...) -> CollationTailoring {
     return CollationTailoring(anchors: components)
   }
