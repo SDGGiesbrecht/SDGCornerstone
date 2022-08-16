@@ -312,9 +312,6 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
 
   public var file: Data {
     let encoder = JSONEncoder()
-    if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {
-      encoder.outputFormatting.insert(.sortedKeys)
-    }
     return try! encoder.encode(self)
   }
 }
