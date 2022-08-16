@@ -259,20 +259,12 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
 
   /// Returns a tailored order by appling the provided rules.
   ///
-  /// - Warning: This method cannot be called within itself and cannot be called on multiple instances at once.
-  ///
   /// - Parameters:
-  ///     - tailoringRules: A closure which tailors the collation by listing rules defined using the operators in this module. (This is the only place where the operators can be used.)
-  public func tailored(accordingTo tailoringRules: () -> Void) -> CollationOrder {
-    inTheProcessOfTailoring = true
-    defer { inTheProcessOfTailoring = false }
-
-    tailoringRoot = self
-    defer { tailoringRoot = nil }
-
-    tailoringRules()
-
-    return tailoringRoot!
+  ///     - tailoringRules: A closure which tailors the collation by listing rules defined using the operators in this module.
+  public func tailored(
+    @CollationTailoringBuilder accordingTo tailoringRules: () -> CollationTailoring
+  ) -> CollationOrder {
+    return tailoringRules().tailor(self)
   }
 
   // MARK: - Decodable
