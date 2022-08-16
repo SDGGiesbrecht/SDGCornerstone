@@ -32,6 +32,6 @@ public struct CollationTailoring {
     for anchor in anchors {
       anchor.applyRules(to: &copy)
     }
-    return order
+    return copy
   }
 }
