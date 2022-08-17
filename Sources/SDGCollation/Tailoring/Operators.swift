@@ -12,11 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// MARK: - Context
-
-internal var inTheProcessOfTailoring: Bool = false
-internal var tailoringRoot: CollationOrder?
-
 // MARK: - Operators
 
 /// The precedence of tailoring rules which anchor to the preceding operand.

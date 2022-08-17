@@ -15,65 +15,71 @@
 import SDGText
 
 private func duplicate(
-  definition anchor: CollationTailoringAnchor,
+  definition anchor: CollationTailoring.Anchor,
   for new: StrictString
-) -> CollationTailoringAnchor {
-  tailoringRoot!.rules[new] = anchor.elements
-  return anchor
+) -> CollationTailoring.Anchor {
+  return anchor.stacking(
+    mutation: { collation in
+      collation.rules[new] = anchor.cursor(collation)
+    },
+    cursor: anchor.cursor
+  )
 }
 
 private func add(
-  circumfix: (prefix: CollationElement, suffix: CollationElement),
+  circumfix: @escaping (CollationOrder) -> (`prefix`: CollationElement, suffix: CollationElement),
   to new: StrictString,
-  basedOn anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
-
-  let newElement: [CollationElement] = [circumfix.prefix] + anchor.elements + [circumfix.suffix]
-  tailoringRoot!.rules[new] = newElement
-  return CollationTailoringAnchor(newElement)
+  basedOn anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
+  let newElement: (CollationOrder) -> [CollationElement] = { collation in
+    let resolvedCircumfix = circumfix(collation)
+    return [resolvedCircumfix.prefix] + anchor.cursor(collation) + [resolvedCircumfix.suffix]
+  }
+  return anchor.stacking(
+    mutation: { collation in
+      collation.rules[new] = newElement(collation)
+    },
+    cursor: newElement
+  )
 }
 
 /// Moves the following operand to be the same as the preceding operand up until the scalar level.
-///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
 ///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←= (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return duplicate(definition: anchor, for: new)
 }
 
 /// Moves the preceding operand to be the same as the following up until the scalar level.
-///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
 ///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func =→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return duplicate(definition: anchor, for: new)
 }
 
 /// Moves the following operand so that it comes after the preceding operand at the primary level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .primary),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .primary)
+    },
     to: new,
     basedOn: anchor
   )
@@ -81,17 +87,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the primary level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .primary),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .primary)
+    },
     to: new,
     basedOn: anchor
   )
@@ -99,17 +105,17 @@ private func add(
 
 /// Moves the following operand so that it comes after the preceding operand at the reverse accent level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←<< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .accentsInReverse),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .accentsInReverse)
+    },
     to: new,
     basedOn: anchor
   )
@@ -117,17 +123,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the reverse accent level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <<→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .accentsInReverse),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .accentsInReverse)
+    },
     to: new,
     basedOn: anchor
   )
@@ -135,17 +141,17 @@ private func add(
 
 /// Moves the following operand so that it comes after the preceding operand at the forward accent level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←<<< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .accentsForward),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .accentsForward)
+    },
     to: new,
     basedOn: anchor
   )
@@ -153,17 +159,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the forward accent level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <<<→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .accentsForward),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .accentsForward)
+    },
     to: new,
     basedOn: anchor
   )
@@ -171,17 +177,17 @@ private func add(
 
 /// Moves the following operand so that it comes after the preceding operand at the case level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←<<<< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .case),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .case)
+    },
     to: new,
     basedOn: anchor
   )
@@ -189,17 +195,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the case level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <<<<→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .case),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .case)
+    },
     to: new,
     basedOn: anchor
   )
@@ -207,17 +213,17 @@ private func add(
 
 /// Moves the following operand so that it comes after the preceding operand at the punctuation level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←<<<<< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .punctuation),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .punctuation)
+    },
     to: new,
     basedOn: anchor
   )
@@ -225,17 +231,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the punctuation level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <<<<<→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .punctuation),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .punctuation)
+    },
     to: new,
     basedOn: anchor
   )
@@ -243,17 +249,17 @@ private func add(
 
 /// Moves the following operand so that it comes after the preceding operand at the script level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
 @discardableResult public func ←<<<<<< (
-  anchor: CollationTailoringAnchor,
+  anchor: CollationTailoring.Anchor,
   new: StrictString
-) -> CollationTailoringAnchor {
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.afterIndex, at: .script),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.afterIndex, at: .script)
+    },
     to: new,
     basedOn: anchor
   )
@@ -261,17 +267,17 @@ private func add(
 
 /// Moves the preceding operand so that it comes before the following operand at the script level.
 ///
-/// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
-///
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
 @discardableResult public func <<<<<<→ (
   new: StrictString,
-  anchor: CollationTailoringAnchor
-) -> CollationTailoringAnchor {
+  anchor: CollationTailoring.Anchor
+) -> CollationTailoring.Anchor {
   return add(
-    circumfix: CollationElement.relative(index: tailoringRoot!.beforeIndex, at: .script),
+    circumfix: { collation in
+      return CollationElement.relative(index: collation.beforeIndex, at: .script)
+    },
     to: new,
     basedOn: anchor
   )
