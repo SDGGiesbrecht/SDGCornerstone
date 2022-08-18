@@ -20,7 +20,7 @@ public typealias UIntMax = UInt64
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily: BitField, CustomReflectable, CVarArg, FixedWidthInteger, Sendable,
+public protocol UIntFamily: BitField, CustomReflectable, CVarArg, FixedWidthInteger,
   UnsignedInteger, WholeNumberProtocol
 {}
 

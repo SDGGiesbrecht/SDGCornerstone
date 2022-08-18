@@ -17,7 +17,7 @@ import SDGLogic
 
 /// A type that can be used for whole‐number arithmetic.
 public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
-  NumericAdditiveArithmetic
+  NumericAdditiveArithmetic, Sendable
 {
 
   // MARK: - Initialization

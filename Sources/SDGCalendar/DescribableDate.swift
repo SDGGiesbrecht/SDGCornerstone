@@ -20,7 +20,7 @@ import SDGLocalization
 ///
 /// Describable dates can be queried for properties such as the hour of the day or the day of the week, but may not be suitable for further calendaring computations.
 public protocol DescribableDate: CustomDebugStringConvertible, CustomPlaygroundDisplayConvertible,
-  CustomStringConvertible
+  CustomStringConvertible, Sendable
 {
 
   // Hebrew

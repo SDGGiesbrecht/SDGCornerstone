@@ -68,7 +68,7 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// - Warning: If you intend to encode and decode a custom definition type, you must register the type with `CalendarDate.register(_:)` before performing any decoding operations.
-public protocol DateDefinition: Decodable, Encodable {
+public protocol DateDefinition: Decodable, Encodable, Sendable {
 
   // MARK: - Static Properties
 
