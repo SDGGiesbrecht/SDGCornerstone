@@ -175,38 +175,15 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   private var definition: DateDefinition {
     willSet {
-      sendability.cache = Sendability.Cache()
+      cache.contents = [:]
     }
     didSet {
-      sendability.cache.conversions[ObjectIdentifier(type(of: definition))] = definition
+      cache.contents[ObjectIdentifier(type(of: definition))] = definition
     }
   }
 
-  private struct Sendability: @unchecked Sendable {
-    fileprivate class Cache {
-      fileprivate init() {
-        self.conversions = [:]
-      }
-      fileprivate init(conversions: [ObjectIdentifier: DateDefinition]) {
-        self.conversions = conversions
-      }
-      fileprivate var conversions: [ObjectIdentifier: DateDefinition]
-    }
-    fileprivate var cache = Cache()
-    private var conversions: [ObjectIdentifier: DateDefinition] {
-      get {
-        return cache.conversions
-      }
-      set {
-        if isKnownUniquelyReferenced(&cache) {
-          cache.conversions = newValue
-        } else {
-          cache = Cache(conversions: newValue)
-        }
-      }
-    }
-  }
-  private var sendability = Sendability()
+  private var cache: SendableValueCache<[ObjectIdentifier: DateDefinition]> = SendableValueCache(
+    contents: [:])
 
   private var intervalSinceEpoch: CalendarInterval<FloatMax> {
     if let hebrew = definition as? HebrewDate {
@@ -238,7 +215,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   public func converted<D: DateDefinition>(to type: D.Type) -> D {
 
     let cachedDefinition: DateDefinition = cached(
-      in: &sendability.cache.conversions[ObjectIdentifier(D.self)]
+      in: &cache.contents[ObjectIdentifier(D.self)]
     ) {
       return recomputeDefinition(as: D.self)
     }
