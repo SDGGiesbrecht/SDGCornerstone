@@ -46,3 +46,6 @@ where Match: PatternMatch {
     return suffix.contents
   }
 }
+
+extension ExclusiveSuffixMatch: Sendable
+where Match: Sendable, Match.Searched.SubSequence: Sendable {}
