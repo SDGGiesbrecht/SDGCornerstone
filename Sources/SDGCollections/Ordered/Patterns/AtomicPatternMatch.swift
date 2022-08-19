@@ -50,3 +50,5 @@ where Searched: Collection /* SearchableCollection */ {
     return AtomicPatternMatch<Context>(range: range, in: context)
   }
 }
+
+extension AtomicPatternMatch: Sendable where Searched.SubSequence: Sendable {}
