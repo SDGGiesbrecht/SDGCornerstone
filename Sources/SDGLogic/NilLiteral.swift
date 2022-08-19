@@ -13,7 +13,7 @@
  */
 
 /// A `nil` literal.
-public struct NilLiteral: ExpressibleByNilLiteral {
+public struct NilLiteral: ExpressibleByNilLiteral, Sendable {
 
   // MARK: - Initialization
 

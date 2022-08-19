@@ -17,7 +17,8 @@ import SDGControlFlow
 /// A user‐facing, localized element.
 ///
 /// - SeeAlso: UserFacingDynamic
-public struct UserFacing<Element, Localization: SDGLocalization.Localization>: TransparentWrapper {
+public struct UserFacing<Element, Localization>: Sendable, TransparentWrapper
+where Localization: SDGLocalization.Localization {
 
   // MARK: - Initialization
 

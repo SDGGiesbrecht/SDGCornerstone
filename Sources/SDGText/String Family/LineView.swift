@@ -20,7 +20,7 @@ import SDGCollections
 
 /// A view of a string’s contents as a collection of lines.
 public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection, MutableCollection,
-  RangeReplaceableCollection, TextualPlaygroundDisplay
+  RangeReplaceableCollection, Sendable, TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization
@@ -103,7 +103,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
       let previousNewline = base.scalars[..<newline.lowerBound]
         .lastMatch(for: subSequenceNewlinePattern)?.range
     else {
-      startIndex.cache.newline = newline
+      startIndex.cache.contents = newline
       return startIndex
     }
     return LineViewIndex(start: previousNewline.upperBound, newline: newline)

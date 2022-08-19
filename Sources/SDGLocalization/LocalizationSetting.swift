@@ -26,7 +26,7 @@ import SDGPersistence
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
 public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStringConvertible,
-  Decodable, Encodable, Equatable
+  Decodable, Encodable, Equatable, Sendable
 {
 
   // MARK: - Static Properties

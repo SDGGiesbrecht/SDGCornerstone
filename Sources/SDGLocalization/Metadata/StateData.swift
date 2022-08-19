@@ -17,7 +17,7 @@ import SDGText
 /// Data about a sovereign state.
 ///
 /// This structure provides access to data used internally by SDGLocalization.
-public struct StateData {
+public struct StateData: Sendable {
 
   // MARK: - List
 

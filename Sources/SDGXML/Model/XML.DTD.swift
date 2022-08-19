@@ -17,7 +17,7 @@ import SDGText
 extension XML {
 
   /// An XML DTD.
-  public enum DTD: Equatable {
+  public enum DTD: Equatable, Sendable {
 
     // MARK: - Cases
 

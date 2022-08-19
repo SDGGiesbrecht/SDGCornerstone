@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGLogic
 
 /// A “random” number generator that returns numbers in a pre‐determined cycle.
-public struct CyclicalNumberGenerator: RandomNumberGenerator {
+public struct CyclicalNumberGenerator: RandomNumberGenerator, Sendable {
 
   private let sequence: [UInt64]
   private var index: Array<UInt64>.Index

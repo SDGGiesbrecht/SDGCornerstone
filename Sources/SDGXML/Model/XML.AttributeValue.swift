@@ -21,7 +21,7 @@ extension XML {
 
   /// An XML attribute value.
   public struct AttributeValue: Decodable, Encodable, Equatable, ExpressibleByStringLiteral,
-    TransparentWrapper
+    Sendable, TransparentWrapper
   {
 
     private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "\u{22}", "<"]

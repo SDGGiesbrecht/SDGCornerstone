@@ -88,3 +88,5 @@ extension XML.Attribute: Hashable where Value: Hashable {
     wrappedValue.hash(into: &hasher)
   }
 }
+
+extension XML.Attribute: Sendable where Value: Sendable {}

@@ -31,7 +31,7 @@ extension CGPoint {
 }
 
 #if canImport(CoreGraphics)
-  extension CGPoint: TwoDimensionalPointProtocol {
+  extension CGPoint: @unchecked Sendable, TwoDimensionalPointProtocol {
 
     // MARK: - PointProtocol
 
