@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Dispatch
+
 /// A sendable cache which can be used as a property by value types to record derived properties without semantically mutating.
 ///
 /// - Warning: Every real mutation to the parent value must reset the cache by creating a new instance.
@@ -36,18 +38,20 @@ public struct SendableValueCache<T>: @unchecked Sendable where T: Sendable {
     @usableFromInline internal var contents: T
   }
   @usableFromInline internal var rawCache: RawCache
+  @usableFromInline internal let semaphore = DispatchSemaphore(value: 0)
 
   /// The contents of the cache.
   @inlinable public var contents: T {
     get {
-      return rawCache.contents
+      semaphore.wait()
+      let contents = rawCache.contents
+      semaphore.signal()
+      return contents
     }
     nonmutating set {
-      if isKnownUniquelyReferenced(&rawCache) {
-        rawCache.contents = newValue
-      } else {
-        rawCache = RawCache(contents: newValue)
-      }
+      semaphore.wait()
+      rawCache.contents = newValue
+      semaphore.signal()
     }
   }
 }
