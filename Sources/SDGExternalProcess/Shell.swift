@@ -18,7 +18,7 @@ import SDGControlFlow
 import SDGLogic
 
 /// A command line shell.
-public final class Shell: TransparentWrapper {
+public struct Shell: TransparentWrapper {
 
   // MARK: - Static Properties
 

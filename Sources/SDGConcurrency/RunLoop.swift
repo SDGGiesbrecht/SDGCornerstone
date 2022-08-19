@@ -23,7 +23,7 @@ import SDGLogic
     // MARK: - Running the Loop
 
     /// A class that manages a run loop.
-    public final class Driver {
+    public final class Driver: Sendable {
       fileprivate init() {}
     }
 
