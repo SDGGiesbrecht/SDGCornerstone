@@ -38,7 +38,7 @@ public struct SendableValueCache<T>: @unchecked Sendable where T: Sendable {
     @usableFromInline internal var contents: T
   }
   @usableFromInline internal var rawCache: RawCache
-  @usableFromInline internal let semaphore = DispatchSemaphore(value: 0)
+  @usableFromInline internal let semaphore = DispatchSemaphore(value: 1)
 
   /// The contents of the cache.
   @inlinable public var contents: T {
