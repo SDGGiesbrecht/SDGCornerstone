@@ -62,3 +62,5 @@ public struct Weak<Pointee: AnyObject>: ProjectingPropertyWrapper, TransparentWr
     return pointee as Any
   }
 }
+
+extension Weak: Sendable where Pointee: Sendable {}
