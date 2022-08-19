@@ -39,7 +39,7 @@ public struct SendableValueCache<T>: @unchecked Sendable where T: Sendable {
 
   /// The contents of the cache.
   @inlinable public var contents: T {
-    @inlinable get {
+    get {
       return rawCache.contents
     }
     nonmutating set {
