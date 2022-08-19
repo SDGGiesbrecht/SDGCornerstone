@@ -15,7 +15,7 @@
 extension LocalizationSetting {
 
   /// A stabilization mode for when multiple languages are active.
-  public enum StabilizationMode {
+  public enum StabilizationMode: Sendable {
 
     /// No stabilization will be performed.
     ///

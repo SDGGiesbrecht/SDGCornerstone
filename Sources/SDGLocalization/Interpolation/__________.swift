@@ -21,7 +21,7 @@ import SDGCollections
 public typealias GenreGrammatical = מין־דקדוקי
 // @localization(🇮🇱עב) @notLocalized(🇨🇦EN) @crossReference(מין־דקדוקי)
 /// מין דקדוקי לשפה עם זכר ונקבה.
-public enum מין־דקדוקי: CodableViaEnumeration {
+public enum מין־דקדוקי: CodableViaEnumeration, Sendable {
 
   /// זכר.
   case זכר

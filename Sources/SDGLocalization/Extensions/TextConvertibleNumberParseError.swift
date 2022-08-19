@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGText
 
 /// An error that occurs while parsing a number from a string.
-public enum TextConvertibleNumberParseError: PresentableError {
+public enum TextConvertibleNumberParseError: PresentableError, Sendable {
 
   /// A character is present which is not a valid digit.
   case invalidDigit(UnicodeScalar, entireString: StrictString)

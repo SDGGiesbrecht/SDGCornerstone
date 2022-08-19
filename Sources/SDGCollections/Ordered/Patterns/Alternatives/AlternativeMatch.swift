@@ -36,3 +36,5 @@ where Preferred: PatternMatch, Fallback: PatternMatch, Preferred.Searched == Fal
     }
   }
 }
+
+extension AlternativeMatch: Sendable where Preferred: Sendable, Fallback: Sendable {}

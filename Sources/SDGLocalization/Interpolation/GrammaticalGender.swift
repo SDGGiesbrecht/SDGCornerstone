@@ -15,7 +15,7 @@
 import SDGCollections
 
 /// A grammatical gender used by languages that differentiate between masculine, feminine and neuter.
-public enum GrammaticalGender: CodableViaEnumeration {
+public enum GrammaticalGender: CodableViaEnumeration, Sendable {
 
   /// Masculine.
   case masculine

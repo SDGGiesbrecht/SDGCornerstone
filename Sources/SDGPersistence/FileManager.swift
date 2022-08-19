@@ -35,7 +35,7 @@ import SDGLogic
     /// A recommended location for file operations.
     ///
     /// For the temporary files used only transiently, use `FileManager.withTemporaryDirectory(appropriateFor:_:)` instead.
-    public enum RecommendedLocation {
+    public enum RecommendedLocation: Sendable {
 
       /// Permanent, backed‐up storage for application‐related, internal‐use files that are hidden from the user.
       case applicationSupport

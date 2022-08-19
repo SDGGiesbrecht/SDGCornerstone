@@ -13,7 +13,7 @@
  */
 
 /// The direction from which to fill a collection.
-public enum FillDirection {
+public enum FillDirection: Sendable {
   /// Fill from the start.
   case start
   /// Fill from the end.
