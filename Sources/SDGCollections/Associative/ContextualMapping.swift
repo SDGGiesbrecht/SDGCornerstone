@@ -28,7 +28,7 @@ where
 
   // MARK: - Static Methods
 
-  @inlinable internal static var defaultFallbackAlgorithm: (Input.Element) -> Output {
+  @inlinable internal static var defaultFallbackAlgorithm: @Sendable (Input.Element) -> Output {
     return { (input: Input.Element) -> Output in
       _preconditionFailure({ localization in
         switch localization {  // @exempt(from: tests)
@@ -41,7 +41,7 @@ where
 
   @inlinable internal static func generate(
     mapping rules: [Input: Output],
-    fallbackAlgorithm: @escaping (Input.Element) -> Output
+    fallbackAlgorithm: @escaping @Sendable (Input.Element) -> Output
   ) -> [Input.Element: ContextualMapping<Input, Output>] {
 
     var ruleGroups: [Input.Element: (simple: Output?, complex: [Input: Output])] = [:]
@@ -102,7 +102,7 @@ where
   ///     - element: The element to use the fallback algorithm on.
   @inlinable public init(
     mapping: [Input: Output],
-    fallbackAlgorithm: @escaping (_ element: Input.Element) -> Output
+    fallbackAlgorithm: @escaping @Sendable (_ element: Input.Element) -> Output
   ) {
     self.simpleOutput = nil
     self.complexMapping = ContextualMapping.generate(
@@ -116,7 +116,7 @@ where
     input: Input.Element,
     simpleOutput: Output?,
     complexMapping: [Input: Output],
-    fallbackAlgorithm: @escaping (Input.Element) -> Output
+    fallbackAlgorithm: @escaping @Sendable (Input.Element) -> Output
   ) {
 
     self.simpleOutput = simpleOutput
@@ -131,7 +131,7 @@ where
 
   @usableFromInline internal let simpleOutput: Output?
   @usableFromInline internal let complexMapping: [Input.Element: ContextualMapping<Input, Output>]
-  @usableFromInline internal let fallbackAlgorithm: (Input.Element) -> Output
+  @usableFromInline internal let fallbackAlgorithm: @Sendable (Input.Element) -> Output
 
   // MARK: - Usage
 
@@ -199,3 +199,5 @@ where
     }
   }
 }
+
+extension ContextualMapping: Sendable where Input.Element: Sendable, Output: Sendable {}

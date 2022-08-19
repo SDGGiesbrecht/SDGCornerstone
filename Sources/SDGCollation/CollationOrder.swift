@@ -22,7 +22,7 @@ import SDGText
 import SDGPersistence
 
 /// A collation order for sorting strings.
-public struct CollationOrder: Decodable, Encodable, FileConvertible {
+public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
 
   // MARK: - Static Properties
 
@@ -62,15 +62,12 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
 
   internal var rules: [StrictString: [CollationElement]] {
     didSet {
-      cache = Cache()
+      cache = SendableValueCache(contents: nil)
     }
   }
 
-  private class Cache {
-    fileprivate init() {}
-    fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
-  }
-  private var cache = Cache()
+  private var cache: SendableValueCache<ContextualMapping<StrictString, [CollationElement]>?> =
+    SendableValueCache(contents: nil)
 
   internal let beforeIndex: CollationIndex
   private let endOfStringIndex: CollationIndex
@@ -96,7 +93,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
         )
       )
     }
-    return cached(in: &cache.contextualMapping) { create() }
+    return cached(in: &cache.contents) { create() }
   }
 
   // MARK: - Fallback
@@ -132,7 +129,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
     unifiedIdeographs: CollationIndex,
     otherUnifiedIdeographs: CollationIndex,
     unassignedCodePoints: CollationIndex
-  ) -> (StrictString.Element) -> [CollationElement] {
+  ) -> @Sendable (StrictString.Element) -> [CollationElement] {
 
     return { character in
 
