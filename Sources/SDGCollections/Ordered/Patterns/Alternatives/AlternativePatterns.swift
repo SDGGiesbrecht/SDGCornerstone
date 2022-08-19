@@ -118,3 +118,5 @@ where Preferred: BidirectionalPattern, Fallback: BidirectionalPattern {
     }
   }
 }
+
+extension AlternativePatterns: Sendable where Preferred: Sendable, Fallback: Sendable {}

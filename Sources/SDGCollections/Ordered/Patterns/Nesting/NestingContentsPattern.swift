@@ -20,7 +20,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   @inlinable internal init(
     opening: Opening,
     closing: Closing,
-    parentNestingPattern: @escaping () -> NestingPattern<Opening, Closing>
+    parentNestingPattern: @escaping @Sendable () -> NestingPattern<Opening, Closing>
   ) {
     self.opening = opening
     self.closing = closing
@@ -36,7 +36,7 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
   @usableFromInline internal var opening: Opening
   @usableFromInline internal var closing: Closing
-  @usableFromInline internal var parentNestingPattern: () -> NestingPattern<Opening, Closing>
+  @usableFromInline internal var parentNestingPattern: @Sendable () -> NestingPattern<Opening, Closing>
   @usableFromInline internal var segmentPattern: _NestingSegmentPattern<Opening, Closing>
 
   // MARK: - Pattern
@@ -126,3 +126,5 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
     )
   }
 }
+
+extension _NestingContentsPattern: Sendable where Opening: Sendable, Closing: Sendable {}

@@ -115,3 +115,5 @@ extension NaryAlternativePatterns: BidirectionalPattern where Option: Bidirectio
     )
   }
 }
+
+extension NaryAlternativePatterns: Sendable where Option: Sendable {}

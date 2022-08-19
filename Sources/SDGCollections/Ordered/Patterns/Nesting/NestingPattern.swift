@@ -130,3 +130,5 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
     )
   }
 }
+
+extension NestingPattern: Sendable where Opening: Sendable, Closing: Sendable {}

@@ -42,3 +42,6 @@ where First: PatternMatch, Second: PatternMatch, First.Searched == Second.Search
   public typealias Searched = First.Searched
   public let contents: First.Searched.SubSequence
 }
+
+extension ConcatenatedMatch: Sendable
+where First: Sendable, Second: Sendable, First.Searched.SubSequence: Sendable {}

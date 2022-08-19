@@ -237,3 +237,5 @@ extension CollectionDifference: Hashable where ChangeElement: Hashable {
     return CollectionDifference(unsafeChanges: pairedChanges)
   }
 }
+
+extension CollectionDifference: Sendable where ChangeElement: Sendable {}

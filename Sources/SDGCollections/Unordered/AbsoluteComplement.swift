@@ -43,9 +43,12 @@ public struct AbsoluteComplement<Base: SetDefinition>: CustomStringConvertible, 
 
   public typealias Element = Base.Element
 
-  @inlinable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element)
-    -> Bool
-  {
+  @inlinable public static func ∋ (
+    precedingValue: AbsoluteComplement,
+    followingValue: Base.Element
+  ) -> Bool {
     return precedingValue.base ∌ followingValue
   }
 }
+
+extension AbsoluteComplement: Sendable where Base: Sendable {}

@@ -34,3 +34,6 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
     }
   }
 }
+
+extension NestingMatchSegment: Sendable
+where Opening: Sendable, Closing: Sendable, Opening.Searched.SubSequence: Sendable {}

@@ -98,3 +98,5 @@ where Base: BidirectionalPattern {
     )
   }
 }
+
+extension NegatedPattern: Sendable where Base: Sendable {}

@@ -45,3 +45,6 @@ where Match: PatternMatch {
   public typealias Searched = Match.Searched
   public let contents: Match.Searched.SubSequence
 }
+
+extension InclusivePrefixMatch: Sendable
+where Match: Sendable, Match.Searched.SubSequence: Sendable {}
