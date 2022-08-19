@@ -22,7 +22,7 @@ import SDGCornerstoneLocalizations
 
 /// A Hebrew month of a particular year.
 public struct HebrewMonthAndYear: Comparable, Equatable, FixedScaleOneDimensionalPoint,
-  PointProtocol, TextualPlaygroundDisplay
+  PointProtocol, Sendable, TextualPlaygroundDisplay
 {
 
   // MARK: - Properties
