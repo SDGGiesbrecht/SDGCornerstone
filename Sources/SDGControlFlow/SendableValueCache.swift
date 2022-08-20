@@ -12,7 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Dispatch
+#if !PLATFORM_LACKS_DISPATCH
+  import Dispatch
+#endif
 
 /// A sendable cache which can be used as a property by value types to record derived properties without semantically mutating.
 ///
@@ -38,20 +40,30 @@ public struct SendableValueCache<T>: @unchecked Sendable where T: Sendable {
     @usableFromInline internal var contents: T
   }
   @usableFromInline internal var rawCache: RawCache
-  @usableFromInline internal let semaphore = DispatchSemaphore(value: 1)
+  #if !PLATFORM_LACKS_DISPATCH  // Web has only one thread anyway.
+    @usableFromInline internal let semaphore = DispatchSemaphore(value: 1)
+  #endif
 
   /// The contents of the cache.
   @inlinable public var contents: T {
     get {
-      semaphore.wait()
+      #if !PLATFORM_LACKS_DISPATCH
+        semaphore.wait()
+      #endif
       let contents = rawCache.contents
-      semaphore.signal()
+      #if !PLATFORM_LACKS_DISPATCH
+        semaphore.signal()
+      #endif
       return contents
     }
     nonmutating set {
-      semaphore.wait()
+      #if !PLATFORM_LACKS_DISPATCH
+        semaphore.wait()
+      #endif
       rawCache.contents = newValue
-      semaphore.signal()
+      #if !PLATFORM_LACKS_DISPATCH
+        semaphore.signal()
+      #endif
     }
   }
 }
