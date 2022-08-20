@@ -33,7 +33,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
   @usableFromInline internal var opening: Opening
   @usableFromInline internal var closing: Closing
-  @usableFromInline internal var parentNestingPattern: @Sendable () -> NestingPattern<Opening, Closing>
+  @usableFromInline internal var parentNestingPattern:
+    @Sendable () -> NestingPattern<Opening, Closing>
 
   // MARK: - Pattern
 

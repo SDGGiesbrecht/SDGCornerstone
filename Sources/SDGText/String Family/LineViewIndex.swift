@@ -38,7 +38,8 @@ public struct LineViewIndex: Comparable, Equatable, Sendable {
 
   // MARK: - Properties
 
-  @usableFromInline internal var cache: SendableValueCache<Range<String.ScalarView.Index>?> = SendableValueCache(contents: nil)
+  @usableFromInline internal var cache: SendableValueCache<Range<String.ScalarView.Index>?> =
+    SendableValueCache(contents: nil)
 
   @usableFromInline internal let start: String.ScalarView.Index?  // nil indicates the end index
 

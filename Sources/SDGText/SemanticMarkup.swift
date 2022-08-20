@@ -45,7 +45,8 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
 public struct SemanticMarkup: Addable, BidirectionalCollection, BidirectionalPattern, Collection,
   Decodable, Encodable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral,
-  Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, Sendable, TextualPlaygroundDisplay
+  Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, Sendable,
+  TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization

@@ -25,7 +25,9 @@ where Localization: SDGLocalization.Localization {
   ///     - localization: The requested localization.
   ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
   public init(
-    _ localize: @escaping @Sendable (_ localization: Localization, _ arguments: Arguments) -> Element
+    _ localize: @escaping @Sendable (
+      _ localization: Localization, _ arguments: Arguments
+    ) -> Element
   ) {
     self.localize = localize
   }
