@@ -13,7 +13,7 @@
  */
 
 /// A type‐erased wrapper for around any `Localization`.
-public struct AnyLocalization: Localization {
+public struct AnyLocalization: Localization, Sendable {
 
   // MARK: - Initialization
 

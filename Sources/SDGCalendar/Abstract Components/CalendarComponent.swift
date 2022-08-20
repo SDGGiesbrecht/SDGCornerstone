@@ -15,7 +15,7 @@
 import SDGMathematics
 
 /// A component of a particular calendar.
-public protocol CalendarComponent: Decodable, Encodable {
+public protocol CalendarComponent: Decodable, Encodable, Sendable {
 
   /// The mean duration.
   static var meanDuration: CalendarInterval<FloatMax> { get }

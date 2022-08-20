@@ -20,7 +20,7 @@ import SDGPersistence
 import SDGLocalization
 
 /// An external process.
-public final class ExternalProcess: TextualPlaygroundDisplay {
+public struct ExternalProcess: TextualPlaygroundDisplay {
 
   // MARK: - Initialization
 
@@ -39,7 +39,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
   ///     - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
   ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
   ///     - process: An executable to validate. Its existence and executability have already been verified.
-  public convenience init?<S>(
+  public init?<S>(
     searching locations: S,
     commandName: String?,
     validate: (_ process: ExternalProcess) -> Bool

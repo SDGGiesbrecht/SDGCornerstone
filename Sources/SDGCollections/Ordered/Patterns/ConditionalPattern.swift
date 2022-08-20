@@ -28,13 +28,13 @@ where Searchable: Collection /* SearchableCollection */ {
   /// - Parameters:
   ///     - condition: The condition an element must meet in order to match.
   ///     - element: An element to check.
-  @inlinable public init(_ condition: @escaping (_ element: Searchable.Element) -> Bool) {
+  @inlinable public init(_ condition: @escaping @Sendable (_ element: Searchable.Element) -> Bool) {
     self.condition = condition
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal var condition: (Searchable.Element) -> Bool
+  @usableFromInline internal var condition: @Sendable (Searchable.Element) -> Bool
 
   // MARK: - Conversions
 
@@ -110,3 +110,5 @@ where Searchable: SearchableBidirectionalCollection {
     )
   }
 }
+
+extension ConditionalPattern: Sendable {}

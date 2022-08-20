@@ -20,7 +20,7 @@ extension XML {
 
   /// XML character data.
   public struct CharacterData: Decodable, Encodable, Equatable, ExpressibleByStringLiteral,
-    TransparentWrapper
+    Sendable, TransparentWrapper
   {
 
     private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "<", ">"]

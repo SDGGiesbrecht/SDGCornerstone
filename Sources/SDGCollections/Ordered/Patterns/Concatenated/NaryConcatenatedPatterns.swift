@@ -150,3 +150,5 @@ where Component: BidirectionalPattern {
     )
   }
 }
+
+extension NaryConcatenatedPatterns: Sendable where Component: Sendable {}

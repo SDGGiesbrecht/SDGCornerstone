@@ -16,7 +16,7 @@ import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public struct NewlinePattern<Searchable>: Pattern
+public struct NewlinePattern<Searchable>: Pattern, Sendable
 where Searchable: Collection, Searchable.Element == Unicode.Scalar {
 
   // MARK: - Initialization

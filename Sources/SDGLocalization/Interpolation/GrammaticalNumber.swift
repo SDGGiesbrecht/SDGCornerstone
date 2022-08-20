@@ -15,7 +15,7 @@
 import SDGCollections
 
 /// A grammatical number used by languages that distinguish only between singular and plural.
-public enum GrammaticalNumber: CodableViaEnumeration {
+public enum GrammaticalNumber: CodableViaEnumeration, Sendable {
 
   /// Singular.
   case singular

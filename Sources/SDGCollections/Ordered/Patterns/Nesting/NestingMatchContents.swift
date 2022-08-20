@@ -41,3 +41,6 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   public typealias Searched = Opening.Searched
   public let contents: Searched.SubSequence
 }
+
+extension NestingMatchContents: Sendable
+where Opening: Sendable, Closing: Sendable, Searched.SubSequence: Sendable {}

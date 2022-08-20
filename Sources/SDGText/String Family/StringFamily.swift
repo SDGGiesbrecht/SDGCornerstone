@@ -17,7 +17,7 @@ import SDGMathematics
 
 /// A `String` or `StrictString`.
 public protocol StringFamily: Addable, Comparable, Decodable, Encodable,
-  ExpressibleByStringInterpolation, Hashable, LosslessStringConvertible, TextOutputStream,
+  ExpressibleByStringInterpolation, Hashable, LosslessStringConvertible, Sendable, TextOutputStream,
   TextOutputStreamable
 {
 

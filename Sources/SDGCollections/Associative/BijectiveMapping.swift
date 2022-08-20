@@ -128,3 +128,5 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
     return xToY
   }
 }
+
+extension BijectiveMapping: Sendable where X: Sendable, Y: Sendable {}

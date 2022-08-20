@@ -297,6 +297,19 @@ where A: Hashable, B: Hashable, C: Hashable, D: Hashable, E: Hashable, F: Hashab
   }
 }
 
+// MARK: - Sendable
+
+extension Tuple2: Sendable
+where A: Sendable, B: Sendable {}
+extension Tuple3: Sendable
+where A: Sendable, B: Sendable, C: Sendable {}
+extension Tuple4: Sendable
+where A: Sendable, B: Sendable, C: Sendable, D: Sendable {}
+extension Tuple5: Sendable
+where A: Sendable, B: Sendable, C: Sendable, D: Sendable, E: Sendable {}
+extension Tuple6: Sendable
+where A: Sendable, B: Sendable, C: Sendable, D: Sendable, E: Sendable, F: Sendable {}
+
 // MARK: - TransparentWrapper
 
 extension Tuple2: TransparentWrapper {

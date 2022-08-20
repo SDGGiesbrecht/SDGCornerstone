@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A line in a string.
-public struct Line<Base: StringFamily>: TextualPlaygroundDisplay {
+public struct Line<Base: StringFamily>: Sendable, TextualPlaygroundDisplay {
 
   // @documentation(SDGCornerstone.Line.init(line:newline:))
   /// Creates a line.

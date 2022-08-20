@@ -51,3 +51,5 @@ where Base1.Element == Base2.Element {
     return precedingValue.a ∋ followingValue ∨ precedingValue.b ∋ followingValue
   }
 }
+
+extension Union: Sendable where Base1: Sendable, Base2: Sendable {}

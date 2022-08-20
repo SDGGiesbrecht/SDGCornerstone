@@ -16,11 +16,12 @@ import SDGCollections
 
 /// A view of a string’s contents as a collection of Unicode scalar values.
 public protocol UnicodeScalarView: BidirectionalPattern, RangeReplaceableCollection,
-  SearchableBidirectionalCollection
+  SearchableBidirectionalCollection, Sendable
 where
   Element == Unicode.Scalar,
   Index == String.UnicodeScalarView.Index,
-  SubSequence: _SearchableBidirectionalCollection
+  SubSequence: _SearchableBidirectionalCollection,
+  SubSequence: Sendable
 {}
 
 // #workaround(Swift 5.6.1, This protocol is redundant and can be removed when the compiler can handle its real counterpart as a constraint above.)

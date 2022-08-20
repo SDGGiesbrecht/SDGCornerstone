@@ -18,7 +18,7 @@ import SDGText
 extension XML {
 
   /// An XML element.
-  public struct Element: CustomStringConvertible, Encodable, Equatable {
+  public struct Element: CustomStringConvertible, Encodable, Equatable, Sendable {
 
     // MARK: - Initialization
 

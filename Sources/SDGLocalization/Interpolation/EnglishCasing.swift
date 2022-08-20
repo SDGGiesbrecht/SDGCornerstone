@@ -20,7 +20,7 @@ import SDGText
 /// A casing position used by the English language.
 ///
 /// - SeeAlso: `Casing`
-public enum EnglishCasing: CodableViaEnumeration {
+public enum EnglishCasing: CodableViaEnumeration, Sendable {
 
   /// The middle of a sentence.
   ///

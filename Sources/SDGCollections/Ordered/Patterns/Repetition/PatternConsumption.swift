@@ -13,7 +13,7 @@
  */
 
 /// Pattern consumption behaviour.
-public enum Consumption {
+public enum Consumption: Sendable {
   /// Prefers longer matches.
   case greedy
   /// Prefers shorter matches.

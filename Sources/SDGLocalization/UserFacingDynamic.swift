@@ -13,7 +13,8 @@
  */
 
 /// A user‐facing, localized element that changes dynamically according to supplied arguments.
-public struct UserFacingDynamic<Element, Localization: SDGLocalization.Localization, Arguments> {
+public struct UserFacingDynamic<Element, Localization, Arguments>: Sendable
+where Localization: SDGLocalization.Localization {
 
   // MARK: - Initialization
 
@@ -24,14 +25,16 @@ public struct UserFacingDynamic<Element, Localization: SDGLocalization.Localizat
   ///     - localization: The requested localization.
   ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
   public init(
-    _ localize: @escaping (_ localization: Localization, _ arguments: Arguments) -> Element
+    _ localize: @escaping @Sendable (
+      _ localization: Localization, _ arguments: Arguments
+    ) -> Element
   ) {
     self.localize = localize
   }
 
   // MARK: - Properties
 
-  private var localize: (Localization, Arguments) -> Element
+  private var localize: @Sendable (Localization, Arguments) -> Element
 
   // MARK: - Output
 

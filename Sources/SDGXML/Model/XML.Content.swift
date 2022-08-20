@@ -18,7 +18,7 @@ import SDGText
 extension XML {
 
   /// The content of an XML element.
-  public enum Content: CustomStringConvertible, Equatable, ExpressibleByStringLiteral {
+  public enum Content: CustomStringConvertible, Equatable, ExpressibleByStringLiteral, Sendable {
 
     // MARK: - Cases
 

@@ -38,3 +38,6 @@ where Component: PatternMatch {
   public typealias Searched = Component.Searched
   public let contents: Component.Searched.SubSequence
 }
+
+extension NaryConcatenatedMatch: Sendable
+where Component: Sendable, Component.Searched.SubSequence: Sendable {}

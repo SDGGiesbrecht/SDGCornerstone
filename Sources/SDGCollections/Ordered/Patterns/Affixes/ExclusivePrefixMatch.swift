@@ -46,3 +46,6 @@ where Match: PatternMatch {
     return prefix.contents
   }
 }
+
+extension ExclusivePrefixMatch: Sendable
+where Match: Sendable, Match.Searched.SubSequence: Sendable {}

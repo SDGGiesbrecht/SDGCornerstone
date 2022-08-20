@@ -171,3 +171,4 @@ extension CollectionDifference.Change: Encodable where ChangeElement: Encodable 
 
 extension CollectionDifference.Change: Equatable where ChangeElement: Equatable {}
 extension CollectionDifference.Change: Hashable where ChangeElement: Hashable {}
+extension CollectionDifference.Change: Sendable where ChangeElement: Sendable {}

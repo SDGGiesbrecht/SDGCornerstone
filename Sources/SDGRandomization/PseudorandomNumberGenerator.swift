@@ -21,7 +21,7 @@ import SDGMathematics
 /// - Warning: The above guarantee of deterministic behaviour does not apply between differing module versions.
 ///
 /// Currently, `PseudorandomNumberGenerator` uses the [xoroshiro128+](https://en.wikipedia.org/wiki/Xoroshiro128%2B) algorithm designed by David Blackman and Sebastiano Vigna.
-public struct PseudorandomNumberGenerator: RandomNumberGenerator {
+public struct PseudorandomNumberGenerator: RandomNumberGenerator, Sendable {
 
   /// The seed.
   public typealias Seed = (UInt64, UInt64)

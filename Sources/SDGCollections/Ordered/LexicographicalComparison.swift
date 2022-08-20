@@ -58,3 +58,5 @@ where C: Collection, C.Element: Comparable {
     return collection
   }
 }
+
+extension LexicographicalComparison: Sendable where C: Sendable {}

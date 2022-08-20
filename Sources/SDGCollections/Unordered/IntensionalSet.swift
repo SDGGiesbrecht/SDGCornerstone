@@ -13,7 +13,7 @@
  */
 
 /// A set with an intensional definion.
-public struct IntensionalSet<Member>: SetDefinition {
+public struct IntensionalSet<Member>: Sendable, SetDefinition {
 
   // MARK: - Initialization
 
@@ -22,20 +22,22 @@ public struct IntensionalSet<Member>: SetDefinition {
   /// - Parameters:
   ///     - condition: The defining condition.
   ///     - possibleMember: An instence to check for membership.
-  @inlinable public init(where condition: @escaping (_ possibleMember: Element) -> Bool) {
+  @inlinable public init(where condition: @escaping @Sendable (_ possibleMember: Element) -> Bool) {
     self.condition = condition
   }
 
   // MARK: - Properties
 
-  @usableFromInline internal let condition: (Element) -> Bool
+  @usableFromInline internal let condition: @Sendable (Element) -> Bool
 
   // MARK: - SetDefinition
 
   public typealias Element = Member
 
-  @inlinable public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool
-  {
+  @inlinable public static func ∋ (
+    precedingValue: IntensionalSet,
+    followingValue: Element
+  ) -> Bool {
     return precedingValue.condition(followingValue)
   }
 }

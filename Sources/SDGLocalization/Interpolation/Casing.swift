@@ -22,7 +22,7 @@ import SDGText
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///
 /// - SeeAlso: `EnglishCasing`
-public enum Casing: CodableViaEnumeration {
+public enum Casing: CodableViaEnumeration, Sendable {
 
   /// The middle of a sentence.
   ///

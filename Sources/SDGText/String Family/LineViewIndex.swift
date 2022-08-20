@@ -17,7 +17,7 @@ import Foundation
 import SDGControlFlow
 
 /// A line view index.
-public struct LineViewIndex: Comparable, Equatable {
+public struct LineViewIndex: Comparable, Equatable, Sendable {
 
   // MARK: - Initialization
 
@@ -26,7 +26,7 @@ public struct LineViewIndex: Comparable, Equatable {
     newline: Range<String.ScalarView.Index>? = nil
   ) {
     self.start = start
-    cache.newline = newline
+    cache.contents = newline
   }
 
   private init() {
@@ -38,11 +38,8 @@ public struct LineViewIndex: Comparable, Equatable {
 
   // MARK: - Properties
 
-  @usableFromInline internal class Cache {
-    fileprivate init() {}
-    @usableFromInline internal var newline: Range<String.ScalarView.Index>?
-  }
-  @usableFromInline internal var cache = Cache()
+  @usableFromInline internal var cache: SendableValueCache<Range<String.ScalarView.Index>?> =
+    SendableValueCache(contents: nil)
 
   @usableFromInline internal let start: String.ScalarView.Index?  // nil indicates the end index
 
@@ -52,7 +49,7 @@ public struct LineViewIndex: Comparable, Equatable {
     guard let startIndex = start else {
       return nil
     }
-    return cached(in: &cache.newline) {
+    return cached(in: &cache.contents) {
       let newlinePattern = Newline.pattern(for: S.SubSequence.self)
       return scalars[startIndex...].firstMatch(for: newlinePattern)?.range
         ?? scalars.endIndex..<scalars.endIndex
@@ -81,10 +78,9 @@ public struct LineViewIndex: Comparable, Equatable {
   ///
   /// - Parameters:
   ///     - clusters: The cluster view.
-  @inlinable public func samePosition(in clusters: StrictString.ClusterView)
-    -> StrictString
-    .ClusterView.Index
-  {
+  @inlinable public func samePosition(
+    in clusters: StrictString.ClusterView
+  ) -> StrictString.ClusterView.Index {
     return samePosition(in: String(StrictString(clusters)).clusters)
   }
 
@@ -99,9 +95,10 @@ public struct LineViewIndex: Comparable, Equatable {
 
   // MARK: - Comparable
 
-  @inlinable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex)
-    -> Bool
-  {
+  @inlinable public static func < (
+    precedingValue: LineViewIndex,
+    followingValue: LineViewIndex
+  ) -> Bool {
     if let precedingValueStart = precedingValue.start {
       if let followingValueStart = followingValue.start {
         return precedingValueStart < followingValueStart
@@ -117,9 +114,10 @@ public struct LineViewIndex: Comparable, Equatable {
 
   // MARK: - Equatable
 
-  @inlinable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex)
-    -> Bool
-  {
+  @inlinable public static func == (
+    precedingValue: LineViewIndex,
+    followingValue: LineViewIndex
+  ) -> Bool {
     return precedingValue.start == followingValue.start
   }
 }

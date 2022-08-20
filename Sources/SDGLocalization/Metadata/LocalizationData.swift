@@ -17,7 +17,7 @@ import SDGText
 /// Data about a localization.
 ///
 /// This structure provides access to data used internally by SDGLocalization.
-public struct LocalizationData {
+public struct LocalizationData: Sendable {
 
   // MARK: - List
 

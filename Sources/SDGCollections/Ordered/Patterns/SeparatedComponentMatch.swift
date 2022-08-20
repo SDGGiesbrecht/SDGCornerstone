@@ -47,3 +47,5 @@ where Match: PatternMatch {
     return component.contents
   }
 }
+
+extension SeparatedMatch: Sendable where Match: Sendable, Match.Searched.SubSequence: Sendable {}

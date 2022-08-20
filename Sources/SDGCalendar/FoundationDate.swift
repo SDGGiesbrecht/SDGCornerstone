@@ -25,13 +25,17 @@ internal struct FoundationDate: DateDefinition, TransparentWrapper {
   // MARK: - Initialization
 
   internal init(_ date: Date) {
-    self.date = date
+    self.foundationReferenceInterval = date.timeIntervalSinceReferenceDate
     self.intervalSinceReferenceDate = FloatMax(date.timeIntervalSinceReferenceDate).seconds
   }
 
   // MARK: - Properties
 
-  internal let date: Date
+  // #workaround(Swift 5.6.1, Date stored indirectly, because Foundation has not been annotated for concurrency yet.)
+  private let foundationReferenceInterval: TimeInterval
+  internal var date: Date {
+    return Date(timeIntervalSinceReferenceDate: foundationReferenceInterval)
+  }
 
   // MARK: - DateDefinition
 
@@ -41,9 +45,7 @@ internal struct FoundationDate: DateDefinition, TransparentWrapper {
 
   internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
     self.intervalSinceReferenceDate = intervalSinceReferenceDate
-    self.date = Date(
-      timeIntervalSinceReferenceDate: TimeInterval(intervalSinceReferenceDate.inSeconds)
-    )
+    self.foundationReferenceInterval = TimeInterval(intervalSinceReferenceDate.inSeconds)
   }
 
   // MARK: - Decodable

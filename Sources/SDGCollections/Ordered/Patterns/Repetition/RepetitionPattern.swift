@@ -235,3 +235,5 @@ extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPatte
     )
   }
 }
+
+extension RepetitionPattern: Sendable where Base: Sendable {}

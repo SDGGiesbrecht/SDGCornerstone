@@ -115,3 +115,5 @@ where First: BidirectionalPattern, Second: BidirectionalPattern {
     )
   }
 }
+
+extension ConcatenatedPatterns: Sendable where First: Sendable, Second: Sendable {}

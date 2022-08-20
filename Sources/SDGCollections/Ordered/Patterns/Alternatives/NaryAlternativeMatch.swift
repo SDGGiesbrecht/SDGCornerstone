@@ -43,3 +43,5 @@ where IndividualMatch: PatternMatch {
     return individual.contents
   }
 }
+
+extension NaryAlternativeMatch: Sendable where IndividualMatch: Sendable {}

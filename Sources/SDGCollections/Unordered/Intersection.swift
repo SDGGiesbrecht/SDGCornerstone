@@ -47,9 +47,12 @@ where Base1.Element == Base2.Element {
 
   public typealias Element = Base1.Element
 
-  @inlinable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element)
-    -> Bool
-  {
+  @inlinable public static func ∋ (
+    precedingValue: Intersection,
+    followingValue: Base1.Element
+  ) -> Bool {
     return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
   }
 }
+
+extension Intersection: Sendable where Base1: Sendable, Base2: Sendable {}

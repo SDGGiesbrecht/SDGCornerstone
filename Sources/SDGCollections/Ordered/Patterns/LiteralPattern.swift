@@ -130,3 +130,5 @@ where Literal: SearchableBidirectionalCollection, Searchable: SearchableBidirect
     )
   }
 }
+
+extension LiteralPattern: Sendable where Literal: Sendable {}

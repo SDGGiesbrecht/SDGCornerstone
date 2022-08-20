@@ -25,7 +25,7 @@ import SDGPersistence
 extension XML {
 
   /// An XML document.
-  public struct Document: CustomStringConvertible, Encodable, Equatable {
+  public struct Document: CustomStringConvertible, Encodable, Equatable, Sendable {
 
     // MARK: - Initialization
 

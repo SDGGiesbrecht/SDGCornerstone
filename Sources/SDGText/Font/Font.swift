@@ -23,7 +23,7 @@
 #endif
 
 /// A font.
-public struct Font {
+public struct Font: Sendable {
 
   // MARK: - Static Properties
 

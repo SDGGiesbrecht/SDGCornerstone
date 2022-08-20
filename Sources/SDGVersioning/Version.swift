@@ -23,7 +23,7 @@ import SDGCornerstoneLocalizations
 
 /// A semantic version.
 public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLiteral, Hashable,
-  TextualPlaygroundDisplay
+  Sendable, TextualPlaygroundDisplay
 {
 
   // MARK: - Initialization

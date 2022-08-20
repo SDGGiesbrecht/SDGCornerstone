@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-public enum _APILocalization: String, CaseIterable {
+public enum _APILocalization: String, CaseIterable, Sendable {
 
   // MARK: - Cases
 
