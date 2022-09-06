@@ -25,8 +25,8 @@ class RegressionTests: TestCase {
     var a = CalendarDate(gregorianYear: 2000)
     XCTAssertEqual(a.hebrewYear, 5760)
     let b = a
-    a −= CalendarInterval(days: 100000)
-    XCTAssertEqual(a.hebrewYear, 5486)
+    a −= CalendarInterval(days: 1000000)
+    XCTAssertEqual(a.hebrewYear, 3022)
     XCTAssertEqual(b.hebrewYear, 5760)
   }
 
