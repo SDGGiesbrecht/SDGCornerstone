@@ -175,7 +175,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   private var definition: DateDefinition {
     willSet {
-      cache.contents = [:]
+      cache = SendableValueCache(contents: [:])
     }
     didSet {
       cache.contents[ObjectIdentifier(type(of: definition))] = definition

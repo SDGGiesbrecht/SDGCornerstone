@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
 import SDGCalendar
 
 import XCTest
@@ -19,6 +20,15 @@ import XCTest
 import SDGXCTestUtilities
 
 class RegressionTests: TestCase {
+
+  func testCacheInvalidation() {
+    var a = CalendarDate(gregorianYear: 2000)
+    XCTAssertEqual(a.hebrewYear, 5760)
+    let b = a
+    a −= CalendarInterval(days: 1_000_000)
+    XCTAssertEqual(a.hebrewYear, 3022)
+    XCTAssertEqual(b.hebrewYear, 5760)
+  }
 
   func testCalendarEquatability() {
     // Untracked

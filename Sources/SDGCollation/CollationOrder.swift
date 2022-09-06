@@ -61,7 +61,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   // MARK: - Properties
 
   internal var rules: [StrictString: [CollationElement]] {
-    didSet {
+    willSet {
       cache = SendableValueCache(contents: nil)
     }
   }
