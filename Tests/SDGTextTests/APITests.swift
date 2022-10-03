@@ -73,7 +73,7 @@ class APITests: TestCase {
         XCTAssertEqual(UIFont.from(font), cocoaFont)
       #endif
     #endif
-    #if canImport(SwiftUI) && !(os(iOS) && arch(arm))
+    #if canImport(SwiftUI)
       if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *) {
         _ = SwiftUI.Font(font)
         font = Font(fontName: "Some Font", size: 12)
