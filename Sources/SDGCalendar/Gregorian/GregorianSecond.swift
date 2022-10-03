@@ -82,7 +82,11 @@ public struct GregorianSecond: CardinalCalendarComponent,
     second = unsafeRawValue
   }
 
-  public static let validRange: Range<FloatMax>? = 0..<FloatMax(GregorianSecond.secondsPerMinute)
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal static let _validRange: Range<FloatMax>? = 0..<FloatMax(GregorianSecond.secondsPerMinute)
+  @inlinable public static var validRange: Range<FloatMax>? {
+    return _validRange
+  }
 
   public var rawValue: FloatMax {
     return second

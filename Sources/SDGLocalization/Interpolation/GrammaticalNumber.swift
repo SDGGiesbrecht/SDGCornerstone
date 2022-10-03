@@ -25,7 +25,11 @@ public enum GrammaticalNumber: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<GrammaticalNumber, String>(
+  @inlinable public static var codingRepresentations: BijectiveMapping<GrammaticalNumber, String> {
+    return _codingRepresentations
+  }
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal static let _codingRepresentations = BijectiveMapping<GrammaticalNumber, String>(
     GrammaticalNumber.allCases,
     map: { casing in
       switch casing {
