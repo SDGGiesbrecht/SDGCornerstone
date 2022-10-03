@@ -28,7 +28,7 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
     contents: Searched.SubSequence
   ) {
     self.segments = segments
-    self.contents = contents
+    self._contents = contents
   }
 
   // MARK: - Properties
@@ -39,7 +39,11 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   // MARK: - PatternMatch
 
   public typealias Searched = Opening.Searched
-  public let contents: Searched.SubSequence
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _contents: Searched.SubSequence
+  @inlinable public var contents: Searched.SubSequence {
+    return _contents
+  }
 }
 
 extension NestingMatchContents: Sendable

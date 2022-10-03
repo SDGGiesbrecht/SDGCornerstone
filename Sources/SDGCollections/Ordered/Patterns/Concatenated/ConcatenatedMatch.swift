@@ -27,7 +27,7 @@ where First: PatternMatch, Second: PatternMatch, First.Searched == Second.Search
   @inlinable public init(first: First, second: Second, in searched: Searched) {
     self.first = first
     self.second = second
-    contents = searched[first.range.lowerBound..<second.range.upperBound]
+    _contents = searched[first.range.lowerBound..<second.range.upperBound]
   }
 
   // MARK: - Properties
@@ -40,7 +40,11 @@ where First: PatternMatch, Second: PatternMatch, First.Searched == Second.Search
   // MARK: - PatternMatch
 
   public typealias Searched = First.Searched
-  public let contents: First.Searched.SubSequence
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _contents: First.Searched.SubSequence
+  @inlinable public var contents: First.Searched.SubSequence {
+    return _contents
+  }
 }
 
 extension ConcatenatedMatch: Sendable

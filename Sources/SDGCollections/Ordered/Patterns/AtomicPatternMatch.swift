@@ -28,12 +28,16 @@ where Searched: Collection /* SearchableCollection */ {
   ///     - collection: The collection containing the match.
   @inlinable public init<R>(range: R, in collection: Searched)
   where R: RangeExpression, R.Bound == Searched.Index {
-    self.contents = collection[range.relative(to: collection)]
+    self._contents = collection[range.relative(to: collection)]
   }
 
   // MARK: - PatternMatch
 
-  public let contents: Searched.SubSequence
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _contents: Searched.SubSequence
+  @inlinable public var contents: Searched.SubSequence {
+    return _contents
+  }
 
   // MARK: - Conversions
 

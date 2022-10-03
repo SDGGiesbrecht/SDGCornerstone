@@ -119,7 +119,11 @@ extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, S
 
   // MARK: - SetInRepresentableUniverse
 
-  public static let universe: CharacterSet = CharacterSet().inverted
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal static let _universe: CharacterSet = CharacterSet().inverted
+  @inlinable public static var universe: CharacterSet {
+    return _universe
+  }
 
   @inlinable public static postfix func ′ (operand: CharacterSet) -> CharacterSet {
     return operand.inverted

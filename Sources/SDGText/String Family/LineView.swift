@@ -27,7 +27,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
   @inlinable internal init(_ base: Base) {
     self.base = base
-    startIndex = Index(start: base.scalars.startIndex)
+    _startIndex = Index(start: base.scalars.startIndex)
   }
 
   // MARK: - Properties
@@ -113,9 +113,17 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
   public typealias Indices = DefaultIndices<LineView>
 
-  public let startIndex: LineViewIndex
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _startIndex: LineViewIndex
+  @inlinable public var startIndex: LineViewIndex {
+    return _startIndex
+  }
 
-  public let endIndex: LineViewIndex = LineViewIndex.endIndex()
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _endIndex: LineViewIndex = LineViewIndex.endIndex()
+  @inlinable public var endIndex: LineViewIndex {
+    return _endIndex
+  }
 
   @inlinable public func index(after i: LineViewIndex) -> LineViewIndex {
     guard let newline = i.newline(in: base.scalars),

@@ -30,7 +30,7 @@ where Match: PatternMatch {
       in: searched
     )
     self.exclusivePrefix = prefixMatch
-    self.contents = searched[searched.startIndex..<match.range.upperBound]
+    self._contents = searched[searched.startIndex..<match.range.upperBound]
   }
 
   // MARK: - Properties
@@ -43,7 +43,11 @@ where Match: PatternMatch {
   // MARK: - PatternMatch
 
   public typealias Searched = Match.Searched
-  public let contents: Match.Searched.SubSequence
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal let _contents: Match.Searched.SubSequence
+  @inlinable public var contents: Match.Searched.SubSequence {
+    return _contents
+  }
 }
 
 extension InclusivePrefixMatch: Sendable

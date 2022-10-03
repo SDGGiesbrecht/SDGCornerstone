@@ -78,7 +78,12 @@ public struct GregorianMinute: CardinalCalendarComponent,
     minute = unsafeRawValue
   }
 
-  public static let validRange: Range<RawValue>? = 0..<GregorianMinute.minutesPerHour
+  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  @usableFromInline internal static let _validRange: Range<RawValue>? =
+    0..<GregorianMinute.minutesPerHour
+  @inlinable public static var validRange: Range<RawValue>? {
+    return _validRange
+  }
 
   public var rawValue: RawValue {
     return minute
