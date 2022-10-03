@@ -32,7 +32,9 @@ public enum GrammaticalGender: CodableViaEnumeration, Sendable {
     return _codingRepresentations
   }
   // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal static let _codingRepresentations = BijectiveMapping<GrammaticalGender, String>(
+  @usableFromInline internal static let _codingRepresentations = BijectiveMapping<
+    GrammaticalGender, String
+  >(
     GrammaticalGender.allCases,
     map: { casing in
       switch casing {

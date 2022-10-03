@@ -60,7 +60,8 @@ public struct HebrewDay: CodableViaRawRepresentableCalendarComponent,
   }
 
   // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal static let _validRange: Range<RawValue>? = 1..<HebrewMonth.maximumNumberOfDays + 1
+  @usableFromInline internal static let _validRange: Range<RawValue>? =
+    1..<HebrewMonth.maximumNumberOfDays + 1
   @inlinable public static var validRange: Range<RawValue>? {
     return _validRange
   }
