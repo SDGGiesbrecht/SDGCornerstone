@@ -40,17 +40,15 @@ class RegressionTests: TestCase {
 
     // #workaround(Swift 5.6.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
-      try forAllLegacyModes { () throws -> Void in
-        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
-          let longCommand = [
-            "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
-          ]
-          #if !PLATFORM_LACKS_GIT
-            let output = try Shell.default.run(command: longCommand).get()
-            XCTAssert(output.contains("0.8.3"))
-          #endif
+      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
+        let longCommand = [
+          "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
+        ]
+        #if !PLATFORM_LACKS_GIT
+          let output = try Shell.default.run(command: longCommand).get()
+          XCTAssert(output.contains("0.8.3"))
         #endif
-      }
+      #endif
     #endif
   }
 

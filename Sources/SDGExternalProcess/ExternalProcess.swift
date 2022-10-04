@@ -166,18 +166,7 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
     ) -> Result<String, ExternalProcess.Error> {
 
       let process = Process()
-
-      #if os(macOS)
-        if #available(macOS 10.13, *),  // @exempt(from: unicode)
-          ¬legacyMode
-        {
-          process.executableURL = executable
-        } else {
-          process.launchPath = executable.path
-        }
-      #else
-        process.executableURL = executable
-      #endif
+      process.executableURL = executable
 
       process.arguments = arguments
       if environment ≠ nil {
@@ -185,17 +174,7 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
       }
 
       if let location = workingDirectory {
-        #if os(macOS)
-          if #available(macOS 10.13, *),  // @exempt(from: unicode)
-            ¬legacyMode
-          {
-            process.currentDirectoryURL = location
-          } else {
-            process.currentDirectoryPath = location.path
-          }
-        #else
-          process.currentDirectoryURL = location
-        #endif
+        process.currentDirectoryURL = location
       }
 
       let pipe = Pipe()
@@ -209,18 +188,7 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
       process.qualityOfService = Thread.current.qualityOfService
 
       do {
-        #if os(macOS)
-          if #available(macOS 10.13, *),  // @exempt(from: unicode)
-            ¬legacyMode
-          {
-            try process.run()
-          } else {
-            _ = try executable.checkResourceIsReachable()
-            process.launch()
-          }
-        #else
-          try process.run()
-        #endif
+        try process.run()
       } catch {
         return .failure(.foundationError(error))
       }

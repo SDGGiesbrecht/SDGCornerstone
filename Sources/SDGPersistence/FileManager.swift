@@ -174,11 +174,7 @@ import SDGLogic
             directory = anyVolume
           } else {
             // @exempt(from: tests)
-            if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) {  // @exempt(from: tests)
-              directory = temporaryDirectory
-            } else {  // @exempt(from: tests)
-              directory = URL(fileURLWithPath: NSTemporaryDirectory())
-            }
+            directory = temporaryDirectory
           }
         }
       #endif
