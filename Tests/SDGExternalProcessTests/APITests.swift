@@ -116,7 +116,9 @@ class APITests: TestCase {
       #else
         directory = nil
       #endif
-      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
+      #if PLATFORM_LACKS_FOUNDATION_PROCESS
+        _ = directory
+      #else
         _ = try Shell.default.run(command: ["ls"], in: directory).get()
       #endif
       let printWorkingDirectory: String
@@ -125,7 +127,9 @@ class APITests: TestCase {
       #else
         printWorkingDirectory = "pwd"
       #endif
-      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
+      #if PLATFORM_LACKS_FOUNDATION_PROCESS
+        _ = printWorkingDirectory
+      #else
         _ = try Shell.default.run(
           command: [printWorkingDirectory],
           in: URL(fileURLWithPath: "/"),
@@ -134,7 +138,9 @@ class APITests: TestCase {
       #endif
 
       let message = "Hello, world!"
-      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
+      #if PLATFORM_LACKS_FOUNDATION_PROCESS
+        _ = message
+      #else
         XCTAssertEqual(
           cleanUpSystemWarningsInEchoOutput(
             try Shell.default.run(command: ["echo", message]).get()
@@ -144,7 +150,9 @@ class APITests: TestCase {
       #endif
 
       let nonexistentCommand = "no‐such‐command"
-      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
+      #if PLATFORM_LACKS_FOUNDATION_PROCESS
+        _ = nonexistentCommand
+      #else
         let result = Shell.default.run(command: [nonexistentCommand])
         switch result {
         case .success(let output):
