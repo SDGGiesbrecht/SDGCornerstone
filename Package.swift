@@ -804,23 +804,23 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #warning(Swift 5.6.1, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.7, Web lacks Foundation.FileManager.)
     // #warning(Swift 5.6.1, Web lacks Foundation.Process.)
     // #warning(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
     // #workaround(Swift 5.7, Web lacks Foundation.RunLoop.)
-    // #warning(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
-    // #warning(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.7, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.7, Web lacks Foundation.PropertyListEncoder.)
     // #warning(Swift 5.6.1, FoundationXML is broken for web.)
     // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.6.1, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    //.define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])),
     //.define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
-    //.define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
-    //.define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [/*.wasi,*/ .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
