@@ -807,7 +807,7 @@ for target in package.targets {
     // #warning(Swift 5.6.1, Web lacks Foundation.FileManager.)
     // #warning(Swift 5.6.1, Web lacks Foundation.Process.)
     // #warning(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
-    // #warning(Swift 5.6.1, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.7, Web lacks Foundation.RunLoop.)
     // #warning(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
     // #warning(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
     // #warning(Swift 5.6.1, FoundationXML is broken for web.)
@@ -818,7 +818,7 @@ for target in package.targets {
     //.define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])),
     //.define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
-    //.define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     //.define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     //.define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [/*.wasi,*/ .android])),
