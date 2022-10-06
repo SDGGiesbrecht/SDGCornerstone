@@ -25,10 +25,8 @@ open class TestCase: XCTestCase {
   open override func setUp() {
     if ¬TestCase.initialized {
       TestCase.initialized = true
-      #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
-        ProcessInfo.applicationIdentifier =
-          "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
-      #endif
+      ProcessInfo.applicationIdentifier =
+        "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
     }
 
     testAssertionMethod = XCTAssert

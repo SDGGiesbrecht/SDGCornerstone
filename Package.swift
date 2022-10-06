@@ -152,12 +152,11 @@ import PackageDescription
 /// ```swift
 /// .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
-/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
+/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [/*.wasi,*/ .android])),
 /// .define(
 ///   "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
 ///   .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
@@ -806,7 +805,6 @@ for target in package.targets {
   swiftSettings.append(contentsOf: [
     // #workaround(Swift 5.7, Web lacks Foundation.FileManager.)
     // #warning(Swift 5.6.1, Web lacks Foundation.Process.)
-    // #warning(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
     // #workaround(Swift 5.7, Web lacks Foundation.RunLoop.)
     // #workaround(Swift 5.7, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.7, Web lacks Foundation.PropertyListEncoder.)
@@ -816,12 +814,14 @@ for target in package.targets {
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])),
-    //.define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+    .define(
+      "PLATFORM_LACKS_FOUNDATION_PROCESS",
+      .when(platforms: [ /*.wasi,*/.tvOS, .iOS, .watchOS])
+    ),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [/*.wasi,*/ .android])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [ /*.wasi,*/.android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
@@ -839,10 +839,12 @@ for target in package.targets {
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
     // #warning(Swift 5.6.1, Web lacks Foundation.DateFormatter.dateFormat.)
     //.define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7, Web lacks Bundle.bundleIdentifier.)
+    .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
     // #warning(Swift 5.6.1, Web lacks Foundation.Thread.)
     //.define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
-    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [/*.wasi,*/ .android])),
+    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [ /*.wasi,*/.android])),
     // #warning(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
     //.define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
