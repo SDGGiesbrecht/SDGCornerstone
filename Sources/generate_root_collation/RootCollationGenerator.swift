@@ -14,7 +14,7 @@
 
 import SDGCollation
 
-enum RootCollationGenerator {
+@main enum RootCollationGenerator {
 
   static func main() throws {
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
