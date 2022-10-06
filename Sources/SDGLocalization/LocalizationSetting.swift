@@ -191,15 +191,19 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static let sdgApplicationPreferences: Shared<Preference> = {
-    guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
-      // @exempt(from: tests)
+    #if PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
       return Shared(Preference.mock())
-    }
-    let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
-      sdgPreferenceKey
-    ]
-    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-    return preferences
+    #else
+      guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
+        // @exempt(from: tests)
+        return Shared(Preference.mock())
+      }
+      let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
+        sdgPreferenceKey
+      ]
+      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+      return preferences
+    #endif
   }()
 
   private static let overrides: Shared<[LocalizationSetting]> = {
