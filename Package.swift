@@ -804,13 +804,13 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(Swift 5.6.1, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.6.1, FoundationXML is broken for web.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.FileManager.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.Process.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.RunLoop.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
+    // #warning(Swift 5.6.1, FoundationXML is broken for web.)
     // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.6.1, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
@@ -835,15 +835,15 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.6.1, Web lacks Dispatch.)
+    // #warning(Swift 5.6.1, Web lacks Dispatch.)
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6.1, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6.1, Web lacks Foundation.Thread.)
+    // #warning(Swift 5.6.1, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
-    // #workaround(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
+    // #warning(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
