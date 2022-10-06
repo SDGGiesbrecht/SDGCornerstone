@@ -804,7 +804,7 @@ for target in package.targets {
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
     // #workaround(Swift 5.7, Web lacks Foundation.FileManager.)
-    // #warning(Swift 5.6.1, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.7, Web lacks Foundation.Process.)
     // #workaround(Swift 5.7, Web lacks Foundation.RunLoop.)
     // #workaround(Swift 5.7, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.7, Web lacks Foundation.PropertyListEncoder.)
@@ -816,7 +816,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_PROCESS",
-      .when(platforms: [ /*.wasi,*/.tvOS, .iOS, .watchOS])
+      .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
