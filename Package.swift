@@ -593,9 +593,9 @@ let package = Package(
 
     // Internal utilities.
 
-    // #workaround(xcodebuild -version 13.4.1, Should be executable, but for interference with tvOS, etc.) @exempt(from: unicode)
-    .testTarget(
-      name: "SDGRootCollationGeneratorTests",
+    .executableTarget(
+      // #workaround(Swift 5.7, Should be hyphens, but Windows cannot handle Unicode names.)
+      name: "generate_root_collation",
       dependencies: [
         "SDGLogic",
         "SDGMathematics",
@@ -604,8 +604,7 @@ let package = Package(
         "SDGCollation",
         "SDGPersistence",
         "SDGLocalization",
-      ],
-      path: "Sources/SDGRootCollationGeneratorTests"
+      ]
     ),
 
     // Internal tests.
