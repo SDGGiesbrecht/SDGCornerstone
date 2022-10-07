@@ -110,32 +110,30 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
       }
     #endif
 
-    #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
-      // Fall back to searching PATH manually, because some Linux flavours lack “which”.
-      if let name = commandName,
-        let path = ProcessInfo.processInfo.environment["PATH"]
-      {
-        let separator: String
+    // Fall back to searching PATH manually, because some Linux flavours lack “which”.
+    if let name = commandName,
+      let path = ProcessInfo.processInfo.environment["PATH"]
+    {
+      let separator: String
+      #if os(Windows)
+        separator = ";"
+      #else
+        separator = ":"
+      #endif
+      for entry in path.components(separatedBy: separator) as [String] {
+        let directory = URL(fileURLWithPath: entry)
         #if os(Windows)
-          separator = ";"
+          let executableName = "\(name).exe"
         #else
-          separator = ":"
+          let executableName = name
         #endif
-        for entry in path.components(separatedBy: separator) as [String] {
-          let directory = URL(fileURLWithPath: entry)
-          #if os(Windows)
-            let executableName = "\(name).exe"
-          #else
-            let executableName = name
-          #endif
-          let possibleExecutable = directory.appendingPathComponent(executableName)
-          if checkLocation(possibleExecutable, validate: validate) {
-            self.init(at: possibleExecutable)  // @exempt(from: tests)
-            return
-          }
+        let possibleExecutable = directory.appendingPathComponent(executableName)
+        if checkLocation(possibleExecutable, validate: validate) {
+          self.init(at: possibleExecutable)  // @exempt(from: tests)
+          return
         }
       }
-    #endif
+    }
 
     return nil
   }

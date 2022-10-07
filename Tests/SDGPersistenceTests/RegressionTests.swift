@@ -100,12 +100,14 @@ class RegressionTests: TestCase {
   func testRemoteURLs() throws {
     // Untracked
 
-    #if !PLATFORM_LACKS_FOUNDATION_NETWORKING
-      do {
-        _ = try String(from: URL(string: "http://example.com/some/path")!)
-      } catch {
-        // Error is espected; hanging due to infinite recursion is not.
-      }
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
+      #if !PLATFORM_LACKS_FOUNDATION_NETWORKING
+        do {
+          _ = try String(from: URL(string: "http://example.com/some/path")!)
+        } catch {
+          // Error is espected; hanging due to infinite recursion is not.
+        }
+      #endif
     #endif
   }
 }

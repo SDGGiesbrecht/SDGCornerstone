@@ -51,18 +51,14 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
 public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
   return cached(in: &specificationDirectory) {
     let repositoryRoot: URL
-    #if PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
+    if let overridden = ProcessInfo.processInfo
+      .environment["SWIFTPM_PACKAGE_ROOT"]
+    {
+      // @exempt(from: tests)
+      repositoryRoot = URL(fileURLWithPath: overridden)
+    } else {
       repositoryRoot = defaultRepositoryRoot(callerLocation)
-    #else
-      if let overridden = ProcessInfo.processInfo
-        .environment["SWIFTPM_PACKAGE_ROOT"]
-      {
-        // @exempt(from: tests)
-        repositoryRoot = URL(fileURLWithPath: overridden)
-      } else {
-        repositoryRoot = defaultRepositoryRoot(callerLocation)
-      }
-    #endif
+    }
     return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
   }
 }

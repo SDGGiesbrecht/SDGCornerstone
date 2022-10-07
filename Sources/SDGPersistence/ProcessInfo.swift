@@ -16,44 +16,46 @@ import Foundation
 
 import SDGControlFlow
 
-#if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
-  extension ProcessInfo {
+extension ProcessInfo {
 
-    private static var _applicationIdentifier: String?
-    /// The application identifier.
-    ///
-    /// Bundled applications can define this in the main bundle’s information property list. Otherwise this property must be directy assigned a value at the very beginning of program execution. Failing to do either before the first attempt to read this property will trigger a precondition failure.
-    public static var applicationIdentifier: String {
-      get {
-        guard let result = possibleApplicationIdentifier else {
-          _preconditionFailure({ (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada:  // @exempt(from: tests)
-              return
-                "“ProcessInfo.applicationIdentifier” has not been set yet. (Import SDGCornerstone or SDGPersistence.)"
-            }
-          })
-        }
-        return result
+  private static var _applicationIdentifier: String?
+  /// The application identifier.
+  ///
+  /// Bundled applications can define this in the main bundle’s information property list. Otherwise this property must be directy assigned a value at the very beginning of program execution. Failing to do either before the first attempt to read this property will trigger a precondition failure.
+  public static var applicationIdentifier: String {
+    get {
+      guard let result = possibleApplicationIdentifier else {
+        _preconditionFailure({ (localization: _APILocalization) -> String in
+          switch localization {
+          case .englishCanada:  // @exempt(from: tests)
+            return
+              "“ProcessInfo.applicationIdentifier” has not been set yet. (Import SDGCornerstone or SDGPersistence.)"
+          }
+        })
       }
-      set {
-        _applicationIdentifier = newValue
-      }
+      return result
     }
-
-    /// The application identifier.
-    ///
-    /// This property has the same value as `applicationIdentifier`, but is typed as an `Optional`.
-    ///
-    /// Framework authors can read from this version of the propery when it should not matter if the client application has neglected to specify an identifier.
-    public static var possibleApplicationIdentifier: String? {
-      return _applicationIdentifier ?? Bundle.main.bundleIdentifier  // @exempt(from: tests)
-      // The right side of “??” is unreachable from tests.
-    }
-
-    /// The application domain.
-    public static var applicationDomain: String {
-      return applicationIdentifier
+    set {
+      _applicationIdentifier = newValue
     }
   }
-#endif
+
+  /// The application identifier.
+  ///
+  /// This property has the same value as `applicationIdentifier`, but is typed as an `Optional`.
+  ///
+  /// Framework authors can read from this version of the propery when it should not matter if the client application has neglected to specify an identifier.
+  public static var possibleApplicationIdentifier: String? {
+    var result = _applicationIdentifier
+    #if !PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER
+      result = result ?? Bundle.main.bundleIdentifier  // @exempt(from: tests)
+    // The right side of “??” is unreachable from tests.
+    #endif
+    return result
+  }
+
+  /// The application domain.
+  public static var applicationDomain: String {
+    return applicationIdentifier
+  }
+}

@@ -152,8 +152,10 @@ import PackageDescription
 /// ```swift
 /// .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
-/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+/// .define(
+///   "PLATFORM_LACKS_FOUNDATION_PROCESS",
+///   .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+/// ),
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
@@ -804,20 +806,21 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(Swift 5.6.1, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.ProcessInfo.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.6.1, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.6.1, FoundationXML is broken for web.)
+    // #workaround(Swift 5.7, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.7, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.7, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.7, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.7, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.7, FoundationXML is broken for web.)
     // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.6.1, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
-    .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+    .define(
+      "PLATFORM_LACKS_FOUNDATION_PROCESS",
+      .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+    ),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
@@ -835,15 +838,17 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.6.1, Web lacks Dispatch.)
+    // #workaround(Swift 5.7, Web lacks Dispatch.)
     .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6.1, Web lacks Foundation.DateFormatter.dateFormat.)
+    // #workaround(Swift 5.7, Web lacks Foundation.DateFormatter.dateFormat.)
     .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6.1, Web lacks Foundation.Thread.)
+    // #workaround(Swift 5.7, Web lacks Bundle.bundleIdentifier.)
+    .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.7, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
-    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.wasi, .android])),
-    // #workaround(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
+    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [ /*.wasi,*/.android])),
+    // #workaround(Swift 5.7, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
