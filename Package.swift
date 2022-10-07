@@ -841,8 +841,8 @@ for target in package.targets {
     //.define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
     // #warning(Swift 5.7, Web lacks Bundle.bundleIdentifier.)
     .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
-    // #warning(Swift 5.6.1, Web lacks Foundation.Thread.)
-    //.define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.7, Web lacks Foundation.Thread.)
+    .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
     .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [ /*.wasi,*/.android])),
     // #warning(Swift 5.6.1, Web lacks XCTest.XCTestExpectation.)
