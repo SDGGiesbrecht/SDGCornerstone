@@ -812,7 +812,7 @@ for target in package.targets {
     // #workaround(Swift 5.7, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.7, Web lacks Foundation.PropertyListEncoder.)
     // #workaround(Swift 5.7, FoundationXML is broken for web.)
-    // #workaround(Swift 5.6.1, FoundationXML is broken on Android.)
+    // #warning(Swift 5.6.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.6.1, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
@@ -824,7 +824,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, /*.android*/])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
@@ -846,8 +846,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.7, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.6.1, Android lacks FoundationNetworking.)
-    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [ /*.wasi,*/.android])),
+    // #warning(Swift 5.6.1, Android lacks FoundationNetworking.)
+    //.define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
     // #workaround(Swift 5.7, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
