@@ -846,8 +846,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.7, Web lacks Foundation.Thread.)
     .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #warning(Swift 5.6.1, Android lacks FoundationNetworking.)
-    //.define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
+    // #workaround(Swift 5.7, Android lacks FoundationNetworking.)
+    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
     // #workaround(Swift 5.7, Web lacks XCTest.XCTestExpectation.)
     .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
