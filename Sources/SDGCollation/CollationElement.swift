@@ -14,7 +14,8 @@
 
 import SDGControlFlow
 
-internal struct CollationElement: Decodable, Encodable, Equatable {
+internal typealias CollationElement = _CollationElement
+public struct _CollationElement: Decodable, Encodable, Equatable, Sendable {
 
   // MARK: - Constructors
 
@@ -44,6 +45,9 @@ internal struct CollationElement: Decodable, Encodable, Equatable {
 
   // MARK: - Initialization
 
+  public init(_rawIndices rawIndices: [[CollationIndex]]) {
+    self.init(rawIndices: rawIndices)
+  }
   internal init(rawIndices: [[CollationIndex]]) {
     self.indices = rawIndices
   }
@@ -60,13 +64,13 @@ internal struct CollationElement: Decodable, Encodable, Equatable {
 
   // MARK: - Encodable
 
-  internal func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: Encoder) throws {
     try encode(to: encoder, via: indices)
   }
 
   // MARK: - Decodable
 
-  internal init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     try self.init(from: decoder, via: [[CollationIndex]].self) { CollationElement(rawIndices: $0) }
   }
 }

@@ -33,8 +33,8 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
 
   // MARK: - Initialization
 
-  internal init(
-    rules: [StrictString: [CollationElement]],
+  public init(
+    _rules rules: [StrictString: [_CollationElement]],
     beforeIndex: CollationIndex,
     endOfStringIndex: CollationIndex,
     placeholderIndex: CollationIndex,
