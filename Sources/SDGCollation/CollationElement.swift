@@ -46,10 +46,10 @@ public struct _CollationElement: Decodable, Encodable, Equatable, Sendable {
   // MARK: - Initialization
 
   public init(_rawIndices rawIndices: [[CollationIndex]]) {
-    self.init(rawIndices: rawIndices)
+    self.indices = rawIndices
   }
   internal init(rawIndices: [[CollationIndex]]) {
-    self.indices = rawIndices
+    self.init(_rawIndices: rawIndices)
   }
 
   // MARK: - Properties
