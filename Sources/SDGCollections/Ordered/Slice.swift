@@ -18,14 +18,6 @@ extension Slice: Pattern, SearchableCollection where Base: SearchableCollection 
 
   public typealias Match = AtomicPatternMatch<Slice<Base>>
   public typealias SubSequencePattern = Slice<Base>
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: Slice<Base>
-  ) -> P.Match?
-  where P: Pattern, Slice<Base> == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 }
 extension Slice: BidirectionalPattern, SearchableBidirectionalCollection
 where Base: SearchableBidirectionalCollection {

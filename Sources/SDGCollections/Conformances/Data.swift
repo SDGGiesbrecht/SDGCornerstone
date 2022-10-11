@@ -16,15 +16,4 @@ import Foundation
 
 import SDGLogic
 
-extension Data: BidirectionalPattern, SearchableBidirectionalCollection {
-
-  // MARK: - SearchableCollection
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: Data.SubSequence
-  ) -> P.Match?
-  where P: Pattern, Data.SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
-}
+extension Data: BidirectionalPattern, SearchableBidirectionalCollection {}

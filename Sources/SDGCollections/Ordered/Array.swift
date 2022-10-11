@@ -31,13 +31,6 @@ where Element: Equatable {
   public typealias Match = AtomicPatternMatch<[Element]>
   public typealias SubSequencePattern = Array<Element>.SubSequence
 
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: Array<Element>.SubSequence
-  ) -> P.Match? where P: Pattern, Array<Element>.SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
-
   // MARK: - BidirectionalPattern
 
   public typealias Reversed = ReversedCollection<Self>
@@ -57,13 +50,6 @@ where Element: Equatable {
   public typealias Match = AtomicPatternMatch<ArraySlice>
   public typealias SubSequencePattern = ArraySlice.SubSequence
 
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: ArraySlice.SubSequence
-  ) -> P.Match? where P: Pattern, ArraySlice.SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
-
   // MARK: - BidirectionalPattern
 
   public typealias Reversed = ReversedCollection<Self>
@@ -82,13 +68,6 @@ where Element: Equatable {
 
   public typealias Match = AtomicPatternMatch<ContiguousArray>
   public typealias SubSequencePattern = ContiguousArray.SubSequence
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: ContiguousArray.SubSequence
-  ) -> P.Match? where P: Pattern, ContiguousArray.SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 
   // MARK: - BidirectionalPattern
 

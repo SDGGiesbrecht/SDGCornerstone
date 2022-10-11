@@ -97,10 +97,7 @@ class APITests: TestCase {
   func testAnyBidirectionalCollection() {
     let collection = AnyBidirectionalCollection([1, 2, 3])
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
     XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
@@ -110,10 +107,7 @@ class APITests: TestCase {
   func testAnyCollection() {
     let collection = AnyCollection([1, 2, 3])
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
   }
@@ -133,10 +127,7 @@ class APITests: TestCase {
   func testAnyRandomAccessCollection() {
     let collection = AnyRandomAccessCollection([1, 2, 3])
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
     XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
@@ -805,10 +796,7 @@ class APITests: TestCase {
   func testContiguousArray() {
     let collection = ContiguousArray([1, 2, 3])
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
     XCTAssertEqual(collection.lastMatch(for: collection)?.range, collection.bounds)
@@ -1125,10 +1113,7 @@ class APITests: TestCase {
 
     let collection = OrderedSet([1, 2, 3])
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
   }
@@ -1136,10 +1121,7 @@ class APITests: TestCase {
   func testOrderedSetSubSequence() {
     let collection = OrderedSet([1, 2, 3])[...]
     XCTAssertEqual(
-      collection.temporaryWorkaroundFirstMatch(
-        for: collection.forSubSequence(),
-        in: collection[...]
-      )?.range,
+      collection[...].firstMatch(for: collection.forSubSequence())?.range,
       collection.bounds
     )
   }

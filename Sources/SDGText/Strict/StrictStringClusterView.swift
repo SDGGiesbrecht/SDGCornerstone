@@ -22,16 +22,6 @@ extension StrictString {
     SearchableCollection, TransparentWrapper
   {
 
-    // MARK: - SearchableCollection
-
-    @inlinable public func temporaryWorkaroundFirstMatch<P>(
-      for pattern: P,
-      in subSequence: Slice<StrictString.ClusterView>
-    ) -> P.Match?
-    where P: Pattern, Slice<StrictString.ClusterView> == P.Match.Searched {
-      return subSequence.firstMatch(for: pattern)
-    }
-
     // MARK: - Initialization
 
     @inlinable internal init(_ string: StrictString) {
