@@ -17,11 +17,8 @@ import SDGLogic
 import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
-///
-/// - Requires: `SubSequence` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public protocol SearchableCollection: Collection, Pattern
-where Element: Equatable, Searchable == Self /*, SubSequence: SearchableCollection */ {
-  // #workaround(Swift 5.6.1, Should require SubSequence: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
   // #workaround(Swift 5.6.1, Needed to dodge Windows compiler bug; remove all conformances too.)
   /// Returns the first match for the pattern in the sub‐sequence.
