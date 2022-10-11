@@ -19,7 +19,7 @@ import SDGMathematics
 import SDGCollections
 import SDGText
 import SDGLocalization
-@testable import SDGCollation
+import SDGCollation
 import SDGPersistence
 
 extension CollationOrder {
@@ -215,7 +215,7 @@ extension CollationOrder {
       print("Finished parsing DUCET.")
 
       return CollationOrder(
-        rules: rules,
+        _rules: rules,
         beforeIndex: CollationOrder.beforeIndex,
         endOfStringIndex: CollationOrder.endOfStringIndex,
         placeholderIndex: CollationOrder.placeholderIndex,

@@ -27,26 +27,4 @@ extension Data: BidirectionalPattern, SearchableBidirectionalCollection {
   where P: Pattern, Data.SubSequence == P.Match.Searched {
     return subSequence.firstMatch(for: pattern)
   }
-
-  // MARK: - SearchableBidirectionalCollection
-
-  // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
-  @inlinable public func lastMatch(for pattern: Self) -> Match? {  // @exempt(from: tests)
-    let reversedCollection: ReversedCollection<Self> = reversed()
-    let reversedPattern: Self.Reversed = pattern.reversed()
-    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
-      return nil
-    }
-    return pattern.forward(match: match, in: self)
-  }
-
-  // #workaround(Swift 5.6.1, Redundant, but evades compiler bug in release configuration.)
-  @inlinable public func hasSuffix(_ pattern: Self) -> Bool {  // @exempt(from: tests)
-    let reversedCollection: ReversedCollection<Self> = reversed()
-    let reversedPattern: Self.Reversed = pattern.reversed()
-    return reversedPattern.primaryMatch(
-      in: reversedCollection,
-      at: reversedCollection.startIndex
-    ) ≠ nil
-  }
 }
