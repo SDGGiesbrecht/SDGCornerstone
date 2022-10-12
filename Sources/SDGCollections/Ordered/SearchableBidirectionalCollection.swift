@@ -16,8 +16,6 @@ import SDGLogic
 import SDGMathematics
 
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
-///
-/// - Requires: Must also conform to `BidirectionalPattern` even though the compiler is currently incapable of enforcing it.
 public protocol SearchableBidirectionalCollection: BidirectionalCollection, BidirectionalPattern,
   SearchableCollection
 {
