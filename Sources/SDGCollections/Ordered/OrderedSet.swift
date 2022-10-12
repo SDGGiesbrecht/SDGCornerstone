@@ -16,7 +16,7 @@ import OrderedCollections
 
 import SDGLogic
 
-extension OrderedCollections.OrderedSet: ComparableSet, BidirectionalPattern, FiniteSet,
+extension OrderedCollections.OrderedSet: ComparableSet, FiniteSet,
   SearchableBidirectionalCollection, SetDefinition
 {
 

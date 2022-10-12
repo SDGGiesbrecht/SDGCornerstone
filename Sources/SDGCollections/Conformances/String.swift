@@ -12,31 +12,31 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String: BidirectionalPattern, SearchableBidirectionalCollection {
+extension String: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension String.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
+extension String.UnicodeScalarView: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension String.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
+extension String.UTF8View: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension String.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
+extension String.UTF16View: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
+extension Substring: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
@@ -46,19 +46,19 @@ extension Substring: BidirectionalPattern, SearchableBidirectionalCollection {
     return _hasSuffix(pattern)
   }
 }
-extension Substring.UnicodeScalarView: BidirectionalPattern, SearchableBidirectionalCollection {
+extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension Substring.UTF8View: BidirectionalPattern, SearchableBidirectionalCollection {
+extension Substring.UTF8View: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
   }
 }
-extension Substring.UTF16View: BidirectionalPattern, SearchableBidirectionalCollection {
+extension Substring.UTF16View: SearchableBidirectionalCollection {
   // #workaround(Swift 5.6.1, This method is redundant and can be removed when the compiler can handle the default implementation.)
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
     return _lastMatch(for: pattern)
