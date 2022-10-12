@@ -18,13 +18,6 @@ extension ReversedCollection: Pattern, SearchableCollection where Base: Searchab
 
   public typealias Match = AtomicPatternMatch<ReversedCollection<Base>>
   public typealias SubSequencePattern = Slice<ReversedCollection<Base>>
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: Slice<ReversedCollection<Base>>
-  ) -> P.Match? where P: Pattern, Slice<ReversedCollection<Base>> == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 }
 extension ReversedCollection: BidirectionalPattern, SearchableBidirectionalCollection
 where Base: SearchableBidirectionalCollection {

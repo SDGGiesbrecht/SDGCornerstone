@@ -18,14 +18,6 @@ extension AnyCollection: Pattern, SearchableCollection where Element: Equatable 
 
   public typealias Match = AtomicPatternMatch<AnyCollection>
   public typealias SubSequencePattern = AnyCollection.SubSequence
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: SubSequence
-  ) -> P.Match?
-  where P: Pattern, SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 }
 
 extension AnyBidirectionalCollection: BidirectionalPattern, Pattern,
@@ -37,14 +29,6 @@ where Element: Equatable {
 
   public typealias Match = AtomicPatternMatch<AnyBidirectionalCollection>
   public typealias SubSequencePattern = AnyBidirectionalCollection.SubSequence
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: SubSequence
-  ) -> P.Match?
-  where P: Pattern, SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 
   // MARK: - BidirectionalPattern
 
@@ -70,14 +54,6 @@ where Element: Equatable {
 
   public typealias Match = AtomicPatternMatch<AnyRandomAccessCollection>
   public typealias SubSequencePattern = AnyRandomAccessCollection.SubSequence
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: SubSequence
-  ) -> P.Match?
-  where P: Pattern, SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
 
   // MARK: - BidirectionalPattern
 

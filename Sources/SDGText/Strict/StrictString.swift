@@ -312,16 +312,6 @@ public struct StrictString: Addable, BidirectionalCollection, BidirectionalPatte
     self = StrictString.concatenateStrictStrings(throughNew, succeeding)
   }
 
-  // MARK: - SearchableCollection
-
-  @inlinable public func temporaryWorkaroundFirstMatch<P>(
-    for pattern: P,
-    in subSequence: StrictString.SubSequence
-  ) -> P.Match?
-  where P: Pattern, StrictString.SubSequence == P.Match.Searched {
-    return subSequence.firstMatch(for: pattern)
-  }
-
   // MARK: - StringFamily
 
   @inlinable public var scalars: StrictString {

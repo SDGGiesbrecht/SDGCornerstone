@@ -20,19 +20,6 @@ import SDGMathematics
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
-  // #workaround(Swift 5.6.1, Needed to dodge Windows compiler bug; remove all conformances too.)
-  /// Returns the first match for the pattern in the sub‐sequence.
-  ///
-  /// The implementation of this method must be `return subSequence.firstMatch(for: pattern)`, which the Windows compiler is unable to do from a default implementation due to a compiler bug.
-  ///
-  /// - Warning: Never call this method directly. It will be removed from the protocol as soon as the compiler is repaired, and that will be versioned as a bug fix, not a breaking change.
-  ///
-  /// - Parameters:
-  ///     - pattern: The pattern to search for.
-  ///     - subSequence: The subSequence.
-  func temporaryWorkaroundFirstMatch<P>(for pattern: P, in subSequence: SubSequence) -> P.Match?
-  where P: Pattern, P.Searchable == SubSequence
-
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
   /// Returns the first match for `pattern` in the collection.
   ///
@@ -249,10 +236,7 @@ extension SearchableCollection {
     let subsequencePattern = pattern.forSubSequence()
     var accountedFor = startIndex
     var results: [P.Match] = []
-    while let match = temporaryWorkaroundFirstMatch(
-      for: subsequencePattern,
-      in: self[accountedFor...]
-    ) {
+    while let match = self[accountedFor...].firstMatch(for: subsequencePattern) {
       accountedFor = match.range.upperBound
       results.append(pattern.convertMatch(from: match, in: self))
     }
@@ -262,8 +246,7 @@ extension SearchableCollection {
   where P: Pattern, P.Searchable == Self {
     return _matches(for: pattern)
   }
-  @inlinable public func matches(for pattern: Self) -> [Match]
-  where SubSequence: SearchableCollection {
+  @inlinable public func matches(for pattern: Self) -> [Match] {
     return _matches(for: pattern)
   }
 
