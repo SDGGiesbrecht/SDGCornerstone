@@ -16,4 +16,4 @@ import Foundation
 
 import SDGLogic
 
-extension Data: BidirectionalPattern, SearchableBidirectionalCollection {}
+extension Data: SearchableBidirectionalCollection {}
