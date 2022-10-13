@@ -18,6 +18,7 @@ import SDGMathematics
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableBidirectionalCollection: BidirectionalCollection, BidirectionalPattern,
   SearchableCollection
+where SubSequence: SearchableBidirectionalCollection
 {
 
   // @documentation(SDGCornerstone.Collection.lastMatch(for:))
