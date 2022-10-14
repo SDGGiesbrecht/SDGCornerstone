@@ -1152,7 +1152,7 @@ class APITests: TestCase {
 
   struct CustomPattern<C>: BidirectionalPattern, SDGCollections.Pattern
   where
-    C: BidirectionalCollection,
+    C: SearchableBidirectionalCollection,
     C.Element == Int
   {
     let pattern = [1].literal(for: C.self)

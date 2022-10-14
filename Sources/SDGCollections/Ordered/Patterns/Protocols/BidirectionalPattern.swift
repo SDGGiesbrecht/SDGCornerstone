@@ -13,11 +13,8 @@
  */
 
 /// A pattern that can be searched for in reverse.
-///
-/// - Requires: `Searchable` must conform to `SearchableBidirectionalCollection` even though the compiler is currently incapable of enforcing it.
 public protocol BidirectionalPattern: Pattern
-where Searchable: BidirectionalCollection {
-  // #workaround(Swift 5.6.1, Should require Searchable: SearchableBidirectionalCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+where Searchable: SearchableBidirectionalCollection {
 
   /// The type of the reverse pattern.
   associatedtype Reversed: Pattern

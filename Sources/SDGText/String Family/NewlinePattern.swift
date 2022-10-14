@@ -97,7 +97,7 @@ where Searchable: Collection, Searchable.Element == Unicode.Scalar {
 }
 
 extension NewlinePattern: BidirectionalPattern
-where Searchable: BidirectionalCollection {
+where Searchable: SearchableBidirectionalCollection {
 
   // MARK: - BidirectionalPattern
 
