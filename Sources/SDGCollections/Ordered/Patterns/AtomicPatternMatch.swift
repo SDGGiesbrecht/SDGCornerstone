@@ -13,11 +13,8 @@
  */
 
 /// A simple pattern match that cannot be further decomposed and contains no extra information.
-///
-/// - Requires: `Searched` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public struct AtomicPatternMatch<Searched>: PatternMatch
-where Searched: Collection /* SearchableCollection */ {
-  // #workaround(Swift 5.6.1, Should require Searched: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+where Searched: SearchableCollection {
 
   // MARK: - Initialization
 

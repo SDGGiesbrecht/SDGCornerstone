@@ -15,15 +15,12 @@
 import SDGLogic
 
 /// A pattern for using one collection as a literal pattern to search another.
-///
-/// - Requires: `Searchable` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public struct LiteralPattern<Literal, Searchable>: Pattern
 where
   Literal: SearchableCollection,
-  Searchable: Collection /* SearchableCollection */,
+  Searchable: SearchableCollection,
   Literal.Element == Searchable.Element
 {
-  // #workaround(Swift 5.6.1, Should require Searchable: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
 
   // MARK: - Initialization
 
