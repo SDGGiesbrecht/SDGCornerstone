@@ -16,7 +16,7 @@ import SDGControlFlow
 
 /// A type‐erased pattern match.
 public struct AnyPatternMatch<Searched>: PatternMatch, TransparentWrapper
-where Searched: SearchableCollection  {
+where Searched: SearchableCollection {
 
   // MARK: - Initialization
 
