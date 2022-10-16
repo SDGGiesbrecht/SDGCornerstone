@@ -15,11 +15,8 @@
 import SDGControlFlow
 
 /// A type‐erased pattern match.
-///
-/// - Requires: `Searched` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public struct AnyPatternMatch<Searched>: PatternMatch, TransparentWrapper
-where Searched: Collection /* SearchableCollection */ {
-  // #workaround(Swift 5.6.1, Should require Searched: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+where Searched: SearchableCollection {
 
   // MARK: - Initialization
 

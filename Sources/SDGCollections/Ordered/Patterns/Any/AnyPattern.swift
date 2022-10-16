@@ -17,11 +17,8 @@ import SDGControlFlow
 /// A type‐erased pattern.
 ///
 /// - Note: The indirection used by `AnyPattern` can negatively affect performance. While use of `AnyPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
-///
-/// - Requires: `Searchable` must conform to `SearchableCollection` even though the compiler is currently incapable of enforcing it.
 public struct AnyPattern<Searchable>: Pattern, TransparentWrapper
-where Searchable: Collection /* SearchableCollection */ {
-  // #workaround(Swift 5.6.1, Should require Searchable: SearchableCollection, but for Windows compiler bug. Remove “requires” documentation too when fixed.)
+where Searchable: SearchableCollection {
 
   // MARK: - Initialization
 

@@ -40,7 +40,7 @@ class APITests: TestCase {
   }
 
   struct AddablePattern<C>: Addable, SDGCollections.Pattern
-  where C: Collection {
+  where C: SearchableCollection {
     static func += (precedingValue: inout AddablePattern, followingValue: AddablePattern) {}
     func matches(in collection: C, at location: C.Index) -> [AtomicPatternMatch<C>] {
       return []
