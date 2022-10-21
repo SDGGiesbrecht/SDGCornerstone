@@ -96,9 +96,7 @@ where
     from subSequenceMatch: AtomicPatternMatch<Searchable.SubSequence>,
     in collection: Searchable
   ) -> AtomicPatternMatch<Searchable> {
-    // #workaround(Swift 5.6.1, Should be commented line instead, but for compiler bug.)
-    return AtomicPatternMatch(range: subSequenceMatch.range, in: collection)
-    // return subSequenceMatch.in(collection)
+    return subSequenceMatch.in(collection)
   }
 }
 
