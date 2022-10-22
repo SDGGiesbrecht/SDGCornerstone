@@ -14,7 +14,7 @@
 
 import SDGMathematics
 
-// #workaround(Swift 5.6.1, Should be “Element: StringFamily” but for Windows compiler crash.)
+// #workaround(Swift 5.7, Should be “Element: StringFamily” but for Windows compiler crash.)
 
 extension Collection where Element == StrictString {
 
