@@ -146,33 +146,38 @@ import SDGLogic
     ) rethrows -> Result {
       var directory: URL
 
-      let volume = try? url(
-        for: .documentDirectory,
-        in: .userDomainMask,
-        appropriateFor: nil,
-        create: true
-      )
-      if let itemReplacement = try? url(
-        for: .itemReplacementDirectory,
-        in: .userDomainMask,
-        appropriateFor: volume,
-        create: true
-      ) {
-        directory = itemReplacement
-      } else {
-        // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
-        if let anyVolume = try? url(
-          for: .itemReplacementDirectory,
+      #if os(Android)
+        // #workaround(Swift 5.7, .itemReplacementDirectory leads to illegal instruction.)
+        directory = temporaryDirectory
+      #else
+        let volume = try? url(
+          for: .documentDirectory,
           in: .userDomainMask,
           appropriateFor: nil,
           create: true
+        )
+        if let itemReplacement = try? url(
+          for: .itemReplacementDirectory,
+          in: .userDomainMask,
+          appropriateFor: volume,
+          create: true
         ) {
-          directory = anyVolume
+          directory = itemReplacement
         } else {
-          // @exempt(from: tests)
-          directory = temporaryDirectory
+          // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
+          if let anyVolume = try? url(
+            for: .itemReplacementDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+          ) {
+            directory = anyVolume
+          } else {
+            // @exempt(from: tests)
+            directory = temporaryDirectory
+          }
         }
-      }
+      #endif
 
       directory.appendPathComponent(UUID().uuidString)
       defer { try? removeItem(at: directory) }
