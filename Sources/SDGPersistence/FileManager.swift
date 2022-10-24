@@ -146,10 +146,10 @@ import SDGLogic
     ) rethrows -> Result {
       var directory: URL
 
-      #if os(Android)
-        // #workaround(Swift 5.6.1, .itemReplacementDirectory leads to illegal instruction.)
+      //#if os(Android)
+        // #warning(Swift 5.6.1, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
-      #else
+      //#else
         let volume = try? url(
           for: .documentDirectory,
           in: .userDomainMask,
@@ -177,7 +177,7 @@ import SDGLogic
             directory = temporaryDirectory
           }
         }
-      #endif
+      //#endif
 
       directory.appendPathComponent(UUID().uuidString)
       defer { try? removeItem(at: directory) }
