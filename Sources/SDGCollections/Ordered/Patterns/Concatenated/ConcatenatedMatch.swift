@@ -40,7 +40,7 @@ where First: PatternMatch, Second: PatternMatch, First.Searched == Second.Search
   // MARK: - PatternMatch
 
   public typealias Searched = First.Searched
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _contents: First.Searched.SubSequence
   @inlinable public var contents: First.Searched.SubSequence {
     return _contents

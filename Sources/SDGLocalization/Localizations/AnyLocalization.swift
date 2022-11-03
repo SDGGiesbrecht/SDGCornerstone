@@ -39,7 +39,7 @@ public struct AnyLocalization: Localization, Sendable {
     self.init(code: code)
   }
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _code: String
   @inlinable public var code: String {
     return _code

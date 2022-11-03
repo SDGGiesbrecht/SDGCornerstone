@@ -198,7 +198,7 @@ extension Double: FloatFamily {
 
   // MARK: - RealArithmetic
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal static let _e: Double = 0x1.5BF0A8B145769p1
   @inlinable public static var e: Double {
     return _e
@@ -243,7 +243,7 @@ extension CGFloat: FloatFamily {
 
   // MARK: - RealArithmetic
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal static let _e: CGFloat = CGFloat(NativeType.e)
   @inlinable public static var e: CGFloat {
     return _e
@@ -331,7 +331,7 @@ extension CGFloat: FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+    // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
     @usableFromInline internal static let _e: Float80 = 0x1.5BF0A8B145769535p1
     @inlinable public static var e: Float80 {
       return _e
@@ -355,7 +355,7 @@ extension Float: FloatFamily {
 
   // MARK: - RealArithmetic
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal static let _e: Float = 0x1.5BF0Bp1
   @inlinable public static var e: Float {
     return _e
@@ -380,7 +380,7 @@ extension Float: FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+    // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
     @usableFromInline internal static let _e: Float16 = 0x1.5Cp1
     @inlinable public static var e: Float16 {
       return _e

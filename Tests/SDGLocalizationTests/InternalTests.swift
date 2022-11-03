@@ -109,7 +109,7 @@ class InternalTests: TestCase {
       // Default simulator state has no language set.
       expectOperatingSystemLanguage = false
     #endif
-    #if os(Android)  // #workaround(Swift 5.7, Not possible yet.)
+    #if os(Android)  // #workaround(Swift 5.7.1, Not possible yet.)
       expectOperatingSystemLanguage = false
     #endif
     #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS

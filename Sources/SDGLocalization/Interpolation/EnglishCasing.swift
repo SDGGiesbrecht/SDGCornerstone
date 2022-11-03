@@ -72,7 +72,7 @@ public enum EnglishCasing: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @inlinable public static var codingRepresentations: BijectiveMapping<EnglishCasing, String> {
     return _codingRepresentations
   }

@@ -113,13 +113,13 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
   public typealias Indices = DefaultIndices<LineView>
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _startIndex: LineViewIndex
   @inlinable public var startIndex: LineViewIndex {
     return _startIndex
   }
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _endIndex: LineViewIndex = LineViewIndex.endIndex()
   @inlinable public var endIndex: LineViewIndex {
     return _endIndex
