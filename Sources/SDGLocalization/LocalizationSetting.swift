@@ -75,7 +75,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   #if os(WASI)
     private static func queryWebLanguages() -> [String]? {
-      // #workaround(Swift 5.7, Should presumably be the following, but JavaScriptKit does not work.)
+      // #workaround(Swift 5.7.1, Should presumably be the following, but JavaScriptKit does not work.)
       return nil
       /*
       guard let window = JSObject.global.window.object,
@@ -136,7 +136,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(Android)
 
-      // #workaround(Swift 5.7, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? No access to Java VM yet.)
+      // #workaround(Swift 5.7.1, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? No access to Java VM yet.)
       preferences = Shared(Preference.mock())
       preferences.value.set(to: nil)
 
@@ -181,7 +181,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     #elseif os(Android)
 
-      // #workaround(Swift 5.7, Android: Locale.getDefault().getLanguage()? No access to Java VM yet.)
+      // #workaround(Swift 5.7.1, Android: Locale.getDefault().getLanguage()? No access to Java VM yet.)
       preferences = Shared(Preference.mock())
 
     #endif

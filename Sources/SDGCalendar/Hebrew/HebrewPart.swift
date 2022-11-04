@@ -71,7 +71,7 @@ public struct HebrewPart: CardinalCalendarComponent, CodableViaRawRepresentableC
     part = unsafeRawValue
   }
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal static let _validRange: Range<RawValue>? =
     0..<FloatMax(HebrewPart.partsPerHour)
   @inlinable public static var validRange: Range<RawValue>? {

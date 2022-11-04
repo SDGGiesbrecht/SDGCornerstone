@@ -147,7 +147,7 @@ import SDGLogic
       var directory: URL
 
       #if os(Android)
-        // #workaround(Swift 5.7, .itemReplacementDirectory leads to illegal instruction.)
+        // #workaround(Swift 5.7.1, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
       #else
         let volume = try? url(

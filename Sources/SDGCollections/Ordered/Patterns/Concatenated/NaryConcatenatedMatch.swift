@@ -36,7 +36,7 @@ where Component: PatternMatch {
   // MARK: - PatternMatch
 
   public typealias Searched = Component.Searched
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _contents: Component.Searched.SubSequence
   @inlinable public var contents: Component.Searched.SubSequence {
     return _contents

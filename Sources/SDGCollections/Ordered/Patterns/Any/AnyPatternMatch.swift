@@ -37,7 +37,7 @@ where Searched: SearchableCollection {
 
   // MARK: - PatternMatch
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _contents: Searched.SubSequence
   @inlinable public var contents: Searched.SubSequence {
     return _contents

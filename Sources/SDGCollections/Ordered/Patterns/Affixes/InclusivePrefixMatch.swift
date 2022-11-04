@@ -43,7 +43,7 @@ where Match: PatternMatch {
   // MARK: - PatternMatch
 
   public typealias Searched = Match.Searched
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _contents: Match.Searched.SubSequence
   @inlinable public var contents: Match.Searched.SubSequence {
     return _contents

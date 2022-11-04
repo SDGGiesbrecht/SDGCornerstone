@@ -97,7 +97,7 @@ where Searchable: SearchableCollection {
 
   // MARK: - TransparentWrapper
 
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _wrappedInstance: Any
   @inlinable public var wrappedInstance: Any {
     return _wrappedInstance

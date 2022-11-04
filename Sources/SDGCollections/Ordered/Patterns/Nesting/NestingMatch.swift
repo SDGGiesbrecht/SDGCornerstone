@@ -51,7 +51,7 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   // MARK: - PatternMatch
 
   public typealias Searched = Opening.Searched
-  // #workaround(workspace version 0.41.0, Indirection because “let” is not detected as protocol conformance during documentation.)
+  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
   @usableFromInline internal let _contents: Opening.Searched.SubSequence
   @inlinable public var contents: Opening.Searched.SubSequence {
     return _contents

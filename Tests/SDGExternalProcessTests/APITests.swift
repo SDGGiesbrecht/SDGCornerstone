@@ -39,7 +39,7 @@ class APITests: TestCase {
       )
     #endif
     #if !PLATFORM_LACKS_SWIFT_COMPILER
-      // #workaround(Swift 5.7, Shell misbehaves. See RegressionTests.testCMDWorks.)
+      // #workaround(Swift 5.7.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
       #if !os(Windows)
         let swift = ExternalProcess(
           searching: [
@@ -108,7 +108,7 @@ class APITests: TestCase {
       return output
     }
 
-    // #workaround(Swift 5.7, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.7.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       let directory: URL?
       #if os(Android)
