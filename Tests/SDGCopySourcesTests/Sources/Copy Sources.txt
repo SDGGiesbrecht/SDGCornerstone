@@ -1,0 +1,1 @@
+Tests/SDGCopySourcesTests/Copied.swift → Copied.swift
