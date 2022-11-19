@@ -615,9 +615,6 @@ let package = Package(
       // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "sdg_copy_sources",
       dependencies: [
-        "SDGLogic",
-        "SDGCollections",
-        "SDGText",
         "SDGPersistence",
       ]
     ),
