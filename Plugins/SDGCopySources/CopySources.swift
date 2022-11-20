@@ -35,8 +35,9 @@ import PackagePlugin
 
       var halves = line.components(separatedBy: " → ")[...]
       guard let relativeOrigin = halves.popFirst(),
-        let relativeDestination = halves.popFirst() else {
-          fatalError("Unable to parse manifest entry; missing “ → ”: “\(line)”")
+        let relativeDestination = halves.popFirst()
+      else {
+        fatalError("Unable to parse manifest entry; missing “ → ”: “\(line)”")
       }
       guard halves.isEmpty else {
         fatalError("Unable to parse manifest entry; extraneous “ → ”: “\(line)”")

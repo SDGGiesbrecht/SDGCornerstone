@@ -615,7 +615,7 @@ let package = Package(
       // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "sdg_copy_sources",
       dependencies: [
-        "SDGPersistence",
+        "SDGPersistence"
       ]
     ),
 
@@ -891,4 +891,12 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
   ])
+}
+
+import Foundation
+// #workaround(Swift 5.7.1, Some platforms cannot use plugins yet.)
+if ["WINDOWS", "WEB", "ANDROID"]
+  .contains(where: { ProcessInfo.processInfo.environment["TARGETING_\($0)"] == "true" })
+{
+  package.targets.removeAll(where: { $0.name == "SDGCopySourcesTests" })
 }
