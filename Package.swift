@@ -272,6 +272,18 @@ let package = Package(
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
+
+    /// A plug‐in that copies sources from outside the target directory into the generated sources directory.
+    ///
+    /// The desired source files must be listed in a manifest named “Copy Sources.txt” located at the target root.
+    ///
+    /// ```txt
+    /// Some/File/Somewhere.swift → Somewhere.swift
+    /// Some/Other/File/Somewhere/Else.swift → Somewhere/Else.swift
+    /// ```
+    ///
+    /// Each line represents a different file to be copied. The first path is that of the file’s origin relative to the package root. The second path is the path of the file’s destination relative to the generated sources directory.
+    .plugin(name: "SDGCopySources", targets: ["SDGCopySources"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
@@ -583,6 +595,10 @@ let package = Package(
       ]
     ),
 
+    // Public plug‐ins.
+
+    .plugin(name: "SDGCopySources", capability: .buildTool(), dependencies: ["sdg_copy_sources"]),
+
     // Internal modules.
 
     .target(
@@ -590,6 +606,16 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLocalization",
+      ]
+    ),
+
+    // Internal plug‐in executables.
+
+    .executableTarget(
+      // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
+      name: "sdg_copy_sources",
+      dependencies: [
+        "SDGPersistence"
       ]
     ),
 
@@ -780,6 +806,12 @@ let package = Package(
       ]
     ),
     .testTarget(
+      name: "SDGCopySourcesTests",
+      path: "Tests/SDGCopySourcesTests/Sources",
+      exclude: ["Copy Sources.txt"],
+      plugins: ["SDGCopySources"]
+    ),
+    .testTarget(
       name: "SDGCornerstoneDocumentationExampleTests",
       dependencies: [
         "SDGControlFlow",
@@ -803,6 +835,9 @@ let package = Package(
 )
 
 for target in package.targets {
+  if target.type == .plugin {
+    continue
+  }
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
@@ -856,4 +891,12 @@ for target in package.targets {
       .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
     ),
   ])
+}
+
+import Foundation
+// #workaround(Swift 5.7.1, Some platforms cannot use plugins yet.)
+if ["WINDOWS", "WEB", "ANDROID"]
+  .contains(where: { ProcessInfo.processInfo.environment["TARGETING_\($0)"] == "true" })
+{
+  package.targets.removeAll(where: { $0.name == "SDGCopySourcesTests" })
 }
