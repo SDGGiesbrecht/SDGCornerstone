@@ -1,5 +1,5 @@
 /*
- CopySources.swift
+ CopySource.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -16,7 +16,7 @@ import Foundation
 
 import SDGPersistence
 
-@main struct CopySources {
+@main struct CopySource {
   static func main() throws {
     var arguments = ProcessInfo.processInfo.arguments.dropFirst()
     guard let originPath = arguments.popFirst() else {
