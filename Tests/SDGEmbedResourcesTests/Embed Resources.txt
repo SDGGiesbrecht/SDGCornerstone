@@ -1,2 +1,2 @@
-Text File.txt → textFile: String
+Text.txt → textFile: String
 Data → rawData: Data

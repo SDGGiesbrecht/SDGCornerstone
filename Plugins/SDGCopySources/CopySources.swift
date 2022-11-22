@@ -48,7 +48,7 @@ import PackagePlugin
 
       commands.append(
         .buildCommand(
-          displayName: "Copy Sources",
+          displayName: "Copy Source (\(destination.lastComponent))",
           executable: executable,
           arguments: [origin, destination],
           inputFiles: [manifestPath, origin],

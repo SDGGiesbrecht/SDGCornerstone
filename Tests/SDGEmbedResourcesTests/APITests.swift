@@ -20,7 +20,7 @@ final class APITests: XCTestCase {
     let data: Data = Resources.rawData
     let text: String = Resources.textFile
     // @endExample
-    XCTAssertEqual(text.lines.dropLast(), "Hello, world!")
+    XCTAssertEqual(text.dropLast(), "Hello, world!")
     XCTAssertEqual(data.count, text.utf8.count)
   }
 }

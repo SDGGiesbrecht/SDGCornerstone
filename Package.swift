@@ -626,7 +626,11 @@ let package = Package(
     // Public plug‐ins.
 
     .plugin(name: "SDGCopySources", capability: .buildTool(), dependencies: ["sdg_copy_source"]),
-    .plugin(name: "SDGEmbedResources", capability: .buildTool(), dependencies: ["sdg_embed_resource"]),
+    .plugin(
+      name: "SDGEmbedResources",
+      capability: .buildTool(),
+      dependencies: ["sdg_embed_resource"]
+    ),
 
     // Internal modules.
 
@@ -649,7 +653,10 @@ let package = Package(
     ),
     .executableTarget(
       // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
-      name: "sdg_embed_resource"
+      name: "sdg_embed_resource",
+      dependencies: [
+        "SDGPersistence"
+      ]
     ),
 
     // Internal utilities.
