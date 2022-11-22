@@ -37,7 +37,7 @@ import PackagePlugin
         displayName: "Generate Resources Namespace",
         executable: executable,
         arguments: [namespace],
-        inputFiles: [],
+        inputFiles: [manifestPath],
         outputFiles: [namespace]
       )
     )
