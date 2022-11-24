@@ -121,6 +121,7 @@ import SDGPersistence
       "extension Resources {",
       // #workaround(Swift 5.7, Some platforms do not support bundled resources yet.)
       "  #if os(WASI)",
+      "    \(sectionVariables.joined(separator: "\n    "))",
       "    internal static var \(identifier): \(type) {",
       "      let data = Data(([\(variableList)] as [[UInt8]]).lazy.joined())",
       "      return \(initializer)",

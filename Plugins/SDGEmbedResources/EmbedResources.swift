@@ -18,8 +18,10 @@ import PackagePlugin
 @main struct EmbedResources: BuildToolPlugin {
 
   func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
+    let package = context.package.displayName
     let executable = try context.tool(named: "sdg_embed_resource").path
     let plugInWork = context.pluginWorkDirectory
+    let targetName = target.name
     let targetRoot = target.directory
 
     let manifestPath = targetRoot.appending("Embed Resources.txt")
@@ -36,7 +38,7 @@ import PackagePlugin
       .buildCommand(
         displayName: "Generate Resources Namespace",
         executable: executable,
-        arguments: [namespace],
+        arguments: [namespace, package, targetName],
         inputFiles: [manifestPath],
         outputFiles: [namespace]
       )

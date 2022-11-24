@@ -856,6 +856,10 @@ let package = Package(
     .testTarget(
       name: "SDGEmbedResourcesTests",
       exclude: ["Embed Resources.txt"],
+      resources: [
+        .copy("Data"),
+        .copy("Text.txt"),
+      ],
       plugins: ["SDGEmbedResources"]
     ),
     .testTarget(
