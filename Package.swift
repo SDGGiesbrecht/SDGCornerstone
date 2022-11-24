@@ -655,7 +655,9 @@ let package = Package(
       // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "sdg_embed_resource",
       dependencies: [
-        "SDGPersistence"
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGPersistence",
       ]
     ),
 
