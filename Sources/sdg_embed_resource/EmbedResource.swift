@@ -101,8 +101,8 @@ import SDGPersistence
       sections.append(prefix)
       unprocessed.removeFirst(prefix.count)
     }
-    var sectionVariables: [String] = sections.enumerated().lazy.map({ index, section in
-      var byteArray = section.lazy
+    let sectionVariables: [String] = sections.enumerated().lazy.map({ index, section in
+      let byteArray = section.lazy
         .map({ byte in
           return "0x\(String(byte, radix: 16, uppercase: true))"
         })
