@@ -53,4 +53,9 @@ configuration.documentation.api.ignoredDependencies = [
 ]
 
 // #workaround(workspace version 0.41.0, Workspace cannot be turned off.)
-configuration.git.additionalGitIgnoreEntries.append("Tests/SDGEmbedResourcesTests/Resources.swift")
+configuration.git.additionalGitIgnoreEntries.append(
+  contentsOf: [
+    "Tests/SDGEmbedResourcesTests/Resources",
+    "Tests/SDGEmbedResourcesTests/Resources.swift",
+  ]
+)
