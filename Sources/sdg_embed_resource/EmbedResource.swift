@@ -133,7 +133,7 @@ import SDGPersistence
       "      return \(initializer)",
       "    }",
       "  #endif",
-      "}"
+      "}",
     ].joined(separator: "\n")
     try? FileManager.default.removeItem(at: outputSource)
     try source.save(to: outputSource)
