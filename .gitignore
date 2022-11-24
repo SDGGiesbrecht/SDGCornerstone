@@ -23,3 +23,4 @@ Validate\ (macOS).command
 IDEWorkspaceChecks.plist
 xcuserdata
 *.profraw
+Tests/SDGEmbedResourcesTests/Resources.swift

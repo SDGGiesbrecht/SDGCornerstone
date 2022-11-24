@@ -855,7 +855,11 @@ let package = Package(
     ),
     .testTarget(
       name: "SDGEmbedResourcesTests",
-      exclude: ["Embed Resources.txt"],
+      exclude: [
+        "Embed Resources.txt",
+        // #workaround(workspace version 0.41.0, Clashes with Workspace, which cannot be turned off.)
+        "Resources.swift",
+      ],
       resources: [
         .copy("Data"),
         .copy("Text.txt"),

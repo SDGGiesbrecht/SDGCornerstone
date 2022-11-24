@@ -51,3 +51,6 @@ configuration.documentation.api.ignoredDependencies = [
   "_NumericsShims",
   "RealModule",
 ]
+
+// #workaround(workspace version 0.41.0, Workspace cannot be turned off.)
+configuration.git.additionalGitIgnoreEntries.append("Tests/SDGEmbedResourcesTests/Resources.swift")
