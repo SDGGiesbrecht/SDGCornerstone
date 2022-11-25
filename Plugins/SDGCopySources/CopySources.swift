@@ -19,7 +19,7 @@ import PackagePlugin
 
   func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
     let package = context.package.directory
-    let executable = try context.tool(named: "sdg_copy_sources").path
+    let executable = try context.tool(named: "sdg_copy_source").path
     let plugInWork = context.pluginWorkDirectory
 
     let manifestPath = target.directory.appending("Copy Sources.txt")
@@ -48,7 +48,7 @@ import PackagePlugin
 
       commands.append(
         .buildCommand(
-          displayName: "Copy Sources",
+          displayName: "Copy Source (\(destination.lastComponent))",
           executable: executable,
           arguments: [origin, destination],
           inputFiles: [manifestPath, origin],

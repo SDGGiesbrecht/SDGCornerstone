@@ -284,6 +284,34 @@ let package = Package(
     ///
     /// Each line represents a different file to be copied. The first path is that of the file’s origin relative to the package root. The second path is the path of the file’s destination relative to the generated sources directory.
     .plugin(name: "SDGCopySources", targets: ["SDGCopySources"]),
+
+    // #example(2, useOfEmbeddedResources)
+    /// A plug‐in that generates resource accessors for all platforms.
+    ///
+    /// For platforms which support bundled resources, the accessors merely load the resources already bundled the standard way by SwiftPM. For platforms that do not support bundled resources, the accessors instead return data embedded in the binary using source literals.
+    ///
+    /// The desired resource files must be listed in a manifest named “Embed Resources.txt” located at the target root, and must also be registered as resources in the package manifest.
+    ///
+    /// ```text
+    /// Raw/Data → rawData: Data
+    /// Text/File.txt → textFile: String
+    /// ```
+    ///
+    /// Each line represents a different resource file to be embedded, and consists of three components:
+    ///
+    /// 1. The path of the resource’s origin relative to the target root.
+    /// 2. A Swift identifier to use for the variable’s name.
+    /// 3. The Swift type of the resource. The supported types are:
+    ///   - `Data`, containing the raw bytes of the resource
+    ///   - `String`, interpreting the file as UTF‐8
+    ///
+    /// The resources are then accessible from source files in the same target like this:
+    ///
+    /// ```swift
+    /// let data: Data = Resources.rawData
+    /// let text: String = Resources.textFile
+    /// ```
+    .plugin(name: "SDGEmbedResources", targets: ["SDGEmbedResources"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", from: Version(1, 0, 0)),
@@ -597,7 +625,12 @@ let package = Package(
 
     // Public plug‐ins.
 
-    .plugin(name: "SDGCopySources", capability: .buildTool(), dependencies: ["sdg_copy_sources"]),
+    .plugin(name: "SDGCopySources", capability: .buildTool(), dependencies: ["sdg_copy_source"]),
+    .plugin(
+      name: "SDGEmbedResources",
+      capability: .buildTool(),
+      dependencies: ["sdg_embed_resource"]
+    ),
 
     // Internal modules.
 
@@ -613,9 +646,18 @@ let package = Package(
 
     .executableTarget(
       // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
-      name: "sdg_copy_sources",
+      name: "sdg_copy_source",
       dependencies: [
         "SDGPersistence"
+      ]
+    ),
+    .executableTarget(
+      // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
+      name: "sdg_embed_resource",
+      dependencies: [
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGPersistence",
       ]
     ),
 
@@ -812,6 +854,19 @@ let package = Package(
       plugins: ["SDGCopySources"]
     ),
     .testTarget(
+      name: "SDGEmbedResourcesTests",
+      exclude: [
+        "Embed Resources.txt",
+        // #workaround(workspace version 0.41.0, Clashes with Workspace, which cannot be turned off.)
+        "Resources.swift",
+      ],
+      resources: [
+        .copy("Data"),
+        .copy("Text.txt"),
+      ],
+      plugins: ["SDGEmbedResources"]
+    ),
+    .testTarget(
       name: "SDGCornerstoneDocumentationExampleTests",
       dependencies: [
         "SDGControlFlow",
@@ -898,5 +953,6 @@ import Foundation
 if ["WINDOWS", "WEB", "ANDROID"]
   .contains(where: { ProcessInfo.processInfo.environment["TARGETING_\($0)"] == "true" })
 {
-  package.targets.removeAll(where: { $0.name == "SDGCopySourcesTests" })
+  let impossible: Set<String> = ["SDGCopySourcesTests", "SDGEmbedResourcesTests"]
+  package.targets.removeAll(where: { impossible.contains($0.name) })
 }
