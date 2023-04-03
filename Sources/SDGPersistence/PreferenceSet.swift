@@ -23,7 +23,7 @@ public final class PreferenceSet {
 
   // MARK: - Static Properties
 
-  public static let _sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
+  public static let _sdgCornerstoneDomain: String = "ca.solideogloria.SDGCornerstone"
 
   // MARK: - Initialization
 
