@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2022 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2023 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -36,21 +36,6 @@ configuration.continuousIntegration.skipSimulatorOutsideContinuousIntegration = 
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
-
-configuration.documentation.api.ignoredDependencies = [
-
-  // Swift
-  "Dispatch",
-  "Foundation",
-  "XCTest",
-
-  // swift‐collections
-  "OrderedCollections",
-
-  // swift‐numerics
-  "_NumericsShims",
-  "RealModule",
-]
 
 // #workaround(workspace version 0.41.0, Workspace cannot be turned off.)
 configuration.git.additionalGitIgnoreEntries.append(
