@@ -16,4 +16,14 @@ import Foundation
 
 import SDGLogic
 
-extension Data: SearchableBidirectionalCollection {}
+extension Data: BidirectionalPattern, Pattern, SearchableBidirectionalCollection, SearchableCollection {
+
+  // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ReversedCollection<Data>
+
+  // MARK: - Pattern
+
+  public typealias Match = AtomicPatternMatch<Data>
+  public typealias SubSequencePattern = Data.SubSequence
+}
