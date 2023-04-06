@@ -13,11 +13,11 @@
  */
 
 #warning("Disabled.")
-/*extension String: SearchableBidirectionalCollection {}
-extension String.UnicodeScalarView: SearchableBidirectionalCollection {}
-extension String.UTF8View: SearchableBidirectionalCollection {}
-extension String.UTF16View: SearchableBidirectionalCollection {}
-extension Substring: SearchableBidirectionalCollection {}
-extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {}
-extension Substring.UTF8View: SearchableBidirectionalCollection {}
-extension Substring.UTF16View: SearchableBidirectionalCollection {}*/
+extension String: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension String.UnicodeScalarView: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension String.UTF8View: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension String.UTF16View: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension Substring: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension Substring.UnicodeScalarView: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension Substring.UTF8View: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
+extension Substring.UTF16View: /*SearchableBidirectionalCollection,*/ SearchableCollection {}
