@@ -16,7 +16,7 @@ on: [push, pull_request]
 
 jobs:
   Swift_5_8_Ubuntu:
-    name: Swift 5.8 Ubuntu
+    name: Swift 5.8 (Ubuntu)
     runs-on: ubuntu-20.04
     container: swift:5.8.0-focal
     steps:
