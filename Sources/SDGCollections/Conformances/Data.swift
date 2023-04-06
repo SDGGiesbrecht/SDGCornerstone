@@ -16,7 +16,10 @@ import Foundation
 
 import SDGLogic
 
-extension Data: BidirectionalPattern, Pattern, SearchableBidirectionalCollection, SearchableCollection {
+#warning("Disabled.")
+/*extension Data: BidirectionalPattern, Pattern, SearchableBidirectionalCollection,
+  SearchableCollection
+{
 
   // MARK: - BidirectionalPattern
 
@@ -25,5 +28,5 @@ extension Data: BidirectionalPattern, Pattern, SearchableBidirectionalCollection
   // MARK: - Pattern
 
   public typealias Match = AtomicPatternMatch<Data>
-  public typealias SubSequencePattern = Data.SubSequence
-}
+  public typealias SubSequencePattern = Data
+}*/
