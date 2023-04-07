@@ -93,9 +93,13 @@ where First: Pattern, Second: Pattern, First.Searchable == Second.Searchable {
 }
 
 extension ConcatenatedPatterns: BidirectionalPattern
-where First: BidirectionalPattern, Second: BidirectionalPattern {
+where First: BidirectionalPattern, Second: BidirectionalPattern,
+  Second.Reversed.Match.Searched == First.Reversed.Match.Searched {
+  #warning("Redundant ↑")
 
   // MARK: - BidirectionalPattern
+
+  public typealias Reversed = ConcatenatedPatterns<Second.Reversed, First.Reversed>
 
   @inlinable public func reversed() -> ConcatenatedPatterns<Second.Reversed, First.Reversed> {
     return ConcatenatedPatterns<Second.Reversed, First.Reversed>(

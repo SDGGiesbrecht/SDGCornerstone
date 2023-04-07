@@ -65,13 +65,12 @@ class RegressionTests: TestCase {
     // Untracked
 
     let glitch = StrictString("x{a^a}")
-    #warning("Disabled.")
-    /*XCTAssertEqual(
+    XCTAssertEqual(
       glitch.lastMatch(for: "{".scalars.literal())?.range,
       glitch.index(
         after: glitch.startIndex
       )..<glitch.index(after: glitch.index(after: glitch.startIndex))
-    )*/
+    )
   }
 
   func testSemanticMarkupToAttributedStringPreservesFont() {

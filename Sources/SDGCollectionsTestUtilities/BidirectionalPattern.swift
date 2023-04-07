@@ -32,7 +32,9 @@ public func testBidirectionalPattern<P>(
   testPattern(pattern, match: match)
 
   let reversedMatch: ReversedCollection<P.Searchable> = match.reversed()
-  let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex)
+  #warning("Not implemented yet.")
+  fatalError()
+  /*let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex)
   test(
     result3?.range == reversedMatch.bounds,
     {  // @exempt(from: tests)
@@ -53,5 +55,5 @@ public func testBidirectionalPattern<P>(
       file: file,
       line: line
     )
-  }
+  }*/
 }

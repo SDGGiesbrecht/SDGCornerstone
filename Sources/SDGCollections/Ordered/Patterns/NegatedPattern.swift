@@ -90,10 +90,12 @@ where Base: BidirectionalPattern {
     in forwardCollection: Searchable
   ) -> AtomicPatternMatch<Base.Searchable> {
     let range = reversedMatch.range
-    return AtomicPatternMatch(
+    #warning("Not implemented yet.")
+    fatalError()
+    /*return AtomicPatternMatch(
       range: range.upperBound.base..<range.lowerBound.base,
       in: forwardCollection
-    )
+    )*/
   }
 }
 

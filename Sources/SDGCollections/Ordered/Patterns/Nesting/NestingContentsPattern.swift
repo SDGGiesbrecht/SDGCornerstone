@@ -102,9 +102,13 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 }
 
 extension _NestingContentsPattern: BidirectionalPattern
-where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
+where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
+  Closing.Reversed.Match.Searched == Opening.Reversed.Match.Searched {
+  #warning("Redundant ↑")
 
   // MARK: - BidirectionalPattern
+  
+  public typealias Reversed = _NestingContentsPattern<Closing.Reversed, Opening.Reversed>
 
   @inlinable public func reversed() -> _NestingContentsPattern<Closing.Reversed, Opening.Reversed> {
     return _NestingContentsPattern<Closing.Reversed, Opening.Reversed>(
@@ -119,12 +123,14 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern {
     in forwardCollection: Searchable
   ) -> NestingMatchContents<Opening.Match, Closing.Match> {
     let reversedRange = reversedMatch.range
-    return NestingMatchContents<Opening.Match, Closing.Match>(
+    #warning("Not implemented yet.")
+    fatalError()
+    /*return NestingMatchContents<Opening.Match, Closing.Match>(
       segments: reversedMatch.segments.lazy.reversed().map({ segment in
         return segmentPattern.forward(match: segment, in: forwardCollection)
       }),
       contents: forwardCollection[reversedRange.upperBound.base..<reversedRange.lowerBound.base]
-    )
+    )*/
   }
 }
 

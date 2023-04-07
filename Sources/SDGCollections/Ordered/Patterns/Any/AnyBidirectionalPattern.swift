@@ -29,7 +29,9 @@ where Searchable: SearchableBidirectionalCollection {
   @inlinable public init<PatternType>(_ pattern: PatternType)
   where PatternType: BidirectionalPattern, PatternType.Searchable == Searchable {
     forwardPattern = AnyPattern(pattern)
-    reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
+    #warning("Not implemented yet.")
+    fatalError()
+    /*reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
     forwardClosure = { reversedMatch, forwardCollection in
       guard let underlying = reversedMatch.underlyingMatch as? PatternType.Reversed.Match else {
         _preconditionFailure({ localization in
@@ -43,7 +45,7 @@ where Searchable: SearchableBidirectionalCollection {
       return AnyPatternMatch<Searchable>(
         pattern.forward(match: underlying, in: forwardCollection)
       )
-    }
+    }*/
   }
 
   // MARK: - Properties

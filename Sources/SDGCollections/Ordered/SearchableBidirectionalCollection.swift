@@ -130,10 +130,12 @@ extension SearchableBidirectionalCollection {
   where P: BidirectionalPattern, P.Searchable == Self {
     let reversedCollection: ReversedCollection<Self> = reversed()
     let reversedPattern: P.Reversed = pattern.reversed()
-    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
+    #warning("Not implemented yet.")
+    fatalError()
+    /*guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
       return nil
     }
-    return pattern.forward(match: match, in: self)
+    return pattern.forward(match: match, in: self)*/
   }
   @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
   where P: BidirectionalPattern, P.Searchable == Self {
@@ -147,10 +149,12 @@ extension SearchableBidirectionalCollection {
   where P: BidirectionalPattern, P.Searchable == Self {
     let reversedCollection: ReversedCollection<Self> = reversed()
     let reversedPattern: P.Reversed = pattern.reversed()
-    return reversedPattern.primaryMatch(
+    #warning("Not implemented yet.")
+    fatalError()
+    /*return reversedPattern.primaryMatch(
       in: reversedCollection,
       at: reversedCollection.startIndex
-    ) ≠ nil
+    ) ≠ nil*/
   }
   @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool
   where P: BidirectionalPattern, P.Searchable == Self {

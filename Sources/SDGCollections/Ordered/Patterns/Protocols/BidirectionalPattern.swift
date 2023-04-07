@@ -18,7 +18,8 @@ where Searchable: SearchableBidirectionalCollection {
 
   /// The type of the reverse pattern.
   associatedtype Reversed: Pattern
-  where Reversed.Searchable == ReversedCollection<Searchable>
+  //where Reversed.Searchable == ReversedCollection<Searchable>
+  #warning("↑ This is the problem.")
 
   /// Returns a pattern that checks for the reverse pattern.
   ///
@@ -46,6 +47,8 @@ extension BidirectionalPattern {
   @inlinable public func forward(
     _ reversedRange: Range<Reversed.Searchable.Index>
   ) -> Range<Searchable.Index> {
-    return reversedRange.upperBound.base..<reversedRange.lowerBound.base
+    #warning("Not implemented yet.")
+    fatalError()
+    //return reversedRange.upperBound.base..<reversedRange.lowerBound.base
   }
 }

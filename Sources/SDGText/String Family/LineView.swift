@@ -44,7 +44,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
     guard
       var previousNewline = base.scalars[..<scalar]
-        ._workaroundLastMatch(for: subSequenceNewlinePattern)
+        .lastMatch(for: subSequenceNewlinePattern)
     else {
       return startIndex
     }
@@ -61,7 +61,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
       guard
         let actualPreviousNewline = base.scalars[..<newline.lowerBound]
-          ._workaroundLastMatch(for: subSequenceNewlinePattern)
+          .lastMatch(for: subSequenceNewlinePattern)
       else {
         return startIndex
       }
@@ -86,7 +86,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
       let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
       guard
         let found = base.scalars[..<searchEnd]
-          ._workaroundLastMatch(for: subSequenceNewlinePattern)?.range
+          .lastMatch(for: subSequenceNewlinePattern)?.range
       else {
         _preconditionFailure({ (localization: _APILocalization) -> String in
           switch localization {
@@ -101,7 +101,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     let subSequenceNewlinePattern = Newline.pattern(for: Base.ScalarView.SubSequence.self)
     guard
       let previousNewline = base.scalars[..<newline.lowerBound]
-        ._workaroundLastMatch(for: subSequenceNewlinePattern)?.range
+        .lastMatch(for: subSequenceNewlinePattern)?.range
     else {
       startIndex.cache.contents = newline
       return startIndex

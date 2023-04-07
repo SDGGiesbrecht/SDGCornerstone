@@ -94,13 +94,10 @@ where Searchable: SearchableCollection, Searchable.Element == Unicode.Scalar {
   }
 }
 
-#warning("Disabled.")
-extension NewlinePattern/*: BidirectionalPattern*/
-where Searchable: BidirectionalCollection/*SearchableBidirectionalCollection*/ {
+extension NewlinePattern: BidirectionalPattern
+where Searchable: SearchableBidirectionalCollection {
 
   // MARK: - BidirectionalPattern
-
-  public typealias Reversed = NewlinePattern<ReversedCollection<Searchable>>
 
   @inlinable public func reversed() -> NewlinePattern<ReversedCollection<Searchable>> {
     return NewlinePattern<ReversedCollection<Searchable>>(

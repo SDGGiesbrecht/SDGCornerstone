@@ -141,13 +141,15 @@ where Component: BidirectionalPattern {
     in forwardCollection: Searchable
   ) -> NaryConcatenatedMatch<Component.Match> {
     let forwardRange = reversedMatch.range
-    return NaryConcatenatedMatch(
+    #warning("Not implemented yet.")
+    fatalError()
+    /*return NaryConcatenatedMatch(
       components: zip(components, reversedMatch.components.reversed())
         .map { pattern, match in
           return pattern.forward(match: match, in: forwardCollection)
         },
       contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
-    )
+    )*/
   }
 }
 

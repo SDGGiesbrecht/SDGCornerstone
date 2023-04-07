@@ -16,17 +16,4 @@ import Foundation
 
 import SDGLogic
 
-#warning("Disabled.")
-extension Data: /*BidirectionalPattern,*/ Pattern, /*SearchableBidirectionalCollection,*/
-  SearchableCollection
-{
-
-  // MARK: - BidirectionalPattern
-
-  public typealias Reversed = ReversedCollection<Data>
-
-  // MARK: - Pattern
-
-  public typealias Match = AtomicPatternMatch<Data>
-  public typealias SubSequencePattern = Data
-}
+extension Data: SearchableBidirectionalCollection {}

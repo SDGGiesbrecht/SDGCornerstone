@@ -226,13 +226,15 @@ extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPatte
     in forwardCollection: Searchable
   ) -> RepetitionMatch<Base.Match> {
     let forwardRange = reversedMatch.range
-    return RepetitionMatch(
+    #warning("Not implemented yet.")
+    fatalError()
+    /*return RepetitionMatch(
       components: reversedMatch.components.reversed()
         .map { match in
           return pattern.forward(match: match, in: forwardCollection)
         },
       contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
-    )
+    )*/
   }
 }
 

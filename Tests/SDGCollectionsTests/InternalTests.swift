@@ -23,8 +23,7 @@ final class InternalTests: XCTestCase {
     let pattern = NestingPattern(opening: "(", closing: ")").contents
     XCTAssertNotNil(pattern.primaryMatch(in: string, at: string.dropFirst(3).startIndex))
     XCTAssertEqual(string.matches(for: pattern).count, 1)
-    #warning("Disabled.")
-    //XCTAssertNotNil(string.lastMatch(for: pattern))
+    XCTAssertNotNil(string.lastMatch(for: pattern))
   }
 
   func testNestingSegmentPattern() {
@@ -35,8 +34,7 @@ final class InternalTests: XCTestCase {
       string.dropFirst(4).prefix(3)
     )
     XCTAssertEqual(string.matches(for: pattern).count, 3)
-    #warning("Disabled.")
-    //XCTAssertNotNil(string.lastMatch(for: pattern))
+    XCTAssertNotNil(string.lastMatch(for: pattern))
     XCTAssertEqual(pattern.matches(in: string, at: string.dropFirst(4).startIndex).count, 1)
     XCTAssertEqual(pattern.matches(in: string, at: string.dropLast(4).endIndex).count, 0)
   }
