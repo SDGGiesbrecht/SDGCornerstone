@@ -126,7 +126,9 @@ where Component: Pattern {
 }
 
 extension NaryConcatenatedPatterns: BidirectionalPattern
-where Component: BidirectionalPattern {
+where Component: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  Component.Reversed.Match.Searched == ReversedCollection<Component.Searchable> {
 
   // MARK: - BidirectionalPattern
 
@@ -141,15 +143,13 @@ where Component: BidirectionalPattern {
     in forwardCollection: Searchable
   ) -> NaryConcatenatedMatch<Component.Match> {
     let forwardRange = reversedMatch.range
-    #warning("Not implemented yet.")
-    fatalError()
-    /*return NaryConcatenatedMatch(
+    return NaryConcatenatedMatch(
       components: zip(components, reversedMatch.components.reversed())
         .map { pattern, match in
           return pattern.forward(match: match, in: forwardCollection)
         },
       contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
-    )*/
+    )
   }
 }
 
