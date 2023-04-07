@@ -28,8 +28,8 @@ where Searchable: SearchableBidirectionalCollection {
     // @documentation(BidirectionalPattern.Reversed)
     /// The type of the reverse pattern.
     associatedtype Reversed: Pattern
-    // #workaround(Swift 5.8, This constraint trips the compiler; also remove the “requires” documentation callout from “BidirectionalPattern” once fixed.)
-    //where Reversed.Searchable == ReversedCollection<Searchable>
+  // #workaround(Swift 5.8, This constraint trips the compiler; also remove the “requires” documentation callout from “BidirectionalPattern” once fixed.)
+  //where Reversed.Searchable == ReversedCollection<Searchable>
   #endif
 
   /// Returns a pattern that checks for the reverse pattern.
@@ -50,8 +50,8 @@ where Searchable: SearchableBidirectionalCollection {
 }
 
 extension BidirectionalPattern
-  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-  where Reversed.Searchable == ReversedCollection<Searchable> {
+// #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+where Reversed.Searchable == ReversedCollection<Searchable> {
 
   /// Converts a reversed range into a range in the forward collection.
   ///

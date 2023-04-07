@@ -103,10 +103,13 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 }
 
 extension _NestingSegmentPattern: BidirectionalPattern
-where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
+where
+  Opening: BidirectionalPattern,
+  Closing: BidirectionalPattern,
   // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
   Opening.Reversed.Match.Searched == ReversedCollection<Opening.Searchable>,
-  Closing.Reversed.Match.Searched == ReversedCollection<Closing.Searchable> {
+  Closing.Reversed.Match.Searched == ReversedCollection<Closing.Searchable>
+{
 
   // MARK: - BidirectionalPattern
 

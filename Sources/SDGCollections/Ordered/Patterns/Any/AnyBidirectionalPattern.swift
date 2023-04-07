@@ -27,9 +27,12 @@ where Searchable: SearchableBidirectionalCollection {
   /// - Parameters:
   ///     - pattern: The pattern.
   @inlinable public init<PatternType>(_ pattern: PatternType)
-  where PatternType: BidirectionalPattern, PatternType.Searchable == Searchable,
-  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-  PatternType.Reversed.Match.Searched == ReversedCollection<Searchable> {
+  where
+    PatternType: BidirectionalPattern,
+    PatternType.Searchable == Searchable,
+    // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+    PatternType.Reversed.Match.Searched == ReversedCollection<Searchable>
+  {
     forwardPattern = AnyPattern(pattern)
     reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
     forwardClosure = { reversedMatch, forwardCollection in

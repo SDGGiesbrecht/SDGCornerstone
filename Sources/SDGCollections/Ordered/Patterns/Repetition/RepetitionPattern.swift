@@ -209,9 +209,12 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   }
 }
 
-extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPattern,
+extension RepetitionPattern: BidirectionalPattern
+where
+  Base: BidirectionalPattern,
   // #workaround(Swift 5.8, The following constraints are redundant; see BidirectionalPattern.Reversed for the reason.)
-  Base.Reversed.Match.Searched == ReversedCollection<Base.Searchable> {
+  Base.Reversed.Match.Searched == ReversedCollection<Base.Searchable>
+{
 
   // MARK: - BidirectionalPattern
 

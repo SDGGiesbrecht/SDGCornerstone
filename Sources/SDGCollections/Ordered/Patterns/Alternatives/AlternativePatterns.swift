@@ -95,10 +95,13 @@ where Preferred: Pattern, Fallback: Pattern, Preferred.Searchable == Fallback.Se
 }
 
 extension AlternativePatterns: BidirectionalPattern
-where Preferred: BidirectionalPattern, Fallback: BidirectionalPattern,
+where
+  Preferred: BidirectionalPattern,
+  Fallback: BidirectionalPattern,
   // #workaround(Swift 5.8, The following constraints are redundant; see BidirectionalPattern.Reversed for the reason.)
   Preferred.Reversed.Match.Searched == ReversedCollection<Preferred.Searchable>,
-  Fallback.Reversed.Match.Searched == ReversedCollection<Fallback.Searchable> {
+  Fallback.Reversed.Match.Searched == ReversedCollection<Fallback.Searchable>
+{
 
   // MARK: - BidirectionalPattern
 

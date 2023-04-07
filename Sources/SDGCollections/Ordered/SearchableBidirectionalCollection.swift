@@ -18,9 +18,11 @@ import SDGMathematics
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
 public protocol SearchableBidirectionalCollection: BidirectionalCollection, BidirectionalPattern,
   SearchableCollection
-where SubSequence: SearchableBidirectionalCollection,
+where
+  SubSequence: SearchableBidirectionalCollection,
   // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-  Reversed.Searchable == ReversedCollection<Self> {
+  Reversed.Searchable == ReversedCollection<Self>
+{
 
   // @documentation(SDGCornerstone.Collection.lastMatch(for:))
   // #example(1, lastMatchBackwardsDifferences1) #example(2, lastMatchBackwardsDifferences2)
@@ -51,7 +53,10 @@ where SubSequence: SearchableBidirectionalCollection,
   ///
   /// - Parameters:
   ///     - pattern: The pattern to search for.
-  func lastMatch<P>(for pattern: P) -> P.Match? where P: BidirectionalPattern, P.Searchable == Self,
+  func lastMatch<P>(for pattern: P) -> P.Match?
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
     // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
     P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
   // #documentation(SDGCornerstone.Collection.lastMatch(for:))
@@ -89,7 +94,10 @@ where SubSequence: SearchableBidirectionalCollection,
   ///
   /// - Parameters:
   ///     - pattern: The pattern to try.
-  func hasSuffix<P>(_ pattern: P) -> Bool where P: BidirectionalPattern, P.Searchable == Self,
+  func hasSuffix<P>(_ pattern: P) -> Bool
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
     // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
     P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
   // #documentation(SDGCornerstone.Collection.hasSuffix(_:))

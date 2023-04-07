@@ -93,10 +93,13 @@ where First: Pattern, Second: Pattern, First.Searchable == Second.Searchable {
 }
 
 extension ConcatenatedPatterns: BidirectionalPattern
-where First: BidirectionalPattern, Second: BidirectionalPattern,
+where
+  First: BidirectionalPattern,
+  Second: BidirectionalPattern,
   // #workaround(Swift 5.8, The following constraints are redundant; see BidirectionalPattern.Reversed for the reason.)
   First.Reversed.Match.Searched == ReversedCollection<First.Searchable>,
-  Second.Reversed.Match.Searched == ReversedCollection<Second.Searchable> {
+  Second.Reversed.Match.Searched == ReversedCollection<Second.Searchable>
+{
 
   // MARK: - BidirectionalPattern
 
