@@ -141,9 +141,12 @@ where
 extension SearchableBidirectionalCollection {
 
   @inlinable internal func _lastMatch<P>(for pattern: P) -> P.Match?
-  where P: BidirectionalPattern, P.Searchable == Self,
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
     // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-    P.Reversed.Match.Searched == ReversedCollection<P.Searchable> {
+    P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
+  {
     let reversedCollection: ReversedCollection<Self> = reversed()
     let reversedPattern: P.Reversed = pattern.reversed()
     guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
@@ -152,9 +155,12 @@ extension SearchableBidirectionalCollection {
     return pattern.forward(match: match, in: self)
   }
   @inlinable public func lastMatch<P>(for pattern: P) -> P.Match?
-  where P: BidirectionalPattern, P.Searchable == Self,
-  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-  P.Reversed.Match.Searched == ReversedCollection<P.Searchable> {
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
+    // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+    P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
+  {
     return _lastMatch(for: pattern)
   }
   @inlinable public func lastMatch(for pattern: Self) -> Match? {
@@ -162,9 +168,12 @@ extension SearchableBidirectionalCollection {
   }
 
   @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool
-  where P: BidirectionalPattern, P.Searchable == Self,
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
     // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-    P.Reversed.Match.Searched == ReversedCollection<P.Searchable> {
+    P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
+  {
     let reversedCollection: ReversedCollection<Self> = reversed()
     let reversedPattern: P.Reversed = pattern.reversed()
     return reversedPattern.primaryMatch(
@@ -173,9 +182,12 @@ extension SearchableBidirectionalCollection {
     ) ≠ nil
   }
   @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool
-  where P: BidirectionalPattern, P.Searchable == Self,
+  where
+    P: BidirectionalPattern,
+    P.Searchable == Self,
     // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
-    P.Reversed.Match.Searched == ReversedCollection<P.Searchable> {
+    P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
+  {
     return _hasSuffix(pattern)
   }
   @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
