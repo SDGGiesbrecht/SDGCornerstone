@@ -18,6 +18,7 @@ where Searchable: SearchableBidirectionalCollection {
 
   /// The type of the reverse pattern.
   associatedtype Reversed: Pattern
+  // #workaround(Swift 5.8, This constraint trips the compiler.)
   //where Reversed.Searchable == ReversedCollection<Searchable>
   #warning("↑ This is the problem.")
 

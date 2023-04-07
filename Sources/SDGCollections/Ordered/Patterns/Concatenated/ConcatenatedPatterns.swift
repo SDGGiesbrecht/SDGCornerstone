@@ -94,8 +94,8 @@ where First: Pattern, Second: Pattern, First.Searchable == Second.Searchable {
 
 extension ConcatenatedPatterns: BidirectionalPattern
 where First: BidirectionalPattern, Second: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
   Second.Reversed.Match.Searched == First.Reversed.Match.Searched {
-  #warning("Redundant ↑")
 
   // MARK: - BidirectionalPattern
 

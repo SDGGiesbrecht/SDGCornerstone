@@ -103,8 +103,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
 
 extension _NestingContentsPattern: BidirectionalPattern
 where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
   Closing.Reversed.Match.Searched == Opening.Reversed.Match.Searched {
-  #warning("Redundant ↑")
 
   // MARK: - BidirectionalPattern
   
