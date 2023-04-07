@@ -109,8 +109,6 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
 
   // MARK: - BidirectionalPattern
 
-  public typealias Reversed = _NestingSegmentPattern<Closing.Reversed, Opening.Reversed>
-
   @inlinable public func reversed() -> _NestingSegmentPattern<Closing.Reversed, Opening.Reversed> {
     return _NestingSegmentPattern<Closing.Reversed, Opening.Reversed>(
       opening: closing.reversed(),

@@ -100,8 +100,6 @@ where Preferred: BidirectionalPattern, Fallback: BidirectionalPattern,
   Preferred.Reversed.Match.Searched == Fallback.Reversed.Match.Searched {
 
   // MARK: - BidirectionalPattern
-  
-  public typealias Reversed = AlternativePatterns<Preferred.Reversed, Fallback.Reversed>
 
   @inlinable public func reversed() -> AlternativePatterns<Preferred.Reversed, Fallback.Reversed> {
     return AlternativePatterns<Preferred.Reversed, Fallback.Reversed>(

@@ -107,8 +107,6 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
   Closing.Reversed.Match.Searched == Opening.Reversed.Match.Searched {
 
   // MARK: - BidirectionalPattern
-  
-  public typealias Reversed = _NestingContentsPattern<Closing.Reversed, Opening.Reversed>
 
   @inlinable public func reversed() -> _NestingContentsPattern<Closing.Reversed, Opening.Reversed> {
     return _NestingContentsPattern<Closing.Reversed, Opening.Reversed>(

@@ -99,8 +99,6 @@ where First: BidirectionalPattern, Second: BidirectionalPattern,
 
   // MARK: - BidirectionalPattern
 
-  public typealias Reversed = ConcatenatedPatterns<Second.Reversed, First.Reversed>
-
   @inlinable public func reversed() -> ConcatenatedPatterns<Second.Reversed, First.Reversed> {
     return ConcatenatedPatterns<Second.Reversed, First.Reversed>(
       second.reversed(),
