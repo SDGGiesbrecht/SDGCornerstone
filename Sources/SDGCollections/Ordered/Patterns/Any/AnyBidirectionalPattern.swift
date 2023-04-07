@@ -27,11 +27,11 @@ where Searchable: SearchableBidirectionalCollection {
   /// - Parameters:
   ///     - pattern: The pattern.
   @inlinable public init<PatternType>(_ pattern: PatternType)
-  where PatternType: BidirectionalPattern, PatternType.Searchable == Searchable {
+  where PatternType: BidirectionalPattern, PatternType.Searchable == Searchable,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  PatternType.Reversed.Match.Searched == ReversedCollection<Searchable> {
     forwardPattern = AnyPattern(pattern)
-    #warning("Not implemented yet.")
-    fatalError()
-    /*reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
+    reversedClosure = { AnyPattern<ReversedCollection<Searchable>>(pattern.reversed()) }
     forwardClosure = { reversedMatch, forwardCollection in
       guard let underlying = reversedMatch.underlyingMatch as? PatternType.Reversed.Match else {
         _preconditionFailure({ localization in
@@ -45,7 +45,7 @@ where Searchable: SearchableBidirectionalCollection {
       return AnyPatternMatch<Searchable>(
         pattern.forward(match: underlying, in: forwardCollection)
       )
-    }*/
+    }
   }
 
   // MARK: - Properties
