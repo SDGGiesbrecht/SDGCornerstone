@@ -46,8 +46,6 @@ extension BidirectionalCollection {
   /// - Parameters:
   ///   - other: The other collection. (The starting point.)
   ///   - areEquivalent: The closure to use when checking whether two elements are equivalent.
-  ///   - elementA: One element.
-  ///   - elementB: The other element.
   @inlinable public func shimmedDifference<C>(
     from other: C,
     by areEquivalent: (_ elementA: Element, _ elementB: Element) -> Bool

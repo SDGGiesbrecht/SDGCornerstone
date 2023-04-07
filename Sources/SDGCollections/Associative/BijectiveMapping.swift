@@ -51,7 +51,6 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// - Parameters:
   ///   - sequence: A sequence of values for the `X` side.
   ///   - map: A closure that produces the corresponding `Y` value for each `X` value in the sequence.
-  ///   - x: A value on the `X` side.
   @inlinable public init<S>(_ sequence: S, map: (_ x: X) -> Y) where S: Sequence, S.Element == X {
     var dictionary: [X: Y] = [:]
     for entry in sequence {

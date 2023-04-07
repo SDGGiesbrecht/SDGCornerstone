@@ -21,7 +21,6 @@ extension Decodable {
   ///     - decoder: The decoder.
   ///     - type: The proxy type.
   ///     - convert: A closure which converts from the proxy type.
-  ///     - other: The instance of the proxy type.
   public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) -> Self)
     throws where Other: Decodable
   {
