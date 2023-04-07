@@ -39,7 +39,9 @@ where Searchable: SearchableBidirectionalCollection {
   ) -> Match
 }
 
-extension BidirectionalPattern {
+extension BidirectionalPattern
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  where Reversed.Searchable == ReversedCollection<Searchable> {
 
   /// Converts a reversed range into a range in the forward collection.
   ///
@@ -48,8 +50,6 @@ extension BidirectionalPattern {
   @inlinable public func forward(
     _ reversedRange: Range<Reversed.Searchable.Index>
   ) -> Range<Searchable.Index> {
-    #warning("Not implemented yet.")
-    fatalError()
-    //return reversedRange.upperBound.base..<reversedRange.lowerBound.base
+    return reversedRange.upperBound.base..<reversedRange.lowerBound.base
   }
 }
