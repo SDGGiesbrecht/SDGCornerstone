@@ -28,13 +28,13 @@ public func testBidirectionalPattern<P>(
   match: P.Searchable,
   file: StaticString = #filePath,
   line: UInt = #line
-) where P: BidirectionalPattern {
+) where P: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  P.Reversed.Match.Searched == ReversedCollection<P.Searchable>{
   testPattern(pattern, match: match)
 
   let reversedMatch: ReversedCollection<P.Searchable> = match.reversed()
-  #warning("Not implemented yet.")
-  fatalError()
-  /*let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex)
+  let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex)
   test(
     result3?.range == reversedMatch.bounds,
     {  // @exempt(from: tests)
@@ -55,5 +55,5 @@ public func testBidirectionalPattern<P>(
       file: file,
       line: line
     )
-  }*/
+  }
 }
