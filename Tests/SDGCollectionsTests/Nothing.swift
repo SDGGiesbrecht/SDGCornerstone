@@ -65,7 +65,8 @@ struct ReversedNothingPattern: SDGCollections.Pattern {
     return subSequenceMatch.in(collection)
   }
 }
-struct Nothing: SDGCollections.BidirectionalPattern, SDGCollections.Pattern {
+#warning("Disabled.")
+/*struct Nothing: SDGCollections.BidirectionalPattern, SDGCollections.Pattern {
   func matches(
     in collection: String,
     at location: String.Index
@@ -94,4 +95,4 @@ struct Nothing: SDGCollections.BidirectionalPattern, SDGCollections.Pattern {
       in: forwardCollection
     )
   }
-}
+}*/

@@ -14,11 +14,24 @@
 
 import SDGCollections
 
+#warning("Disabled.")
 /// A view of a string’s contents as a collection of Unicode scalar values.
-public protocol UnicodeScalarView: BidirectionalPattern, RangeReplaceableCollection,
-  SearchableBidirectionalCollection, Sendable
+public protocol UnicodeScalarView: BidirectionalCollection, /*BidirectionalPattern,*/ RangeReplaceableCollection,
+  /*SearchableBidirectionalCollection,*/ SearchableCollection, Sendable
 where
   Element == Unicode.Scalar,
   Index == String.UnicodeScalarView.Index,
   SubSequence: Sendable
 {}
+
+extension SearchableCollection where Self: BidirectionalCollection, Element == Unicode.Scalar {
+  #warning("For evasion of SearchableBidirectionalCollection.")
+  @inlinable public func _workaroundLastMatch(for pattern: NewlinePattern<Self>) -> NewlinePattern<Self>.Match? {
+    let reversedCollection: ReversedCollection<Self> = reversed()
+    let reversedPattern: NewlinePattern<Self>.Reversed = pattern.reversed()
+    guard let match = reversedCollection.firstMatch(for: reversedPattern) else {
+      return nil
+    }
+    return pattern.forward(match: match, in: self)
+  }
+}
