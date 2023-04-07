@@ -77,7 +77,9 @@ where Base: Pattern {
 }
 
 extension NegatedPattern: BidirectionalPattern
-where Base: BidirectionalPattern {
+where Base: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  Base.Reversed.Match.Searched == ReversedCollection<Base.Searchable> {
 
   // MARK: - BidirectionalPattern
 
@@ -90,12 +92,10 @@ where Base: BidirectionalPattern {
     in forwardCollection: Searchable
   ) -> AtomicPatternMatch<Base.Searchable> {
     let range = reversedMatch.range
-    #warning("Not implemented yet.")
-    fatalError()
-    /*return AtomicPatternMatch(
+    return AtomicPatternMatch(
       range: range.upperBound.base..<range.lowerBound.base,
       in: forwardCollection
-    )*/
+    )
   }
 }
 

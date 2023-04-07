@@ -132,14 +132,12 @@ where Opening: BidirectionalPattern, Closing: BidirectionalPattern,
       )
     case .other(let other):
       let reversedMatchRange = other.range
-      #warning("Not implemented yet.")
-      fatalError()
-      /*return .other(
+      return .other(
         AtomicPatternMatch(
           range: reversedMatchRange.upperBound.base..<reversedMatchRange.lowerBound.base,
           in: forwardCollection
         )
-      )*/
+      )
     }
   }
 }

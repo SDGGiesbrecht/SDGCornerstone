@@ -209,7 +209,9 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   }
 }
 
-extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPattern {
+extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraints are redundant; see BidirectionalPattern.Reversed for the reason.)
+  Base.Reversed.Match.Searched == ReversedCollection<Base.Searchable> {
 
   // MARK: - BidirectionalPattern
 
@@ -226,15 +228,13 @@ extension RepetitionPattern: BidirectionalPattern where Base: BidirectionalPatte
     in forwardCollection: Searchable
   ) -> RepetitionMatch<Base.Match> {
     let forwardRange = reversedMatch.range
-    #warning("Not implemented yet.")
-    fatalError()
-    /*return RepetitionMatch(
+    return RepetitionMatch(
       components: reversedMatch.components.reversed()
         .map { match in
           return pattern.forward(match: match, in: forwardCollection)
         },
       contents: forwardCollection[forwardRange.upperBound.base..<forwardRange.lowerBound.base]
-    )*/
+    )
   }
 }
 
