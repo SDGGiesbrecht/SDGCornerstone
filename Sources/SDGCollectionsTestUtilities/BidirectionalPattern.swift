@@ -28,7 +28,8 @@ public func testBidirectionalPattern<P>(
   match: P.Searchable,
   file: StaticString = #filePath,
   line: UInt = #line
-) where
+)
+where
   P: BidirectionalPattern,
   // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
   P.Reversed.Match.Searched == ReversedCollection<P.Searchable>
