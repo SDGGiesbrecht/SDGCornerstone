@@ -36,6 +36,8 @@ public protocol PointProtocol: Decodable, Encodable, Equatable, Sendable {
   ///     - followingValue: The vector to add.
   static func += (precedingValue: inout Self, followingValue: Vector)
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // @documentation(PointProtocol.−(Self, Vector))
   /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
   ///
   /// - Parameters:
@@ -64,6 +66,13 @@ extension PointProtocol {
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
   }
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting point.
+  ///     - followingValue: The vector to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
     return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
   }

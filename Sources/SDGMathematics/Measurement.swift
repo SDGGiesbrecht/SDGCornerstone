@@ -63,6 +63,8 @@ where Scalar: RationalArithmetic {
   ///     - followingValue: The scalar.
   static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // @documentation(Measurement.÷(Self, Scalar))
   /// Returns the (rational) quotient of a measurement divided by a scalar.
   ///
   /// - Parameters:
@@ -70,6 +72,8 @@ where Scalar: RationalArithmetic {
   ///     - followingValue: The scalar.
   static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // @documentation(Measurement.÷(Self, Self))
   /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
   ///
   /// - Parameters:
@@ -182,10 +186,24 @@ extension Measurement {
     precedingValue.rawValue ×= followingValue
   }
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // #documentation(Measurement.÷(Self, Scalar))
+  /// Returns the (rational) quotient of a measurement divided by a scalar.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The measurement.
+  ///     - followingValue: The scalar.
   @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
     return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
   }
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // #documentation(Measurement.÷(Self, Self))
+  /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The dividend.
+  ///     - followingValue: The divisor.
   @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
     return precedingValue.rawValue ÷ followingValue.rawValue
   }
@@ -306,6 +324,15 @@ extension Measurement {
     return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
   }
 
+  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
+  // #documentation(Addable.+=)
+  /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol.
+  ///
+  /// Exact behaviour depends on the type.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The value to modify.
+  ///     - followingValue: The value to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
     precedingValue.rawValue += followingValue.rawValue
   }
