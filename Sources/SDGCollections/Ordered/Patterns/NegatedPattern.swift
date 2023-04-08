@@ -77,7 +77,11 @@ where Base: Pattern {
 }
 
 extension NegatedPattern: BidirectionalPattern
-where Base: BidirectionalPattern {
+where
+  Base: BidirectionalPattern,
+  // #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+  Base.Reversed.Match.Searched == ReversedCollection<Base.Searchable>
+{
 
   // MARK: - BidirectionalPattern
 

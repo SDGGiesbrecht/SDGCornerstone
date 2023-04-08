@@ -13,12 +13,24 @@
  */
 
 /// A pattern that can be searched for in reverse.
+///
+/// - Requires: The `Reversed.Searchable` must be `ReversedCollection<Searchable>`, but the Swift 5.8 compiler cannot enforce it due to a bug.
 public protocol BidirectionalPattern: Pattern
 where Searchable: SearchableBidirectionalCollection {
 
-  /// The type of the reverse pattern.
-  associatedtype Reversed: Pattern
-  where Reversed.Searchable == ReversedCollection<Searchable>
+  // #workaround(Swift 5.8, The “#if” should not be necessary redundant; see BidirectionalPattern.Reversed for the reason.)
+  #if compiler(<5.8)
+    // #documentation(BidirectionalPattern.Reversed)
+    /// The type of the reverse pattern.
+    associatedtype Reversed: Pattern
+    where Reversed.Searchable == ReversedCollection<Searchable>
+  #else
+    // @documentation(BidirectionalPattern.Reversed)
+    /// The type of the reverse pattern.
+    associatedtype Reversed: Pattern
+  // #workaround(Swift 5.8, This constraint trips the compiler; also remove the “requires” documentation callout from “BidirectionalPattern” once fixed.)
+  //where Reversed.Searchable == ReversedCollection<Searchable>
+  #endif
 
   /// Returns a pattern that checks for the reverse pattern.
   ///
@@ -37,7 +49,9 @@ where Searchable: SearchableBidirectionalCollection {
   ) -> Match
 }
 
-extension BidirectionalPattern {
+extension BidirectionalPattern
+// #workaround(Swift 5.8, The following constraint is redundant; see BidirectionalPattern.Reversed for the reason.)
+where Reversed.Searchable == ReversedCollection<Searchable> {
 
   /// Converts a reversed range into a range in the forward collection.
   ///
