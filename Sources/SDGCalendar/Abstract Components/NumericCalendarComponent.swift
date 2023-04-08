@@ -25,6 +25,12 @@ extension NumericCalendarComponent {
     precedingValue = Self(precedingValue.rawValue + followingValue)
   }
 
+  // #documentation(PointProtocol.−(Self, Self))
+  /// Returns the vector that leads from the preceding point to the following point.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The endpoint.
+  ///     - followingValue: The startpoint.
   public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     return precedingValue.rawValue − followingValue.rawValue
   }

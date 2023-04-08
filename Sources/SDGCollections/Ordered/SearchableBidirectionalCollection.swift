@@ -190,6 +190,11 @@ extension SearchableBidirectionalCollection {
   {
     return _hasSuffix(pattern)
   }
+  // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
+  /// Returns `true` if `self` begins with `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
   @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
     return _hasSuffix(pattern)
   }

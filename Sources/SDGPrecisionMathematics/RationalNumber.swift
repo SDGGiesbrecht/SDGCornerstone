@@ -46,6 +46,9 @@ public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatab
   }
 
   /// Creates an instance from a whole number.
+  ///
+  /// - Parameters:
+  ///   - wholeNumber: The whole number.
   public init(_ wholeNumber: WholeNumber) {
     self.init(Integer(wholeNumber))
   }

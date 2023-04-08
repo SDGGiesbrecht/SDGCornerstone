@@ -261,6 +261,11 @@ extension SearchableCollection {
   where P: Pattern, P.Searchable == Self {
     return _prefix(upTo: pattern)
   }
+  // #documentation(SDGCornerstone.Collection.prefix(upTo:))
+  /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to search for.
   @inlinable public func prefix(upTo pattern: Self) -> ExclusivePrefixMatch<Match>? {
     return _prefix(upTo: pattern)
   }

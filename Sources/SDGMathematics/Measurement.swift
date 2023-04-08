@@ -63,7 +63,6 @@ where Scalar: RationalArithmetic {
   ///     - followingValue: The scalar.
   static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // @documentation(Measurement.÷(Self, Scalar))
   /// Returns the (rational) quotient of a measurement divided by a scalar.
   ///
@@ -72,7 +71,6 @@ where Scalar: RationalArithmetic {
   ///     - followingValue: The scalar.
   static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // @documentation(Measurement.÷(Self, Self))
   /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
   ///
@@ -186,7 +184,6 @@ extension Measurement {
     precedingValue.rawValue ×= followingValue
   }
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // #documentation(Measurement.÷(Self, Scalar))
   /// Returns the (rational) quotient of a measurement divided by a scalar.
   ///
@@ -197,7 +194,6 @@ extension Measurement {
     return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
   }
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // #documentation(Measurement.÷(Self, Self))
   /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
   ///
@@ -320,11 +316,11 @@ extension Measurement {
 
   // MARK: - Addable
 
+  // @documentation(Addable.+)
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
   }
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // #documentation(Addable.+=)
   /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol.
   ///

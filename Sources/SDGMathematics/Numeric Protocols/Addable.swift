@@ -29,7 +29,6 @@ public protocol Addable {
   ///     - followingValue: The value to add.
   static func + (precedingValue: Self, followingValue: Self) -> Self
 
-  // #workaround(Swift 5.7, This documentation is not inherited automatically.)
   // @documentation(Addable.+=)
   /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol.
   ///

@@ -99,7 +99,6 @@ where
   /// - Parameters:
   ///     - mapping: A dictionary representing the mapping. Keys are input, values are corresponding output.
   ///     - fallbackAlgorithm: An algorithm to use for any single elements not defined in the mapping.
-  ///     - element: The element to use the fallback algorithm on.
   @inlinable public init(
     mapping: [Input: Output],
     fallbackAlgorithm: @escaping @Sendable (_ element: Input.Element) -> Output

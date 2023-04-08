@@ -95,7 +95,6 @@ public struct Shell: TransparentWrapper {
     ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
     ///     - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
     ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
-    ///     - line: The line of output.
     ///
     /// - Returns: The output of the command.
     @discardableResult public func run(

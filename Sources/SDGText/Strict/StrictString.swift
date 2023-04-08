@@ -104,6 +104,9 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   }
 
   /// Creates a string from an extended grapheme cluster.
+  ///
+  /// - Parameters:
+  ///   - cluster: The cluster.
   @inlinable public init(_ cluster: ExtendedGraphemeCluster) {
     self.init(String(cluster))
   }

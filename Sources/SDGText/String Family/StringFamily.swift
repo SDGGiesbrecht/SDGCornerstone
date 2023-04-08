@@ -54,6 +54,9 @@ public protocol StringFamily: Addable, Comparable, Decodable, Encodable,
 extension StringFamily {
 
   /// Creates a string from a collection of lines.
+  ///
+  /// - Parameters:
+  ///   - lines: The lines.
   @inlinable public init(_ lines: LineView<Self>) {
     self = lines.base
   }

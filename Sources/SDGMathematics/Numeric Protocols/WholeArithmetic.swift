@@ -33,6 +33,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   // Duplicates Subtractable, but makes the compiler prefer the “Self” variant over the “Vector” variant.
   static func − (precedingValue: Self, followingValue: Self) -> Self
 
+  // @documentation(WholeArithmetic.×)
   /// Returns the product of the preceding value times the following value.
   ///
   /// - Parameters:
@@ -386,7 +387,12 @@ extension WholeArithmetic {
 
   // MARK: - Numeric
 
-  /// Multiplies two values and produces their product.
+  // #documentation(WholeArithmetic.×)
+  /// Returns the product of the preceding value times the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: A value.
+  ///     - followingValue: Another value.
   @inlinable public static func * (  // @exempt(from: unicode)
     precedingValue: Self,
     followingValue: Self

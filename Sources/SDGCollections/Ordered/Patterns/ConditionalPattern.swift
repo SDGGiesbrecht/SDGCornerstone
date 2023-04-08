@@ -24,7 +24,6 @@ where Searchable: SearchableCollection {
   ///
   /// - Parameters:
   ///     - condition: The condition an element must meet in order to match.
-  ///     - element: An element to check.
   @inlinable public init(_ condition: @escaping @Sendable (_ element: Searchable.Element) -> Bool) {
     self.condition = condition
   }
