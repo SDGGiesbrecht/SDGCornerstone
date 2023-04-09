@@ -204,15 +204,30 @@ extension SearchableBidirectionalCollection {
   ) -> AtomicPatternMatch<Self> where C.Element == Self.Element {
     return forward(match: reversed().commonPrefix(with: other.reversed()), in: self)
   }
+  // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection
   @inlinable public func commonSuffix<C: SearchableBidirectionalCollection>(
     with other: C
   ) -> AtomicPatternMatch<Self> where C.Element == Self.Element {
     return _commonSuffix(with: other)
   }
+  // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection
   @inlinable public func commonSuffix(with other: Self) -> AtomicPatternMatch<Self> {
     return _commonSuffix(with: other)
   }
 
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
   @inlinable public func changes<C>(
     from other: C
   ) -> CollectionDifference<Element>

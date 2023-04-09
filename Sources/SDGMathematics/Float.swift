@@ -122,6 +122,11 @@ extension FloatFamily {
     precedingValue = precedingValue ↑ followingValue
   }
 
+  // #documentation(WholeArithmetic.rounded(_:))
+  /// Returns the value rounded to an integral value using the specified rounding rule.
+  ///
+  /// - Parameters:
+  ///   - rule: The rounding rule follow.
   @inlinable public func rounded(_ rule: RoundingRule) -> Self {
     return roundedAsFloatingPoint(rule)
   }

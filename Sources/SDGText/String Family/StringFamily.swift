@@ -39,7 +39,7 @@ public protocol StringFamily: Addable, Comparable, Decodable, Encodable,
   /// Creates a string from a collection of scalars.
   ///
   /// - Parameters:
-  ///   - clusters: The collection of scalars. 
+  ///   - scalars: The collection of scalars. 
   init(_ scalars: ScalarView)
 
   /// Creates a string from a collection of clusters.

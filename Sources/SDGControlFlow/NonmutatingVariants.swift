@@ -95,9 +95,6 @@
 ///
 /// - Parameters:
 ///   - mutation: The mutating counterpart.
-///   - anInstance: An instance on which to perform the mutating counterpart.
-///   - firstMutationArgument: An argument for the mutation.
-///   - secondMutationArgument: Another argument for the mutation.
 ///   - theInstance: The starting instance.
 ///   - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B>(
@@ -134,10 +131,6 @@
 ///
 /// - Parameters:
 ///   - mutation: The mutating counterpart.
-///   - anInstance: An instance on which to perform the mutating counterpart.
-///   - firstMutationArgument: An argument for the mutation.
-///   - secondMutationArgument: Another argument for the mutation.
-///   - thirdMutationArgument: Another argument for the mutation.
 ///   - theInstance: The starting instance.
 ///   - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B, C>(

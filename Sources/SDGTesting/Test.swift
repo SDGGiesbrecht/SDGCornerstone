@@ -90,9 +90,6 @@ public func fail(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -126,9 +123,6 @@ public func test<T, R>(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - argument: The argument to pass to the method.
 ///   - expectedResult: The expected result.
@@ -163,9 +157,6 @@ public func test<T, A, R>(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - arguments: The arguments to pass to the method.
 ///   - expectedResult: The expected result.
@@ -204,9 +195,6 @@ public func test<T, A, B, R>(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -240,10 +228,6 @@ public func test<T>(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - methodArgument: An argument to pass to the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - argument: The argument to pass to the method.
 ///   - expectedResult: The expected result.
@@ -280,11 +264,6 @@ public func test<T, A>(
 ///
 /// - Parameters:
 ///   - method: The method to test.
-///   - call: The method itself.
-///   - methodInstance: The instance on which to call the method.
-///   - firstMethodArgument: An argument to pass to the method.
-///   - secondMethodArgument: Another argument to pass to the method.
-///   - name: The method name.
 ///   - instance: The instance on which to call the method.
 ///   - arguments: The arguments to pass to the method.
 ///   - expectedResult: The expected result.
@@ -325,9 +304,6 @@ public func test<T, A, B>(
 ///
 /// - Parameters:
 ///   - function: The function to test.
-///   - call: The function itself.
-///   - functionArgument: An argument to pass to the function.
-///   - name: The function name.
 ///   - argument: The argument to pass to the function.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -360,10 +336,6 @@ public func test<A, R>(
 ///
 /// - Parameters:
 ///   - function: The function to test.
-///   - call: The function itself.
-///   - firstFunctionArgument: An argument to pass to the function.
-///   - secondFunctionArgument: An argument to pass to the function.
-///   - name: The function name.
 ///   - arguments: The arguments to pass to the function.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -400,10 +372,6 @@ public func test<A, B, R>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - precedingOperand: The preceding operand.
-///   - followingOperand: The following operand.
-///   - name: The function name.
 ///   - operands: The operands to pass to the function.
 ///   - precedingValue: The preceding operand.
 ///   - followingValue: The following operand.
@@ -437,10 +405,6 @@ public func test<P, F, R>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - precedingOperand: The preceding operand.
-///   - followingOperand: The following operand.
-///   - name: The function name.
 ///   - operands: The operands to pass to the function.
 ///   - precedingValue: The preceding operand.
 ///   - followingValue: The following operand.
@@ -476,10 +440,6 @@ public func test<P, F, R, S>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - precedingOperand: The preceding operand.
-///   - followingOperand: The following operand.
-///   - name: The function name.
 ///   - precedingValue: The preceding operand.
 ///   - followingValue: The following operand.
 ///   - expectedResult: The expected result.
@@ -516,10 +476,6 @@ public func test<P, F, R>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - precedingOperand: The preceding operand.
-///   - followingOperand: The following operand.
-///   - name: The function name.
 ///   - operands: The operands to pass to the function.
 ///   - precedingValue: The preceding operand.
 ///   - followingValue: The following operand.
@@ -556,10 +512,6 @@ public func test<P, F>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - precedingOperand: The preceding operand.
-///   - followingOperand: The following operand.
-///   - name: The function name.
 ///   - precedingValue: The preceding operand.
 ///   - followingValue: The following operand.
 ///   - expectedResult: The expected result.
@@ -598,9 +550,6 @@ public func test<P, F>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - functionOperand: The operand to pass to the function.
-///   - name: The function name.
 ///   - operand: The operand to pass to the function.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -632,9 +581,6 @@ public func test<O, R>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - functionOperand: The operand to pass to the function.
-///   - name: The function name.
 ///   - operand: The operand to pass to the function.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -667,9 +613,6 @@ public func test<O, R>(
 ///
 /// - Parameters:
 ///   - operator: The operator function to test.
-///   - function: The function itself.
-///   - functionOperand: The operand to pass to the function.
-///   - name: The function name.
 ///   - operand: The operand to pass to the function.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -706,9 +649,6 @@ public func test<O>(
 ///
 /// - Parameters:
 ///   - property: The property to test.
-///   - accessor: A closure which retrieves the property.
-///   - accessorInstance: The instance on which to inspect the property.
-///   - name: The property name.
 ///   - instance: The instance on which to inspect the property.
 ///   - expectedValue: The expected property value.
 ///   - file: Optional. A different source file to associate with any failures.
@@ -739,8 +679,6 @@ public func test<T, P>(
 ///
 /// - Parameters:
 ///   - variable: The variable to test.
-///   - contents: The variable itself.
-///   - name: The name of the variable.
 ///   - expectedValue: The expected property value.
 ///   - file: Optional. A different source file to associate with any failures.
 ///   - line: Optional. A different line to associate with any failures.

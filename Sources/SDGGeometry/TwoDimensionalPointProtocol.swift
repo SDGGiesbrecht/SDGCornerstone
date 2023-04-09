@@ -117,11 +117,23 @@ extension TwoDimensionalPointProtocol {
 
   // MARK: - PointProtocol
 
+  // #documentation(PointProtocol.+=(Self, Vector))
+  /// Moves the preceding point by the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The point to modify.
+  ///   - followingValue: The vector to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue.x += followingValue.Δx
     precedingValue.y += followingValue.Δy
   }
 
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     let Δx = precedingValue.x − followingValue.x
     let Δy = precedingValue.y − followingValue.y

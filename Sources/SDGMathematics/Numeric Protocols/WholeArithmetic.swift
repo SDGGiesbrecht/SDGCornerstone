@@ -171,6 +171,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///   - rule: The rounding rule follow.
   mutating func round(_ rule: RoundingRule)
 
+  // @documentation(WholeArithmetic.rounded(_:))
   /// Returns the value rounded to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
