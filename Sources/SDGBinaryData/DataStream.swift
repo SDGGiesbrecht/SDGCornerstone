@@ -43,7 +43,7 @@ public struct DataStream {
   /// Appends a unit of data.
   ///
   /// - Parameters:
-  ///     - unit: The unit of data to append.
+  ///   - unit: The unit of data to append.
   public mutating func append(unit: Data) {
     var unit = unit
 

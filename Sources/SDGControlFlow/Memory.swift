@@ -21,7 +21,7 @@
 /// On platforms lacking Objective C, this function simply executes the closure.
 ///
 /// - Parameters:
-///     - closure: A closure to invoke.
+///   - closure: A closure to invoke.
 @inlinable public func purgingAutoreleased<Result>(
   from closure: () throws -> Result
 ) rethrows -> Result {

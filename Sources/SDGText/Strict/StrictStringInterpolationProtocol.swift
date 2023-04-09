@@ -18,7 +18,7 @@ public protocol StrictStringInterpolationProtocol: StringInterpolationProtocol {
   /// Creates an interpolation starting with an initial string.
   ///
   /// - Parameters:
-  ///     - string: The initial string.
+  ///   - string: The initial string.
   init(string: StrictString)
 
   /// The string described by the interpolation.
@@ -41,7 +41,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: StrictString) {
     self.string.append(contentsOf: string)
   }
@@ -49,7 +49,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: StrictString.SubSequence) {
     self.string.append(contentsOf: string)
   }
@@ -57,7 +57,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: StrictString.ClusterView) {
     self.string.append(contentsOf: StrictString(string))
   }
@@ -65,7 +65,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: StrictString.ClusterView.SubSequence) {
     self.string.append(contentsOf: StrictString(StrictString.ClusterView(string)))
   }
@@ -74,7 +74,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: String) {
     self.string.append(contentsOf: string.scalars)
   }
@@ -82,7 +82,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: String.SubSequence) {
     self.string.append(contentsOf: string.unicodeScalars)
   }
@@ -90,7 +90,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: String.ScalarView) {
     self.string.append(contentsOf: string)
   }
@@ -98,7 +98,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: String.ScalarView.SubSequence) {
     self.string.append(contentsOf: string)
   }
@@ -106,7 +106,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a string.
   ///
   /// - Parameters:
-  ///     - string: The string.
+  ///   - string: The string.
   public mutating func appendInterpolation(_ string: StaticString) {
     self.string.append(contentsOf: StrictString(string))
   }
@@ -114,14 +114,14 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates a Unicode scalar.
   ///
   /// - Parameters:
-  ///     - scalar: The Unicode scalar.
+  ///   - scalar: The Unicode scalar.
   public mutating func appendInterpolation(_ scalar: Unicode.Scalar) {
     self.string.append(scalar)
   }
   /// Interpolates an extended grapheme cluster.
   ///
   /// - Parameters:
-  ///     - cluster: The extended grapheme cluster.
+  ///   - cluster: The extended grapheme cluster.
   public mutating func appendInterpolation(_ cluster: ExtendedGraphemeCluster) {
     self.string.append(contentsOf: cluster.unicodeScalars)
   }
@@ -129,7 +129,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates the name of the specified type.
   ///
   /// - Parameters:
-  ///     - type: The type.
+  ///   - type: The type.
   public mutating func appendInterpolation(typeName type: Any.Type) {
     let typeName: String = "\(type)"
     self.string.append(contentsOf: typeName.scalars)
@@ -140,7 +140,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpoliert eine willkürliche Beschreibung des Werts, bereitgestellt von dem Swift‐Übersetzer.
   ///
   /// - Parameters:
-  ///     - wert: Der Wert.
+  ///   - wert: Der Wert.
   @inlinable public mutating func appendInterpolation(willkürlicheBeschreibungVon wert: Any) {
     appendInterpolation(arbitraryDescriptionOf: wert)
   }
@@ -149,7 +149,7 @@ extension StrictStringInterpolationProtocol {
   /// Interpolates an arbitrary description of the value, supplied by the Swift compiler.
   ///
   /// - Parameters:
-  ///     - value: The value.
+  ///   - value: The value.
   public mutating func appendInterpolation(arbitraryDescriptionOf value: Any) {
     let description: String = "\(value)"
     self.string.append(contentsOf: description.scalars)

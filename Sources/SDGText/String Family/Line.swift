@@ -21,8 +21,8 @@ public struct Line<Base: StringFamily>: Sendable, TextualPlaygroundDisplay {
   /// Creates a line.
   ///
   /// - Parameters:
-  ///     - line: The text of the line.
-  ///     - newline: The text of the newline control.
+  ///   - line: The text of the line.
+  ///   - newline: The text of the newline control.
   @inlinable public init(line: Base, newline: Base) {
     self.line = line.scalars[...]
     self.newline = newline.scalars[...]
@@ -32,8 +32,8 @@ public struct Line<Base: StringFamily>: Sendable, TextualPlaygroundDisplay {
   /// Creates a line.
   ///
   /// - Parameters:
-  ///     - line: The text of the line.
-  ///     - newline: The text of the newline control.
+  ///   - line: The text of the line.
+  ///   - newline: The text of the newline control.
   @inlinable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
     self.line = line
     self.newline = newline

@@ -27,12 +27,12 @@ import SDGPersistenceTestUtilities
 /// To update the specification instead of testing against it, change `overwriteSpecificationInsteadOfFailing` to `true` and re‐run the test suite. The specification will be rewritten to match the descriptions. *Do not forget to change it back afterward, or the test will cease to validate anything.*
 ///
 /// - Parameters:
-///     - instance: An instance to get a description from.
-///     - localizations: The localization set to test.
-///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
-///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update the specification.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - instance: An instance to get a description from.
+///   - localizations: The localization set to test.
+///   - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
+///   - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update the specification.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testCustomStringConvertibleConformance<T, L>(
   of instance: T,
   localizations: L.Type,

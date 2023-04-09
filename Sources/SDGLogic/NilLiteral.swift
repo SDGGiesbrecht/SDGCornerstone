@@ -20,7 +20,7 @@ public struct NilLiteral: ExpressibleByNilLiteral, Sendable {
   /// Creates an instance of `NilLiteral`.
   ///
   /// - Parameters:
-  ///     - nilLiteral: Void.
+  ///   - nilLiteral: Void.
   @inlinable public init(nilLiteral: Void) {}
 
   // MARK: - Equality
@@ -29,8 +29,8 @@ public struct NilLiteral: ExpressibleByNilLiteral, Sendable {
   /// Returns `true` if the two values are inequal.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value to compare.
-  ///     - followingValue: Another value to compare.
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   @inlinable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
     return precedingValue != nil  // @exempt(from: unicode)
     // Allows “x ≠ nil” even when x is not Equatable.

@@ -46,8 +46,8 @@ private func add(
 /// Moves the following operand to be the same as the preceding operand up until the scalar level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←= (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -58,8 +58,8 @@ private func add(
 /// Moves the preceding operand to be the same as the following up until the scalar level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func =→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -70,8 +70,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the primary level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -88,8 +88,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the primary level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -106,8 +106,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the reverse accent level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←<< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -124,8 +124,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the reverse accent level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <<→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -142,8 +142,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the forward accent level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←<<< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -160,8 +160,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the forward accent level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <<<→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -178,8 +178,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the case level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←<<<< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -196,8 +196,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the case level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <<<<→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -214,8 +214,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the punctuation level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←<<<<< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -232,8 +232,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the punctuation level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <<<<<→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor
@@ -250,8 +250,8 @@ private func add(
 /// Moves the following operand so that it comes after the preceding operand at the script level.
 ///
 /// - Parameters:
-///     - anchor: The anchor for the rule.
-///     - new: The new element.
+///   - anchor: The anchor for the rule.
+///   - new: The new element.
 @discardableResult public func ←<<<<<< (
   anchor: CollationTailoring.Anchor,
   new: StrictString
@@ -268,8 +268,8 @@ private func add(
 /// Moves the preceding operand so that it comes before the following operand at the script level.
 ///
 /// - Parameters:
-///     - new: The new element.
-///     - anchor: The anchor for the rule.
+///   - new: The new element.
+///   - anchor: The anchor for the rule.
 @discardableResult public func <<<<<<→ (
   new: StrictString,
   anchor: CollationTailoring.Anchor

@@ -103,14 +103,32 @@ extension IntXFamily {
 
   // MARK: - PointProtocol
 
+  // #documentation(PointProtocol.+(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
     return precedingValue.advanced(by: followingValue)
   }
 
+  // #documentation(PointProtocol.+=(Self, Vector))
+  /// Moves the preceding point by the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The point to modify.
+  ///   - followingValue: The vector to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue = precedingValue.advanced(by: followingValue)
   }
 
+  // #documentation(PointProtocol.−(Self, Self))
+  /// Returns the vector that leads from the preceding point to the following point.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The endpoint.
+  ///   - followingValue: The startpoint.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     return followingValue.distance(to: precedingValue)
   }

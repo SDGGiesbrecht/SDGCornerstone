@@ -18,7 +18,7 @@ public protocol OneDimensionalVector: VectorProtocol {
   /// Returns the quotient of the precedng value divided by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The dividend.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The dividend.
+  ///   - followingValue: The divisor.
   static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 }

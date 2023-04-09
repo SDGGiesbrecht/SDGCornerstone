@@ -27,7 +27,7 @@ where
   /// Creates a literal pattern.
   ///
   /// - Parameters:
-  ///     - literal: The literal to search for.
+  ///   - literal: The literal to search for.
   @inlinable public init(_ literal: Literal) {
     self.literal = literal
   }

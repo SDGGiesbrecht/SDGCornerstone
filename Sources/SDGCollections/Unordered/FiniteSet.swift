@@ -22,8 +22,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is a subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊆ <S: SetDefinition>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element
 
@@ -32,8 +32,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊈ <S: SetDefinition>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element
 
@@ -42,8 +42,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is a superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊇ <S: SetDefinition>(precedingValue: S, followingValue: Self) -> Bool
   where S.Element == Self.Element
 
@@ -52,8 +52,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊉ <S: SetDefinition>(precedingValue: S, followingValue: Self) -> Bool
   where S.Element == Self.Element
 
@@ -62,8 +62,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊊ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element
 
@@ -72,8 +72,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊋ <S: FiniteSet>(precedingValue: S, followingValue: Self) -> Bool
   where S.Element == Self.Element
 
@@ -81,8 +81,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if the two values are equal.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value to compare.
-  ///     - followingValue: Another value to compare.
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   static func == <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element
 
@@ -91,8 +91,8 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if the two values are inequal.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value to compare.
-  ///     - followingValue: Another value to compare.
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   static func ≠ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element
 
@@ -101,7 +101,7 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if the sets overlap.
   ///
   /// - Parameters:
-  ///     - other: The other set.
+  ///   - other: The other set.
   func overlaps<S: SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element
 
   // @documentation(SDGCornerstone.FiniteSet.isDisjoint(with:))
@@ -109,7 +109,7 @@ public protocol FiniteSet: Collection, ComparableSet {
   /// Returns `true` if the sets are disjoint.
   ///
   /// - Parameters:
-  ///     - other: Another set.
+  ///   - other: Another set.
   func isDisjoint<S: FiniteSet>(with other: S) -> Bool where S.Element == Self.Element
 }
 

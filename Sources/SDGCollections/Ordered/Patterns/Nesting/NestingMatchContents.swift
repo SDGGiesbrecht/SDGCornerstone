@@ -21,8 +21,8 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   /// Creates nesting match contents.
   ///
   /// - Parameters:
-  ///     - segments: The contents’ segments.
-  ///     - contents: The subsequence corresponding to the segments taken together.
+  ///   - segments: The contents’ segments.
+  ///   - contents: The subsequence corresponding to the segments taken together.
   @inlinable public init(
     segments: [NestingMatchSegment<Opening, Closing>],
     contents: Searched.SubSequence

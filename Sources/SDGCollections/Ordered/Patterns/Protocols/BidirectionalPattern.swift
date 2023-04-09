@@ -41,8 +41,8 @@ where Searchable: SearchableBidirectionalCollection {
   /// Converts the reversed match into a match in the forward collection.
   ///
   /// - Parameters:
-  ///     - reversedMatch: The reversed match.
-  ///     - forwardCollection: The forward collection.
+  ///   - reversedMatch: The reversed match.
+  ///   - forwardCollection: The forward collection.
   func forward(
     match reversedMatch: Reversed.Match,
     in forwardCollection: Searchable
@@ -56,7 +56,7 @@ where Reversed.Searchable == ReversedCollection<Searchable> {
   /// Converts a reversed range into a range in the forward collection.
   ///
   /// - Parameters:
-  ///     - reversedRange: The reversed range.
+  ///   - reversedRange: The reversed range.
   @inlinable public func forward(
     _ reversedRange: Range<Reversed.Searchable.Index>
   ) -> Range<Searchable.Index> {

@@ -39,7 +39,7 @@ public struct PseudorandomNumberGenerator: RandomNumberGenerator, Sendable {
   /// Creates a pseudorandom number generator with a specific seed.
   ///
   /// - Parameters:
-  ///     - seed: The seed.
+  ///   - seed: The seed.
   public init(seed: Seed) {
     self.state = seed
     _ = next()  // Step away from seed itself.

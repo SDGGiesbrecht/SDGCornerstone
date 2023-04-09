@@ -19,7 +19,7 @@ extension Bool: Comparable {
   /// Returns the logical inverse of the operand.
   ///
   /// - Parameters:
-  ///     - proposition: The proposition to invert.
+  ///   - proposition: The proposition to invert.
   @inlinable public static prefix func ¬ (proposition: Bool) -> Bool {
     return !proposition  // @exempt(from: unicode)
   }
@@ -29,8 +29,8 @@ extension Bool: Comparable {
   /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `true`.
   ///
   /// - Parameters:
-  ///     - precedingValue: A Boolean value.
-  ///     - followingValue: A closure that results in another Boolean value.
+  ///   - precedingValue: A Boolean value.
+  ///   - followingValue: A closure that results in another Boolean value.
   @inlinable public static func ∧ (
     precedingValue: Bool,
     followingValue: @autoclosure () throws -> Bool
@@ -43,8 +43,8 @@ extension Bool: Comparable {
   /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `true`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The Boolean value to modify.
-  ///     - followingValue: A closure that results in another Boolean value.
+  ///   - precedingValue: The Boolean value to modify.
+  ///   - followingValue: A closure that results in another Boolean value.
   @inlinable public static func ∧= (
     precedingValue: inout Bool,
     followingValue: @autoclosure () throws -> Bool
@@ -57,8 +57,8 @@ extension Bool: Comparable {
   /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `false`.
   ///
   /// - Parameters:
-  ///     - precedingValue: A Boolean value.
-  ///     - followingValue: A closure that results in another Boolean value.
+  ///   - precedingValue: A Boolean value.
+  ///   - followingValue: A closure that results in another Boolean value.
   @inlinable public static func ∨ (
     precedingValue: Bool,
     followingValue: @autoclosure () throws -> Bool
@@ -71,8 +71,8 @@ extension Bool: Comparable {
   /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `false`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The Boolean value to modify.
-  ///     - followingValue: A closure that results in another Boolean value.
+  ///   - precedingValue: The Boolean value to modify.
+  ///   - followingValue: A closure that results in another Boolean value.
   @inlinable public static func ∨= (
     precedingValue: inout Bool,
     followingValue: @autoclosure () throws -> Bool

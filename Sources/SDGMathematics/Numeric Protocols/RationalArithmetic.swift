@@ -20,37 +20,37 @@ public protocol RationalArithmetic: ExpressibleByFloatLiteral, IntegralArithmeti
 
   /// Creates an instance as close as possible to `floatingPoint`.
   ///
-  /// - Properties:
-  ///     - floatingPoint: An instance of `FloatMax`.
+  /// - Parameters:
+  ///   - floatingPoint: An instance of `FloatMax`.
   init(_ floatingPoint: FloatMax)
 
   /// Returns the (rational) quotient of the preceding value divided by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The dividend.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The dividend.
+  ///   - followingValue: The divisor.
   static func ÷ (precedingValue: Self, followingValue: Self) -> Self
 
   /// Modifies the preceding value by dividing it by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The divisor.
   static func ÷= (precedingValue: inout Self, followingValue: Self)
 
   // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
   /// Creates a random value within a particular range.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
+  ///   - range: The allowed range for the random value.
   static func random(in range: Range<Self>) -> Self
 
   // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
   /// Creates a random value within a particular range using the specified randomizer.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator
 }
@@ -86,7 +86,7 @@ extension RationalArithmetic {
   /// Creates a random value within a particular range.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
+  ///   - range: The allowed range for the random value.
   @inlinable public static func random(in range: Range<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
@@ -96,8 +96,8 @@ extension RationalArithmetic {
   /// Creates a random value within a particular range using the specified randomizer.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator {
 

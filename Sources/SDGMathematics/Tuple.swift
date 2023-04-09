@@ -16,8 +16,8 @@
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≤ <A: Comparable, B: Comparable>(
   precedingValue: (A, B),
   followingValue: (A, B)
@@ -29,8 +29,8 @@
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≤ <A: Comparable, B: Comparable, C: Comparable>(
   precedingValue: (A, B, C),
   followingValue: (A, B, C)
@@ -42,8 +42,8 @@
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≤ <A: Comparable, B: Comparable, C: Comparable, D: Comparable>(
   precedingValue: (A, B, C, D),
   followingValue: (A, B, C, D)
@@ -55,8 +55,8 @@
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable
 public func ≤ <
   A: Comparable,
@@ -72,8 +72,8 @@ public func ≤ <
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable
 public func ≤ <
   A: Comparable,
@@ -90,8 +90,8 @@ public func ≤ <
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≥ <A: Comparable, B: Comparable>(
   precedingValue: (A, B),
   followingValue: (A, B)
@@ -103,8 +103,8 @@ public func ≤ <
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≥ <A: Comparable, B: Comparable, C: Comparable>(
   precedingValue: (A, B, C),
   followingValue: (A, B, C)
@@ -116,8 +116,8 @@ public func ≤ <
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≥ <A: Comparable, B: Comparable, C: Comparable, D: Comparable>(
   precedingValue: (A, B, C, D),
   followingValue: (A, B, C, D)
@@ -129,8 +129,8 @@ public func ≤ <
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable
 public func ≥ <
   A: Comparable,
@@ -146,8 +146,8 @@ public func ≥ <
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable
 public func ≥ <
   A: Comparable,

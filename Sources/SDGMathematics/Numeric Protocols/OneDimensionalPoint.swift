@@ -47,7 +47,7 @@ extension OneDimensionalPoint where Self: Strideable {
   /// Returns the value that follows `self` by a distance of `n`.
   ///
   /// - Parameters:
-  ///     - n: The distance to advance.
+  ///   - n: The distance to advance.
   @inlinable public func advanced(by n: Vector) -> Self {
     return self + n
   }
@@ -55,7 +55,7 @@ extension OneDimensionalPoint where Self: Strideable {
   /// Returns the distance from `self` to `other`.
   ///
   /// - Parameters:
-  ///     - other: The value to which the distance should be measured.
+  ///   - other: The value to which the distance should be measured.
   @inlinable public func distance(to other: Self) -> Vector {
     return other − self
   }

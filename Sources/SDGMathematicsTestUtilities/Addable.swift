@@ -19,11 +19,11 @@ import SDGTesting
 /// Tests a type’s conformance to Addable.
 ///
 /// - Parameters:
-///     - augend: An augend.
-///     - addend: An addend.
-///     - sum: The expected sum.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - augend: An augend.
+///   - addend: An addend.
+///   - sum: The expected sum.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testAddableConformance<T>(
   augend: T,
   addend: T,

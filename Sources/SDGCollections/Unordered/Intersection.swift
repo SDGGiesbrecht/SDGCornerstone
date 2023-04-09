@@ -25,8 +25,8 @@ where Base1.Element == Base2.Element {
   /// Creates an intersection from two sets.
   ///
   /// - Parameters:
-  ///     - a: A set.
-  ///     - b: Another set.
+  ///   - a: A set.
+  ///   - b: Another set.
   @inlinable public init(_ a: Base1, _ b: Base2) {
     self.a = a
     self.b = b

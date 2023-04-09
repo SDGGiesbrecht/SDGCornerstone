@@ -20,8 +20,8 @@ public protocol TwoDimensionalVectorProtocol: VectorProtocol {
   /// Creates a vector using the specified differences in *x* and *y*.
   ///
   /// - Parameters:
-  ///     - Δx: The difference in *x*.
-  ///     - Δy: The difference in *y*.
+  ///   - Δx: The difference in *x*.
+  ///   - Δy: The difference in *y*.
   init(Δx: Scalar, Δy: Scalar)
 
   /// The difference in *x*.
@@ -35,6 +35,14 @@ extension TwoDimensionalVectorProtocol {
 
   // MARK: - Addable
 
+  // #documentation(Addable.+=)
+  /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol.
+  ///
+  /// Exact behaviour depends on the type.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The value to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
     precedingValue.Δx += followingValue.Δx
     precedingValue.Δy += followingValue.Δy
@@ -74,8 +82,8 @@ extension TwoDimensionalVectorProtocol where Self: RationalVector {
   /// Modifies the preceding value by dividing it by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The divisor.
   @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
     precedingValue.Δx ÷= followingValue
     precedingValue.Δy ÷= followingValue
@@ -87,8 +95,8 @@ extension TwoDimensionalVectorProtocol where Scalar: RealArithmetic {
   /// Creates a vector from an angular direction and a length.
   ///
   /// - Parameters:
-  ///     - direction: The direction of the vector.
-  ///     - length: The length of the vector.
+  ///   - direction: The direction of the vector.
+  ///   - length: The length of the vector.
   @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
     self.init(Δx: cos(direction) × length, Δy: sin(direction) × length)
   }

@@ -19,10 +19,10 @@ import SDGTesting
 /// Tests a type that conforms to Pattern.
 ///
 /// - Parameters:
-///     - pattern: A pattern.
-///     - match: A collection expected to match the pattern exactly.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - pattern: A pattern.
+///   - match: A collection expected to match the pattern exactly.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testPattern<P>(
   _ pattern: P,
   match: P.Searchable,

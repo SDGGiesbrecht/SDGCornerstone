@@ -25,8 +25,8 @@ public protocol Addable {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The starting value.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to add.
   static func + (precedingValue: Self, followingValue: Self) -> Self
 
   // @documentation(Addable.+=)
@@ -35,8 +35,8 @@ public protocol Addable {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The value to add.
   static func += (precedingValue: inout Self, followingValue: Self)
 }
 

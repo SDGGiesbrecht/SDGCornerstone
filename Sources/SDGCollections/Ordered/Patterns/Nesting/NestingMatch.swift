@@ -21,10 +21,10 @@ where Opening: PatternMatch, Closing: PatternMatch, Closing.Searched == Opening.
   /// Creates a nesting match.
   ///
   /// - Parameters:
-  ///     - opening: The match for the opening pattern.
-  ///     - contents: The contents of the nesting level.
-  ///     - closing: The match for the closing pattern.
-  ///     - searched: The searched collection
+  ///   - opening: The match for the opening pattern.
+  ///   - contents: The contents of the nesting level.
+  ///   - closing: The match for the closing pattern.
+  ///   - searched: The searched collection
   @inlinable public init(
     opening: Opening,
     contents: NestingMatchContents<Opening, Closing>,

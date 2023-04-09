@@ -20,7 +20,7 @@ public struct IntensionalSet<Member>: Sendable, SetDefinition {
   /// Creates a set with a condition.
   ///
   /// - Parameters:
-  ///     - condition: The defining condition.
+  ///   - condition: The defining condition.
   @inlinable public init(where condition: @escaping @Sendable (_ possibleMember: Element) -> Bool) {
     self.condition = condition
   }

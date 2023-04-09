@@ -126,7 +126,7 @@ public struct Preference: Equatable, TransparentWrapper {
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:
-    ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
+    ///   - value: The new preference value, either an instance of a `Codable` type or `nil`.
     public mutating func set<T>(to value: T?) where T: Encodable {
 
       guard let theValue = value else {
@@ -153,7 +153,7 @@ public struct Preference: Equatable, TransparentWrapper {
   /// Sets the preference to a particular value.
   ///
   /// - Parameters:
-  ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
+  ///   - value: The new preference value, either an instance of a `Codable` type or `nil`.
   public mutating func set(to value: NilLiteral) {
     propertyListObject = nil
   }
@@ -164,7 +164,7 @@ public struct Preference: Equatable, TransparentWrapper {
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
     ///
     /// - Parameters:
-    ///     - type: The type to cast to.
+    ///   - type: The type to cast to.
     public func `as`<T>(_ type: T.Type) -> T? where T: Decodable {
       guard let object = propertyListObject else {
         // Value is nil.
@@ -191,7 +191,7 @@ public struct Preference: Equatable, TransparentWrapper {
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
     ///
     /// - Parameters:
-    ///     - type: The type to cast to.
+    ///   - type: The type to cast to.
     public subscript<T>(as type: T.Type) -> T? where T: Decodable, T: Encodable {
       get {
         return `as`(type)
@@ -206,8 +206,8 @@ public struct Preference: Equatable, TransparentWrapper {
     /// The result will be the default if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
     ///
     /// - Parameters:
-    ///     - type: The type to cast to.
-    ///     - default: The default.
+    ///   - type: The type to cast to.
+    ///   - default: The default.
     public subscript<T>(as type: T.Type, default default: T) -> T where T: Decodable, T: Encodable {
       get {
         return self[as: type] ?? `default`

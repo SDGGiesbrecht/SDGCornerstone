@@ -22,14 +22,14 @@ import SDGLogicTestUtilities
 /// Tests a type’s conformance to ComparableSet.
 ///
 /// - Parameters:
-///     - set: A set.
-///     - member: A member of the set.
-///     - nonmember: A nonmember of the set.
-///     - superset: A superset of the set.
-///     - overlapping: Another set which overlaps `set`.
-///     - disjoint: Another set which is disjoint with `set`.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - set: A set.
+///   - member: A member of the set.
+///   - nonmember: A nonmember of the set.
+///   - superset: A superset of the set.
+///   - overlapping: Another set which overlaps `set`.
+///   - disjoint: Another set which is disjoint with `set`.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testComparableSetConformance<T>(
   of set: T,
   member: T.Element,

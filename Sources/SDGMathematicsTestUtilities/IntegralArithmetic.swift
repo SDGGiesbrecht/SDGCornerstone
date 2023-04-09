@@ -19,9 +19,9 @@ import SDGTesting
 /// Tests a type’s conformance to IntegralArithmetic.
 ///
 /// - Parameters:
-///     - type: The type to test.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type to test.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testIntegralArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,

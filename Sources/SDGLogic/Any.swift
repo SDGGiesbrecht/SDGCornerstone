@@ -18,8 +18,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≠ (precedingValue: Any.Type?, followingValue: Any.Type?) -> Bool {
   return precedingValue != followingValue  // @exempt(from: unicode)
 }

@@ -86,6 +86,10 @@ extension UIntFamily {
 
   // MARK: - WholeArithmetic
 
+  /// Creates an unsigned integer from another unsigned integer.
+  ///
+  /// - Parameters:
+  ///   - uInt: The other unsigned integer.
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(asBinaryIntegerWithUInt: uInt)
   }

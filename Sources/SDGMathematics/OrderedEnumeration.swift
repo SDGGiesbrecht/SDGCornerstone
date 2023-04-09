@@ -39,7 +39,7 @@ where AllCases: BidirectionalCollection {
   /// Increments to the next case in the cycle.
   ///
   /// - Parameters:
-  ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
+  ///   - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
   mutating func incrementCyclically(_ wrap: () -> Void)
 
   /// Returns the next case, wrapping around to the first case if necessary.
@@ -48,7 +48,7 @@ where AllCases: BidirectionalCollection {
   /// Decrements to the previous case in the cycle.
   ///
   /// - Parameters:
-  ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
+  ///   - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
   mutating func decrementCyclically(_ wrap: () -> Void)
 
   /// Returns the previous case, wrapping around to the last case if necessary.

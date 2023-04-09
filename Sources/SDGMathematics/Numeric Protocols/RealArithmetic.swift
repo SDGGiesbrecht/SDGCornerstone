@@ -34,25 +34,25 @@ public protocol RealArithmetic: RationalArithmetic {
   /// Returns the `degree`‐th root of `self`.
   ///
   /// - Parameters:
-  ///     - degree: The degree of the root.
+  ///   - degree: The degree of the root.
   func root(ofDegree degree: Self) -> Self
 
   /// Sets `self` to its `degree`‐th root.
   ///
   /// - Parameters:
-  ///     - degree: The degree of the root.
+  ///   - degree: The degree of the root.
   mutating func formRoot(ofDegree degree: Self)
 
   /// Returns the square root of `operand`.
   ///
   /// - Parameters:
-  ///     - operand: The radicand.
+  ///   - operand: The radicand.
   static prefix func √ (operand: Self) -> Self
 
   /// Sets `operand` to its square root.
   ///
   /// - Parameters:
-  ///     - operand: The value to modify.
+  ///   - operand: The value to modify.
   static postfix func √= (operand: inout Self)
 
   // @documentation(SDGCornerstone.RealArithmetic.log(toBase:of:))
@@ -65,8 +65,8 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: `base` ≠ 1
   ///
   /// - Parameters:
-  ///     - base: The base.
-  ///     - antilogarithm: The antilogarithm.
+  ///   - base: The base.
+  ///   - antilogarithm: The antilogarithm.
   static func log(toBase base: Self, of antilogarithm: Self) -> Self
 
   /// Sets `self` to its base `base` logarithm.
@@ -78,7 +78,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: `base` ≠ 1
   ///
   /// - Parameters:
-  ///     - base: The base.
+  ///   - base: The base.
   mutating func formLogarithm(toBase base: Self)
 
   // @documentation(SDGCornerstone.RealArithmetic.log(_:))
@@ -87,7 +87,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: `antilogarithm` > 0
   ///
   /// - Parameters:
-  ///     - antilogarithm: The antilogarithm.
+  ///   - antilogarithm: The antilogarithm.
   static func log(_ antilogarithm: Self) -> Self
 
   /// Sets `self` to its common logarithm.
@@ -101,7 +101,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: `antilogarithm` > 0
   ///
   /// - Parameters:
-  ///     - antilogarithm: The antilogarithm.
+  ///   - antilogarithm: The antilogarithm.
   static func ln(_ antilogarithm: Self) -> Self
 
   /// Sets `self` to its natural logarithm.
@@ -113,42 +113,42 @@ public protocol RealArithmetic: RationalArithmetic {
   /// Returns the sine of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func sin(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.cos(_:))
   /// Returns the cosine of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func cos(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.tan(_:))
   /// Returns the tangent of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func tan(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.csc(_:))
   /// Returns the cosecant of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func csc(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.sec(_:))
   /// Returns the secant of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func sec(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.cot(_:))
   /// Returns the cotangent of an angle.
   ///
   /// - Parameters:
-  ///     - angle: The angle.
+  ///   - angle: The angle.
   static func cot(_ angle: Angle<Self>) -> Self
 
   // @documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
@@ -159,7 +159,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: −1 ≤ `sine` ≤ 1
   ///
   /// - Parameters:
-  ///     - sine: The sine.
+  ///   - sine: The sine.
   static func arcsin(_ sine: Self) -> Angle<Self>
 
   // @documentation(SDGCornerstone.RealArithmetic.arccos(_:))
@@ -170,7 +170,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: −1 ≤ `sine` ≤ 1
   ///
   /// - Parameters:
-  ///     - cosine: The cosine.
+  ///   - cosine: The cosine.
   static func arccos(_ cosine: Self) -> Angle<Self>
 
   // @documentation(SDGCornerstone.RealArithmetic.arctan(_:))
@@ -179,7 +179,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// The returned angle will be between −90° and 90°.
   ///
   /// - Parameters:
-  ///     - tangent: The tangent.
+  ///   - tangent: The tangent.
   static func arctan(_ tangent: Self) -> Angle<Self>
 
   // @documentation(SDGCornerstone.RealArithmetic.arccsc(_:))
@@ -190,7 +190,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: −1 ≥ `cosecant` ∨ `cosecant` ≤ 1
   ///
   /// - Parameters:
-  ///     - cosecant: The cosecant.
+  ///   - cosecant: The cosecant.
   static func arccsc(_ cosecant: Self) -> Angle<Self>
 
   // @documentation(SDGCornerstone.RealArithmetic.arcsec(_:))
@@ -201,7 +201,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// - Precondition: −1≥ `secant` ∨ `secant` ≤ 1
   ///
   /// - Parameters:
-  ///     - secant: The secant.
+  ///   - secant: The secant.
   static func arcsec(_ secant: Self) -> Angle<Self>
 
   // @documentation(SDGCornerstone.RealArithmetic.arccot(_:))
@@ -210,7 +210,7 @@ public protocol RealArithmetic: RationalArithmetic {
   /// The returned angle will be between 0° and 180°.
   ///
   /// - Parameters:
-  ///     - cotangent: The cotangent.
+  ///   - cotangent: The cotangent.
   static func arccot(_ cotangent: Self) -> Angle<Self>
 
   // MARK: - Conversions
@@ -401,8 +401,8 @@ extension RealArithmetic {
 /// - Precondition: `base` ≠ 1
 ///
 /// - Parameters:
-///     - base: The base.
-///     - antilogarithm: The antilogarithm.
+///   - base: The base.
+///   - antilogarithm: The antilogarithm.
 @inlinable public func log<N: RealArithmetic>(toBase base: N, of antilogarithm: N) -> N {
   return N.log(toBase: base, of: antilogarithm)
 }
@@ -413,7 +413,7 @@ extension RealArithmetic {
 /// - Precondition: `antilogarithm` > 0
 ///
 /// - Parameters:
-///     - antilogarithm: The antilogarithm.
+///   - antilogarithm: The antilogarithm.
 @inlinable public func log<N: RealArithmetic>(_ antilogarithm: N) -> N {
   return N.log(antilogarithm)
 }
@@ -424,7 +424,7 @@ extension RealArithmetic {
 /// - Precondition: `antilogarithm` > 0
 ///
 /// - Parameters:
-///     - antilogarithm: The antilogarithm.
+///   - antilogarithm: The antilogarithm.
 @inlinable public func ln<N: RealArithmetic>(_ antilogarithm: N) -> N {
   return N.ln(antilogarithm)
 }
@@ -433,7 +433,7 @@ extension RealArithmetic {
 /// Returns the sine of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func sin<N>(_ angle: Angle<N>) -> N {
   return N.sin(angle)
 }
@@ -442,7 +442,7 @@ extension RealArithmetic {
 /// Returns the cosine of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func cos<N>(_ angle: Angle<N>) -> N {
   return N.cos(angle)
 }
@@ -451,7 +451,7 @@ extension RealArithmetic {
 /// Returns the tangent of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func tan<N>(_ angle: Angle<N>) -> N {
   return N.tan(angle)
 }
@@ -460,7 +460,7 @@ extension RealArithmetic {
 /// Returns the cosecant of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func csc<N>(_ angle: Angle<N>) -> N {
   return N.csc(angle)
 }
@@ -469,7 +469,7 @@ extension RealArithmetic {
 /// Returns the secant of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func sec<N>(_ angle: Angle<N>) -> N {
   return N.sec(angle)
 }
@@ -478,7 +478,7 @@ extension RealArithmetic {
 /// Returns the cotangent of an angle.
 ///
 /// - Parameters:
-///     - angle: The angle.
+///   - angle: The angle.
 @inlinable public func cot<N>(_ angle: Angle<N>) -> N {
   return N.cot(angle)
 }
@@ -491,7 +491,7 @@ extension RealArithmetic {
 /// - Precondition: −1 ≤ `sine` ≤ 1
 ///
 /// - Parameters:
-///     - sine: The sine.
+///   - sine: The sine.
 @inlinable public func arcsin<N: RealArithmetic>(_ sine: N) -> Angle<N> {
   return N.arcsin(sine)
 }
@@ -504,7 +504,7 @@ extension RealArithmetic {
 /// - Precondition: −1 ≤ `sine` ≤ 1
 ///
 /// - Parameters:
-///     - cosine: The cosine.
+///   - cosine: The cosine.
 @inlinable public func arccos<N: RealArithmetic>(_ cosine: N) -> Angle<N> {
   return N.arccos(cosine)
 }
@@ -515,7 +515,7 @@ extension RealArithmetic {
 /// The returned angle will be between −90° and 90°.
 ///
 /// - Parameters:
-///     - tangent: The tangent.
+///   - tangent: The tangent.
 @inlinable public func arctan<N: RealArithmetic>(_ tangent: N) -> Angle<N> {
   return N.arctan(tangent)
 }
@@ -528,7 +528,7 @@ extension RealArithmetic {
 /// - Precondition: −1 ≥ `cosecant` ∨ `cosecant` ≤ 1
 ///
 /// - Parameters:
-///     - cosecant: The cosecant.
+///   - cosecant: The cosecant.
 @inlinable public func arccsc<N: RealArithmetic>(_ cosecant: N) -> Angle<N> {
   return N.arccsc(cosecant)
 }
@@ -541,7 +541,7 @@ extension RealArithmetic {
 /// - Precondition: −1≥ `secant` ∨ `secant` ≤ 1
 ///
 /// - Parameters:
-///     - secant: The secant.
+///   - secant: The secant.
 @inlinable public func arcsec<N: RealArithmetic>(_ secant: N) -> Angle<N> {
   return N.arcsec(secant)
 }
@@ -552,7 +552,7 @@ extension RealArithmetic {
 /// The returned angle will be between 0° and 180°.
 ///
 /// - Parameters:
-///     - cotangent: The cotangent.
+///   - cotangent: The cotangent.
 @inlinable public func arccot<N: RealArithmetic>(_ cotangent: N) -> Angle<N> {
   return N.arccot(cotangent)
 }

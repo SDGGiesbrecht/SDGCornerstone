@@ -21,8 +21,8 @@ where Opening: Pattern, Closing: Pattern, Opening.Searchable == Closing.Searchab
   /// Creates a nesting pattern from opening and closing patterns.
   ///
   /// - Parameters:
-  ///     - opening: The opening pattern.
-  ///     - closing: The closing pattern.
+  ///   - opening: The opening pattern.
+  ///   - closing: The closing pattern.
   @inlinable public init(opening: Opening, closing: Closing) {
     self.opening = opening
     let contents = _NestingContentsPattern(

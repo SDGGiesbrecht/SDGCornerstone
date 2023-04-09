@@ -19,12 +19,12 @@ import SDGTesting
 /// Tests a type’s conformance to SetInRepresentableUniverse.
 ///
 /// - Parameters:
-///     - type: The type.
-///     - a: An element.
-///     - b: Another, distinct element.
-///     - c: Yet another distinct element.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type.
+///   - a: An element.
+///   - b: Another, distinct element.
+///   - c: Yet another distinct element.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testSetInRepresentableUniverseConformance<T>(
   of type: T.Type,
   a: T.Element,

@@ -34,7 +34,7 @@ where Scalar: RationalArithmetic {
   /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
   ///
   /// - Parameters:
-  ///     - rawValue: The raw value.
+  ///   - rawValue: The raw value.
   init(rawValue: Scalar)
 
   /// A raw value in undefined but consistent units.
@@ -52,38 +52,38 @@ where Scalar: RationalArithmetic {
   /// Returns the result of multipling the measurement by the scalar.
   ///
   /// - Parameters:
-  ///     - precedingValue: The measurement.
-  ///     - followingValue: The scalar.
+  ///   - precedingValue: The measurement.
+  ///   - followingValue: The scalar.
   static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
   /// Modifies the measurement by multiplication with a scalar.
   ///
   /// - Parameters:
-  ///     - precedingValue: The measurement to modify.
-  ///     - followingValue: The scalar.
+  ///   - precedingValue: The measurement to modify.
+  ///   - followingValue: The scalar.
   static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
   // @documentation(Measurement.÷(Self, Scalar))
   /// Returns the (rational) quotient of a measurement divided by a scalar.
   ///
   /// - Parameters:
-  ///     - precedingValue: The measurement.
-  ///     - followingValue: The scalar.
+  ///   - precedingValue: The measurement.
+  ///   - followingValue: The scalar.
   static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
   // @documentation(Measurement.÷(Self, Self))
   /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The dividend.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The dividend.
+  ///   - followingValue: The divisor.
   static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 
   /// Modifies the preceding value by dividing it by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The measurement to modify.
-  ///     - followingValue: The scalar divisor.
+  ///   - precedingValue: The measurement to modify.
+  ///   - followingValue: The scalar divisor.
   static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 
   // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
@@ -93,13 +93,13 @@ where Scalar: RationalArithmetic {
   /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   func dividedAccordingToEuclid(by divisor: Self) -> Scalar
 
   /// Returns the Euclidean remainder of `self` ÷ `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   ///
   /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
   func mod(_ divisor: Self) -> Self
@@ -107,7 +107,7 @@ where Scalar: RationalArithmetic {
   /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   ///
   /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
   mutating func formRemainder(mod divisor: Self)
@@ -115,35 +115,35 @@ where Scalar: RationalArithmetic {
   /// Returns `true` if `self` is evenly divisible by `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor to check.
+  ///   - divisor: The divisor to check.
   func isDivisible(by divisor: Self) -> Bool
 
   // @documentation(SDGCornerstone.Measurement.gcd(_:_:))
   /// Returns the greatest common divisor of `a` and `b`.
   ///
   /// - Parameters:
-  ///     - a: A value.
-  ///     - b: Another value.
+  ///   - a: A value.
+  ///   - b: Another value.
   static func gcd(_ a: Self, _ b: Self) -> Self
 
   /// Sets `self` to the greatest common divisor of `self` and `other`.
   ///
   /// - Parameters:
-  ///     - other: Another value.
+  ///   - other: Another value.
   mutating func formGreatestCommonDivisor(with other: Self)
 
   // @documentation(SDGCornerstone.Measurement.lcm(_:_:))
   /// Returns the least common multiple of `a` and `b`.
   ///
   /// - Parameters:
-  ///     - a: A value.
-  ///     - b: Another value.
+  ///   - a: A value.
+  ///   - b: Another value.
   static func lcm(_ a: Self, _ b: Self) -> Self
 
   /// Sets `self` to the least common multiple of `self` and `other`.
   ///
   /// - Parameters:
-  ///     - other: Another value.
+  ///   - other: Another value.
   mutating func formLeastCommonMultiple(with other: Self)
 
   // MARK: - Rounding
@@ -154,15 +154,15 @@ where Scalar: RationalArithmetic {
   /// Rounds the value to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
   /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 }
 
@@ -188,8 +188,8 @@ extension Measurement {
   /// Returns the (rational) quotient of a measurement divided by a scalar.
   ///
   /// - Parameters:
-  ///     - precedingValue: The measurement.
-  ///     - followingValue: The scalar.
+  ///   - precedingValue: The measurement.
+  ///   - followingValue: The scalar.
   @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
     return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
   }
@@ -198,8 +198,8 @@ extension Measurement {
   /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The dividend.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The dividend.
+  ///   - followingValue: The divisor.
   @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
     return precedingValue.rawValue ÷ followingValue.rawValue
   }
@@ -260,7 +260,7 @@ extension Measurement {
   /// - Precondition: `range` is not empty.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
+  ///   - range: The allowed range for the random value.
   @inlinable public static func random(in range: Range<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
@@ -272,7 +272,7 @@ extension Measurement {
   /// - Precondition: `range` is not empty.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
+  ///   - range: The allowed range for the random value.
   @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)
@@ -284,8 +284,8 @@ extension Measurement {
   /// - Precondition: `range` is not empty.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator {
     let scalar = Scalar.random(
@@ -301,8 +301,8 @@ extension Measurement {
   /// - Precondition: `range` is not empty.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(
     in range: ClosedRange<Self>,
     using generator: inout R
@@ -322,8 +322,8 @@ extension Measurement {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The starting value.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
   }
@@ -334,8 +334,8 @@ extension Measurement {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The value to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
     precedingValue.rawValue += followingValue.rawValue
   }
@@ -420,8 +420,8 @@ extension Measurement {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - a: A value.
-///     - b: Another value.
+///   - a: A value.
+///   - b: Another value.
 @inlinable public func gcd<M: Measurement>(_ a: M, _ b: M) -> M {
   return M.gcd(a, b)
 }
@@ -430,8 +430,8 @@ extension Measurement {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - a: A value.
-///     - b: Another value.
+///   - a: A value.
+///   - b: Another value.
 @inlinable public func lcm<M: Measurement>(_ a: M, _ b: M) -> M {
   return M.lcm(a, b)
 }

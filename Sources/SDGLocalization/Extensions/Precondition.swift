@@ -18,9 +18,9 @@ import SDGText
 /// Throws a precondition failure indicating that the primitive method in which it is called has not been overridden.
 ///
 /// - Parameters:
-///     - method: The method. (Provided by default.)
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - method: The method. (Provided by default.)
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func primitiveMethod(
   _ method: String = #function,
   file: StaticString = #fileID,
@@ -40,10 +40,10 @@ public func primitiveMethod(
 /// This is intended for use only when there is no forseable way for code to reach a particular path; when code might be reached by disobeying preconditions, provide a more specific description with `preconditionFailure(_:)` instead.
 ///
 /// - Parameters:
-///     - function: The function. (Provided by default.)
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
-///     - column: The column number. (Provided by default.)
+///   - function: The function. (Provided by default.)
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
+///   - column: The column number. (Provided by default.)
 public func unreachable(
   function: String = #function,
   file: StaticString = #fileID,
@@ -80,9 +80,9 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 /// This can be used during development to automatically provide a reminder. The distinct name can also be easily detected by validation scripts. It should never occur in code intended for release.
 ///
 /// - Parameters:
-///     - function: The function. (Provided by default.)
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - function: The function. (Provided by default.)
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func notImplementedYet(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
   file: StaticString = #fileID,
@@ -96,9 +96,9 @@ public func notImplementedYet(  // @exempt(from: missingImplementation)
 /// This can be used during development to automatically provide a more detailed error description. The distinct name can also be easily detected by validation scripts. It should never occur in code intended for release.
 ///
 /// - Parameters:
-///     - function: The function. (Provided by default.)
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - function: The function. (Provided by default.)
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
   file: StaticString = #fileID,
@@ -110,10 +110,10 @@ public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplement
 /// Checks a necessary condition for making forward progress.
 ///
 /// - Parameters:
-///     - condition: A closure that performs the check.
-///     - message: A closure that generates a localized message.
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - condition: A closure that performs the check.
+///   - message: A closure that generates a localized message.
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func precondition<L>(
   _ condition: @autoclosure () -> Bool,
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
@@ -126,9 +126,9 @@ public func precondition<L>(
 /// Indicates that a precondition was violated.
 ///
 /// - Parameters:
-///     - message: A closure that generates a localized message.
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - message: A closure that generates a localized message.
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func preconditionFailure<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
   file: StaticString = #fileID,
@@ -140,10 +140,10 @@ public func preconditionFailure<L>(
 /// Performs an internal sanity check.
 ///
 /// - Parameters:
-///     - condition: A closure that performs the check.
-///     - message: A closure that generates a localized message.
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - condition: A closure that performs the check.
+///   - message: A closure that generates a localized message.
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 @inlinable public func assert<L>(
   _ condition: @autoclosure () -> Bool,
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
@@ -156,9 +156,9 @@ public func preconditionFailure<L>(
 /// Indicates that an internal sanity check failed.
 ///
 /// - Parameters:
-///     - message: A closure that generates a localized message.
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - message: A closure that generates a localized message.
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 @inlinable public func assertionFailure<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
   file: StaticString = #fileID,
@@ -170,9 +170,9 @@ public func preconditionFailure<L>(
 /// Unconditionally prints a given message and stops execution.
 ///
 /// - Parameters:
-///     - message: A closure that generates a localized message.
-///     - file: The file. (Provided by default.)
-///     - line: The line number. (Provided by default.)
+///   - message: A closure that generates a localized message.
+///   - file: The file. (Provided by default.)
+///   - line: The line number. (Provided by default.)
 public func fatalError<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
   file: StaticString = #fileID,

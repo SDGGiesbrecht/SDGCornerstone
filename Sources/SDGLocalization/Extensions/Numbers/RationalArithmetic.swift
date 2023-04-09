@@ -21,9 +21,9 @@ extension RationalArithmetic {
   /// Returns the number in digits.
   ///
   /// - Parameters:
-  ///     - maximumDecimalPlaces: The maximum number of decimal places.
-  ///     - radixCharacter: The character to use to represent the radix.
-  ///     - thousandsSeparator: The thousands separator. (Space by default.)
+  ///   - maximumDecimalPlaces: The maximum number of decimal places.
+  ///   - radixCharacter: The character to use to represent the radix.
+  ///   - thousandsSeparator: The thousands separator. (Space by default.)
   public func inDigits(
     maximumDecimalPlaces: Int,
     radixCharacter: UnicodeScalar,

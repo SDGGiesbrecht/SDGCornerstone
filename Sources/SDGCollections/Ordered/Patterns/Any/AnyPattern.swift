@@ -25,7 +25,7 @@ where Searchable: SearchableCollection {
   /// Creates a type erased instance of a pattern.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern.
+  ///   - pattern: The pattern.
   @inlinable public init<PatternType>(_ pattern: PatternType)
   where PatternType: Pattern, PatternType.Searchable == Searchable {
     matchesClosure = { collection, index in

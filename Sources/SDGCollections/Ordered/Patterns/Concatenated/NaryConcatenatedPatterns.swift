@@ -27,7 +27,7 @@ where Component: Pattern {
   /// - Requires: There must be at least one component.
   ///
   /// - Parameters:
-  ///     - components: The component pattern.
+  ///   - components: The component pattern.
   @inlinable public init(_ components: [Component]) {
     self.components = components
   }

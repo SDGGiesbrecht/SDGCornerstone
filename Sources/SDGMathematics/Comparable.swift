@@ -22,8 +22,8 @@ extension Comparable {
   /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value to compare.
-  ///     - followingValue: Another value to compare.
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   @inlinable public static func ≤ (precedingValue: Self, followingValue: Self) -> Bool {
     return precedingValue <= followingValue  // @exempt(from: unicode)
   }
@@ -32,8 +32,8 @@ extension Comparable {
   /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value to compare.
-  ///     - followingValue: Another value to compare.
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   @inlinable public static func ≥ (precedingValue: Self, followingValue: Self) -> Bool {
     return precedingValue >= followingValue  // @exempt(from: unicode)
   }
@@ -64,7 +64,7 @@ extension Comparable {
   /// ```
   ///
   /// - Parameters:
-  ///     - minimum: The desired minimum for the value.
+  ///   - minimum: The desired minimum for the value.
   @inlinable public mutating func increase(to minimum: Self) {
     if self < minimum {
       self = minimum
@@ -97,7 +97,7 @@ extension Comparable {
   /// ```
   ///
   /// - Parameters:
-  ///     - maximum: The desired maximum for the value.
+  ///   - maximum: The desired maximum for the value.
   @inlinable public mutating func decrease(to maximum: Self) {
     if self > maximum {
       self = maximum
@@ -114,8 +114,8 @@ extension Comparable {
   /// ```
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to test.
-  ///     - followingValue: The bounds of the range.
+  ///   - precedingValue: The value to test.
+  ///   - followingValue: The bounds of the range.
   @inlinable public static func ≈ (precedingValue: Self, followingValue: (Self, Self)) -> Bool {
     let range: ClosedRange<Self>
     if followingValue.0 ≥ followingValue.1 {
@@ -150,7 +150,6 @@ extension Comparable {
 ///   - precedingValue: The value preceding the `<` sign.
 ///   - followingValue: The value following the `<` sign.
 ///   - comparison: A closure which returns the derived value to compare.
-///   - value: The value for which to derive the sort criterion.
 @inlinable public func compare<T, C>(
   _ precedingValue: T,
   _ followingValue: T,
@@ -167,9 +166,7 @@ extension Comparable {
 ///   - precedingValue: The value preceding the `<` sign.
 ///   - followingValue: The value following the `<` sign.
 ///   - comparisonOne: A closure which returns the first derived value to compare.
-///   - valueOne: The value for which to derive the first sort criterion.
 ///   - comparisonTwo: A closure which returns the second derived value to compare.
-///   - valueTwo: The value for which to derive the second sort criterion.
 @inlinable public func compare<T, C, D>(
   _ precedingValue: T,
   _ followingValue: T,
@@ -189,11 +186,8 @@ where C: Comparable, D: Comparable {
 ///   - precedingValue: The value preceding the `<` sign.
 ///   - followingValue: The value following the `<` sign.
 ///   - comparisonOne: A closure which returns the first derived value to compare.
-///   - valueOne: The value for which to derive the first sort criterion.
 ///   - comparisonTwo: A closure which returns the second derived value to compare.
-///   - valueTwo: The value for which to derive the second sort criterion.
 ///   - comparisonThree: A closure which returns the third derived value to compare.
-///   - valueThree: The value for which to derive the third sort criterion.
 @inlinable public func compare<T, C, D, E>(
   _ precedingValue: T,
   _ followingValue: T,
@@ -214,13 +208,9 @@ where C: Comparable, D: Comparable, E: Comparable {
 ///   - precedingValue: The value preceding the `<` sign.
 ///   - followingValue: The value following the `<` sign.
 ///   - comparisonOne: A closure which returns the first derived value to compare.
-///   - valueOne: The value for which to derive the first sort criterion.
 ///   - comparisonTwo: A closure which returns the second derived value to compare.
-///   - valueTwo: The value for which to derive the second sort criterion.
 ///   - comparisonThree: A closure which returns the third derived value to compare.
-///   - valueThree: The value for which to derive the third sort criterion.
 ///   - comparisonFour: A closure which returns the fourth derived value to compare.
-///   - valueFour: The value for which to derive the fourth sort criterion.
 @inlinable public func compare<T, C, D, E, F>(
   _ precedingValue: T,
   _ followingValue: T,

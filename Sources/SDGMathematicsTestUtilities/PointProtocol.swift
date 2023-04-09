@@ -23,11 +23,11 @@ import SDGPersistenceTestUtilities
 /// - Precondition: `departure` and `destination` are expected to be inequal.
 ///
 /// - Parameters:
-///     - departure: A point of departure.
-///     - vector: A vector.
-///     - destination: The expected point of arrival.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - departure: A point of departure.
+///   - vector: A vector.
+///   - destination: The expected point of arrival.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testPointProtocolConformance<T>(
   departure: T,
   vector: T.Vector,

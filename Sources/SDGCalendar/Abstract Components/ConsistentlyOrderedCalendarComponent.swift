@@ -28,7 +28,7 @@ public protocol ConsistentlyOrderedCalendarComponent: CalendarComponent,
   /// - Precondition: The number must be valid for the particular compenent.
   ///
   /// - Parameters:
-  ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
+  ///   - numberAlreadyElapsed: The number of complete compenents already elapsed.
   init(numberAlreadyElapsed: Vector)
 
   /// Creates a component from an ordinal.
@@ -36,7 +36,7 @@ public protocol ConsistentlyOrderedCalendarComponent: CalendarComponent,
   /// - Precondition: The ordinal must be valid for the particular compenent.
   ///
   /// - Parameters:
-  ///     - ordinal: The ordinal.
+  ///   - ordinal: The ordinal.
   init(ordinal: Vector)
 
   /// The number of complete components already elapsed.

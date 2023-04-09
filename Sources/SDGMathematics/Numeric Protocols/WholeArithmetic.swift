@@ -25,7 +25,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Creates an instance equal to `uInt`.
   ///
   /// - Parameters:
-  ///     - uInt: An instance of `UIntMax`.
+  ///   - uInt: An instance of `UIntMax`.
   init(_ uInt: UIntMax)
 
   // MARK: - Operations
@@ -37,16 +37,16 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Returns the product of the preceding value times the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value.
-  ///     - followingValue: Another value.
+  ///   - precedingValue: A value.
+  ///   - followingValue: Another value.
   static func × (precedingValue: Self, followingValue: Self) -> Self
 
   // @documentation(WholeArithmetic.×=)
   /// Modifies the preceding value by multiplication with the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The coefficient by which to multiply.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The coefficient by which to multiply.
   static func ×= (precedingValue: inout Self, followingValue: Self)
 
   /// Sets `self` to the integral quotient of `self` divided by `divisor`.
@@ -54,7 +54,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   mutating func divideAccordingToEuclid(by divisor: Self)
 
   /// Returns the integral quotient of `self` divided by `divisor`.
@@ -62,13 +62,13 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   func dividedAccordingToEuclid(by divisor: Self) -> Self
 
   /// Returns the Euclidean remainder of `self` ÷ `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   ///
   /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
   func mod(_ divisor: Self) -> Self
@@ -76,7 +76,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor.
+  ///   - divisor: The divisor.
   ///
   /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
   mutating func formRemainder(mod divisor: Self)
@@ -84,35 +84,35 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Returns `true` if `self` is evenly divisible by `divisor`.
   ///
   /// - Parameters:
-  ///     - divisor: The divisor to check.
+  ///   - divisor: The divisor to check.
   func isDivisible(by divisor: Self) -> Bool
 
   // @documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
   /// Returns the greatest common divisor of `a` and `b`.
   ///
   /// - Parameters:
-  ///     - a: A value.
-  ///     - b: Another value.
+  ///   - a: A value.
+  ///   - b: Another value.
   static func gcd(_ a: Self, _ b: Self) -> Self
 
   /// Sets `self` to the greatest common divisor of `self` and `other`.
   ///
   /// - Parameters:
-  ///     - other: Another value.
+  ///   - other: Another value.
   mutating func formGreatestCommonDivisor(with other: Self)
 
   // @documentation(SDGCornerstone.WholeArithmetic.lcm(_:_:))
   /// Returns the least common multiple of `a` and `b`.
   ///
   /// - Parameters:
-  ///     - a: A value.
-  ///     - b: Another value.
+  ///   - a: A value.
+  ///   - b: Another value.
   static func lcm(_ a: Self, _ b: Self) -> Self
 
   /// Sets `self` to the least common multiple of `self` and `other`.
   ///
   /// - Parameters:
-  ///     - other: Another value.
+  ///   - other: Another value.
   mutating func formLeastCommonMultiple(with other: Self)
 
   /// Returns the result of the preceding value to the power of the following value.
@@ -121,12 +121,12 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
   ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
   ///   - If `Self` conforms to `RealNumberProtocol`, either
-  ///     - `precedingValue` must be positive, or
-  ///     - `followingValue` must be an integer.
+  ///   - `precedingValue` must be positive, or
+  ///   - `followingValue` must be an integer.
   ///
   /// - Parameters:
-  ///     - precedingValue: The base.
-  ///     - followingValue: The exponent.
+  ///   - precedingValue: The base.
+  ///   - followingValue: The exponent.
   static func ↑ (precedingValue: Self, followingValue: Self) -> Self
 
   /// Modifies the preceding value by exponentiation with the following value.
@@ -135,12 +135,12 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
   ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
   ///   - If `Self` conforms to `RealNumberProtocol`, either
-  ///     - `precedingValue` must be positive, or
-  ///     - `followingValue` must be an integer.
+  ///   - `precedingValue` must be positive, or
+  ///   - `followingValue` must be an integer.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The exponent.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The exponent.
   static func ↑= (precedingValue: inout Self, followingValue: Self)
 
   // MARK: - Classification
@@ -168,27 +168,27 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Rounds the value to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   mutating func round(_ rule: RoundingRule)
 
   /// Returns the value rounded to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   func rounded(_ rule: RoundingRule) -> Self
 
   /// Rounds the value to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
   /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
   // @localization(🇨🇦EN) @crossReference(WholeArithmetic.random(in:))
@@ -196,15 +196,15 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   /// Creates a random value within a particular range.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
+  ///   - range: The allowed range for the random value.
   static func random(in range: ClosedRange<Self>) -> Self
 
   // @documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
   /// Creates a random value within a particular range using the specified randomizer.
   ///
   /// - Parameters:
-  ///     - range: The allowed range for the random value.
-  ///     - generator: The randomizer to use to generate the random value.
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator
 }
@@ -371,7 +371,7 @@ extension WholeArithmetic {
   /// Erstellt einen zufälligen Wert innerhalb eines bestimmten Intervall.
   ///
   /// - Parameters:
-  ///     - intervall: Das erlaubte Intervall für den zufälligen Wert.
+  ///   - intervall: Das erlaubte Intervall für den zufälligen Wert.
   @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self {
     return random(in: intervall)
   }
@@ -392,8 +392,8 @@ extension WholeArithmetic {
   /// Returns the product of the preceding value times the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value.
-  ///     - followingValue: Another value.
+  ///   - precedingValue: A value.
+  ///   - followingValue: Another value.
   @inlinable public static func * (  // @exempt(from: unicode)
     precedingValue: Self,
     followingValue: Self
@@ -405,8 +405,8 @@ extension WholeArithmetic {
   /// Modifies the preceding value by multiplication with the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The coefficient by which to multiply.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The coefficient by which to multiply.
   @inlinable public static func *= (  // @exempt(from: unicode)
     precedingValue: inout Self,
     followingValue: Self
@@ -421,8 +421,8 @@ extension WholeArithmetic {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - a: A value.
-///     - b: Another value.
+///   - a: A value.
+///   - b: Another value.
 @inlinable public func gcd<N: WholeArithmetic>(_ a: N, _ b: N) -> N {
   return N.gcd(a, b)
 }
@@ -431,8 +431,8 @@ extension WholeArithmetic {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - a: A value.
-///     - b: Another value.
+///   - a: A value.
+///   - b: Another value.
 @inlinable public func lcm<N: WholeArithmetic>(_ a: N, _ b: N) -> N {
   return N.lcm(a, b)
 }

@@ -20,7 +20,7 @@ public struct AnyDescribableDate: DescribableDate {
   /// Creates a wrapped date.
   ///
   /// - Parameters:
-  ///     - wrapped: The date.
+  ///   - wrapped: The date.
   public init(_ wrapped: DescribableDate) {
     self.date = wrapped
   }

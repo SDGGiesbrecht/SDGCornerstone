@@ -26,7 +26,7 @@ where Option: Pattern {
   /// Creates a set of alternative patterns.
   ///
   /// - Parameters:
-  ///     - alternatives: The alternative patterns.
+  ///   - alternatives: The alternative patterns.
   @inlinable public init(_ alternatives: [Option]) {
     self.alternatives = alternatives
   }

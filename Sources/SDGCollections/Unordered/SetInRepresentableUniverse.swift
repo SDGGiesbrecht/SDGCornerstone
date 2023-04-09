@@ -25,13 +25,13 @@ public protocol SetInRepresentableUniverse: MutableSet {
   /// Returns the absolute complement of the set.
   ///
   /// - Parameters:
-  ///     - operand: The set.
+  ///   - operand: The set.
   static postfix func ′ (operand: Self) -> Self
 
   /// Sets the operand to its absolute complement.
   ///
   /// - Parameters:
-  ///     - operand: The set.
+  ///   - operand: The set.
   static postfix func ′= (operand: inout Self)
 }
 

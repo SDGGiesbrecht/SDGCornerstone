@@ -266,7 +266,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     /// Otherwise, use `do(_:)` instead.
     ///
     /// - Parameters:
-    ///     - setting: The new localization setting.
+    ///   - setting: The new localization setting.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
 
       // Make sure this was set and it is not just a silent mock preference.
@@ -291,7 +291,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   /// Creates a localization setting from a list of precedence groups.
   ///
   /// - Parameters:
-  ///     - orderOfPrecedence: An array of precedence groups. The outer array represents the order of precedence. Each inner array represents a group of localizations with equal precedence. Within a specific group, localizations will be mixed and matched at random. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
+  ///   - orderOfPrecedence: An array of precedence groups. The outer array represents the order of precedence. Each inner array represents a group of localizations with equal precedence. Within a specific group, localizations will be mixed and matched at random. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
   public init(orderOfPrecedence: [[String]]) {
     self.orderOfPrecedence = orderOfPrecedence
   }
@@ -299,7 +299,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   /// Creates a localization setting from a precedence list.
   ///
   /// - Parameters:
-  ///     - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
+  ///   - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
   public init(orderOfPrecedence: [String]) {
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
@@ -322,7 +322,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   /// Executes the closure under the localization settings described by `self`.
   ///
   /// - Parameters:
-  ///     - closure: The closure to execute.
+  ///   - closure: The closure to execute.
   public func `do`(_ closure: () throws -> Void) rethrows {
     LocalizationSetting.overrides.value.append(self)
     defer { LocalizationSetting.overrides.value.removeLast() }
@@ -373,7 +373,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   /// Returns the preferred localization out of those supported by the type `L`.
   ///
   /// - Parameters:
-  ///     - stabilization: The stabilization mode.
+  ///   - stabilization: The stabilization mode.
   public func resolved<L: Localization>(stabilization: StabilizationMode = .none) -> L {
     switch stabilization {
     case .none:

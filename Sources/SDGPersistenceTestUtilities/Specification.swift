@@ -31,7 +31,7 @@ import SDGTesting
 ///
 /// The directory should be specified relative to a source file using some combination of `#filePath` and `deletingLastPathComponent()`.
 /// - Parameters:
-///     - directory: The directory.
+///   - directory: The directory.
 public func setTestSpecificationDirectory(to directory: URL) {
   specificationDirectory = directory
 }
@@ -47,7 +47,7 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
 /// This method normally assumes the package source is still accessible in the same location as it was compiled from. If that is not the case, the `SWIFTPM_PACKAGE_ROOT` environment variable, can be used to direct this function to look for the package at a different location instead.
 ///
 /// - Parameters:
-///     - callerLocation: Optional. A different file to consider as the location of the call.
+///   - callerLocation: Optional. A different file to consider as the location of the call.
 public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
   return cached(in: &specificationDirectory) {
     let repositoryRoot: URL
@@ -72,11 +72,11 @@ public func testSpecificationDirectory(_ callerLocation: StaticString = #filePat
 /// To update a specification instead of testing against it, change `overwriteSpecificationInsteadOfFailing` to `true` and re‐run the test suite. The specification will be rewritten to match the provided string. *Do not forget to change it back afterward, or the test will cease to validate anything.*
 ///
 /// - Parameters:
-///     - string: The string to test.
-///     - specification: The location of the specification to compare against (or write to).
-///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - string: The string to test.
+///   - specification: The location of the specification to compare against (or write to).
+///   - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func compare(
   _ string: String,
   against specification: URL,

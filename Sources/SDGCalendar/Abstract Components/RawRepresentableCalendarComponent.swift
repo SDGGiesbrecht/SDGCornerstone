@@ -34,7 +34,7 @@ where Vector: IntegralArithmetic {
   /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
   ///
   /// - Parameters:
-  ///     - unsafeRawValue: The raw value.
+  ///   - unsafeRawValue: The raw value.
   init(unsafeRawValue: RawValue)
 
   /// The valid range for raw values.
@@ -51,7 +51,7 @@ extension RawRepresentableCalendarComponent {
   /// Creates an instance from a raw value.
   ///
   /// - Parameters:
-  ///     - value: The raw value.
+  ///   - value: The raw value.
   public init(_ value: RawValue) {
     guard let result = Self(possibleRawValue: value) else {
       preconditionFailure(
@@ -70,7 +70,7 @@ extension RawRepresentableCalendarComponent {
   /// Creates an instance from a raw value.
   ///
   /// - Parameters:
-  ///     - value: The raw value.
+  ///   - value: The raw value.
   public init?(possibleRawValue value: RawValue) {
     if let range = Self.validRange,
       value ∉ range

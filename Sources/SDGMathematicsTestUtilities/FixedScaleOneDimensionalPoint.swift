@@ -19,11 +19,11 @@ import SDGMathematics
 /// - Precondition: `departure` is expected to be less than `destination`.
 ///
 /// - Parameters:
-///     - departure: A point of departure.
-///     - vector: A vector.
-///     - destination: The expected point of arrival.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - departure: A point of departure.
+///   - vector: A vector.
+///   - destination: The expected point of arrival.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testFixedScaleOneDimensionalPointConformance<T>(
   departure: T,
   vector: T.Vector,

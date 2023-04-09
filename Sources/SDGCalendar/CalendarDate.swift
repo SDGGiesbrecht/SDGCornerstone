@@ -51,7 +51,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Creates an instance with the provided definition.
   ///
   /// - Parameters:
-  ///     - definition: The definition of the date.
+  ///   - definition: The definition of the date.
   public init(definition: DateDefinition) {
     self.definition = definition
   }
@@ -63,11 +63,11 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
   ///
   /// - Parameters:
-  ///     - year: The year.
-  ///     - month: The month.
-  ///     - day: The day of the month.
-  ///     - hour: The hour.
-  ///     - part: The part.
+  ///   - year: The year.
+  ///   - month: The month.
+  ///   - day: The day of the month.
+  ///   - hour: The hour.
+  ///   - part: The part.
   public init(
     hebrewYear year: HebrewYear,
     month: HebrewMonth = .tishrei,
@@ -85,11 +85,11 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
   ///
   /// - Parameters:
-  ///     - month: The month.
-  ///     - day: The day of the month.
-  ///     - year: The year.
-  ///     - hour: The hour.
-  ///     - part: The part.
+  ///   - month: The month.
+  ///   - day: The day of the month.
+  ///   - year: The year.
+  ///   - hour: The hour.
+  ///   - part: The part.
   public init(
     hebrew month: HebrewMonth,
     _ day: HebrewDay,
@@ -107,12 +107,12 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
   ///
   /// - Parameters:
-  ///     - year: The year.
-  ///     - month: The month.
-  ///     - day: The day of the month.
-  ///     - hour: The hour.
-  ///     - minute: The minute.
-  ///     - second: The second.
+  ///   - year: The year.
+  ///   - month: The month.
+  ///   - day: The day of the month.
+  ///   - hour: The hour.
+  ///   - minute: The minute.
+  ///   - second: The second.
   public init(
     gregorianYear year: GregorianYear,
     month: GregorianMonth = .january,
@@ -139,12 +139,12 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
   ///
   /// - Parameters:
-  ///     - month: The month.
-  ///     - day: The day of the month.
-  ///     - year: The year.
-  ///     - hour: The hour.
-  ///     - minute: The minute.
-  ///     - second: The second.
+  ///   - month: The month.
+  ///   - day: The day of the month.
+  ///   - year: The year.
+  ///   - hour: The hour.
+  ///   - minute: The minute.
+  ///   - second: The second.
   public init(
     gregorian month: GregorianMonth,
     _ day: GregorianDay,
@@ -166,7 +166,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Creates a calendar date using an instance of `Date`.
   ///
   /// - Parameters:
-  ///     - dateInstance: The `Date` instance.
+  ///   - dateInstance: The `Date` instance.
   public init(_ dateInstance: Date) {
     self.init(definition: FoundationDate(dateInstance))
   }
@@ -209,7 +209,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// This method is preferred to manual conversions, as the returned conversions are automatically cached.
   ///
   /// - Parameters:
-  ///     - type: The type to convert to.
+  ///   - type: The type to convert to.
   ///
   /// - Returns: The converted definition.
   public func converted<D: DateDefinition>(to type: D.Type) -> D {
@@ -242,7 +242,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Returns the time in the ISO format.
   ///
   /// - Parameters:
-  ///     - includeSeconds: Whether or not to include the seconds.
+  ///   - includeSeconds: Whether or not to include the seconds.
   public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
     var result = gregorianHour.inISOFormat() + ":" + gregorianMinute.inISOFormat()
     if includeSeconds {
@@ -273,7 +273,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Returns date properties adjusted to the specified time zone.
   ///
   /// - Parameters:
-  ///     - timeZone: The target time zone.
+  ///   - timeZone: The target time zone.
   public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
     let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
     return AnyDescribableDate(date)
@@ -282,7 +282,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Returns date properties adjusted to mean solar time at the specified longitude, with negative angles representing west.
   ///
   /// - Parameters:
-  ///     - longitude: The target longitude.
+  ///   - longitude: The target longitude.
   public func adjustedToMeanSolarTime<N>(atLongitude longitude: Angle<N>) -> AnyDescribableDate
   where N: BinaryFloatingPoint {
     let convertedAngle = Angle(rawValue: FloatMax(longitude.rawValue))
@@ -308,7 +308,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   /// Registers a definition type so that its instances can be decoded.
   ///
   /// - Parameters:
-  ///     - type: The type to register.
+  ///   - type: The type to register.
   public static func register(_ type: DateDefinition.Type) {
     knownDateDefinitions[type.identifier] = type
   }

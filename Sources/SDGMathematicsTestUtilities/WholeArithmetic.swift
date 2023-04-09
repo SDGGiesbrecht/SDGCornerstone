@@ -19,10 +19,10 @@ import SDGTesting
 /// Tests a type’s conformance to WholeArithmetic.
 ///
 /// - Parameters:
-///     - type: The type.
-///     - includingNegatives: Whether or not to test negative numbers.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type.
+///   - includingNegatives: Whether or not to test negative numbers.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testWholeArithmeticConformance<T>(
   of type: T.Type,
   includingNegatives: Bool,

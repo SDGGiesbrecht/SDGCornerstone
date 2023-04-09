@@ -21,8 +21,8 @@ where Searched: SearchableCollection {
   /// Creates a description of a match.
   ///
   /// - Parameters:
-  ///     - range: The range of the match.
-  ///     - collection: The collection containing the match.
+  ///   - range: The range of the match.
+  ///   - collection: The collection containing the match.
   @inlinable public init<R>(range: R, in collection: Searched)
   where R: RangeExpression, R.Bound == Searched.Index {
     self._contents = collection[range.relative(to: collection)]
@@ -43,7 +43,7 @@ where Searched: SearchableCollection {
   /// - Requires: All indices within the match must be valid for the target collection and point at the same elements.
   ///
   /// - Parameters:
-  ///     - context: The new context of the match.
+  ///   - context: The new context of the match.
   @inlinable public func `in`<Context>(
     _ context: Context
   ) -> AtomicPatternMatch<Context>

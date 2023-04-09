@@ -17,10 +17,10 @@ import SDGTesting
 /// Tests a type’s conformance to RangeReplaceableCollection.
 ///
 /// - Parameters:
-///     - type: The type.
-///     - element: An element instance.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type.
+///   - element: An element instance.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testRangeReplaceableCollectionConformance<T>(
   of type: T.Type,
   element: T.Element,

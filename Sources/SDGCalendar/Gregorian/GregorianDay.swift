@@ -32,8 +32,8 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
   /// February 29 becomes March 1 in non‐leap years.
   ///
   /// - Parameters:
-  ///     - month: The month.
-  ///     - year: The year.
+  ///   - month: The month.
+  ///   - year: The year.
   public mutating func correct(forMonth month: inout GregorianMonth, year: GregorianYear) {
     let daysInMonth = month.numberOfDays(leapYear: year.isLeapYear)
     if self.day > daysInMonth {

@@ -52,7 +52,7 @@ where
   /// ```
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to search for.
+  ///   - pattern: The pattern to search for.
   func lastMatch<P>(for pattern: P) -> P.Match?
   where
     P: BidirectionalPattern,
@@ -86,14 +86,14 @@ where
   /// ```
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to search for.
+  ///   - pattern: The pattern to search for.
   func lastMatch(for pattern: Self) -> Match?
 
   // @documentation(SDGCornerstone.Collection.hasSuffix(_:))
   /// Returns `true` if `self` begins with `pattern`.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to try.
+  ///   - pattern: The pattern to try.
   func hasSuffix<P>(_ pattern: P) -> Bool
   where
     P: BidirectionalPattern,
@@ -104,14 +104,14 @@ where
   /// Returns `true` if `self` begins with `pattern`.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to try.
+  ///   - pattern: The pattern to try.
   func hasSuffix(_ pattern: Self) -> Bool
 
   // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
   /// Returns the longest suffix subsequence shared with the other collection.
   ///
   /// - Parameters:
-  ///     - other: The other collection
+  ///   - other: The other collection
   func commonSuffix<C: SearchableBidirectionalCollection>(
     with other: C
   ) -> AtomicPatternMatch<Self>
@@ -120,21 +120,21 @@ where
   /// Returns the longest prefix subsequence shared with the other collection.
   ///
   /// - Parameters:
-  ///     - other: The other collection
+  ///   - other: The other collection
   func commonSuffix(with other: Self) -> AtomicPatternMatch<Self>
 
   // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
-  ///     - other: The other collection. (The starting point.)
+  ///   - other: The other collection. (The starting point.)
   func changes<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
-  ///     - other: The other collection. (The starting point.)
+  ///   - other: The other collection. (The starting point.)
   func changes(from other: Self) -> CollectionDifference<Element>
 }
 
@@ -194,7 +194,7 @@ extension SearchableBidirectionalCollection {
   /// Returns `true` if `self` begins with `pattern`.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to try.
+  ///   - pattern: The pattern to try.
   @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
     return _hasSuffix(pattern)
   }
@@ -223,7 +223,7 @@ extension SearchableBidirectionalCollection {
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
-  ///     - other: The other collection. (The starting point.)
+  ///   - other: The other collection. (The starting point.)
   @inlinable public func changes(
     from other: Self
   ) -> CollectionDifference<Element> {
@@ -236,8 +236,8 @@ extension SearchableBidirectionalCollection {
   /// Converts the reversed match into a match in the forward collection.
   ///
   /// - Parameters:
-  ///     - reversedMatch: The reversed match.
-  ///     - forwardCollection: The forward collection.
+  ///   - reversedMatch: The reversed match.
+  ///   - forwardCollection: The forward collection.
   @inlinable public func forward(
     match reversedMatch: AtomicPatternMatch<ReversedCollection<Self>>,
     in forwardCollection: Self

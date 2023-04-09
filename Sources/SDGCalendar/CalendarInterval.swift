@@ -40,7 +40,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of Gregorian leap year cycles.
   ///
   /// - Parameters:
-  ///     - gregorianLeapYearCycles: The number of leap year cycles.
+  ///   - gregorianLeapYearCycles: The number of leap year cycles.
   public init(gregorianLeapYearCycles: Scalar) {
     self.inGregorianLeapYearCycles = gregorianLeapYearCycles
   }
@@ -48,7 +48,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of Hebrew moons.
   ///
   /// - Parameters:
-  ///     - hebrewMoons: The number of moons.
+  ///   - hebrewMoons: The number of moons.
   public init(hebrewMoons: Scalar) {
     self.inHebrewMoons = hebrewMoons
   }
@@ -56,7 +56,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of weeks.
   ///
   /// - Parameters:
-  ///     - weeks: The number of weeks.
+  ///   - weeks: The number of weeks.
   public init(weeks: Scalar) {
     self.inWeeks = weeks
   }
@@ -64,7 +64,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of days.
   ///
   /// - Parameters:
-  ///     - days: The number of days.
+  ///   - days: The number of days.
   public init(days: Scalar) {
     self.inDays = days
   }
@@ -72,7 +72,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of hours.
   ///
   /// - Parameters:
-  ///     - hours: The number of hours.
+  ///   - hours: The number of hours.
   public init(hours: Scalar) {
     self.inHours = hours
   }
@@ -80,7 +80,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of minutes.
   ///
   /// - Parameters:
-  ///     - minutes: The number of minutes.
+  ///   - minutes: The number of minutes.
   public init(minutes: Scalar) {
     self.inMinutes = minutes
   }
@@ -88,7 +88,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of Hebrew parts.
   ///
   /// - Parameters:
-  ///     - hebrewParts: The number of parts.
+  ///   - hebrewParts: The number of parts.
   public init(hebrewParts: Scalar) {
     self.inHebrewParts = hebrewParts
   }
@@ -96,7 +96,7 @@ where Scalar: RationalArithmetic {
   /// Creates an interval from a number of seconds.
   ///
   /// - Parameters:
-  ///     - seconds: The number of seconds.
+  ///   - seconds: The number of seconds.
   public init(seconds: Scalar) {
     self.inSeconds = seconds
   }

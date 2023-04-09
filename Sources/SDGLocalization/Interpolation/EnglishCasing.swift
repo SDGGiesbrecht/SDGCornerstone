@@ -47,7 +47,7 @@ public enum EnglishCasing: CodableViaEnumeration, Sendable {
   /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase a–z will cause an precondition failure.
   ///
   /// - Parameters:
-  ///     - compileTimeString: The string to transform.
+  ///   - compileTimeString: The string to transform.
   public func apply(to compileTimeString: StaticString) -> StrictString {
     var string = StrictString(compileTimeString)
     assert(

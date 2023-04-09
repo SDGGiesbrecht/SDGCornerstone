@@ -93,10 +93,12 @@ extension FloatFamily {
 
   // MARK: - Subtractable
 
+  // @documentation(Subtractable.−)
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
 
+  // @documentation(Subtractable.−=)
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
     precedingValue -= followingValue  // @exempt(from: unicode)
   }

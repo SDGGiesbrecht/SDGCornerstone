@@ -23,8 +23,8 @@ extension Addable where Self: Pattern {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The starting value.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     // Disambiguate Addable vs Pattern
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)

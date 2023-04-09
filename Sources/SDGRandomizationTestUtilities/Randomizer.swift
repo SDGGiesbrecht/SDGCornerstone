@@ -17,9 +17,9 @@ import SDGTesting
 /// Tests a type’s conformance to RandomNumberGenerator.
 ///
 /// - Parameters:
-///     - randomizer: A randomizer to test.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - randomizer: A randomizer to test.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testRandomNumberGeneratorConformance<T>(
   of randomizer: T,
   file: StaticString = #filePath,

@@ -94,8 +94,8 @@ import SDGLogic
     /// Returns a URL for the specified location and relative path in the application’s domain.
     ///
     /// - Parameters:
-    ///     - location: The location.
-    ///     - relativePath: The path.
+    ///   - location: The location.
+    ///   - relativePath: The path.
     public func url(in location: RecommendedLocation, at relativePath: String) -> URL {
       return url(in: location, for: ProcessInfo.applicationDomain, at: relativePath)
     }
@@ -103,9 +103,9 @@ import SDGLogic
     /// Returns a URL for the specified location, domain and relative path.
     ///
     /// - Parameters:
-    ///     - location: The location.
-    ///     - domain: The domain.
-    ///     - relativePath: The path.
+    ///   - location: The location.
+    ///   - domain: The domain.
+    ///   - relativePath: The path.
     public func url(in location: RecommendedLocation, for domain: String, at relativePath: String)
       -> URL
     {
@@ -115,7 +115,7 @@ import SDGLogic
     /// Deletes everything in the specified location for the application domain.
     ///
     /// - Parameters:
-    ///     - location: The location.
+    ///   - location: The location.
     public func delete(_ location: RecommendedLocation) {
       delete(location, for: ProcessInfo.applicationDomain)
     }
@@ -123,8 +123,8 @@ import SDGLogic
     /// Deletes everything in the specified location and domain.
     ///
     /// - Parameters:
-    ///     - location: The location.
-    ///     - domain: The domain.
+    ///   - location: The location.
+    ///   - domain: The domain.
     public func delete(_ location: RecommendedLocation, for domain: String) {
       let folder = url(in: location, for: domain)
       try? removeItem(at: folder)
@@ -137,9 +137,9 @@ import SDGLogic
     /// The directory will be in a location where the operating system will clean it up eventually in the event of a crash preventing the method from performing clean‐up itself.
     ///
     /// - Parameters:
-    ///     - destination: The approximate destination of any files that will be moved out of the temporary directory. The method will attempt to use a temporary directory on the same volume so the move can be made faster. Pass `nil` if it does not matter.
-    ///     - body: The body of the operation.
-    ///     - directory: The provided temporary directory.
+    ///   - destination: The approximate destination of any files that will be moved out of the temporary directory. The method will attempt to use a temporary directory on the same volume so the move can be made faster. Pass `nil` if it does not matter.
+    ///   - body: The body of the operation.
+    ///   - directory: The provided temporary directory.
     public func withTemporaryDirectory<Result>(
       appropriateFor destination: URL?,
       _ body: (_ directory: URL) throws -> Result
@@ -243,8 +243,8 @@ import SDGLogic
     /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
-    ///     - source: The URL of the source item.
-    ///     - destination: The destination URL.
+    ///   - source: The URL of the source item.
+    ///   - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
       try createDirectory(at: destination.deletingLastPathComponent())
       try moveItem(
@@ -258,8 +258,8 @@ import SDGLogic
     /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
-    ///     - source: The URL of the source item.
-    ///     - destination: The destination URL.
+    ///   - source: The URL of the source item.
+    ///   - destination: The destination URL.
     public func copy(_ source: URL, to destination: URL) throws {
       try createDirectory(at: destination.deletingLastPathComponent())
       try copyItem(
@@ -275,7 +275,7 @@ import SDGLogic
     /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
-    ///     - directory: The root directory for the search.
+    ///   - directory: The root directory for the search.
     public func contents(ofDirectory directory: URL) throws -> [URL] {
       return try contentsOfDirectory(
         at: existingRepresentation(of: directory),
@@ -295,7 +295,7 @@ import SDGLogic
     /// Directories themselves are not returned—only the files they contain.
     ///
     /// - Parameters:
-    ///     - directory: The root directory for the search.
+    ///   - directory: The root directory for the search.
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
       do {
         return try _deepFileEnumeration(in: directory)
@@ -366,8 +366,8 @@ import SDGLogic
     /// The directory will be automatically created if necessary.
     ///
     /// - Parameters:
-    ///     - directory: The directory in which to execute the closure.
-    ///     - closure: The closure.
+    ///   - directory: The directory in which to execute the closure.
+    ///   - closure: The closure.
     public func `do`(in directory: URL, closure: () throws -> Void) throws {
 
       try createDirectory(at: directory)

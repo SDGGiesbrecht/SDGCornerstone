@@ -25,8 +25,8 @@ where Vector: TwoDimensionalVectorProtocol {
   /// Creates a point from two co‐ordinates.
   ///
   /// - Parameters:
-  ///     - x: The *x* co‐ordinate.
-  ///     - y: The *y* co‐ordinate.i
+  ///   - x: The *x* co‐ordinate.
+  ///   - y: The *y* co‐ordinate.i
   init(_ x: Coordinate, _ y: Coordinate)
 
   /// The *x* co‐ordinate.
@@ -38,27 +38,27 @@ where Vector: TwoDimensionalVectorProtocol {
   /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   mutating func round(_ rule: WholeArithmetic.RoundingRule)
 
   /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self
 
   /// Rounds the point’s co‐ordinates to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar)
 
   /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) -> Self
 }
 

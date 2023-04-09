@@ -20,7 +20,7 @@ extension BidirectionalCollection {
   /// Returns the backward version of the specified range.
   ///
   /// - Parameters:
-  ///     - range: The range.
+  ///   - range: The range.
   @inlinable public func backward<R>(_ range: R) -> Range<ReversedCollection<Self>.Index>
   where R: RangeExpression, R.Bound == Self.Index {
     let resolved = range.relative(to: self)
@@ -32,7 +32,7 @@ extension BidirectionalCollection {
   /// Returns the forward version of the specified range.
   ///
   /// - Parameters:
-  ///     - range: The range.
+  ///   - range: The range.
   @inlinable public func forward<R>(_ range: R) -> Range<Self.Index>
   where R: RangeExpression, R.Bound == ReversedCollection<Self>.Index {
     let resolved = range.relative(to: reversed())
