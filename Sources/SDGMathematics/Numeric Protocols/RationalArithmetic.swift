@@ -82,6 +82,11 @@ extension RationalArithmetic {
     }
   }
 
+  // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+  /// Creates a random value within a particular range.
+  ///
+  /// - Parameters:
+  ///     - range: The allowed range for the random value.
   @inlinable public static func random(in range: Range<Self>) -> Self {
     var generator = SystemRandomNumberGenerator()
     return random(in: range, using: &generator)

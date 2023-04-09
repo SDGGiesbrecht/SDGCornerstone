@@ -316,7 +316,14 @@ extension Measurement {
 
   // MARK: - Addable
 
-  // @documentation(Addable.+)
+  // #documentation(Addable.+)
+  /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol.
+  ///
+  /// Exact behaviour depends on the type.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting value.
+  ///     - followingValue: The value to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
   }

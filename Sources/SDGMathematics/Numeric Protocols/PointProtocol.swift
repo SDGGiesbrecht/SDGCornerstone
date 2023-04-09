@@ -90,6 +90,12 @@ extension PointProtocol where Self.Vector == Self {
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
   }
 
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting point.
+  ///     - followingValue: The vector to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     // Disambiguate Self − Vector vs Self − Self
     return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)

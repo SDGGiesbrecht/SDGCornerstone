@@ -41,6 +41,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   ///     - followingValue: Another value.
   static func × (precedingValue: Self, followingValue: Self) -> Self
 
+  // @documentation(WholeArithmetic.×=)
   /// Modifies the preceding value by multiplication with the following value.
   ///
   /// - Parameters:
@@ -400,7 +401,12 @@ extension WholeArithmetic {
     return precedingValue × followingValue
   }
 
-  /// Multiplies two values and stores the result in the left‐hand‐side variable.
+  // #documentation(WholeArithmetic.×=)
+  /// Modifies the preceding value by multiplication with the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The value to modify.
+  ///     - followingValue: The coefficient by which to multiply.
   @inlinable public static func *= (  // @exempt(from: unicode)
     precedingValue: inout Self,
     followingValue: Self

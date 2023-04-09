@@ -41,6 +41,9 @@ public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatab
   }
 
   /// Creates an instance from an integer.
+  ///
+  /// - Parameters:
+  ///   - integer: The integer.
   public init(_ integer: Integer) {
     self.init(numerator: integer, denominator: 1)
   }

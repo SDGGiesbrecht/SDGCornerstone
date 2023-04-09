@@ -81,8 +81,8 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   /// - Important: Changing this invalidates any existing sorted data. Care should be taken if changes need to be made after an application has already done some work.
   ///
   /// - Parameters:
-  ///     - precedingValue: The preceding string.
-  /// 	- followingValue: The following string.
+  ///   - precedingValue: The preceding string.
+  ///   - followingValue: The following string.
   public static var sortAlgorithm:
     (
       _ precedingValue: StrictString,

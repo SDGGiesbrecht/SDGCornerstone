@@ -352,6 +352,11 @@ extension SearchableCollection {
   @inlinable public func hasPrefix<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self {
     return _hasPrefix(pattern)
   }
+  // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
+  /// Returns `true` if `self` begins with `pattern`.
+  ///
+  /// - Parameters:
+  ///     - pattern: The pattern to try.
   @inlinable public func hasPrefix(_ pattern: Self) -> Bool {
     return _hasPrefix(pattern)
   }

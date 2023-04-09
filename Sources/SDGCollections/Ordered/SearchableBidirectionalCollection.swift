@@ -219,6 +219,11 @@ extension SearchableBidirectionalCollection {
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return shimmedDifference(from: other)
   }
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
+  ///
+  /// - Parameters:
+  ///     - other: The other collection. (The starting point.)
   @inlinable public func changes(
     from other: Self
   ) -> CollectionDifference<Element> {

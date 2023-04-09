@@ -51,6 +51,9 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
   // MARK: - Initialization
 
   /// Creates semantic markup from raw text.
+  ///
+  /// - Parameters:
+  ///   - rawText: The raw text.
   public init(_ rawText: StrictString) {
     source = rawText
   }
