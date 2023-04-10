@@ -79,10 +79,6 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   /// A unified international order intended for displayed human text is provided in `SDGCollation`. To use it globally, set this property to `{ CollationOrder.root.stringsAreOrderedAscending($0, $1) }`.
   ///
   /// - Important: Changing this invalidates any existing sorted data. Care should be taken if changes need to be made after an application has already done some work.
-  ///
-  /// - Parameters:
-  ///   - precedingValue: The preceding string.
-  ///   - followingValue: The following string.
   public static var sortAlgorithm:
     (
       _ precedingValue: StrictString,
@@ -115,6 +111,9 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   }
 
   /// Creates a string from a `String`.
+  ///
+  /// - Parameters:
+  ///   - string: The `String`.
   @inlinable public init(_ string: String) {
     self.string = StrictString.normalizeAsString(string)
   }
@@ -138,7 +137,7 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   /// Creates a string from a strict `ClusterView`.
   ///
   /// - Parameters:
-  ///   - string: The cluster view.
+  ///   - clusters: The cluster view.
   @inlinable public init(_ clusters: ClusterView) {
     self = clusters.string
   }
