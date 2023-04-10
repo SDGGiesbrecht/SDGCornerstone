@@ -73,6 +73,7 @@ public protocol MutableSet: ComparableSet, SetAlgebra {
   static func ∩= <S: FiniteSet>(precedingValue: inout Self, followingValue: S)
   where S.Element == Self.Element
 
+  // @documentation(MutableSet.∩=)
   /// Sets `precedingValue` to the intersection of the two sets.
   ///
   /// - Parameters:
@@ -166,15 +167,33 @@ public protocol MutableSet: ComparableSet, SetAlgebra {
 
 extension MutableSet {
 
+  // #documentation(SDGCornerstone.SetDefinition.∩)
+  /// Returns the intersection of the two sets.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∩ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Self
   where S.Element == Self.Element {
     return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
   }
 
+  // #documentation(SDGCornerstone.SetDefinition.∩)
+  /// Returns the intersection of the two sets.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
     return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
   }
 
+  // #documentation(MutableSet.∩=)
+  /// Sets `precedingValue` to the intersection of the two sets.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∩= <S: FiniteSet>(precedingValue: inout Self, followingValue: S)
   where S.Element == Self.Element {
     var result = Self()

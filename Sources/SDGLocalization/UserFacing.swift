@@ -27,7 +27,6 @@ where Localization: SDGLocalization.Localization {
   ///
   /// - Parameters:
   ///   - localize: A closure that resolves the element based on a requested localization.
-  ///   - localization: The requested localization.
   public init(_ localize: @escaping (_ localization: Localization) -> Element) {
 
     #if DEBUG
@@ -42,7 +41,6 @@ where Localization: SDGLocalization.Localization {
   ///
   /// - Parameters:
   ///   - localize: A closure that resolves the element based on a requested localization.
-  ///   - localization: The requested localization.
   public init(_ localize: @escaping (_ localization: Localization) -> Element)
   where Localization: InputLocalization {
 

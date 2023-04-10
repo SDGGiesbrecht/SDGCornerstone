@@ -22,8 +22,6 @@ where Localization: SDGLocalization.Localization {
   ///
   /// - Parameters:
   ///   - localize: A closure that resolves the element based on a requested localization.
-  ///   - localization: The requested localization.
-  ///   - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
   public init(
     _ localize: @escaping @Sendable (
       _ localization: Localization, _ arguments: Arguments

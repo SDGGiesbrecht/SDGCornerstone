@@ -99,6 +99,9 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   }
 
   /// Creates a string from a scalar.
+  ///
+  /// - Parameters:
+  ///   - scalar: The scalar.
   @inlinable public init(_ scalar: Unicode.Scalar) {
     self.init(String(scalar))
   }
@@ -117,16 +120,25 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   }
 
   /// Creates a string from a `StaticString`.
+  ///
+  /// - Parameters:
+  ///   - string: The static string.
   @inlinable public init(_ string: StaticString) {
     self.init("\(string)")
   }
 
   /// Creates a string from a `StrictString`.
+  ///
+  /// - Parameters:
+  ///   - string: The `StrictString`.
   @inlinable public init(_ string: StrictString) {
     self = string
   }
 
   /// Creates a string from a strict `ClusterView`.
+  ///
+  /// - Parameters:
+  ///   - string: The cluster view.
   @inlinable public init(_ clusters: ClusterView) {
     self = clusters.string
   }

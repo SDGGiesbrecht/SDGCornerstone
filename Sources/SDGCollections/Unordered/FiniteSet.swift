@@ -221,6 +221,11 @@ extension FiniteSet {
     return false
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.isDisjoint(with:))
+  /// Returns `true` if the sets are disjoint.
+  ///
+  /// - Parameters:
+  ///   - other: Another set.
   @inlinable public func isDisjoint<S: SetDefinition>(with other: S) -> Bool
   where S.Element == Self.Element {
     return ¬overlaps(other)

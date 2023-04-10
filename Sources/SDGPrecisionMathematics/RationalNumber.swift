@@ -57,6 +57,9 @@ public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatab
   }
 
   /// Creates an instance from a floating point number.
+  ///
+  /// - Parameters:
+  ///   - floatingPoint: The floating point number.
   public init(_ floatingPoint: FloatMax) {
     var numerator = floatingPoint
     var denominator: FloatMax = 1
