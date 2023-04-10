@@ -50,7 +50,6 @@ extension Dictionary {
   /// - Parameters:
   ///   - key: The key whose value should change.
   ///   - mutate: A mutating closure.
-  ///   - previous: The previous value or `nil` if the dictionary does not contain the specified key.
   @inlinable public mutating func mutateValue(
     for key: Key,
     _ mutate: (_ previous: Value?) throws -> Value?
@@ -82,8 +81,6 @@ extension Dictionary {
   ///
   /// - Parameters:
   ///   - transform: A mapping closure.
-  ///   - key: A key to transform.
-  ///   - value: A value to transform.
   @inlinable public func mapKeyValuePairs<K, V>(
     _ transform: (_ key: Key, _ value: Value) throws -> (key: K, value: V)
   ) rethrows -> [K: V] {
@@ -99,7 +96,6 @@ extension Dictionary {
   ///
   /// - Parameters:
   ///   - transform: A mapping closure.
-  ///   - key: A key to transform.
   @inlinable public func mapKeys<T>(_ transform: (_ key: Key) throws -> T) rethrows -> [T: Value] {
     return try mapKeyValuePairs { (try transform($0), $1) }
   }

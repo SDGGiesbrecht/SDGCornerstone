@@ -131,6 +131,7 @@ public protocol MutableSet: ComparableSet, SetAlgebra {
   ///   - followingValue: The set to subtract.
   static func ∖ (precedingValue: Self, followingValue: Self) -> Self
 
+  // @documentation(SDGCornerstone.SetDefinition.∖=)
   /// Subtracts `followingValue` from `precedingValue`.
   ///
   /// - Parameters:
@@ -217,15 +218,33 @@ extension MutableSet {
     }
   }
 
+  // #documentation(SDGCornerstone.SetDefinition.∖)
+  /// Returns the relative complement of `followingValue` in `precedingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The set to subtract from.
+  ///   - followingValue: The set to subtract.
   @inlinable public static func ∖ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Self
   where S.Element == Self.Element {
     return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
   }
 
+  // #documentation(SDGCornerstone.SetDefinition.∖)
+  /// Returns the relative complement of `followingValue` in `precedingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The set to subtract from.
+  ///   - followingValue: The set to subtract.
   @inlinable public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
     return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
   }
 
+  // #documentation(SDGCornerstone.SetDefinition.∖=)
+  /// Subtracts `followingValue` from `precedingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The set to subtract from.
+  ///   - followingValue: The set to subtract.
   @inlinable public static func ∖= <S: FiniteSet>(precedingValue: inout Self, followingValue: S)
   where S.Element == Self.Element {
     for element in followingValue {

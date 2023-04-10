@@ -450,9 +450,19 @@ extension SearchableCollection {
     return pattern.matches(in: self, at: startIndex)
       .contains(where: { $0.range.upperBound == endIndex })
   }
+  // #documentation(SDGCornerstone.Collection.isMatch(for:))
+  /// Returns `true` if the whole collection matches the specified pattern.
+  ///
+  /// - Parameters:
+  ///   - pattern: The pattern to try.
   @inlinable public func isMatch<P>(for pattern: P) -> Bool where P: Pattern, P.Searchable == Self {
     return _isMatch(for: pattern)
   }
+  // #documentation(SDGCornerstone.Collection.isMatch(for:))
+  /// Returns `true` if the whole collection matches the specified pattern.
+  ///
+  /// - Parameters:
+  ///   - pattern: The pattern to try.
   @inlinable public func isMatch(for pattern: Self) -> Bool {
     return elementsEqual(pattern)
   }
@@ -470,12 +480,22 @@ extension SearchableCollection {
     }
     return AtomicPatternMatch(range: ..<end, in: self)
   }
+  // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection
   @inlinable public func commonPrefix<C: SearchableCollection>(
     with other: C
   ) -> AtomicPatternMatch<Self>
   where C.Element == Self.Element {
     return _commonPrefix(with: other)
   }
+  // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
+  /// Returns the longest prefix subsequence shared with the other collection.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection
   @inlinable public func commonPrefix(with other: Self) -> AtomicPatternMatch<Self> {
     return _commonPrefix(with: other)
   }

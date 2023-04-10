@@ -139,7 +139,6 @@ import SDGLogic
     /// - Parameters:
     ///   - destination: The approximate destination of any files that will be moved out of the temporary directory. The method will attempt to use a temporary directory on the same volume so the move can be made faster. Pass `nil` if it does not matter.
     ///   - body: The body of the operation.
-    ///   - directory: The provided temporary directory.
     public func withTemporaryDirectory<Result>(
       appropriateFor destination: URL?,
       _ body: (_ directory: URL) throws -> Result

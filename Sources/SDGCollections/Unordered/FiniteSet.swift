@@ -192,11 +192,22 @@ extension FiniteSet {
     return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
   }
 
+  /// Returns whether or not the two operands represent the equal sets.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func == <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element {
     return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.≠)
+  /// Returns `true` if the two values are inequal.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: A value to compare.
+  ///   - followingValue: Another value to compare.
   @inlinable public static func ≠ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element {
     return ¬(precedingValue == followingValue)
