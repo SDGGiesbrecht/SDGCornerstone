@@ -115,6 +115,12 @@ public protocol FiniteSet: Collection, ComparableSet {
 
 extension FiniteSet {
 
+  // #documentation(SDGCornerstone.FiniteSet.⊆)
+  /// Returns `true` if `precedingValue` is a subset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊆ <S: SetDefinition>(
     precedingValue: Self,
     followingValue: S
@@ -125,6 +131,12 @@ extension FiniteSet {
     return true
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.⊈)
+  /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊈ <S: SetDefinition>(
     precedingValue: Self,
     followingValue: S
@@ -132,6 +144,12 @@ extension FiniteSet {
     return ¬(precedingValue ⊆ followingValue)
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.⊇)
+  /// Returns `true` if `precedingValue` is a superset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊇ <S: SetDefinition>(
     precedingValue: S,
     followingValue: Self
@@ -139,6 +157,12 @@ extension FiniteSet {
     return followingValue ⊆ precedingValue
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.⊉)
+  /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊉ <S: SetDefinition>(
     precedingValue: S,
     followingValue: Self
@@ -146,11 +170,23 @@ extension FiniteSet {
     return ¬(precedingValue ⊇ followingValue)
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.⊊)
+  /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊊ <S: FiniteSet>(precedingValue: Self, followingValue: S) -> Bool
   where S.Element == Self.Element {
     return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.⊋)
+  /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   @inlinable public static func ⊋ <S: FiniteSet>(precedingValue: S, followingValue: Self) -> Bool
   where S.Element == Self.Element {
     return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue

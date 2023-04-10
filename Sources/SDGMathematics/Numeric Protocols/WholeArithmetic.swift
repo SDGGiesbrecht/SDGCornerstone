@@ -212,6 +212,11 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
 
 extension WholeArithmetic {
 
+  // @documentation(WholeArithmetic.init(uInt:))
+  /// Creates an instance from an unsigned integer.
+  ///
+  /// - Parameters:
+  ///   - uInt: The unsigned integer.
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(UIntMax(uInt))
   }

@@ -32,7 +32,6 @@
 ///
 /// - Parameters:
 ///   - mutation: The mutating counterpart.
-///   - anInstance: An instance on which to perform the mutating counterpart.
 ///   - theInstance: The starting instance.
 @inlinable public func nonmutatingVariant<T>(
   of mutation: (_ anInstance: inout T) throws -> Void,

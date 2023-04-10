@@ -28,6 +28,10 @@ extension IntFamily {
 
   // MARK: - IntegralArithmetic
 
+  /// Creates an integer from another integer.
+  ///
+  /// - Parameters:
+  ///   - int: The other integer.
   @inlinable public init<I: IntFamily>(_ int: I) {
     self.init(asBinaryIntegerWithInt: int)
   }
@@ -76,6 +80,11 @@ extension IntFamily {
 
   // MARK: - WholeArithmetic
 
+  // #documentation(WholeArithmetic.init(uInt:))
+  /// Creates an instance from an unsigned integer.
+  ///
+  /// - Parameters:
+  ///   - uInt: The unsigned integer.
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(asBinaryIntegerWithUInt: uInt)
   }

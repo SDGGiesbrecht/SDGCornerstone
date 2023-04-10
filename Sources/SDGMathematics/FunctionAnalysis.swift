@@ -143,7 +143,6 @@ import SDGLogic
 ///   - location: A location (*x*) where the slope approaches the searched‐for local minimum.
 ///   - bounds: An optional domain (for *x*) to stay within.
 ///   - function: The function to analyze.
-///   - input: An input value.
 /// - Returns: The input (*x*) that results in the local minimum (*y*).
 @inlinable public func findLocalMinimum<I: OneDimensionalPoint, O: Comparable>(
   near location: I,

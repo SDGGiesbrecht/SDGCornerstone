@@ -281,8 +281,6 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
 /// - Parameters:
 ///   - operator: The operator function to test.
 ///   - operands: The operands to pass to the function.
-///   - precedingValue: The preceding operand.
-///   - followingValue: The following operand.
 ///   - expectedResult: The expected result.
 ///   - file: Optional. A different source file to associate with any failures.
 ///   - line: Optional. A different line to associate with any failures.

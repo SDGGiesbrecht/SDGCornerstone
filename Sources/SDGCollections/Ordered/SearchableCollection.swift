@@ -489,12 +489,28 @@ extension SearchableCollection {
       return false
     }
   }
+  // #documentation(SDGCornerstone.Collection.advance(_: over:))
+  /// Advances the index over the pattern.
+  ///
+  /// - Parameters:
+  ///   - index: The index to advance.
+  ///   - pattern: The pattern to advance over.
+  ///
+  /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @inlinable @discardableResult public func advance<P>(
     _ index: inout Index,
     over pattern: P
   ) -> Bool where P: Pattern, P.Searchable == Self {
     return _advance(&index, over: pattern)
   }
+  // #documentation(SDGCornerstone.Collection.advance(_: over:))
+  /// Advances the index over the pattern.
+  ///
+  /// - Parameters:
+  ///   - index: The index to advance.
+  ///   - pattern: The pattern to advance over.
+  ///
+  /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @inlinable @discardableResult public func advance(
     _ index: inout Index,
     over pattern: Self
@@ -519,12 +535,22 @@ extension SearchableCollection {
 
     return CollectionDifference(unsafeChanges: adjusted)
   }
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
   @inlinable public func changes<C>(
     from other: C
   ) -> CollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
   @inlinable public func changes(
     from other: Self
   ) -> CollectionDifference<Element> {
