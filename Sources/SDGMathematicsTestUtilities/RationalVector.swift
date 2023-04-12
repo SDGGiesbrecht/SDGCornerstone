@@ -19,14 +19,14 @@ import SDGTesting
 /// Tests a type’s conformance to RationalVector.
 ///
 /// - Parameters:
-///     - augend: An augend.
-///     - addend: An addend.
-///     - sum: The expected sum.
-///     - multiplicand: A multiplicand.
-///     - multiplier: A multiplier.
-///     - product: The expected product.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - augend: An augend.
+///   - addend: An addend.
+///   - sum: The expected sum.
+///   - multiplicand: A multiplicand.
+///   - multiplier: A multiplier.
+///   - product: The expected product.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testRationalVectorConformance<T>(
   augend: T,
   addend: T,

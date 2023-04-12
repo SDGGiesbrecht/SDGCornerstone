@@ -61,7 +61,7 @@ public struct LineViewIndex: Comparable, Equatable, Sendable {
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - scalars: The scalar view.
+  ///   - scalars: The scalar view.
   @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
     return start ?? scalars.endIndex
   }
@@ -69,7 +69,7 @@ public struct LineViewIndex: Comparable, Equatable, Sendable {
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - scalars: The scalar view.
+  ///   - scalars: The scalar view.
   @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
     return start ?? scalars.endIndex
   }
@@ -77,7 +77,7 @@ public struct LineViewIndex: Comparable, Equatable, Sendable {
   /// Returns the position in the given view of clusters that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - clusters: The cluster view.
+  ///   - clusters: The cluster view.
   @inlinable public func samePosition(
     in clusters: StrictString.ClusterView
   ) -> StrictString.ClusterView.Index {
@@ -87,7 +87,7 @@ public struct LineViewIndex: Comparable, Equatable, Sendable {
   /// Returns the position in the given view of clusters that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - clusters: The cluster view.
+  ///   - clusters: The cluster view.
   @inlinable public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
     let string = String(clusters)
     return samePosition(in: string.scalars).cluster(in: string.clusters)

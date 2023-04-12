@@ -24,6 +24,6 @@ public protocol DefaultAssignmentPropertyWrapper: PropertyWrapper {
   /// Creates a wrapper with a value.
   ///
   /// - Parameters:
-  ///     - wrappedValue: The wrapped value.
+  ///   - wrappedValue: The wrapped value.
   init(wrappedValue: Wrapped)
 }

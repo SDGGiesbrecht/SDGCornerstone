@@ -28,7 +28,7 @@ public protocol ConsistentlyOrderedCalendarComponent: CalendarComponent,
   /// - Precondition: The number must be valid for the particular compenent.
   ///
   /// - Parameters:
-  ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
+  ///   - numberAlreadyElapsed: The number of complete compenents already elapsed.
   init(numberAlreadyElapsed: Vector)
 
   /// Creates a component from an ordinal.
@@ -36,7 +36,7 @@ public protocol ConsistentlyOrderedCalendarComponent: CalendarComponent,
   /// - Precondition: The ordinal must be valid for the particular compenent.
   ///
   /// - Parameters:
-  ///     - ordinal: The ordinal.
+  ///   - ordinal: The ordinal.
   init(ordinal: Vector)
 
   /// The number of complete components already elapsed.
@@ -78,12 +78,24 @@ where Self: EnumerationCalendarComponent, Self.RawValue == Int {
 
   // MARK: - PointProtocol
 
+  // #documentation(PointProtocol.+=(Self, Vector))
+  /// Moves the preceding point by the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The point to modify.
+  ///   - followingValue: The vector to add.
   public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue = Self(
       numberAlreadyElapsed: precedingValue.numberAlreadyElapsed + followingValue
     )
   }
 
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to subtract.
   public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     return precedingValue.numberAlreadyElapsed − followingValue.numberAlreadyElapsed
   }

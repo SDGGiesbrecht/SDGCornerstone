@@ -23,15 +23,15 @@ public protocol VectorProtocol: Negatable {
   /// Returns the product of the preceding value times the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: A value.
-  ///     - followingValue: A scalar coefficient.
+  ///   - precedingValue: A value.
+  ///   - followingValue: A scalar coefficient.
   static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
   /// Modifies the preceding value by multiplication with the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The scalar coefficient by which to multiply.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The scalar coefficient by which to multiply.
   static func ×= (precedingValue: inout Self, followingValue: Scalar)
 }
 

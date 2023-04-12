@@ -23,7 +23,7 @@ public protocol Negatable: GenericAdditiveArithmetic {
   /// Returns the additive inverse of the operand.
   ///
   /// - Parameters:
-  ///     - operand: The value to invert.
+  ///   - operand: The value to invert.
   static prefix func − (operand: Self) -> Self
 
   /// Replaces this value with its additive inverse.
@@ -62,7 +62,7 @@ extension Negatable where Self: SignedNumeric {
   /// Returns the additive inverse of the operand.
   ///
   /// - Parameters:
-  ///     - operand: The value to invert.
+  ///   - operand: The value to invert.
   @inlinable public static prefix func - (operand: Self) -> Self {  // @exempt(from: unicode)
     return −operand
   }

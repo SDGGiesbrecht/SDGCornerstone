@@ -22,11 +22,11 @@ import SDGText
 /// Stellt fest, ob zwei Werte gleich sind.
 ///
 /// - Parameters:
-///     - ausdruck1: Der erste Ausdruck.
-///     - ausdruck2: Der zweite Ausdruck.
-///     - mitteilung: Eine beschreibung des Fehlers.
-///     - datei: Die Datei.
-///     - zeile: Die Zeile.
+///   - ausdruck1: Der erste Ausdruck.
+///   - ausdruck2: Der zweite Ausdruck.
+///   - mitteilung: Eine beschreibung des Fehlers.
+///   - datei: Die Datei.
+///   - zeile: Die Zeile.
 @inlinable public func XCTFeststellenGleich<T>(
   _ ausdruck1: @autoclosure () throws -> T,
   _ ausdruck2: @autoclosure () throws -> T,

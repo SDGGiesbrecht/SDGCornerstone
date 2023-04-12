@@ -17,9 +17,9 @@ import SDGLogicTestUtilities
 /// Tests a type’s conformance to Hashable.
 ///
 /// - Parameters:
-///     - differingInstances: Two instances expected to be inequal.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - differingInstances: Two instances expected to be inequal.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testHashableConformance<T>(
   differingInstances: (T, T),
   file: StaticString = #filePath,

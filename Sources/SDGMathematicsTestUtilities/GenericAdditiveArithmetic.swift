@@ -21,11 +21,11 @@ import SDGPersistenceTestUtilities
 /// Tests a type’s conformance to GenericAdditiveArithmetic.
 ///
 /// - Parameters:
-///     - augend: An augend.
-///     - addend: An addend.
-///     - sum: The expected sum.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - augend: An augend.
+///   - addend: An addend.
+///   - sum: The expected sum.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testGenericAdditiveArithmeticConformance<T>(
   augend: T,
   addend: T,

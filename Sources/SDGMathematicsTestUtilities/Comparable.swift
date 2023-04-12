@@ -17,10 +17,10 @@ import SDGTesting
 /// Tests a type’s conformance to Comparable.
 ///
 /// - Parameters:
-///     - less: A comparable instance.
-///     - greater: Another instance greater than `less`.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - less: A comparable instance.
+///   - greater: Another instance greater than `less`.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testComparableConformance<T>(
   less: T,
   greater: T,

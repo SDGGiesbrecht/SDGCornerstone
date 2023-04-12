@@ -28,8 +28,8 @@ extension IntegralArithmetic {
 
   /// Creates an instance equal to `int`.
   ///
-  /// - Properties:
-  ///     - int: An instance of a member of the `Int` family.
+  /// - Parameters:
+  ///   - int: An instance of a member of the `Int` family.
   @inlinable public init<I: IntFamily>(_ int: I) {
     self.init(IntMax(int))
   }

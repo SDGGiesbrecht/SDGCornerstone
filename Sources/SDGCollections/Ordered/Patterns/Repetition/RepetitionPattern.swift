@@ -27,9 +27,9 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   /// - Precondition: `count` must not involve a negative bound.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to repeat.
-  ///     - count: A range representing the allowed number of repetitions.
-  ///     - consumption: The desired consumption behaviour.
+  ///   - pattern: The pattern to repeat.
+  ///   - count: A range representing the allowed number of repetitions.
+  ///   - consumption: The desired consumption behaviour.
   @inlinable public init(
     _ pattern: Base,
     count: CountableRange<Int>? = nil,
@@ -57,9 +57,9 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   /// - Precondition: `count` must not involve a negative bound.
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to repeat.
-  ///     - count: A range representing the allowed number of repetitions.
-  ///     - consumption: The desired consumption behaviour.
+  ///   - pattern: The pattern to repeat.
+  ///   - count: A range representing the allowed number of repetitions.
+  ///   - consumption: The desired consumption behaviour.
   @inlinable public init(
     _ pattern: Base,
     count: CountableClosedRange<Int>?,

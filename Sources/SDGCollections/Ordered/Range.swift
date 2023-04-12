@@ -53,8 +53,7 @@ extension Range: RangeFamily {
   /// - Precondition: The conversion must generate valid bounds—the upper bound must not precede the lower bound.
   ///
   /// - Parameters:
-  ///     - convert: A closure which converts a single bound.
-  ///     - bound: The bound to convert.
+  ///   - convert: A closure which converts a single bound.
   @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B) -> Range<B> {
     return convert(lowerBound)..<convert(upperBound)
   }
@@ -64,8 +63,7 @@ extension Range: RangeFamily {
   /// The result will be `nil` if either bound conversion fails, or if the upper bound ends up preceding the lower bound.
   ///
   /// - Parameters:
-  ///     - convert: A closure which converts a single bound.
-  ///     - bound: The bound to convert.
+  ///   - convert: A closure which converts a single bound.
   @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B?) -> Range<B>? {
     guard let lower = convert(lowerBound),
       let upper = convert(upperBound),
@@ -94,8 +92,7 @@ extension ClosedRange: RangeFamily {
   /// - Precondition: The conversion must generate valid bounds—the upper bound must not precede the lower bound.
   ///
   /// - Parameters:
-  ///     - convert: A closure which converts a single bound.
-  ///     - bound: The bound to convert.
+  ///   - convert: A closure which converts a single bound.
   @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B) -> ClosedRange<B> {
     return convert(lowerBound)...convert(upperBound)
   }
@@ -105,8 +102,7 @@ extension ClosedRange: RangeFamily {
   /// The result will be `nil` if either bound conversion fails, or if the upper bound ends up preceding the lower bound.
   ///
   /// - Parameters:
-  ///     - convert: A closure which converts a single bound.
-  ///     - bound: The bound to convert.
+  ///   - convert: A closure which converts a single bound.
   @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B?) -> ClosedRange<B>? {
     guard let lower = convert(lowerBound),
       let upper = convert(upperBound),

@@ -28,11 +28,11 @@ import SDGTesting
 /// This function will write the file to the test specification directory in the project repository and will attempt to load that data in future calls. It is recommeded to check those specifications into source control, as this will make it easier to track backwards compatibility. These files can be deleted manually in the event that a particular format should no longer be supported.
 ///
 /// - Parameters:
-///     - instance: An instance to save and load.
-///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
-///     - normalizeLineEndings: Treats the file as text and converts the line endings of loaded specifications from CR + LF into LF before comparison. This can be used to work around alterations caused by source control systems.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - instance: An instance to save and load.
+///   - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
+///   - normalizeLineEndings: Treats the file as text and converts the line endings of loaded specifications from CR + LF into LF before comparison. This can be used to work around alterations caused by source control systems.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testFileConvertibleConformance<T>(
   of instance: T,
   uniqueTestName: StrictString,

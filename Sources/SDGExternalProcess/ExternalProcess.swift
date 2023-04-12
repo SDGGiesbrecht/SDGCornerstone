@@ -27,7 +27,7 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
   /// Creates an instance with the executable at the specified location.
   ///
   /// - Parameters:
-  ///     - executable: The location of the executable file.
+  ///   - executable: The location of the executable file.
   public init(at executable: URL) {
     self.executable = executable
   }
@@ -35,10 +35,9 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
   /// Creates an instance by searching the system for the exectutable.
   ///
   /// - Parameters:
-  ///     - locations: A list of locations to search. They will be tried in order.
-  ///     - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
-  ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
-  ///     - process: An executable to validate. Its existence and executability have already been verified.
+  ///   - locations: A list of locations to search. They will be tried in order.
+  ///   - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
+  ///   - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
   public init?<S>(
     searching locations: S,
     commandName: String?,
@@ -147,12 +146,11 @@ public struct ExternalProcess: TextualPlaygroundDisplay {
     /// Runs the executable with the specified arguments and returns the output.
     ///
     /// - Parameters:
-    ///     - arguments: The arguments.
-    ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
-    ///     - environment: Optional. A different environment to use instead of that of the current process.
-    ///     - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
-    ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
-    ///     - line: The line of output.
+    ///   - arguments: The arguments.
+    ///   - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
+    ///   - environment: Optional. A different environment to use instead of that of the current process.
+    ///   - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
+    ///   - reportProgress: Optional. A closure to execute for each line of output as it is received.
     ///
     /// - Returns: The entire output.
     @discardableResult public func run(

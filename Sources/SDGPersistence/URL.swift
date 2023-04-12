@@ -30,7 +30,7 @@ extension URL: Comparable {
   /// - points to the same file or folder as the other URL.
   ///
   /// - Parameters:
-  ///     - other: Another URL.
+  ///   - other: Another URL.
   public func `is`(in other: URL) -> Bool {
     let path = self.path
     let otherPath = other.path
@@ -50,7 +50,7 @@ extension URL: Comparable {
   /// Returns the relative path from another URL.
   ///
   /// - Parameters:
-  ///     - other: Another URL.
+  ///   - other: Another URL.
   ///
   /// - Returns: The relative path from the specified URL (or the absolute path if the URL is not a parent directory).
   public func path(relativeTo other: URL) -> String {

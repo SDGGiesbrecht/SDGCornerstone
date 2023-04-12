@@ -82,7 +82,7 @@ public struct _PartialAbsoluteValue<Wrapped: NumericAdditiveArithmetic> {
 /// ```
 ///
 /// - Parameters:
-///     - operand: The value.
+///   - operand: The value.
 @inlinable public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
   return operand.contents
 }
@@ -97,7 +97,7 @@ public struct _PartialAbsoluteValue<Wrapped: NumericAdditiveArithmetic> {
 /// ```
 ///
 /// - Parameters:
-///     - operand: The value.
+///   - operand: The value.
 @inlinable public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
   return _PartialAbsoluteValue(contents: operand.absoluteValue)
 }

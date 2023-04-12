@@ -41,16 +41,25 @@ public struct RationalNumber: Addable, Comparable, Decodable, Encodable, Equatab
   }
 
   /// Creates an instance from an integer.
+  ///
+  /// - Parameters:
+  ///   - integer: The integer.
   public init(_ integer: Integer) {
     self.init(numerator: integer, denominator: 1)
   }
 
   /// Creates an instance from a whole number.
+  ///
+  /// - Parameters:
+  ///   - wholeNumber: The whole number.
   public init(_ wholeNumber: WholeNumber) {
     self.init(Integer(wholeNumber))
   }
 
   /// Creates an instance from a floating point number.
+  ///
+  /// - Parameters:
+  ///   - floatingPoint: The floating point number.
   public init(_ floatingPoint: FloatMax) {
     var numerator = floatingPoint
     var denominator: FloatMax = 1

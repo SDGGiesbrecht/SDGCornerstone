@@ -97,8 +97,8 @@ extension DescribableDate {
   /// Returns the Hebrew date in British English.
   ///
   /// - Parameters:
-  ///     - withYear: Whether or not to include the year.
-  ///     - withWeekday: Whether or not to include the day of the week.
+  ///   - withYear: Whether or not to include the year.
+  ///   - withWeekday: Whether or not to include the day of the week.
   public func hebrewDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false)
     -> StrictString
   {
@@ -115,8 +115,8 @@ extension DescribableDate {
   /// Returns the Hebrew date in American English.
   ///
   /// - Parameters:
-  ///     - withYear: Whether or not to include the year.
-  ///     - withWeekday: Whether or not to include the day of the week.
+  ///   - withYear: Whether or not to include the year.
+  ///   - withWeekday: Whether or not to include the day of the week.
   public func hebrewDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false)
     -> StrictString
   {
@@ -133,8 +133,8 @@ extension DescribableDate {
   /// Returns the Gregorian date in British English.
   ///
   /// - Parameters:
-  ///     - withYear: Whether or not to include the year.
-  ///     - withWeekday: Whether or not to include the day of the week.
+  ///   - withYear: Whether or not to include the year.
+  ///   - withWeekday: Whether or not to include the day of the week.
   public func gregorianDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false)
     -> StrictString
   {
@@ -151,8 +151,8 @@ extension DescribableDate {
   /// Returns the Gregorian date in American English.
   ///
   /// - Parameters:
-  ///     - withYear: Whether or not to include the year.
-  ///     - withWeekday: Whether or not to include the day of the week.
+  ///   - withYear: Whether or not to include the year.
+  ///   - withWeekday: Whether or not to include the day of the week.
   public func gregorianDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false)
     -> StrictString
   {
@@ -188,8 +188,8 @@ extension DescribableDate {
   /// Gibt das hebräische Datum auf Deutsch zurück.
   ///
   /// - Parameters:
-  ///     - mitJahr: Ob das Datum das Jahr enthalten soll.
-  ///     - mitWochentag: Ob das Datum den Wochentag enthalten soll.
+  ///   - mitJahr: Ob das Datum das Jahr enthalten soll.
+  ///   - mitWochentag: Ob das Datum den Wochentag enthalten soll.
   public func hebräischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false)
     -> StrictString
   {
@@ -207,8 +207,8 @@ extension DescribableDate {
   /// Gibt das gregorianisches Datum auf Deutsch zurück.
   ///
   /// - Parameters:
-  ///     - mitJahr: Ob das Datum das Jahr enthalten soll.
-  ///     - mitWochentag: Ob das Datum den Wochentag enthalten soll.
+  ///   - mitJahr: Ob das Datum das Jahr enthalten soll.
+  ///   - mitWochentag: Ob das Datum den Wochentag enthalten soll.
   public func gregorianischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false)
     -> StrictString
   {
@@ -250,9 +250,9 @@ extension DescribableDate {
   /// Renvoie la date hébraïque en français.
   ///
   /// - Parameters:
-  ///     - majuscules: La mode d’utilisation des majuscules.
-  ///     - avecAn: Si la date devrait inclure l’an.
-  ///     - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
+  ///   - majuscules: La mode d’utilisation des majuscules.
+  ///   - avecAn: Si la date devrait inclure l’an.
+  ///   - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
   public func dateHébraïqueEnFrançais(
     _ majuscules: Casing,
     avecAn: Bool = true,
@@ -273,9 +273,9 @@ extension DescribableDate {
   /// Renvoie la date grégorienne en français.
   ///
   /// - Parameters:
-  ///     - majuscules: La mode d’utilisation des majuscules.
-  ///     - avecAn: Si la date devrait inclure l’an.
-  ///     - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
+  ///   - majuscules: La mode d’utilisation des majuscules.
+  ///   - avecAn: Si la date devrait inclure l’an.
+  ///   - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
   public func dateGrégorienneEnFrançais(
     _ majuscules: Casing,
     avecAn: Bool = true,
@@ -314,8 +314,8 @@ extension DescribableDate {
   /// Επιστρέφει την εβραϊκή ημερομηνία στα Ελληνικά.
   ///
   /// - Parameters:
-  ///     - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
-  ///     - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
+  ///   - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
+  ///   - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
   public func εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false)
     -> StrictString
   {
@@ -333,8 +333,8 @@ extension DescribableDate {
   /// Επιστρέφει την γρηγοριανή ημερομηνία στα Ελληνικά.
   ///
   /// - Parameters:
-  ///     - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
-  ///     - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
+  ///   - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
+  ///   - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
   public func γρηγοριανήΗμερομηνίαΣεΕλληνικά(
     μεΧρόνο: Bool = true,
     μεΗμέραΤηςΕβδομάδας: Bool = false
@@ -371,8 +371,8 @@ extension DescribableDate {
   /// משיבה את התאריך העברי בעברית.
   ///
   /// - Parameters:
-  ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
-  ///     - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
+  ///   - עם־שנה: אם התאריך צריך להכיל את השנה.
+  ///   - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
   public func תאריך־עברי־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
     return תאריך־בעברית(
       שנה: hebrewYear,
@@ -388,8 +388,8 @@ extension DescribableDate {
   /// משיבה את התאריך הגרגוריאני בעברית.
   ///
   /// - Parameters:
-  ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
-  ///     - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
+  ///   - עם־שנה: אם התאריך צריך להכיל את השנה.
+  ///   - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
   public func תאריך־גרגוריאני־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString
   {
     return תאריך־בעברית(

@@ -24,7 +24,7 @@ where Base: Pattern {
   /// Creates a negated pattern from another pattern.
   ///
   /// - Parameters:
-  ///     - pattern: The underlying pattern to negate.
+  ///   - pattern: The underlying pattern to negate.
   @inlinable public init(_ pattern: Base) {
     self.base = pattern
   }

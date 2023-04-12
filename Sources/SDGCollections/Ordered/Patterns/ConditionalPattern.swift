@@ -23,8 +23,7 @@ where Searchable: SearchableCollection {
   /// Creates an algorithmic pattern based on a condition.
   ///
   /// - Parameters:
-  ///     - condition: The condition an element must meet in order to match.
-  ///     - element: An element to check.
+  ///   - condition: The condition an element must meet in order to match.
   @inlinable public init(_ condition: @escaping @Sendable (_ element: Searchable.Element) -> Bool) {
     self.condition = condition
   }

@@ -23,7 +23,7 @@ where Searched: SearchableCollection {
   /// Wraps a pattern match.
   ///
   /// - Parameters:
-  ///     - match: The match.
+  ///   - match: The match.
   @inlinable public init<MatchType>(_ match: MatchType)
   where MatchType: PatternMatch, MatchType.Searched == Searched {
     self.underlyingMatch = match

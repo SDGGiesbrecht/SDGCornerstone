@@ -23,12 +23,12 @@ import SDGTesting
 /// - Precondition: `augend` is expected to be positive.
 ///
 /// - Parameters:
-///     - augend: A positive augend.
-///     - addend: An addend.
-///     - sum: The expected sum.
-///     - includingNegatives: Whether or not to test negative numbers.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - augend: A positive augend.
+///   - addend: An addend.
+///   - sum: The expected sum.
+///   - includingNegatives: Whether or not to test negative numbers.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testNumericAdditiveArithmeticConformance<T>(
   augend: T,
   addend: T,

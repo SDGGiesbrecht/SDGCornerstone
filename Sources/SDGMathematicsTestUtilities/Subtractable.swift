@@ -19,11 +19,11 @@ import SDGTesting
 /// Tests a type’s conformance to Subtractable.
 ///
 /// - Parameters:
-///     - minuend: A minuend.
-///     - subtrahend: A subtrahend.
-///     - difference: The expected difference.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - minuend: A minuend.
+///   - subtrahend: A subtrahend.
+///   - difference: The expected difference.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testSubtractableConformance<T>(
   minuend: T,
   subtrahend: T,

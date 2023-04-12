@@ -17,9 +17,9 @@ import SDGTesting
 /// Tests a type’s conformance to BidirectionalCollection.
 ///
 /// - Parameters:
-///     - collection: A collection.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - collection: A collection.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testBidirectionalCollectionConformance<T>(
   of collection: T,
   file: StaticString = #filePath,

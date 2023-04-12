@@ -23,7 +23,7 @@ public struct SharedProperty<Value>: DefaultAssignmentPropertyWrapper, Projectin
   /// Creates a shared property with a shared value.
   ///
   /// - Parameters:
-  ///     - sharedValue: The shared value.
+  ///   - sharedValue: The shared value.
   public init(_ sharedValue: Shared<Value>) {
     self.projectedValue = sharedValue
   }
@@ -31,7 +31,7 @@ public struct SharedProperty<Value>: DefaultAssignmentPropertyWrapper, Projectin
   /// Creates a shared property with a value.
   ///
   /// - Parameters:
-  ///     - value: The value.
+  ///   - value: The value.
   public init(_ value: Value) {
     self.init(Shared(value))
   }

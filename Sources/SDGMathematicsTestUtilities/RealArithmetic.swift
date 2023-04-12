@@ -19,9 +19,9 @@ import SDGTesting
 /// Tests a type’s conformance to RealArithmetic.
 ///
 /// - Parameters:
-///     - type: The type.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testRealArithmeticConformance<T>(
   of type: T.Type,
   file: StaticString = #filePath,

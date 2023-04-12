@@ -28,10 +28,10 @@ public protocol TextConvertibleNumber: ExpressibleByStringLiteral, WholeArithmet
   /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
   ///
   /// - Parameters:
-  ///     - representation: The string to interpret.
-  ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
-  ///     - radixCharacters: The set of characters that can mark the radix position.
-  ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
+  ///   - representation: The string to interpret.
+  ///   - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
+  ///   - radixCharacters: The set of characters that can mark the radix position.
+  ///   - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
   static func parse(
     fromRepresentation representation: StrictString,
     usingDigits digits: [[UnicodeScalar]],
@@ -57,7 +57,7 @@ extension TextConvertibleNumber {
   /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
   ///
   /// - Parameters:
-  ///     - decimal: The decimal representation.
+  ///   - decimal: The decimal representation.
   @inlinable public init(_ decimal: StrictString) {
     self.init(forcing: { Self.parse(possibleDecimal: decimal) })
   }
@@ -67,7 +67,7 @@ extension TextConvertibleNumber {
   /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
   ///
   /// - Parameters:
-  ///     - hexadecimal: The hexadecimal representation.
+  ///   - hexadecimal: The hexadecimal representation.
   @inlinable public init(hexadecimal: StrictString) {
     self.init(forcing: { Self.parse(possibleHexadecimal: hexadecimal) })
   }
@@ -77,7 +77,7 @@ extension TextConvertibleNumber {
   /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
   ///
   /// - Parameters:
-  ///     - octal: The octal representation.
+  ///   - octal: The octal representation.
   @inlinable public init(octal: StrictString) {
     self.init(forcing: { Self.parse(possibleOctal: octal) })
   }
@@ -87,7 +87,7 @@ extension TextConvertibleNumber {
   /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
   ///
   /// - Parameters:
-  ///     - binary: The binary representation.
+  ///   - binary: The binary representation.
   @inlinable public init(binary: StrictString) {
     self.init(forcing: { Self.parse(possibleBinary: binary) })
   }
@@ -95,7 +95,7 @@ extension TextConvertibleNumber {
   /// Creates an instance from a decimal representation.
   ///
   /// - Parameters:
-  ///     - decimal: The decimal representation.
+  ///   - decimal: The decimal representation.
   @inlinable public static func parse(
     possibleDecimal decimal: StrictString
   ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -105,7 +105,7 @@ extension TextConvertibleNumber {
   /// Creates an instance from a hexadecimal representation.
   ///
   /// - Parameters:
-  ///     - hexadecimal: The hexadecimal representation.
+  ///   - hexadecimal: The hexadecimal representation.
   @inlinable public static func parse(
     possibleHexadecimal hexadecimal: StrictString
   ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -115,7 +115,7 @@ extension TextConvertibleNumber {
   /// Creates an instance from a octal representation.
   ///
   /// - Parameters:
-  ///     - octal: The octal representation.
+  ///   - octal: The octal representation.
   @inlinable public static func parse(
     possibleOctal octal: StrictString
   ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -125,7 +125,7 @@ extension TextConvertibleNumber {
   /// Creates an instance from a binary representation.
   ///
   /// - Parameters:
-  ///     - binary: The binary representation.
+  ///   - binary: The binary representation.
   @inlinable public static func parse(
     possibleBinary binary: StrictString
   ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -137,8 +137,8 @@ extension TextConvertibleNumber {
   /// - Precondition: `2 ≤ base ≤ 16`, `base` ∈ Z
   ///
   /// - Parameters:
-  ///     - representation: The string to interpret.
-  ///     - base: The base of the number system.
+  ///   - representation: The string to interpret.
+  ///   - base: The base of the number system.
   @inlinable public static func parse(
     _ representation: StrictString,
     base: Int

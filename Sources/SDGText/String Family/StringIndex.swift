@@ -21,7 +21,7 @@ extension String.Index {
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - scalars: The scalar view of the string the range refers to.
+  ///   - scalars: The scalar view of the string the range refers to.
   @inlinable public func samePosition(in scalars: StrictString.ScalarView) -> StrictString.Index? {
     return samePosition(in: String(StrictString(scalars)).scalars)
   }
@@ -30,7 +30,7 @@ extension String.Index {
   /// Returns the position of the scalar that contains this index.
   ///
   /// - Parameters:
-  ///     - scalars: The scalar view of the string the range refers to.
+  ///   - scalars: The scalar view of the string the range refers to.
   @inlinable public func scalar(in scalars: String.ScalarView) -> String.Index {
     let string = String(scalars)
     var cursor = self
@@ -51,7 +51,7 @@ extension String.Index {
   /// Returns the position of the scalar that contains this index.
   ///
   /// - Parameters:
-  ///     - scalars: The scalar view of the string the range refers to.
+  ///   - scalars: The scalar view of the string the range refers to.
   @inlinable public func scalar(in scalars: StrictString.ScalarView) -> StrictString.Index {
     return scalar(in: String(StrictString(scalars)).scalars)
   }
@@ -59,7 +59,7 @@ extension String.Index {
   /// Returns the position in the given view of clusters that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - clusters: The cluster view of the string the range refers to.
+  ///   - clusters: The cluster view of the string the range refers to.
   @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.Index?
   {
     return samePosition(in: String(StrictString(clusters)))
@@ -69,7 +69,7 @@ extension String.Index {
   /// Returns the position of the cluster that contains this index.
   ///
   /// - Parameters:
-  ///     - clusters: The cluster view of the string the range refers to.
+  ///   - clusters: The cluster view of the string the range refers to.
   @inlinable public func cluster(in clusters: String.ClusterView) -> String.Index {
     let string = String(clusters)
     let startScalar = scalar(in: string.scalars)
@@ -86,7 +86,7 @@ extension String.Index {
   /// Returns the position of the cluster that contains this index.
   ///
   /// - Parameters:
-  ///     - clusters: The cluster view of the string the range refers to.
+  ///   - clusters: The cluster view of the string the range refers to.
   @inlinable public func cluster(in clusters: StrictString.ClusterView) -> StrictString.Index {
     return cluster(in: String(StrictString(clusters)))
   }
@@ -94,7 +94,7 @@ extension String.Index {
   /// Returns the position in the given view of lines that corresponds exactly to this index.
   ///
   /// - Parameters:
-  ///     - lines: The line view of the string the range refers to.
+  ///   - lines: The line view of the string the range refers to.
   @inlinable public func samePosition<S>(in lines: LineView<S>) -> LineView<S>.Index? {
     let line = self.line(in: lines)
     guard let start = line.start else {
@@ -111,7 +111,7 @@ extension String.Index {
   /// Returns the position of the line that contains this index.
   ///
   /// - Parameters:
-  ///     - lines: The line view of the string the range refers to.
+  ///   - lines: The line view of the string the range refers to.
   @inlinable public func line<S>(in lines: LineView<S>) -> LineView<S>.Index {
     return lines.line(for: self)
   }

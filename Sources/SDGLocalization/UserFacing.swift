@@ -26,8 +26,7 @@ where Localization: SDGLocalization.Localization {
   /// Creates a user‐facing element from a closure that resolves the element for a specified localization.
   ///
   /// - Parameters:
-  ///     - localize: A closure that resolves the element based on a requested localization.
-  ///     - localization: The requested localization.
+  ///   - localize: A closure that resolves the element based on a requested localization.
   public init(_ localize: @escaping (_ localization: Localization) -> Element) {
 
     #if DEBUG
@@ -41,8 +40,7 @@ where Localization: SDGLocalization.Localization {
   /// Creates a user‐facing element from a closure that resolves the element for a specified localization.
   ///
   /// - Parameters:
-  ///     - localize: A closure that resolves the element based on a requested localization.
-  ///     - localization: The requested localization.
+  ///   - localize: A closure that resolves the element based on a requested localization.
   public init(_ localize: @escaping (_ localization: Localization) -> Element)
   where Localization: InputLocalization {
 
@@ -71,7 +69,7 @@ where Localization: SDGLocalization.Localization {
   /// Returns the resolved element for the current localization.
   ///
   /// - Parameters:
-  ///     - stabilization: The stabilization mode.
+  ///   - stabilization: The stabilization mode.
   public func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Element {
     return dynamic.resolved(using: (), stabilization: stabilization)
   }
@@ -79,7 +77,7 @@ where Localization: SDGLocalization.Localization {
   /// Returns the resolved element for the specified localization.
   ///
   /// - Parameters:
-  ///     - localization: The target localization.
+  ///   - localization: The target localization.
   public func resolved(for localization: Localization) -> Element {
     return dynamic.resolved(for: localization, using: ())
   }

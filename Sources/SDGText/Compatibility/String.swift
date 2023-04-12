@@ -21,6 +21,9 @@ extension String: StringFamily {
   // MARK: - Initialization
 
   /// Creates a string from a `StrictString`.
+  ///
+  /// - Parameters:
+  ///   - string: The `StrictString`.
   @inlinable public init(_ string: StrictString) {
     self = string.string
   }

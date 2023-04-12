@@ -39,7 +39,7 @@ public enum מין־דקדוקי: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<מין־דקדוקי, String>(
+  public static let codingRepresentations: BijectiveMapping<מין־דקדוקי, String> = BijectiveMapping(
     מין־דקדוקי.allCases,
     map: { casing in
       switch casing {

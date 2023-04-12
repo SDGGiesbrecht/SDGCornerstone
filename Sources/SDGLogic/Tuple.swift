@@ -18,8 +18,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≠ <A: Equatable, B: Equatable>(
   precedingValue: (A, B),
   followingValue: (A, B)
@@ -31,8 +31,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≠ <A: Equatable, B: Equatable, C: Equatable>(
   precedingValue: (A, B, C),
   followingValue: (A, B, C)
@@ -44,8 +44,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≠ <A: Equatable, B: Equatable, C: Equatable, D: Equatable>(
   precedingValue: (A, B, C, D),
   followingValue: (A, B, C, D)
@@ -57,8 +57,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable public func ≠ <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable>(
   precedingValue: (A, B, C, D, E),
   followingValue: (A, B, C, D, E)
@@ -70,8 +70,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - precedingValue: A value to compare.
-///     - followingValue: Another value to compare.
+///   - precedingValue: A value to compare.
+///   - followingValue: Another value to compare.
 @inlinable
 public func ≠ <
   A: Equatable,

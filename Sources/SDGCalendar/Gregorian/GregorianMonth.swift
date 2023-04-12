@@ -76,7 +76,7 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
   /// The number of days in the month.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the result should represent a leap year.
+  ///   - leapYear: Whether or not the result should represent a leap year.
   public func numberOfDays(leapYear: Bool) -> Int {
 
     switch self {

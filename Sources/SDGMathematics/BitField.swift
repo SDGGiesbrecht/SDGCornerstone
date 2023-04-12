@@ -26,37 +26,37 @@ public protocol BitField: Equatable {
   /// Returns the bits present in both `self` and `other`.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   func bitwiseAnd(with other: Self) -> Self
 
   /// Removes the bits not also present in `other`.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   mutating func formBitwiseAnd(with other: Self)
 
   /// Returns the bits present in either `self` or `other`.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   func bitwiseOr(with other: Self) -> Self
 
   /// Inserts the bits present in `other`.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   mutating func formBitwiseOr(with other: Self)
 
   /// Returns the bits present only in `self` or only in `other`.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   func bitwiseExclusiveOr(with other: Self) -> Self
 
   /// Inserts the bits present in `other` and removes the bits present in both.
   ///
   /// - Parameters:
-  ///     - other: The other bits.
+  ///   - other: The other bits.
   mutating func formBitwiseExclusiveOr(with other: Self)
 }
 

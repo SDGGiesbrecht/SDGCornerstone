@@ -17,6 +17,8 @@ import SDGCollections
 
 extension StrictString {
 
+  // #documentation(SDGCornerstone.StringFamily.ClusterView)
+  /// A view of a string’s contents as a collection of extended grapheme clusters.
   public struct ClusterView: BidirectionalCollection, Collection, ExtendedGraphemeClusterView,
     RangeReplaceableCollection, SearchableBidirectionalCollection, SearchableCollection,
     TransparentWrapper

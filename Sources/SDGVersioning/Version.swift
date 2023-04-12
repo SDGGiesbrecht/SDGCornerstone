@@ -31,9 +31,9 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
   /// Creates a version.
   ///
   /// - Parameters:
-  ///     - major: The major version number.
-  ///     - minor: Optional. The minor version number.
-  ///     - patch: Optional. The patch version number.
+  ///   - major: The major version number.
+  ///   - minor: Optional. The minor version number.
+  ///   - patch: Optional. The patch version number.
   public init(_ major: Int, _ minor: Int = 0, _ patch: Int = 0) {
     self.major = major
     self.minor = minor
@@ -73,7 +73,7 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
   /// Returns the version’s string representation.
   ///
   /// - Parameters:
-  ///     - droppingEmptyPatch: Optional. Set to `true` to have the patch number left off if it is zero. (i.e. “1.0” instead of “1.0.0”, but still “1.0.1” regardless.)
+  ///   - droppingEmptyPatch: Optional. Set to `true` to have the patch number left off if it is zero. (i.e. “1.0” instead of “1.0.0”, but still “1.0.1” regardless.)
   public func string(droppingEmptyPatch: Bool = false) -> String {
     var result = "\(major).\(minor)"
     if ¬droppingEmptyPatch ∨ patch ≠ 0 {
@@ -85,7 +85,7 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
   /// Creates a version from its string representation.
   ///
   /// - Parameters:
-  ///     - string: The version string.
+  ///   - string: The version string.
   public init?(_ string: String) {
     let parsed: [String] = string.components(separatedBy: ".").map { String($0.contents) }
     var sections = parsed[parsed.bounds]
@@ -124,7 +124,7 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
   /// Creates an instance representing the first version in a string.
   ///
   /// - Parameters:
-  ///     - string: The string to look for the version in.
+  ///   - string: The string to look for the version in.
   public init?(firstIn string: String) {
     let versionDigits: Set<Unicode.Scalar> = [
       "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",

@@ -32,10 +32,18 @@ extension SemanticMarkup {
 
     // MARK: - StringInterpolationProtocol
 
+    /// Appends interpolated semantic markup.
+    ///
+    /// - Parameters:
+    ///   - markup: The markup.
     public mutating func appendInterpolation(_ markup: SemanticMarkup) {
       appendInterpolation(markup.source)
     }
 
+    /// Appends an interpolated fragment of semantic markup.
+    ///
+    /// - Parameters:
+    ///   - markup: The fragment of markup.
     public mutating func appendInterpolation(_ markup: SemanticMarkup.SubSequence) {
       appendInterpolation(SemanticMarkup(markup).source)
     }

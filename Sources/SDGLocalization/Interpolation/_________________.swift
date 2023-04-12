@@ -34,19 +34,20 @@ public enum ΓραμματικήΠτώση: CodableViaEnumeration, Sendable 
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<ΓραμματικήΠτώση, String>(
-    ΓραμματικήΠτώση.allCases,
-    map: { casing in
-      switch casing {
-      case .ονομαστική:
-        return "ονομ."
-      case .αιτιατική:
-        return "αιτ."
-      case .γενική:
-        return "γεν."
-      case .κλητική:
-        return "κλητ."
+  public static let codingRepresentations: BijectiveMapping<ΓραμματικήΠτώση, String> =
+    BijectiveMapping(
+      ΓραμματικήΠτώση.allCases,
+      map: { casing in
+        switch casing {
+        case .ονομαστική:
+          return "ονομ."
+        case .αιτιατική:
+          return "αιτ."
+        case .γενική:
+          return "γεν."
+        case .κλητική:
+          return "κλητ."
+        }
       }
-    }
-  )
+    )
 }

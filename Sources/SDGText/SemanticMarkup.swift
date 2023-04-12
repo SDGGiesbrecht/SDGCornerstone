@@ -51,11 +51,17 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
   // MARK: - Initialization
 
   /// Creates semantic markup from raw text.
+  ///
+  /// - Parameters:
+  ///   - rawText: The raw text.
   public init(_ rawText: StrictString) {
     source = rawText
   }
 
   /// Creates semantic markup from raw text.
+  ///
+  /// - Parameters:
+  ///   - rawText: The raw text.
   public init(_ rawText: String) {
     source = StrictString(rawText)
   }
@@ -193,7 +199,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
     /// Returns the rich text representation.
     ///
     /// - Parameters:
-    ///     - font: The font to use.
+    ///   - font: The font to use.
     public func richText(font: Font) -> NSAttributedString {
       do {
         return try SemanticMarkup._attributedString(from: String(html()), in: font)

@@ -74,7 +74,7 @@ public struct Font: Sendable {
     /// Creates a font by wrapping a Cocoa font.
     ///
     /// - Parameters:
-    ///     - cocoa: The Cocoa font.
+    ///   - cocoa: The Cocoa font.
     public init(_ cocoa: NSFont) {
       self.definition = .cocoa(cocoa)
     }
@@ -83,7 +83,7 @@ public struct Font: Sendable {
     /// Creates a font by wrapping a Cocoa font.
     ///
     /// - Parameters:
-    ///     - cocoa: The Cocoa font.
+    ///   - cocoa: The Cocoa font.
     public init(_ cocoa: UIFont) {
       self.definition = .cocoa(cocoa)
     }
@@ -141,7 +141,7 @@ public struct Font: Sendable {
   /// The same font in a different size.
   ///
   /// - Parameters:
-  ///     - size: The new point size.
+  ///   - size: The new point size.
   public func resized(to size: Double) -> Font {
     switch definition {
     case .identifier(let name, _):

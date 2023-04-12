@@ -23,7 +23,7 @@ public final class PreferenceSet {
 
   // MARK: - Static Properties
 
-  public static let _sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
+  public static let _sdgCornerstoneDomain: String = "ca.solideogloria.SDGCornerstone"
 
   // MARK: - Initialization
 
@@ -46,7 +46,7 @@ public final class PreferenceSet {
     /// Returns the preferences for a particular domain.
     ///
     /// - Parameters:
-    ///     - domain: The domain.
+    ///   - domain: The domain.
     public static func preferences(for domain: String) -> PreferenceSet {
 
       var domainsCopy = domains  // Allow reading from original during closure.
@@ -63,7 +63,7 @@ public final class PreferenceSet {
     /// Subclasses may call this during initialization, but in all other circumstances, `preferences(for:)` should be called to prevent duplication.
     ///
     /// - Parameters:
-    ///     - domain: The domain.
+    ///   - domain: The domain.
     public init(domain: String) {
       _assert(
         PreferenceSet.domains[domain] == nil,
@@ -188,7 +188,7 @@ public final class PreferenceSet {
   /// Accesses the preference for the specified key.
   ///
   /// - Parameters:
-  ///     - key: The key.
+  ///   - key: The key.
   public subscript(key: String) -> Shared<Preference> {
     return cached(in: &values[key]) {
       let shared = Shared(contents[key] ?? Preference(propertyListObject: nil))

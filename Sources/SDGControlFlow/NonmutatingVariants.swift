@@ -31,9 +31,8 @@
 /// ```
 ///
 /// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - anInstance: An instance on which to perform the mutating counterpart.
-///     - theInstance: The starting instance.
+///   - mutation: The mutating counterpart.
+///   - theInstance: The starting instance.
 @inlinable public func nonmutatingVariant<T>(
   of mutation: (_ anInstance: inout T) throws -> Void,
   on theInstance: T
@@ -62,11 +61,9 @@
 /// ```
 ///
 /// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - anInstance: An instance on which to perform the mutating counterpart.
-///     - mutationArgument: An argument for the mutation.
-///     - theInstance: The starting instance.
-///     - argument: An argument to pass to the mutating counterpart.
+///   - mutation: The mutating counterpart.
+///   - theInstance: The starting instance.
+///   - argument: An argument to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A>(
   of mutation: (_ anInstance: inout T, _ mutationArgument: A) throws -> Void,
   on theInstance: T,
@@ -96,12 +93,9 @@
 /// ```
 ///
 /// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - anInstance: An instance on which to perform the mutating counterpart.
-///     - firstMutationArgument: An argument for the mutation.
-///     - secondMutationArgument: Another argument for the mutation.
-///     - theInstance: The starting instance.
-///     - arguments: Arguments to pass to the mutating counterpart.
+///   - mutation: The mutating counterpart.
+///   - theInstance: The starting instance.
+///   - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B>(
   of mutation: (
     _ anInstance: inout T,
@@ -135,13 +129,9 @@
 /// ```
 ///
 /// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - anInstance: An instance on which to perform the mutating counterpart.
-///     - firstMutationArgument: An argument for the mutation.
-///     - secondMutationArgument: Another argument for the mutation.
-///     - thirdMutationArgument: Another argument for the mutation.
-///     - theInstance: The starting instance.
-///     - arguments: Arguments to pass to the mutating counterpart.
+///   - mutation: The mutating counterpart.
+///   - theInstance: The starting instance.
+///   - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B, C>(
   of mutation: (
     _ anInstance: inout T,

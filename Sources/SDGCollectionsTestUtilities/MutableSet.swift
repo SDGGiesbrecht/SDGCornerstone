@@ -19,12 +19,12 @@ import SDGTesting
 /// Tests a type’s conformance to MutableSet.
 ///
 /// - Parameters:
-///     - type: The type to test.
-///     - a: An element instance.
-///     - b: Another, distinct element instance.
-///     - c: Yet another distinct element instance.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type to test.
+///   - a: An element instance.
+///   - b: Another, distinct element instance.
+///   - c: Yet another distinct element instance.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testMutableSetConformance<T>(
   of type: T.Type,
   a: T.Element,

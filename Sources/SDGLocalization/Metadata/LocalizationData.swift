@@ -41,7 +41,7 @@ public struct LocalizationData: Sendable {
   /// - Important: Not all valid codes are supported—only those necessary for other `SDGLocalization` functionality. Support for a particular localization may be added or removed at any time.
   ///
   /// - Parameters:
-  ///     - code: The IETF language code.
+  ///   - code: The IETF language code.
   public init?(code: String) {
     if let localization = ContentLocalization(exactly: code) {
       self = LocalizationData(localization: localization)
@@ -55,7 +55,7 @@ public struct LocalizationData: Sendable {
   /// - Important: Not all valid icons are supported—only those necessary for other `SDGLocalization` functionality. Support for a particular localization may be added or removed at any time.
   ///
   /// - Parameters:
-  ///     - icon: The icon.
+  ///   - icon: The icon.
   public init?(icon: StrictString) {
     if let localization = ContentLocalization(icon: icon) {
       self = LocalizationData(localization: localization)
@@ -85,7 +85,7 @@ public struct LocalizationData: Sendable {
   /// - Important: Not all localizations are supported—only those necessary for other `SDGLocalization` functionality. Support for a particular localization may be added or removed at any time.
   ///
   /// - Parameters:
-  ///     - localization: The localization in which to provide the name.
+  ///   - localization: The localization in which to provide the name.
   public func isolatedName<L>(in localization: L) -> StrictString? where L: Localization {
     if let localization = _InterfaceLocalization(exactly: localization.code) {
       return self.localization.isolatedName().resolved(for: localization)

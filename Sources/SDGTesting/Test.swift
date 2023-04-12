@@ -28,12 +28,6 @@ private func defaultTestAssertionMethod(
 }
 
 /// The assertion method used by `test(_:_:_:_:)`.
-///
-/// - Parameters:
-///     - expression: The expression to test.
-///     - message: The message to use when indicating failure.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
 public var testAssertionMethod:
   (
     _ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String,
@@ -43,10 +37,10 @@ public var testAssertionMethod:
 /// Tests an expression, verifying that it is true.
 ///
 /// - Parameters:
-///     - expression: The expresion to test.
-///     - message: The message to use when indicating failure.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - expression: The expresion to test.
+///   - message: The message to use when indicating failure.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test(
   _ expression: @autoclosure () throws -> Bool,
   _ message: @autoclosure () throws -> String,
@@ -78,9 +72,9 @@ public func test(
 /// Fails a test.
 ///
 /// - Parameters:
-///     - message: The message to use when indicating failure.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - message: The message to use when indicating failure.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func fail(
   _ message: @autoclosure () throws -> String,
   file: StaticString = #filePath,
@@ -95,14 +89,11 @@ public func fail(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, R>(
   method: (call: (_ methodInstance: T) -> () throws -> R, name: String),
   of instance: T,
@@ -131,15 +122,12 @@ public func test<T, R>(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - argument: The argument to pass to the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - argument: The argument to pass to the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, A, R>(
   method: (call: (_ methodInstance: T) -> (_ methodArgument: A) throws -> R, name: String),
   of instance: T,
@@ -168,15 +156,12 @@ public func test<T, A, R>(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - arguments: The arguments to pass to the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - arguments: The arguments to pass to the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, A, B, R>(
   method: (
     call: (_ methodInstance: T) -> (_ firstMethodArgument: A, _ secondMethodArgmuent: B) throws ->
@@ -209,14 +194,11 @@ public func test<T, A, B, R>(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T>(
   mutatingMethod method: (call: (_ methodInstance: inout T) throws -> Void, name: String),
   of instance: T,
@@ -245,16 +227,12 @@ public func test<T>(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - methodArgument: An argument to pass to the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - argument: The argument to pass to the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - argument: The argument to pass to the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, A>(
   mutatingMethod method: (
     call: (_ methodInstance: inout T, _ methodArgument: A) throws -> Void, name: String
@@ -285,17 +263,12 @@ public func test<T, A>(
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - method: The method to test.
-///     - call: The method itself.
-///     - methodInstance: The instance on which to call the method.
-///     - firstMethodArgument: An argument to pass to the method.
-///     - secondMethodArgument: Another argument to pass to the method.
-///     - name: The method name.
-///     - instance: The instance on which to call the method.
-///     - arguments: The arguments to pass to the method.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - method: The method to test.
+///   - instance: The instance on which to call the method.
+///   - arguments: The arguments to pass to the method.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, A, B>(
   mutatingMethod method: (
     call: (_ methodInstance: inout T, _ firstMethodArgument: A, _ secondMethodArgument: B) throws ->
@@ -330,14 +303,11 @@ public func test<T, A, B>(
 /// Tests a function, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The function to test.
-///     - call: The function itself.
-///     - functionArgument: An argument to pass to the function.
-///     - name: The function name.
-///     - argument: The argument to pass to the function.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - function: The function to test.
+///   - argument: The argument to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<A, R>(
   function: (call: (_ functionArgument: A) throws -> R, name: String),
   on argument: A,
@@ -365,15 +335,11 @@ public func test<A, R>(
 /// Tests a function, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The function to test.
-///     - call: The function itself.
-///     - firstFunctionArgument: An argument to pass to the function.
-///     - secondFunctionArgument: An argument to pass to the function.
-///     - name: The function name.
-///     - arguments: The arguments to pass to the function.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - function: The function to test.
+///   - arguments: The arguments to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<A, B, R>(
   function: (
     call: (_ firstFunctionArgument: A, _ secondFunctionArgument: B) throws -> R, name: String
@@ -405,17 +371,11 @@ public func test<A, B, R>(
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - precedingOperand: The preceding operand.
-///     - followingOperand: The following operand.
-///     - name: The function name.
-///     - operands: The operands to pass to the function.
-///     - precedingValue: The preceding operand.
-///     - followingValue: The following operand.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operands: The operands to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<P, F, R>(
   operator: (function: (_ precedingOperand: P, _ followingOperand: F) throws -> R, name: String),
   on operands: (precedingValue: P, followingValue: F),
@@ -442,17 +402,11 @@ public func test<P, F, R>(
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - precedingOperand: The preceding operand.
-///     - followingOperand: The following operand.
-///     - name: The function name.
-///     - operands: The operands to pass to the function.
-///     - precedingValue: The preceding operand.
-///     - followingValue: The following operand.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operands: The operands to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<P, F, R, S>(
   operator: (
     function: (_ precedingOperand: P, _ followingOperand: F) throws -> (R, S), name: String
@@ -481,16 +435,12 @@ public func test<P, F, R, S>(
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - precedingOperand: The preceding operand.
-///     - followingOperand: The following operand.
-///     - name: The function name.
-///     - precedingValue: The preceding operand.
-///     - followingValue: The following operand.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - precedingValue: The preceding operand.
+///   - followingValue: The following operand.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<P, F, R>(
   operator: (
     function: (_ precedingOperand: P, _ followingOperand: @autoclosure () throws -> F) throws -> R,
@@ -521,17 +471,11 @@ public func test<P, F, R>(
 /// Tests an infix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - precedingOperand: The preceding operand.
-///     - followingOperand: The following operand.
-///     - name: The function name.
-///     - operands: The operands to pass to the function.
-///     - precedingValue: The preceding operand.
-///     - followingValue: The following operand.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operands: The operands to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<P, F>(
   assignmentOperator operator: (
     function: (_ precedingOperand: inout P, _ followingOperand: F) throws -> Void, name: String
@@ -561,16 +505,12 @@ public func test<P, F>(
 /// Tests an infix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - precedingOperand: The preceding operand.
-///     - followingOperand: The following operand.
-///     - name: The function name.
-///     - precedingValue: The preceding operand.
-///     - followingValue: The following operand.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - precedingValue: The preceding operand.
+///   - followingValue: The following operand.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<P, F>(
   assignmentOperator operator: (
     function: (_ precedingOperand: inout P, _ followingOperand: @autoclosure () throws -> F) throws
@@ -603,14 +543,11 @@ public func test<P, F>(
 /// Tests a prefix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - functionOperand: The operand to pass to the function.
-///     - name: The function name.
-///     - operand: The operand to pass to the function.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operand: The operand to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<O, R>(
   prefixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String),
   on operand: O,
@@ -637,14 +574,11 @@ public func test<O, R>(
 /// Tests a postfix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - functionOperand: The operand to pass to the function.
-///     - name: The function name.
-///     - operand: The operand to pass to the function.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operand: The operand to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<O, R>(
   postfixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String),
   on operand: O,
@@ -672,14 +606,11 @@ public func test<O, R>(
 /// Tests a postfix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - operator: The operator function to test.
-///     - function: The function itself.
-///     - functionOperand: The operand to pass to the function.
-///     - name: The function name.
-///     - operand: The operand to pass to the function.
-///     - expectedResult: The expected result.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - operator: The operator function to test.
+///   - operand: The operand to pass to the function.
+///   - expectedResult: The expected result.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<O>(
   postfixAssignmentOperator operator: (
     function: (_ functionOperand: inout O) throws -> Void, name: String
@@ -711,14 +642,11 @@ public func test<O>(
 /// Tests a property of an instance, verifying that it contains the expected value.
 ///
 /// - Parameters:
-///     - property: The property to test.
-///     - accessor: A closure which retrieves the property.
-///     - accessorInstance: The instance on which to inspect the property.
-///     - name: The property name.
-///     - instance: The instance on which to inspect the property.
-///     - expectedValue: The expected property value.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - property: The property to test.
+///   - instance: The instance on which to inspect the property.
+///   - expectedValue: The expected property value.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<T, P>(
   property: (accessor: (_ accessorInstance: T) -> P, name: String),
   of instance: T,
@@ -744,12 +672,10 @@ public func test<T, P>(
 /// Tests a variable, verifying that it contains the expected value.
 ///
 /// - Parameters:
-///     - variable: The variable to test.
-///     - contents: The variable itself.
-///     - name: The name of the variable.
-///     - expectedValue: The expected property value.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - variable: The variable to test.
+///   - expectedValue: The expected property value.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func test<V>(
   variable: (contents: V, name: String),
   is expectedValue: V,

@@ -21,62 +21,62 @@ public protocol ComparableSet: Equatable, SetDefinition {
   /// Returns `true` if `precedingValue` is a subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.⊈)
   /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.⊇)
   /// Returns `true` if `precedingValue` is a superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.⊉)
   /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.⊊)
   /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible subset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible subset to test.
+  ///   - followingValue: The other set.
   static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.⊋)
   /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The possible superset to test.
-  ///     - followingValue: The other set.
+  ///   - precedingValue: The possible superset to test.
+  ///   - followingValue: The other set.
   static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.overlaps(_:))
   /// Returns `true` if the sets overlap.
   ///
   /// - Parameters:
-  ///     - other: The other set.
+  ///   - other: The other set.
   func overlaps(_ other: Self) -> Bool
 
   // @documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
   /// Returns `true` if the sets are disjoint.
   ///
   /// - Parameters:
-  ///     - other: Another set.
+  ///   - other: Another set.
   func isDisjoint(with other: Self) -> Bool
 }
 

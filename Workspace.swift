@@ -37,21 +37,6 @@ configuration.continuousIntegration.skipSimulatorOutsideContinuousIntegration = 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
 
-configuration.documentation.api.ignoredDependencies = [
-
-  // Swift
-  "Dispatch",
-  "Foundation",
-  "XCTest",
-
-  // swift‐collections
-  "OrderedCollections",
-
-  // swift‐numerics
-  "_NumericsShims",
-  "RealModule",
-]
-
 // #workaround(workspace version 0.41.0, Workspace cannot be turned off.)
 configuration.git.additionalGitIgnoreEntries.append(
   contentsOf: [

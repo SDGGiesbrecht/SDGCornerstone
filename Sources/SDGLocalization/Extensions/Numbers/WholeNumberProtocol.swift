@@ -23,7 +23,7 @@ extension WholeNumberProtocol {
   /// Gibt die Zahl in Zahlzeichen zurück.
   ///
   /// - Parameters:
-  ///     - tausendertrennzeichen: Das Tausendertrennzeichen. (Ein Leerzeichen, wenn nicht angegeben.)
+  ///   - tausendertrennzeichen: Das Tausendertrennzeichen. (Ein Leerzeichen, wenn nicht angegeben.)
   @inlinable public func inZahlzeichen(
     tausendertrennzeichen: Unicode.Skalar = " "
   ) -> StrengeZeichenkette {
@@ -34,7 +34,7 @@ extension WholeNumberProtocol {
   /// Returns the number in digits.
   ///
   /// - Parameters:
-  ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
+  ///   - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
   public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
     return wholeDigits(thousandsSeparator: thousandsSeparator)
   }
@@ -73,7 +73,7 @@ extension WholeNumberProtocol {
   /// Gibt die Zahl in römischer Zahlschrift zurück.
   ///
   /// - Parameters:
-  ///     - kleinbuchstaben: Ob Kleinbuchstaben verwendet werden sollen. (`falsch` wenn nicht angegeben.)
+  ///   - kleinbuchstaben: Ob Kleinbuchstaben verwendet werden sollen. (`falsch` wenn nicht angegeben.)
   @inlinable public func inRömischerZahlschrift(
     kleinbuchstaben: Bool = falsch
   ) -> StrengeZeichenkette {
@@ -84,7 +84,7 @@ extension WholeNumberProtocol {
   /// Returns the number in roman numerals.
   ///
   /// - Parameters:
-  ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
+  ///   - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
   public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
     return romanNumerals(lowercase: lowercase)
   }

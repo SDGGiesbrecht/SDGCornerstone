@@ -86,7 +86,7 @@ where
   /// Creates a contextual mapping from a simple dictionary mapping.
   ///
   /// - Parameters:
-  ///     - exhaustiveMapping: A dictionary representing the mapping. Keys are input, values are corresponding output. The mapping must contain every input element that the contextual mapping will encounter; A precondition will fire if such an undefined element is encountered.
+  ///   - exhaustiveMapping: A dictionary representing the mapping. Keys are input, values are corresponding output. The mapping must contain every input element that the contextual mapping will encounter; A precondition will fire if such an undefined element is encountered.
   @inlinable public init(exhaustiveMapping: [Input: Output]) {
     self.init(
       mapping: exhaustiveMapping,
@@ -97,9 +97,8 @@ where
   /// Creates a contextual mapping from a simple dictionary mapping and a fallback algorithm.
   ///
   /// - Parameters:
-  ///     - mapping: A dictionary representing the mapping. Keys are input, values are corresponding output.
-  ///     - fallbackAlgorithm: An algorithm to use for any single elements not defined in the mapping.
-  ///     - element: The element to use the fallback algorithm on.
+  ///   - mapping: A dictionary representing the mapping. Keys are input, values are corresponding output.
+  ///   - fallbackAlgorithm: An algorithm to use for any single elements not defined in the mapping.
   @inlinable public init(
     mapping: [Input: Output],
     fallbackAlgorithm: @escaping @Sendable (_ element: Input.Element) -> Output
@@ -138,7 +137,7 @@ where
   /// Maps the input.
   ///
   /// - Parameters:
-  ///     - input: The input.
+  ///   - input: The input.
   @inlinable public func map(_ input: Input) -> Output {
     var output = Output()
     var pendingIndex: Input.Index = input.startIndex

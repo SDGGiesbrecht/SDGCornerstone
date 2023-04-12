@@ -19,9 +19,9 @@ import SDGMathematicsTestUtilities
 /// Tests a type’s conformance to TwoDimensionalPointProtocol.
 ///
 /// - Parameters:
-///     - type: The type.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - type: The type.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testTwoDimensionalPointProtocolConformance<T>(
   _ type: T.Type,
   file: StaticString = #filePath,

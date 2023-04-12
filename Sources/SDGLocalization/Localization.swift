@@ -26,7 +26,7 @@ public protocol Localization: TextualPlaygroundDisplay {
   /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
   ///
   /// - Parameters:
-  ///     - code: The localization code.
+  ///   - code: The localization code.
   init?(exactly code: String)
 
   /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
@@ -43,7 +43,7 @@ extension Localization {
   /// Returns the preferred localization out of those supported by the type.
   ///
   /// - Parameters:
-  ///     - stabilization: The stabilization mode.
+  ///   - stabilization: The stabilization mode.
   public static func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Self
   {
     return LocalizationSetting.current.value.resolved(stabilization: stabilization) as Self
@@ -147,7 +147,7 @@ extension Localization {
   /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).
   ///
   /// - Parameters:
-  ///     - code: The localization code for which to find a reasonable match.
+  ///   - code: The localization code for which to find a reasonable match.
   public init?(reasonableMatchFor code: String) {
     if let result = Self(reasonableMatchFor: code, skippingParents: false) {
       self = result
@@ -287,7 +287,7 @@ extension Localization {
   /// - SeeAlso: `icon`
   ///
   /// - Parameters:
-  ///     - icon: The localization icon.
+  ///   - icon: The localization icon.
   public init?(icon: StrictString) {
     if let recognized = ContentLocalization(definedIcon: icon) {
       self.init(reasonableMatchFor: recognized.code)
@@ -310,7 +310,7 @@ extension Localization {
   /// Use this to convert abritrary, user‐provided codes, even when they are not directly supported by the application.
   ///
   /// - Parameters:
-  ///     - icon: The localization icon.
+  ///   - icon: The localization icon.
   public static func code(for icon: StrictString) -> String? {
     return ContentLocalization(icon: icon)?.code
   }
@@ -320,7 +320,7 @@ extension Localization {
   /// Use this to convert abritrary, user‐provided icons, even when they are not directly supported by the application.
   ///
   /// - Parameters:
-  ///     - code: The localization code.
+  ///   - code: The localization code.
   public static func icon(for code: String) -> StrictString? {
     return ContentLocalization(reasonableMatchFor: code)?.icon
   }

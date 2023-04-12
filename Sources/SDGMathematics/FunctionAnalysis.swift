@@ -57,12 +57,12 @@ import SDGLogic
 /// This function automates a guess‐and‐check strategy and is useful for inverting otherwise one‐way functions. See the related function `findLocalMaximum(near:bounds:inFunction:)` for an example.
 ///
 /// - Warning: Behaviour is undefined when:
-///     - `location` is at a local minimum. For example:
+///   - `location` is at a local minimum. For example:
 ///       ```swift
 ///       // This is undefined:
 ///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? $0 ↑ 2 : −($0 ↑ 2) }
 ///       ```
-///     - two or more adjascent inputs share the maximum output. For example:
+///   - two or more adjascent inputs share the maximum output. For example:
 ///       ```swift
 ///       // This is undefined:
 ///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? 1 : −(|$0|) }
@@ -75,10 +75,9 @@ import SDGLogic
 ///   ```
 ///
 /// - Parameters:
-///     - location: A location (*x*) where the slope approaches the searched‐for local maximum.
-///     - bounds: An optional domain (for *x*) to stay within.
-///     - function: The function to analyze.
-///     - input: An input value.
+///   - location: A location (*x*) where the slope approaches the searched‐for local maximum.
+///   - bounds: An optional domain (for *x*) to stay within.
+///   - function: The function to analyze.
 /// - Returns: The input (*x*) that results in the local maximum (*y*).
 @inlinable public func findLocalMaximum<I: OneDimensionalPoint, O: Comparable>(
   near location: I,
@@ -123,12 +122,12 @@ import SDGLogic
 /// ```
 ///
 /// - Warning: Behaviour is undefined when:
-///     - `location` is at a local maximum. For example:
+///   - `location` is at a local maximum. For example:
 ///       ```swift
 ///       // This is undefined:
 ///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −($0 ↑ 2) : $0 ↑ 2 }
 ///       ```
-///     - two or more adjascent inputs share the minimum output. For example:
+///   - two or more adjascent inputs share the minimum output. For example:
 ///       ```swift
 ///       // This is undefined:
 ///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −1 : |$0| }
@@ -141,10 +140,9 @@ import SDGLogic
 ///   ```
 ///
 /// - Parameters:
-///     - location: A location (*x*) where the slope approaches the searched‐for local minimum.
-///     - bounds: An optional domain (for *x*) to stay within.
-///     - function: The function to analyze.
-///     - input: An input value.
+///   - location: A location (*x*) where the slope approaches the searched‐for local minimum.
+///   - bounds: An optional domain (for *x*) to stay within.
+///   - function: The function to analyze.
 /// - Returns: The input (*x*) that results in the local minimum (*y*).
 @inlinable public func findLocalMinimum<I: OneDimensionalPoint, O: Comparable>(
   near location: I,

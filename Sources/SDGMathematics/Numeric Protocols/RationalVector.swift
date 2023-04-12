@@ -21,16 +21,16 @@ where Scalar: RationalArithmetic {
   /// Returns the quotient of the preceding value divided by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The dividend.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The dividend.
+  ///   - followingValue: The divisor.
   static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
   // @documentation(RationalVector.÷=)
   /// Modifies the preceding value by dividing it by the following value.
   ///
   /// - Parameters:
-  ///     - precedingValue: The value to modify.
-  ///     - followingValue: The divisor.
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The divisor.
   static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 

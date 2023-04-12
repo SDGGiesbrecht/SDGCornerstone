@@ -17,8 +17,8 @@ extension Encodable {
   /// Encodes this value by encoding a proxy type into the given encoder.
   ///
   /// - Parameters:
-  ///     - encoder: The encoder.
-  ///     - other: The instance of the proxy type.
+  ///   - encoder: The encoder.
+  ///   - other: The instance of the proxy type.
   public func encode<Other>(to encoder: Encoder, via other: Other) throws where Other: Encodable {
     var container = encoder.singleValueContainer()
     try container.encode(other)

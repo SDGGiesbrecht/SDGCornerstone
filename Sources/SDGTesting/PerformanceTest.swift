@@ -28,11 +28,11 @@ import SDGCornerstoneLocalizations
 /// Notes: A closure’s execution times may vary vastly accross different systems or build configurations. Expectations must either be set according to the slowest environment where the tests will be run, or else limited by conditions so as to only run on those environments that are meaningful.
 ///
 /// - Parameters:
-///     - testName: A name to identify the particular test in the output.
-///     - duration: The time limit within which the closure is expected to complete.
-///     - file: The file name where the call occurs. Provided.
-///     - line: The line number where the call occurs. Provided.
-///     - test: The closure to test.
+///   - testName: A name to identify the particular test in the output.
+///   - duration: The time limit within which the closure is expected to complete.
+///   - file: The file name where the call occurs. Provided.
+///   - line: The line number where the call occurs. Provided.
+///   - test: The closure to test.
 public func limit(
   _ testName: String,
   to duration: TimeInterval,

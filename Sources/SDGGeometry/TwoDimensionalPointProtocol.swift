@@ -25,8 +25,8 @@ where Vector: TwoDimensionalVectorProtocol {
   /// Creates a point from two co‐ordinates.
   ///
   /// - Parameters:
-  ///     - x: The *x* co‐ordinate.
-  ///     - y: The *y* co‐ordinate.i
+  ///   - x: The *x* co‐ordinate.
+  ///   - y: The *y* co‐ordinate.i
   init(_ x: Coordinate, _ y: Coordinate)
 
   /// The *x* co‐ordinate.
@@ -38,27 +38,27 @@ where Vector: TwoDimensionalVectorProtocol {
   /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   mutating func round(_ rule: WholeArithmetic.RoundingRule)
 
   /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
+  ///   - rule: The rounding rule follow.
   func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self
 
   /// Rounds the point’s co‐ordinates to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar)
 
   /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
   ///
   /// - Parameters:
-  ///     - rule: The rounding rule follow.
-  ///     - factor: The factor to round to a multiple of.
+  ///   - rule: The rounding rule follow.
+  ///   - factor: The factor to round to a multiple of.
   func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) -> Self
 }
 
@@ -117,11 +117,23 @@ extension TwoDimensionalPointProtocol {
 
   // MARK: - PointProtocol
 
+  // #documentation(PointProtocol.+=(Self, Vector))
+  /// Moves the preceding point by the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The point to modify.
+  ///   - followingValue: The vector to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue.x += followingValue.Δx
     precedingValue.y += followingValue.Δy
   }
 
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     let Δx = precedingValue.x − followingValue.x
     let Δy = precedingValue.y − followingValue.y

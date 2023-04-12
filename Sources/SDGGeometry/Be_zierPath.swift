@@ -42,7 +42,7 @@
       /// Creates a Bézier path with a native Bézier path.
       ///
       /// - Parameters:
-      ///     - native: The native Bézier path.
+      ///   - native: The native Bézier path.
       public init(_ native: NSBezierPath) {
         self.native = native
         separateCopy()
@@ -52,7 +52,7 @@
       /// Creates a Bézier path with a native Bézier path.
       ///
       /// - Parameters:
-      ///     - native: The native Bézier path.
+      ///   - native: The native Bézier path.
       public init(_ native: UIBezierPath) {
         self.native = native
         separateCopy()
@@ -84,7 +84,7 @@
     /// Moves the current point to a new location without drawing anything in between.
     ///
     /// - Parameters:
-    ///     - point: The destination to move to.
+    ///   - point: The destination to move to.
     public mutating func move(to point: TwoDimensionalPoint<Double>) {
       separateCopy()
       native.move(to: CGPoint(point))
@@ -93,7 +93,7 @@
     /// Appends a straight line to the path.
     ///
     /// - Parameters:
-    ///     - point: The target point.
+    ///   - point: The target point.
     public mutating func appendLine(to point: TwoDimensionalPoint<Double>) {
       separateCopy()
       #if canImport(AppKit)
@@ -106,11 +106,11 @@
     /// Appends an arc of a circle to the path.
     ///
     /// - Parameters:
-    ///     - centre: The centre point of the circle used to define the arc.
-    ///     - radius: The radius of the arc.
-    ///     - startAngle: The starting angle of the arc, measured counterclockwise from the x‐axis.
-    ///     - endAngle: The end angle of the arc, measured counterclockwise from the x‐axis.
-    ///     - clockwise: Whether or not the arc should be drawn in the clockwise direction.
+    ///   - centre: The centre point of the circle used to define the arc.
+    ///   - radius: The radius of the arc.
+    ///   - startAngle: The starting angle of the arc, measured counterclockwise from the x‐axis.
+    ///   - endAngle: The end angle of the arc, measured counterclockwise from the x‐axis.
+    ///   - clockwise: Whether or not the arc should be drawn in the clockwise direction.
     public mutating func appendArc(
       centre: TwoDimensionalPoint<Double>,
       radius: Double,

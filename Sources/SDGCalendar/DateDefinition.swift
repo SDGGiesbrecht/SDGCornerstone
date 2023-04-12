@@ -83,7 +83,7 @@ public protocol DateDefinition: Decodable, Encodable, Sendable {
   /// Creates a date from an interval since the type’s reference date.
   ///
   /// - Parameters:
-  ///     - intervalSinceReferenceDate: The interval since the type’s reference date.
+  ///   - intervalSinceReferenceDate: The interval since the type’s reference date.
   init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)
 
   // MARK: - Properties

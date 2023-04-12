@@ -85,8 +85,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// Returns the number of days in the month for a year with given properties.
   ///
   /// - Parameters:
-  ///     - yearLength: The class of year in which the month occurs.
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - yearLength: The class of year in which the month occurs.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public func numberOfDays(yearLength: HebrewYear.Length, leapYear: Bool) -> Int {
 
     switch self {
@@ -166,7 +166,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// Returns the next month.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public func successor(leapYear: Bool) -> HebrewMonth {
 
     switch self {
@@ -192,7 +192,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// Increments the month.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public mutating func increment(leapYear: Bool) {
     self = successor(leapYear: leapYear)
   }
@@ -200,7 +200,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// Returns the previous month.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public func predecessor(leapYear: Bool) -> HebrewMonth {
 
     switch self {
@@ -226,7 +226,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// Decrements the month.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public mutating func decrement(leapYear: Bool) {
     self = predecessor(leapYear: leapYear)
   }
@@ -236,8 +236,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
-  ///     - wrap: A closure to execute when wrapping to a new year.
+  ///   - leapYear: Whether or not the month is in a leap year.
+  ///   - wrap: A closure to execute when wrapping to a new year.
   public func cyclicSuccessor(leapYear: Bool, _ wrap: () -> Void) -> HebrewMonth {
     if self == .elul {
       wrap()
@@ -252,8 +252,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
-  ///     - wrap: A closure to execute when wrapping to a new year.
+  ///   - leapYear: Whether or not the month is in a leap year.
+  ///   - wrap: A closure to execute when wrapping to a new year.
   public mutating func incrementCyclically(leapYear: Bool, _ wrap: () -> Void) {
     self = cyclicSuccessor(leapYear: leapYear, wrap)
   }
@@ -263,8 +263,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// If wrapping occurs, `warp` will be executed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
-  ///     - wrap: A closure to execute when wrapping to a new year.
+  ///   - leapYear: Whether or not the month is in a leap year.
+  ///   - wrap: A closure to execute when wrapping to a new year.
   public func cyclicPredecessor(leapYear: Bool, _ wrap: () -> Void) -> HebrewMonth {
     if self == .tishrei {
       wrap()
@@ -279,8 +279,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
-  ///     - wrap: A closure to execute when wrapping to a new year.
+  ///   - leapYear: Whether or not the month is in a leap year.
+  ///   - wrap: A closure to execute when wrapping to a new year.
   public mutating func decrementCyclically(leapYear: Bool, _ wrap: () -> Void) {
     self = cyclicPredecessor(leapYear: leapYear, wrap)
   }
@@ -292,7 +292,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// For leap years, Adar becomes Adar II. For normal years: Adar I and Adar II become Adar.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public mutating func correctForYear(leapYear: Bool) {
     if leapYear {
       if self == .adar {
@@ -326,8 +326,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// - Precondition: The number must be valid for the particular year.
   ///
   /// - Parameters:
-  ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - numberAlreadyElapsed: The number of complete compenents already elapsed.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public init(numberAlreadyElapsed: Int, leapYear: Bool) {
     self.init(ordinal: numberAlreadyElapsed + 1, leapYear: leapYear)
   }
@@ -337,8 +337,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// - Precondition: The number must be valid for the particular year.
   ///
   /// - Parameters:
-  ///     - ordinal: The ordinal number of the month.
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - ordinal: The ordinal number of the month.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public init(ordinal: Int, leapYear: Bool) {
     var offset = −1
     if ordinal + offset ≤ HebrewMonth.shevat.rawValue {
@@ -387,7 +387,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// The number of complete components already elapsed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public func numberAlreadyElapsed(leapYear: Bool) -> Int? {
     guard let theOrdinal = ordinal(leapYear: leapYear) else {
       return nil
@@ -398,7 +398,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   /// The number of complete components already elapsed.
   ///
   /// - Parameters:
-  ///     - leapYear: Whether or not the month is in a leap year.
+  ///   - leapYear: Whether or not the month is in a leap year.
   public func ordinal(leapYear: Bool) -> Int? {
     var offset = 1
     if self ≤ HebrewMonth.shevat {

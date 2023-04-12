@@ -46,7 +46,7 @@ extension Sequence where Element: GenericAdditiveArithmetic {
   /// Returns the sum of all values in the sequence.
   ///
   /// - Parameters:
-  ///     - sequence: The sequence.
+  ///   - sequence: The sequence.
   @inlinable public static prefix func ∑ (sequence: Self) -> Element {
     var sum = Element.zero
     for element in sequence {
@@ -61,7 +61,7 @@ extension Sequence where Element: WholeArithmetic {
   /// Returns the product of all values in the sequence.
   ///
   /// - Parameters:
-  ///     - sequence: The sequence.
+  ///   - sequence: The sequence.
   @inlinable public static prefix func ∏ (sequence: Self) -> Element {
     var product: Element = 1
     for element in sequence {

@@ -27,7 +27,7 @@ public final class Shared<Value>: TransparentWrapper {
   /// Creates a reference to a value.
   ///
   /// - Parameters:
-  ///     - value: The value.
+  ///   - value: The value.
   public init(_ value: Value) {
     self.value = value
   }
@@ -65,9 +65,9 @@ public final class Shared<Value>: TransparentWrapper {
   /// The observer will receive its first such message immediately.
   ///
   /// - Parameters:
-  ///     - observer: The observer.
-  ///     - identifier: An identifier for the shared value. If provided, it can be used later to differentiate between several values watched by the same observer.
-  ///     - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
+  ///   - observer: The observer.
+  ///   - identifier: An identifier for the shared value. If provided, it can be used later to differentiate between several values watched by the same observer.
+  ///   - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
   ///
   /// - SeeAlso: `valueChanged(for:)`
   public func register(
@@ -91,7 +91,7 @@ public final class Shared<Value>: TransparentWrapper {
   /// This method is only necessary when an observer needs to persist after cancelling observation. In most cases, cancellation is automated through ARC.
   ///
   /// - Parameters:
-  ///     - observer: The observer.
+  ///   - observer: The observer.
   public func cancel(observer: SharedValueObserver) {
     for index in observers.indices.reversed() {
       let (existingObserver, _) = observers[index]

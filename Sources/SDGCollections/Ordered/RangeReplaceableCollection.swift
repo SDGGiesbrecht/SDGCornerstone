@@ -25,7 +25,7 @@ extension RangeReplaceableCollection {
   /// Appends the contents of the sequence to the end of the collection.
   ///
   /// - Parameters:
-  ///     - newElements: The new elements to append.
+  ///   - newElements: The new elements to append.
   @inlinable public mutating func append(contentsOf newElements: Self) {
     appendAsCollection(contentsOf: newElements)
   }
@@ -39,8 +39,8 @@ extension RangeReplaceableCollection {
   /// Inserts the contents of the sequence to the specified index.
   ///
   /// - Parameters:
-  ///     - newElements: The new elements to insert into the collection.
-  ///     - i: The position at which to insert the new elements.
+  ///   - newElements: The new elements to insert into the collection.
+  ///   - i: The position at which to insert the new elements.
   @inlinable public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
     insertAsCollection(contentsOf: newElements, at: i)
   }
@@ -64,8 +64,8 @@ extension RangeReplaceableCollection {
   /// Replaces the specified subrange of elements with the given collection.
   ///
   /// - Parameters:
-  ///     - subrange: The subrange of the collection to replace.
-  ///     - newElements: The new elements to add to the collection.
+  ///   - subrange: The subrange of the collection to replace.
+  ///   - newElements: The new elements to add to the collection.
   @inlinable public mutating func replaceSubrange<R>(_ subrange: R, with newElements: Self)
   where R: RangeExpression, R.Bound == Self.Index {
     replaceSubrangeAsCollection(subrange, with: newElements)
@@ -74,7 +74,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by appending an element to the end of the collection.
   ///
   /// - Parameters:
-  ///     - newElement: The element to append to the collection
+  ///   - newElement: The element to append to the collection
   @inlinable public func appending(_ newElement: Self.Element) -> Self {
     return nonmutatingVariant(of: { $0.append($1) }, on: self, with: newElement)
   }
@@ -83,7 +83,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by appending the contents of another collection to the end of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to append to the collection
+  ///   - newElements: The elements to append to the collection
   @inlinable public func appending<C: Collection>(contentsOf newElements: C) -> Self
   where C.Element == Self.Element {
     return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: newElements)
@@ -97,7 +97,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by appending the contents of another collection to the end of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to append to the collection
+  ///   - newElements: The elements to append to the collection
   @inlinable public func appending(contentsOf newElements: Self) -> Self {
     return appendingAsCollection(contentsOf: newElements)
   }
@@ -105,7 +105,7 @@ extension RangeReplaceableCollection {
   /// Adds an element to the beginning of the collection.
   ///
   /// - Parameters:
-  ///     - newElement: The element to prepend to the collection
+  ///   - newElement: The element to prepend to the collection
   @inlinable public mutating func prepend(_ newElement: Self.Element) {
     insert(newElement, at: startIndex)
   }
@@ -114,7 +114,7 @@ extension RangeReplaceableCollection {
   /// Adds the contents of another collection to the beginning of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to prepend to the collection
+  ///   - newElements: The elements to prepend to the collection
   @inlinable public mutating func prepend<C: Collection>(contentsOf newElements: C)
   where C.Element == Self.Element {
     insert(contentsOf: newElements, at: startIndex)
@@ -128,7 +128,7 @@ extension RangeReplaceableCollection {
   /// Adds the contents of another collection to the beginning of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to prepend to the collection
+  ///   - newElements: The elements to prepend to the collection
   @inlinable public mutating func prepend(contentsOf newElements: Self) {
     prependAsCollection(contentsOf: newElements)
   }
@@ -136,7 +136,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by prepending an element to the beginning of the collection.
   ///
   /// - Parameters:
-  ///     - newElement: The element to prepend to the collection
+  ///   - newElement: The element to prepend to the collection
   @inlinable public func prepending(_ newElement: Self.Element) -> Self {
     return nonmutatingVariant(of: { $0.prepend($1) }, on: self, with: newElement)
   }
@@ -145,7 +145,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by prepending the contents of another collection to the beginning of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to prepend to the collection
+  ///   - newElements: The elements to prepend to the collection
   @inlinable public func prepending<C: Collection>(contentsOf newElements: C) -> Self
   where C.Element == Self.Element {
     return nonmutatingVariant(of: { $0.prepend(contentsOf: $1) }, on: self, with: newElements)
@@ -159,7 +159,7 @@ extension RangeReplaceableCollection {
   /// Adds the contents of another collection to the beginning of `self`.
   ///
   /// - Parameters:
-  ///     - newElements: The elements to prepend to the collection
+  ///   - newElements: The elements to prepend to the collection
   @inlinable public func prepending(contentsOf newElements: Self) -> Self {
     return prependingAsCollection(contentsOf: newElements)
   }
@@ -167,7 +167,7 @@ extension RangeReplaceableCollection {
   /// Truncates the `self` at `index`.
   ///
   /// - Parameters:
-  ///     - index: The index at which to truncate.
+  ///   - index: The index at which to truncate.
   @inlinable public mutating func truncate(at index: Index) {
     removeSubrange(index...)
   }
@@ -175,7 +175,7 @@ extension RangeReplaceableCollection {
   /// Returns a collection formed by truncating `self` at `index`.
   ///
   /// - Parameters:
-  ///     - index: The index at which to truncate.
+  ///   - index: The index at which to truncate.
   @inlinable public func truncated(at index: Index) -> Self {
     return nonmutatingVariant(of: { $0.truncate(at: $1) }, on: self, with: index)
   }
@@ -183,9 +183,9 @@ extension RangeReplaceableCollection {
   /// Fills the collection to a certain count.
   ///
   /// - Parameters:
-  ///     - count: The target count.
-  ///     - element: The element with which to fill the collection.
-  ///     - direction: The direction from which to fill the collection.
+  ///   - count: The target count.
+  ///   - element: The element with which to fill the collection.
+  ///   - direction: The direction from which to fill the collection.
   @inlinable public mutating func fill(
     to count: Int,
     with element: Element,
@@ -204,9 +204,9 @@ extension RangeReplaceableCollection {
   /// Returns the collection filled to a certain count.
   ///
   /// - Parameters:
-  ///     - count: The target count.
-  ///     - element: The element with which to fill the collection.
-  ///     - direction: The direction from which to fill the collection.
+  ///   - count: The target count.
+  ///   - element: The element with which to fill the collection.
+  ///   - direction: The direction from which to fill the collection.
   @inlinable public func filled(to count: Int, with element: Element, from direction: FillDirection)
     -> Self
   {
@@ -226,7 +226,7 @@ extension RangeReplaceableCollection {
   /// Shuffles the collection.
   ///
   /// - Parameters:
-  ///     - generator: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+  ///   - generator: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
   @inlinable public mutating func shuffle<R>(using generator: inout R)
   where R: RandomNumberGenerator {
     self = Self(shuffled(using: &generator))
@@ -264,7 +264,7 @@ extension RangeReplaceableCollection {
   /// Creates an instance from an array literal.
   ///
   /// - Parameters:
-  ///     - arrayLiteral: The array literal.
+  ///   - arrayLiteral: The array literal.
   @inlinable public init(arrayLiteral: Element...) {
     self.init()
     append(contentsOf: arrayLiteral)
@@ -279,8 +279,8 @@ extension RangeReplaceableCollection where Self: Pattern {
   /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
-  ///     - precedingValue: The starting value.
-  ///     - followingValue: The value to add.
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
     // Disambiguate RangeReplaceableCollection vs Pattern
     return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)

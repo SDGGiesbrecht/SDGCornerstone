@@ -21,7 +21,7 @@ public struct Weak<Pointee: AnyObject>: ProjectingPropertyWrapper, TransparentWr
   /// Creates a reference to a class instance.
   ///
   /// - Parameters:
-  ///     - pointee: The pointee.
+  ///   - pointee: The pointee.
   public init(_ pointee: Pointee?) {
     self.pointee = pointee
   }

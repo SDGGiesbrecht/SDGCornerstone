@@ -69,8 +69,8 @@ extension ArrayFamily where Element: RangeReplaceableCollection {
   /// Fills the collections in the array so that all of them have the same count.
   ///
   /// - Parameters:
-  ///     - element: The element with which to fill the collections.
-  ///     - direction: The direction from which to fill the collections.
+  ///   - element: The element with which to fill the collections.
+  ///   - direction: The direction from which to fill the collections.
   @inlinable public mutating func equalizeCounts(
     byFillingWith element: Element.Element,
     from direction: FillDirection
@@ -87,8 +87,8 @@ extension ArrayFamily where Element: RangeReplaceableCollection {
   /// Returns the same array of collections, but with the shorter ones filled so that all of them have the same count.
   ///
   /// - Parameters:
-  ///     - element: The element with which to fill the collections.
-  ///     - direction: The direction from which to fill the collections.
+  ///   - element: The element with which to fill the collections.
+  ///   - direction: The direction from which to fill the collections.
   @inlinable public func countsEqualized(
     byFillingWith element: Element.Element,
     from direction: FillDirection

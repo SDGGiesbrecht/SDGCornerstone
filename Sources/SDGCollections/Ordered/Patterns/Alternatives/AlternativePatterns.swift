@@ -26,8 +26,8 @@ where Preferred: Pattern, Fallback: Pattern, Preferred.Searchable == Fallback.Se
   /// Creates a pair of alternative patterns.
   ///
   /// - Parameters:
-  ///     - preferred: The pattern to try first.
-  ///     - fallback: The pattern to try second.
+  ///   - preferred: The pattern to try first.
+  ///   - fallback: The pattern to try second.
   @inlinable public init(_ preferred: Preferred, _ fallback: Fallback) {
     self.preferred = preferred
     self.fallback = fallback

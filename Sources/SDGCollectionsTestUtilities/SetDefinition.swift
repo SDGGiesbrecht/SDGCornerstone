@@ -19,11 +19,11 @@ import SDGTesting
 /// Tests a type’s conformance to SetDefinition.
 ///
 /// - Parameters:
-///     - set: A set.
-///     - member: A member of the set.
-///     - nonmember: A nonmember of the set.
-///     - file: Optional. A different source file to associate with any failures.
-///     - line: Optional. A different line to associate with any failures.
+///   - set: A set.
+///   - member: A member of the set.
+///   - nonmember: A nonmember of the set.
+///   - file: Optional. A different source file to associate with any failures.
+///   - line: Optional. A different line to associate with any failures.
 public func testSetDefinitionConformance<T>(
   of set: T,
   member: T.Element,

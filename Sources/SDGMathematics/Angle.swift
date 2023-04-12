@@ -21,7 +21,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in radians.
   ///
   /// - Parameters:
-  ///     - radians: The number of radians.
+  ///   - radians: The number of radians.
   @inlinable public init(radians: Scalar) {
     self.inRadians = radians
   }
@@ -29,7 +29,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in rotations.
   ///
   /// - Parameters:
-  ///     - rotations: The number of rotations.
+  ///   - rotations: The number of rotations.
   @inlinable public init(rotations: Scalar) {
     inRotations = rotations
   }
@@ -37,7 +37,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in degrees.
   ///
   /// - Parameters:
-  ///     - degrees: The number of degrees.
+  ///   - degrees: The number of degrees.
   @inlinable public init(degrees: Scalar) {
     inDegrees = degrees
   }
@@ -45,7 +45,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in minutes.
   ///
   /// - Parameters:
-  ///     - minutes: The number of minutes.
+  ///   - minutes: The number of minutes.
   @inlinable public init(minutes: Scalar) {
     inMinutes = minutes
   }
@@ -53,7 +53,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in seconds.
   ///
   /// - Parameters:
-  ///     - seconds: The number of seconds.
+  ///   - seconds: The number of seconds.
   @inlinable public init(seconds: Scalar) {
     inSeconds = seconds
   }
@@ -61,7 +61,7 @@ where Scalar: RealArithmetic {
   /// Creates an angle in gradians.
   ///
   /// - Parameters:
-  ///     - gradians: The number of gradians.
+  ///   - gradians: The number of gradians.
   @inlinable public init(gradians: Scalar) {
     inGradians = gradians
   }
@@ -183,7 +183,7 @@ extension RealArithmetic {
   /// Returns an angle in degrees.
   ///
   /// - Parameters:
-  ///     - value: The value in degrees.
+  ///   - value: The value in degrees.
   @inlinable public static postfix func ° (value: Self) -> Angle<Self> {
     return value.degrees
   }
@@ -196,7 +196,7 @@ extension RealArithmetic {
   /// Returns an angle in minutes.
   ///
   /// - Parameters:
-  ///     - value: The value in minutes.
+  ///   - value: The value in minutes.
   @inlinable public static postfix func ′ (value: Self) -> Angle<Self> {
     return value.minutes
   }
@@ -209,7 +209,7 @@ extension RealArithmetic {
   /// Returns an angle in seconds.
   ///
   /// - Parameters:
-  ///     - value: The value in seconds.
+  ///   - value: The value in seconds.
   @inlinable public static postfix func ′′ (value: Self) -> Angle<Self> {
     return value.seconds
   }

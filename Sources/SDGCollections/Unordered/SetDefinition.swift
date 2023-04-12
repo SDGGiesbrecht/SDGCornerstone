@@ -26,29 +26,29 @@ public protocol SetDefinition {
   /// Returns `true` if `precedingValue` is an element of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The element to test.
-  ///     - followingValue: The set.
+  ///   - precedingValue: The element to test.
+  ///   - followingValue: The set.
   static func ∈ (precedingValue: Element, followingValue: Self) -> Bool
 
   /// Returns `true` if `precedingValue` is not an element of `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The element to test.
-  ///     - followingValue: The set.
+  ///   - precedingValue: The element to test.
+  ///   - followingValue: The set.
   static func ∉ (precedingValue: Element, followingValue: Self) -> Bool
 
   /// Returns `true` if `precedingValue` contains `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The set.
-  ///     - followingValue: The element to test.
+  ///   - precedingValue: The set.
+  ///   - followingValue: The element to test.
   static func ∋ (precedingValue: Self, followingValue: Element) -> Bool
 
   /// Returns `true` if `precedingValue` does not contain `followingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The set.
-  ///     - followingValue: The element to test.
+  ///   - precedingValue: The set.
+  ///   - followingValue: The element to test.
   static func ∌ (precedingValue: Self, followingValue: Element) -> Bool
 }
 
@@ -70,8 +70,8 @@ extension SetDefinition {
   /// Returns the intersection of the two sets.
   ///
   /// - Parameters:
-  ///     - precedingValue: A set.
-  ///     - followingValue: Another set.
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∩ <S: SetDefinition>(precedingValue: Self, followingValue: S)
     -> Intersection<Self, S>
   {
@@ -82,8 +82,8 @@ extension SetDefinition {
   /// Returns the union of the two sets.
   ///
   /// - Parameters:
-  ///     - precedingValue: A set.
-  ///     - followingValue: Another set.
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∪ <S: SetDefinition>(precedingValue: Self, followingValue: S)
     -> Union<Self, S>
   {
@@ -94,8 +94,8 @@ extension SetDefinition {
   /// Returns the relative complement of `followingValue` in `precedingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: The set to subtract from.
-  ///     - followingValue: The set to subtract.
+  ///   - precedingValue: The set to subtract from.
+  ///   - followingValue: The set to subtract.
   @inlinable public static func ∖ <S: SetDefinition>(precedingValue: Self, followingValue: S)
     -> Intersection<Self, AbsoluteComplement<S>>
   {
@@ -106,7 +106,7 @@ extension SetDefinition {
   /// Returns the absolute complement of the set.
   ///
   /// - Parameters:
-  ///     - operand: The set.
+  ///   - operand: The set.
   @inlinable public static postfix func ′ (operand: Self) -> AbsoluteComplement<Self> {
     return AbsoluteComplement(operand)
   }
@@ -115,8 +115,8 @@ extension SetDefinition {
   /// Returns the symmetric difference of `followingValue` in `precedingValue`.
   ///
   /// - Parameters:
-  ///     - precedingValue: A set.
-  ///     - followingValue: Another set.
+  ///   - precedingValue: A set.
+  ///   - followingValue: Another set.
   @inlinable public static func ∆ <S: SetDefinition>(precedingValue: Self, followingValue: S)
     -> Union<Intersection<Self, AbsoluteComplement<S>>, Intersection<S, AbsoluteComplement<Self>>>
   {
@@ -141,8 +141,8 @@ extension SetDefinition {
   /// ```
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to check against.
-  ///     - value: The value to check.
+  ///   - pattern: The pattern to check against.
+  ///   - value: The value to check.
   @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
     return value ∈ pattern
   }
@@ -153,7 +153,7 @@ extension SetDefinition where Self: SetAlgebra {
   /// Returns `true` if `self` contains `member`.
   ///
   /// - Parameters:
-  ///     - member: The element to test.
+  ///   - member: The element to test.
   @inlinable public func contains(_ member: Self.Element) -> Bool {
     return self ∋ member
   }

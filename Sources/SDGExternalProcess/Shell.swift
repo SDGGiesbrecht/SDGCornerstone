@@ -54,7 +54,7 @@ public struct Shell: TransparentWrapper {
   /// Arguments which `Shell` already quotes automatically are not affected by this function, so as not to receive a duplicate set of quotation marks in the end.
   ///
   /// - Parameters:
-  ///     - argument: The argument to quote.
+  ///   - argument: The argument to quote.
   public static func quote(_ argument: String) -> String {
     if Shell.argumentNeedsQuotationMarks(argument) {
       return argument
@@ -68,7 +68,7 @@ public struct Shell: TransparentWrapper {
   /// Creates a shell instance referring to the executable.
   ///
   /// - Parameters:
-  ///     - executable: The location of the executable file.
+  ///   - executable: The location of the executable file.
   public init(at executable: URL) {
     process = ExternalProcess(at: executable)
   }
@@ -89,13 +89,12 @@ public struct Shell: TransparentWrapper {
     /// Runs a command.
     ///
     /// - Parameters:
-    ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
-    ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
-    ///     - environment: Optional. A different environment to use instead of that of the current process.
-    ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
-    ///     - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
-    ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
-    ///     - line: The line of output.
+    ///   - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
+    ///   - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
+    ///   - environment: Optional. A different environment to use instead of that of the current process.
+    ///   - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
+    ///   - ignoreStandardError: Optional. If `true`, standard error will be excluded from the output. The default is `false`.
+    ///   - reportProgress: Optional. A closure to execute for each line of output as it is received.
     ///
     /// - Returns: The output of the command.
     @discardableResult public func run(

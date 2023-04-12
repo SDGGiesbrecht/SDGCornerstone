@@ -202,7 +202,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   /// Returns the collation indices for a particular string.
   ///
   /// - Parameters:
-  ///     - string: The string to convert to collation indices.
+  ///   - string: The string to convert to collation indices.
   @inlinable public func indices<S>(for string: S) -> [CollationIndex] where S: StringFamily {
     let strict: StrictString
     if let already = string as? StrictString {
@@ -218,8 +218,8 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   /// Returns whether or not the strings are sorted in ascending order.
   ///
   /// - Parameters:
-  ///     - preceding: The preceding string.
-  ///     - following: The following string
+  ///   - preceding: The preceding string.
+  ///   - following: The following string
   @inlinable public func stringsAreOrderedAscending<S>(
     _ preceding: S,
     _ following: S
@@ -230,8 +230,8 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   /// Returns whether or not the strings are sorted equal.
   ///
   /// - Parameters:
-  ///     - preceding: The preceding string.
-  ///     - following: The following string
+  ///   - preceding: The preceding string.
+  ///   - following: The following string
   @inlinable public func stringsAreOrderedEqual<S>(
     _ preceding: S,
     _ following: S
@@ -242,7 +242,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   /// Sorts a collection of strings.
   ///
   /// - Parameters:
-  ///     - strings: The strings to sort.
+  ///   - strings: The strings to sort.
   @inlinable public func collate<C, S>(_ strings: C) -> [S]
   where C: Sequence, S: StringFamily, C.Element == S {
     var cache: [CollationCacheEntry<S>] = strings.map { string in
@@ -257,7 +257,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible, Sendable {
   /// Returns a tailored order by appling the provided rules.
   ///
   /// - Parameters:
-  ///     - tailoringRules: A closure which tailors the collation by listing rules defined using the operators in this module.
+  ///   - tailoringRules: A closure which tailors the collation by listing rules defined using the operators in this module.
   public func tailored(
     @CollationTailoringBuilder accordingTo tailoringRules: () -> CollationTailoring
   ) -> CollationOrder {

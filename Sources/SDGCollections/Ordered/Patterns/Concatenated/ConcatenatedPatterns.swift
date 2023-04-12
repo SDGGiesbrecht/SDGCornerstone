@@ -24,8 +24,8 @@ where First: Pattern, Second: Pattern, First.Searchable == Second.Searchable {
   /// Creates a pattern from a pair of component patterns.
   ///
   /// - Parameters:
-  ///     - first: The first pattern.
-  ///     - second: The second pattern.
+  ///   - first: The first pattern.
+  ///   - second: The second pattern.
   @inlinable public init(_ first: First, _ second: Second) {
     self.first = first
     self.second = second

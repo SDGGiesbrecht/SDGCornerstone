@@ -32,8 +32,8 @@ public protocol Pattern {
   /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
   ///
   /// - Parameters:
-  ///     - collection: The collection in which to search.
-  ///     - location: The index at which to check for the beginning of a match.
+  ///   - collection: The collection in which to search.
+  ///   - location: The index at which to check for the beginning of a match.
   func matches(in collection: Searchable, at location: Searchable.Index) -> [Match]
 
   /// Returns the primary match beginning at the specified index in the collection.
@@ -41,8 +41,8 @@ public protocol Pattern {
   /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
   ///
   /// - Parameters:
-  ///     - collection: The collection in which to search.
-  ///     - location: The index at which to check for the beginning of a match.
+  ///   - collection: The collection in which to search.
+  ///   - location: The index at which to check for the beginning of a match.
   func primaryMatch(
     in collection: Searchable,
     at location: Searchable.Index
@@ -54,8 +54,8 @@ public protocol Pattern {
   /// Converts the sub‐sequence match into a match in the parent collection.
   ///
   /// - Parameters:
-  ///     - subSequenceMatch: The sub‐sequence match.
-  ///     - collection: The parent collection.
+  ///   - subSequenceMatch: The sub‐sequence match.
+  ///   - collection: The parent collection.
   func convertMatch(
     from subSequenceMatch: SubSequencePattern.Match,
     in collection: Searchable
@@ -78,8 +78,8 @@ extension Pattern {
   /// See the `ConcatenatedPatterns` type for details.
   ///
   /// - Parameters:
-  ///     - precedingValue: The first pattern.
-  ///     - followingValue: The second pattern.
+  ///   - precedingValue: The first pattern.
+  ///   - followingValue: The second pattern.
   @inlinable public static func + <Other>(
     precedingValue: Self,
     followingValue: Other
@@ -93,8 +93,8 @@ extension Pattern {
   /// See the `AlternativePatterns` type for details.
   ///
   /// - Parameters:
-  ///     - precedingValue: The first pattern.
-  ///     - followingValue: The second pattern.
+  ///   - precedingValue: The first pattern.
+  ///   - followingValue: The second pattern.
   @inlinable public static func ∨ <Other>(
     precedingValue: Self,
     followingValue: Other
@@ -108,7 +108,7 @@ extension Pattern {
   /// See the `NegatedPattern` type for details.
   ///
   /// - Parameters:
-  ///     - operand: The pattern to negate.
+  ///   - operand: The pattern to negate.
   @inlinable public static prefix func ¬ (operand: Self) -> NegatedPattern<Self> {
     return NegatedPattern(operand)
   }
@@ -130,8 +130,8 @@ extension Pattern {
   /// ```
   ///
   /// - Parameters:
-  ///     - pattern: The pattern to match against.
-  ///     - value: The value to check.
+  ///   - pattern: The pattern to match against.
+  ///   - value: The value to check.
   @inlinable public static func ~= (pattern: Self, value: Self.Match.Searched) -> Bool
   where Self.Match.Searched: SearchableCollection {
     return value.isMatch(for: pattern)

@@ -26,7 +26,7 @@ public struct CyclicalNumberGenerator: RandomNumberGenerator, Sendable {
   /// - Precondition: `sequence` is not empty.
   ///
   /// - Parameters:
-  ///     - sequence: The sequence.
+  ///   - sequence: The sequence.
   public init(_ sequence: [UInt64]) {
     _assert(
       ¬sequence.isEmpty,

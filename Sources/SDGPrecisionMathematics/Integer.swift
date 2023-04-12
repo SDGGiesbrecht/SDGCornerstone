@@ -43,6 +43,9 @@ public struct Integer: Addable, CodableViaTextConvertibleNumber, Comparable, Equ
   }
 
   /// Creates an instance from a whole number.
+  ///
+  /// - Parameters:
+  ///   - wholeNumber: The whole number.
   public init(_ wholeNumber: WholeNumber) {
     self.init(magnitude: wholeNumber, isNegative: false)
   }

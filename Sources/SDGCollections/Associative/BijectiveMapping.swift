@@ -24,7 +24,7 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// Creates a bijective mapping from the mapping in one direction.
   ///
   /// - Parameters:
-  ///     - mapping: The mapping.
+  ///   - mapping: The mapping.
   @inlinable public init(_ mapping: [X: Y]) {
 
     xToY = mapping
@@ -51,7 +51,6 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// - Parameters:
   ///   - sequence: A sequence of values for the `X` side.
   ///   - map: A closure that produces the corresponding `Y` value for each `X` value in the sequence.
-  ///   - x: A value on the `X` side.
   @inlinable public init<S>(_ sequence: S, map: (_ x: X) -> Y) where S: Sequence, S.Element == X {
     var dictionary: [X: Y] = [:]
     for entry in sequence {
@@ -70,14 +69,14 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// Returns the corresponding `Y` for a particular `X`.
   ///
   /// - Parameters:
-  ///     - x: The `X` value.
+  ///   - x: The `X` value.
   @inlinable public func y(for x: X) -> Y? {
     return xToY[x]
   }
   /// Returns the corresponding `X` for a particular `Y`.
   ///
   /// - Parameters:
-  ///     - y: The `Y` value.
+  ///   - y: The `Y` value.
   @inlinable public func x(for y: Y) -> X? {
     return yToX[y]
   }
@@ -85,7 +84,7 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// Accesses the corresponding `Y` for a particular `X`.
   ///
   /// - Parameters:
-  ///     - x: The `X` value.
+  ///   - x: The `X` value.
   @inlinable public subscript(x: X) -> Y? {
     return xToY[x]
   }
@@ -93,7 +92,7 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   /// Accesses the corresponding `X` for a particular `Y`.
   ///
   /// - Parameters:
-  ///     - y: The `Y` value.
+  ///   - y: The `Y` value.
   @inlinable public subscript(y: Y) -> X? {
     return yToX[y]
   }

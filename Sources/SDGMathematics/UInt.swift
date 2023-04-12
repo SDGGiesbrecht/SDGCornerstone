@@ -62,30 +62,64 @@ extension UIntFamily {
 
   // MARK: - PointProtocol
 
+  // #documentation(PointProtocol.+(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to add.
   @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
     return precedingValue.advanced(by: followingValue)
   }
 
+  // #documentation(PointProtocol.+=(Self, Vector))
+  /// Moves the preceding point by the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The point to modify.
+  ///   - followingValue: The vector to add.
   @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
     precedingValue = precedingValue.advanced(by: followingValue)
   }
 
+  // #documentation(PointProtocol.−(Self, Vector))
+  /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting point.
+  ///   - followingValue: The vector to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
     return followingValue.distance(to: precedingValue)
   }
 
   // MARK: - Subtractable
 
+  // #documentation(Subtractable.−)
+  /// Returns the difference of the preceding value minus the following value.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to subtract.
   @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
     return precedingValue - followingValue  // @exempt(from: unicode)
   }
 
+  // #documentation(Subtractable.−=)
+  /// Subtracts the following value from the preceding value.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The value to modify.
+  ///   - followingValue: The value to subtract.
   @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
     precedingValue -= followingValue  // @exempt(from: unicode)
   }
 
   // MARK: - WholeArithmetic
 
+  /// Creates an unsigned integer from another unsigned integer.
+  ///
+  /// - Parameters:
+  ///   - uInt: The other unsigned integer.
   @inlinable public init<U: UIntFamily>(_ uInt: U) {
     self.init(asBinaryIntegerWithUInt: uInt)
   }
