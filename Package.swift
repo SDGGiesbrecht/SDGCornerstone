@@ -956,3 +956,66 @@ if ["WINDOWS", "WEB", "ANDROID"]
   let impossible: Set<String> = ["SDGCopySourcesTests", "SDGEmbedResourcesTests"]
   package.targets.removeAll(where: { impossible.contains($0.name) })
 }
+
+// #warning(Debugging.)
+if true {
+  let disabled = [
+    "generate_root_collation",
+    "SDGBinaryData",
+    "SDGBinaryDataTests",
+    "SDGCalendar",
+    "SDGCalendarTests",
+    "SDGCollation",
+    "SDGCollationTests",
+    "SDGCollections",
+    "SDGCollectionsTests",
+    "SDGCollectionsTestUtilities",
+    "SDGConcurrency",
+    "SDGConcurrencyTests",
+    "SDGControlFlowTests",
+    "sdg_copy_source",
+    "SDGCopySources",
+    "SDGCopySourcesTests",
+    "SDGCornerstoneDocumentationExampleTests",
+    "SDGCornerstoneLocalizations",
+    "sdg_embed_resource",
+    "SDGEmbedResources",
+    "SDGEmbedResourcesTests",
+    "SDGExternalProcess",
+    "SDGExternalProcessTests",
+    "SDGGeometry",
+    "SDGGeometryTests",
+    "SDGGeometryTestUtilities",
+    "SDGLocalization",
+    "SDGLocalizationTests",
+    "SDGLocalizationTestUtilities",
+    "SDGLogic",
+    "SDGLogicTests",
+    "SDGLogicTestUtilities",
+    "SDGMathematics",
+    "SDGMathematicsTests",
+    "SDGMathematicsTestUtilities",
+    "SDGPersistence",
+    "SDGPersistenceTests",
+    "SDGPersistenceTestUtilities",
+    "SDGPrecisionMathematics",
+    "SDGPrecisionMathematicsTests",
+    "SDGRandomization",
+    "SDGRandomizationTests",
+    "SDGRandomizationTestUtilities",
+    "SDGTesting",
+    "SDGText",
+    "SDGTextTests",
+    "SDGVersioning",
+    "SDGVersioningTests",
+    "SDGXCTestUtilities",
+    "SDGXML",
+    "SDGXMLTests",
+  ]
+  package.targets.removeAll(where: { disabled.contains($0.name) })
+  package.products = []
+  package.targets.append(.testTarget(name: "DebuggingTests", dependencies: [
+    .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
+    .product(name: "RealModule", package: "swift\u{2D}numerics"),
+  ]))
+}
