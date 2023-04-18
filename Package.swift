@@ -961,13 +961,13 @@ if ["WINDOWS", "WEB", "ANDROID"]
 if true {
   let collections = package.targets.first(where: { $0.name == "SDGCollections" })!
   collections.exclude = [
-    "Associative",
+    //"Associative",
     "Conformances",
     "Ordered",
     "Unordered",
     "Addable.swift",
-    "LegacyMode.swift",
-    "Operators.swift",
+    //"LegacyMode.swift",
+    //"Operators.swift",
   ]
   let disabled = [
     "generate_root_collation",
@@ -1022,8 +1022,6 @@ if true {
   package.targets.removeAll(where: { disabled.contains($0.name) })
   package.products = []
   package.targets.append(.testTarget(name: "DebuggingTests", dependencies: [
-    //"SDGMathematics",
     "SDGCollections",
-    //.product(name: "OrderedCollections", package: "swift\u{2D}collections"),
   ]))
 }
