@@ -959,16 +959,6 @@ if ["WINDOWS", "WEB", "ANDROID"]
 
 // #warning(Debugging.)
 if true {
-  let collections = package.targets.first(where: { $0.name == "SDGCollections" })!
-  collections.exclude = [
-    "Associative",
-    "Conformances",
-    "Ordered",
-    "Unordered",
-    "Addable.swift",
-    "LegacyMode.swift",
-    "Operators.swift",
-  ]
   let disabled = [
     "generate_root_collation",
     "SDGBinaryData",
