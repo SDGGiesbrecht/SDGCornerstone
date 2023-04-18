@@ -1001,6 +1001,7 @@ if true {
     "SDGRandomizationTests",
     "SDGRandomizationTestUtilities",
     "SDGTesting",
+    "SDGText",
     "SDGTextTests",
     "SDGVersioning",
     "SDGVersioningTests",
@@ -1011,7 +1012,8 @@ if true {
   package.targets.removeAll(where: { disabled.contains($0.name) })
   package.products = []
   package.targets.append(.testTarget(name: "DebuggingTests", dependencies: [
-    //"SDGCollections",
-    "SDGText",
+    //"SDGMathematics",
+    "SDGCollections",
+    //.product(name: "OrderedCollections", package: "swift\u{2D}collections"),
   ]))
 }
