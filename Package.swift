@@ -967,7 +967,6 @@ if true {
     "SDGCalendarTests",
     "SDGCollation",
     "SDGCollationTests",
-    "SDGCollections",
     "SDGCollectionsTests",
     "SDGCollectionsTestUtilities",
     "SDGConcurrency",
@@ -1013,10 +1012,8 @@ if true {
   package.targets.removeAll(where: { disabled.contains($0.name) })
   package.products = []
   package.targets.append(.testTarget(name: "DebuggingTests", dependencies: [
-    //"SDGControlFlow",
-    //"SDGLogic",
-    "SDGMathematics",
-    .product(name: "OrderedCollections", package: "swift\u{2D}collections"),
-    //.product(name: "RealModule", package: "swift\u{2D}numerics"),
+    //"SDGMathematics",
+    "SDGCollections",
+    //.product(name: "OrderedCollections", package: "swift\u{2D}collections"),
   ]))
 }
