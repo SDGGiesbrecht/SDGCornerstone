@@ -124,7 +124,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   ///
   /// - Parameters:
   ///   - pattern: The pattern to search for.
-  func components(separatedBy pattern: Self) -> [SeparatedMatch<Match>]
+  func components(separatedBy pattern: Self) -> [SeparatedMatch<Match>]*/
 
   // @documentation(SDGCornerstone.Collection.contains(pattern:))
   /// Returns `true` if `self` contains an match for `pattern`.
@@ -150,7 +150,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   ///
   /// - Parameters:
   ///   - pattern: The pattern to try.
-  func hasPrefix(_ pattern: Self) -> Bool*/
+  func hasPrefix(_ pattern: Self) -> Bool
 
   // @documentation(SDGCornerstone.Collection.isMatch(for:))
   /// Returns `true` if the whole collection matches the specified pattern.
