@@ -20,6 +20,8 @@ import SDGMathematics
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
+  #warning("Debugging")
+  /*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
   /// Returns the first match for `pattern` in the collection.
   ///
@@ -208,6 +210,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   /// - Parameters:
   ///   - other: The other collection. (The starting point.)
   func changes(from other: Self) -> CollectionDifference<Element>
+  */
 }
 
 extension SearchableCollection {
