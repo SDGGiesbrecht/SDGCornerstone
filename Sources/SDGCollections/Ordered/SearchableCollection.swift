@@ -96,6 +96,8 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   ///   - pattern: The pattern to search for.
   func suffix(from pattern: Self) -> InclusiveSuffixMatch<Match>?*/
 
+#warning("Debugging")
+/*
   // @documentation(SDGCornerstone.Collection.suffix(after:))
   /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
   ///
@@ -148,7 +150,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   ///
   /// - Parameters:
   ///   - pattern: The pattern to try.
-  func hasPrefix(_ pattern: Self) -> Bool
+  func hasPrefix(_ pattern: Self) -> Bool*/
 
   // @documentation(SDGCornerstone.Collection.isMatch(for:))
   /// Returns `true` if the whole collection matches the specified pattern.
