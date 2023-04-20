@@ -17,7 +17,7 @@
 extension String.UnicodeScalarView: SearchableBidirectionalCollection {}
 extension String.UTF8View: SearchableBidirectionalCollection {}
 extension String.UTF16View: SearchableBidirectionalCollection {}*/
-/*extension Substring: SearchableBidirectionalCollection {}*/
+extension Substring: /*SearchableBidirectionalCollection*/ /*BidirectionalPattern,*/ Pattern, SearchableCollection {}
 extension Substring.UnicodeScalarView: SearchableBidirectionalCollection {}
 extension Substring.UTF8View: SearchableBidirectionalCollection {}
 extension Substring.UTF16View: SearchableBidirectionalCollection {}
