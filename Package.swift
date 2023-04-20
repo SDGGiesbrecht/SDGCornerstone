@@ -962,8 +962,7 @@ if true {
   let collections = package.targets.first(where: { $0.name == "SDGCollections" })!
   collections.exclude = [
     "Conformances",
-    "Ordered",
-    //"Unordered",
+    //"Ordered",
     "Addable.swift",
   ]
   let disabled = [
