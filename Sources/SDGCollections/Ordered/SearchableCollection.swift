@@ -20,8 +20,6 @@ import SDGMathematics
 public protocol SearchableCollection: Collection, Pattern
 where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection {
 
-  #warning("Debugging")
-  /*
   // @documentation(SDGCornerstone.Collection.firstMatch(for:))
   /// Returns the first match for `pattern` in the collection.
   ///
@@ -94,7 +92,7 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   ///
   /// - Parameters:
   ///   - pattern: The pattern to search for.
-  func suffix(from pattern: Self) -> InclusiveSuffixMatch<Match>?*/
+  func suffix(from pattern: Self) -> InclusiveSuffixMatch<Match>?
 
   // @documentation(SDGCornerstone.Collection.suffix(after:))
   /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
