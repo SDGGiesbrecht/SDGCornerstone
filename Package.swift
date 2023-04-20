@@ -961,9 +961,7 @@ if ["WINDOWS", "WEB", "ANDROID"]
 if true {
   let collections = package.targets.first(where: { $0.name == "SDGCollections" })!
   collections.exclude = [
-    //"Conformances/CharacterSet.swift",
-    //"Conformances/Data.swift",
-    "Conformances/String.swift",
+    //"Conformances/String.swift",
     "Conformances/StringProtocol.swift",
     "Addable.swift",
   ]
