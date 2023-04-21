@@ -958,7 +958,7 @@ if ["WINDOWS", "WEB", "ANDROID"]
 }
 
 // #warning(Debugging.)
-if true {
+if false {
   let collections = package.targets.first(where: { $0.name == "SDGCollections" })!
   /*collections.exclude = [
     "Conformances/StringProtocol.swift",
