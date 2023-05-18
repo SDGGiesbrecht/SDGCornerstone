@@ -14,6 +14,7 @@
 
 import SDGControlFlow
 import SDGMathematics
+import SDGCollections
 
 /// A `String` or `StrictString`.
 public protocol StringFamily: Addable, Comparable, Decodable, Encodable,

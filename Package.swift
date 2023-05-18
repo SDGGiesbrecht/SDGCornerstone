@@ -350,6 +350,7 @@ let package = Package(
       dependencies: [
         "SDGMathematics", "SDGTesting",
         "SDGCollections",
+        "SDGLocalization",
         "SDGLogicTestUtilities",
         "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
