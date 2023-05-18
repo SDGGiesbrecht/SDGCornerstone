@@ -16,7 +16,7 @@ import Foundation
 
 import SDGPersistence
 
-@main struct CopySource {
+/*@main*/ struct CopySource {
   static func main() throws {
     var arguments = ProcessInfo.processInfo.arguments.dropFirst()
     guard let originPath = arguments.popFirst() else {
