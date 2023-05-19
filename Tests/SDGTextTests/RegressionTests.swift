@@ -89,11 +89,19 @@ class RegressionTests: TestCase {
         let attributedString = markup.richText(font: font)
         let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
         var originalName = font.fontName
-        if originalName == ".SFNSText" ∨ originalName == ".SFNS\u{2D}Regular" {
+        if originalName == ".SFNSText"
+          ∨ originalName == ".SFNS\u{2D}Regular"
+          ∨ originalName == ".SFCompact\u{2D}Regular"
+          ∨ originalName == ".SFCompact\u{2D}Black_opsz_GRAD_wght1900000"
+          ∨ originalName == ".SFCompact\u{2D}Black_opsz140000_GRAD_wght1900000" {
           originalName = ".AppleSystemUIFont"
         }
         var resultingName = (attribute as? NSFont)?.fontName
-        if resultingName == ".SFNSText" ∨ resultingName == ".SFNS\u{2D}Regular" {
+        if resultingName == ".SFNSText"
+          ∨ resultingName == ".SFNS\u{2D}Regular"
+          ∨ resultingName == ".SFCompact\u{2D}Regular"
+          ∨ resultingName == ".SFCompact\u{2D}Black_opsz_GRAD_wght1900000"
+          ∨ resultingName == ".SFCompact\u{2D}Black_opsz140000_GRAD_wght1900000" {
           resultingName = ".AppleSystemUIFont"
         }
         XCTAssertEqual(resultingName, originalName)

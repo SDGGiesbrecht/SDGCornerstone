@@ -13,6 +13,7 @@
  */
 
 import SDGMathematics
+import SDGLocalization
 
 import SDGTesting
 

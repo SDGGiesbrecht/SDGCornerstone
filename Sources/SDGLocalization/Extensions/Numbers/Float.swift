@@ -17,6 +17,8 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
+import SDGMathematics
+
 extension Double: TextConvertibleNumber {}
 extension CGFloat: TextConvertibleNumber {}
 #if !(PLATFORM_LACKS_SWIFT_FLOAT_80 || ((os(macOS) || os(Linux)) && arch(arm64)))

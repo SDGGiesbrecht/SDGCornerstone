@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGCollections
 
 /// A line view index.
 public struct LineViewIndex: Comparable, Equatable, Sendable {

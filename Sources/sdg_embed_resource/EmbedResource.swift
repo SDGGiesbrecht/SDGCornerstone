@@ -18,7 +18,7 @@ import SDGLogic
 import SDGMathematics
 import SDGPersistence
 
-@main struct EmbedResource {
+/*@main*/ struct EmbedResource {
 
   static func main() throws {
     var arguments = ProcessInfo.processInfo.arguments.dropFirst()

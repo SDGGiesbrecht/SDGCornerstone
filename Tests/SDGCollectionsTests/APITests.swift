@@ -1595,7 +1595,7 @@ class APITests: TestCase {
 
   func testUnion() {
     testCustomStringConvertibleConformance(
-      of: 1...3 ∪ 7...9,
+      of: (1...3) ∪ (7...9),
       localizations: InterfaceLocalization.self,
       uniqueTestName: "1–3 ∪ 7–9",
       overwriteSpecificationInsteadOfFailing: false

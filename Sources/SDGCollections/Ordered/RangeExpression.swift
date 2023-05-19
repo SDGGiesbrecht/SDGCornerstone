@@ -21,7 +21,7 @@ extension RangeExpression where Self: SetDefinition {
   /// switch 5 {
   /// case IntensionalSet(where: { $0.isEven }):
   ///   XCTFail("This case does not match.")
-  /// case (2...4 ∪ 7...9)′:
+  /// case ((2...4) ∪ (7...9))′:
   ///   print("This case does match.")
   /// default:
   ///   XCTFail("This case is never reached.")
