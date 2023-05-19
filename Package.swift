@@ -897,24 +897,24 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #warning(Swift 5.7.1, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.8.0, Web lacks Foundation.FileManager.)
     // #warning(Swift 5.7.1, Web lacks Foundation.Process.)
     // #workaround(Swift 5.8.0, Web lacks Foundation.RunLoop.)
-    // #warning(Swift 5.7.1, Web lacks Foundation.UserDefaults.)
-    // #warning(Swift 5.7.1, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.8.0, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.8.0, Web lacks Foundation.PropertyListEncoder.)
     // #warning(Swift 5.7.1, FoundationXML is broken for web.)
     // #warning(Swift 5.7.1, FoundationXML is broken on Android.)
     // #workaround(Swift 5.7.2, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    //.define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_PROCESS",
       .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])
     ),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
-    //.define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
-    //.define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
     //.define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
@@ -931,12 +931,12 @@ for target in package.targets {
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
     // #warning(Swift 5.7.1, Web lacks Dispatch.)
     //.define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #warning(Swift 5.8.0, Web lacks DispatchSemaphore.)
+    // #workaround(Swift 5.8.0, Web lacks DispatchSemaphore.)
     .define("PLATFORM_LACKS_DISPATCH_SEMAPHORE", .when(platforms: [.wasi])),
     // #warning(Swift 5.7.1, Web lacks Foundation.DateFormatter.dateFormat.)
     //.define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #warning(Swift 5.7.1, Web lacks Bundle.bundleIdentifier.)
-    //.define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.8.0, Web lacks Bundle.bundleIdentifier.)
+    .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
     // #warning(Swift 5.7.1, Web lacks Foundation.Thread.)
     //.define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
     // #warning(Swift 5.7.1, Android lacks FoundationNetworking.)
