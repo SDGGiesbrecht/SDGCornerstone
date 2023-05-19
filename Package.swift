@@ -646,14 +646,14 @@ let package = Package(
     // Internal plug‐in executables.
 
     .executableTarget(
-      // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
+      // #workaround(Swift 5.8.0, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "sdg_copy_source",
       dependencies: [
         "SDGPersistence"
       ]
     ),
     .executableTarget(
-      // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
+      // #workaround(Swift 5.8.0, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "sdg_embed_resource",
       dependencies: [
         "SDGLogic",
@@ -665,7 +665,7 @@ let package = Package(
     // Internal utilities.
 
     .executableTarget(
-      // #workaround(Swift 5.7.1, Should be hyphens, but Windows cannot handle Unicode names.)
+      // #workaround(Swift 5.8.0, Should be hyphens, but Windows cannot handle Unicode names.)
       name: "generate_root_collation",
       dependencies: [
         "SDGLogic",
@@ -858,7 +858,7 @@ let package = Package(
       name: "SDGEmbedResourcesTests",
       exclude: [
         "Embed Resources.txt",
-        // #workaround(workspace version 0.41.0, Clashes with Workspace, which cannot be turned off.)
+        // #workaround(Swift 5.8.0, Other targets must use Workspace until all platforms support plugins.)
         "Resources.swift",
       ],
       resources: [
@@ -897,28 +897,28 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(Swift 5.7.1, Web lacks Foundation.FileManager.)
-    // #workaround(Swift 5.7.1, Web lacks Foundation.Process.)
-    // #workaround(Swift 5.7.1, Web lacks Foundation.RunLoop.)
-    // #workaround(Swift 5.7.1, Web lacks Foundation.UserDefaults.)
-    // #workaround(Swift 5.7.1, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.7.1, FoundationXML is broken for web.)
-    // #workaround(Swift 5.7.1, FoundationXML is broken on Android.)
-    // #workaround(Swift 5.7.1, macOS lacks Swift.Float16 for some architectures.)
+    // #warning(Swift 5.7.1, Web lacks Foundation.FileManager.)
+    // #warning(Swift 5.7.1, Web lacks Foundation.Process.)
+    // #warning(Swift 5.7.1, Web lacks Foundation.RunLoop.)
+    // #warning(Swift 5.7.1, Web lacks Foundation.UserDefaults.)
+    // #warning(Swift 5.7.1, Web lacks Foundation.PropertyListEncoder.)
+    // #warning(Swift 5.7.1, FoundationXML is broken for web.)
+    // #warning(Swift 5.7.1, FoundationXML is broken on Android.)
+    // #workaround(Swift 5.7.2, macOS lacks Swift.Float16 for some architectures.)
     // @example(conditions)
     .define("PLATFORM_HAS_COCOA", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+    //.define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_PROCESS",
-      .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])
+      .when(platforms: [/*.wasi,*/ .tvOS, .iOS, .watchOS])
     ),
-    .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
+    //.define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
+    //.define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+    //.define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    //.define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi, .android])),
     .define(
       "PLATFORM_LACKS_FOUNDATION_XML_XML_DOCUMENT",
-      .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
+      .when(platforms: [/*.wasi,*/ .tvOS, .iOS, /*.android,*/ .watchOS])
     ),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define(
@@ -929,18 +929,18 @@ for target in package.targets {
 
     // Internal‐only:
     .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    // #workaround(Swift 5.7.1, Web lacks Dispatch.)
-    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.7.1, Web lacks Foundation.DateFormatter.dateFormat.)
-    .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.7.1, Web lacks Bundle.bundleIdentifier.)
-    .define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.7.1, Web lacks Foundation.Thread.)
-    .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    // #workaround(Swift 5.7.1, Android lacks FoundationNetworking.)
-    .define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
-    // #workaround(Swift 5.7.1, Web lacks XCTest.XCTestExpectation.)
-    .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7.1, Web lacks Dispatch.)
+    //.define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7.1, Web lacks Foundation.DateFormatter.dateFormat.)
+    //.define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7.1, Web lacks Bundle.bundleIdentifier.)
+    //.define("PLATFORM_LACKS_FOUNDATION_BUNDLE_BUNDLE_IDENTIFIER", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7.1, Web lacks Foundation.Thread.)
+    //.define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
+    // #warning(Swift 5.7.1, Android lacks FoundationNetworking.)
+    //.define("PLATFORM_LACKS_FOUNDATION_NETWORKING", .when(platforms: [.android])),
+    // #warning(Swift 5.7.1, Web lacks XCTest.XCTestExpectation.)
+    //.define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(
       "PLATFORM_LACKS_SWIFT_COMPILER",
@@ -950,7 +950,7 @@ for target in package.targets {
 }
 
 import Foundation
-// #workaround(Swift 5.7.1, Some platforms cannot use plugins yet.)
+// #workaround(Swift 5.8.0, Some platforms cannot use plugins yet.)
 if ["WINDOWS", "WEB", "ANDROID"]
   .contains(where: { ProcessInfo.processInfo.environment["TARGETING_\($0)"] == "true" })
 {

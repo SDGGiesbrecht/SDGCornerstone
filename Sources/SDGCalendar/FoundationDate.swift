@@ -31,7 +31,7 @@ internal struct FoundationDate: DateDefinition, TransparentWrapper {
 
   // MARK: - Properties
 
-  // #workaround(Swift 5.7.1, Date stored indirectly, because Foundation has not been annotated for concurrency yet.)
+  // #workaround(Swift 5.7.2, Date stored indirectly, because Foundation has not been annotated for concurrency yet.)
   private let foundationReferenceInterval: TimeInterval
   internal var date: Date {
     return Date(timeIntervalSinceReferenceDate: foundationReferenceInterval)

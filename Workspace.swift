@@ -37,7 +37,7 @@ configuration.continuousIntegration.skipSimulatorOutsideContinuousIntegration = 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
 
-// #workaround(workspace version 0.41.0, Workspace cannot be turned off.)
+// #workaround(Swift 5.8.0, Must use Workspace until all platforms support plugins.)
 configuration.git.additionalGitIgnoreEntries.append(
   contentsOf: [
     "Tests/SDGEmbedResourcesTests/Resources",
