@@ -57,7 +57,7 @@ import SDGPersistence
       imports,
       "",
       "internal enum Resources {",
-      // #workaround(Swift 5.7.1, Standard accessor tripped by symlinks.)
+      // #workaround(Swift 5.7.2, Standard accessor tripped by symlinks.)
       "  #if !os(WASI)",
       "    internal static let moduleBundle: Bundle = {",
       "      let main = Bundle.main.executableURL?.resolvingSymlinksInPath().deletingLastPathComponent()",
@@ -92,7 +92,7 @@ import SDGPersistence
     let `extension` = possibleExtension == "" ? "nil" : "\u{22}\(possibleExtension)\u{22}"
 
     let data = try Data(from: resource)
-    // #workaround(Swift 5.7.1, The compiler hangs for some platforms if long literals are used.
+    // #workaround(Swift 5.7.2, The compiler hangs for some platforms if long literals are used.
     let problematicLength: Int = 2 ↑ 15
     var unprocessed: Data.SubSequence = data[...]
     var sections: [Data.SubSequence] = []

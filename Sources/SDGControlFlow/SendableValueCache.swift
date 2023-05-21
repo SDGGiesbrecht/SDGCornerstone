@@ -40,28 +40,28 @@ public struct SendableValueCache<T>: @unchecked Sendable where T: Sendable {
     @usableFromInline internal var contents: T
   }
   @usableFromInline internal var rawCache: RawCache
-  #if !PLATFORM_LACKS_DISPATCH  // Web has only one thread anyway.
+  #if !PLATFORM_LACKS_DISPATCH_SEMAPHORE  // Web has only one thread anyway.
     @usableFromInline internal let semaphore = DispatchSemaphore(value: 1)
   #endif
 
   /// The contents of the cache.
   @inlinable public var contents: T {
     get {
-      #if !PLATFORM_LACKS_DISPATCH
+      #if !PLATFORM_LACKS_DISPATCH_SEMAPHORE
         semaphore.wait()
       #endif
       let contents = rawCache.contents
-      #if !PLATFORM_LACKS_DISPATCH
+      #if !PLATFORM_LACKS_DISPATCH_SEMAPHORE
         semaphore.signal()
       #endif
       return contents
     }
     nonmutating set {
-      #if !PLATFORM_LACKS_DISPATCH
+      #if !PLATFORM_LACKS_DISPATCH_SEMAPHORE
         semaphore.wait()
       #endif
       rawCache.contents = newValue
-      #if !PLATFORM_LACKS_DISPATCH
+      #if !PLATFORM_LACKS_DISPATCH_SEMAPHORE
         semaphore.signal()
       #endif
     }
