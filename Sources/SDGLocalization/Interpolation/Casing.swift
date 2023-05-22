@@ -66,11 +66,7 @@ public enum Casing: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  @inlinable public static var codingRepresentations: BijectiveMapping<Casing, String> {
-    return _codingRepresentations
-  }
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal static let _codingRepresentations = BijectiveMapping<Casing, String>(
+  public static let codingRepresentations = BijectiveMapping<Casing, String>(
     Casing.allCases,
     map: { casing in
       switch casing {

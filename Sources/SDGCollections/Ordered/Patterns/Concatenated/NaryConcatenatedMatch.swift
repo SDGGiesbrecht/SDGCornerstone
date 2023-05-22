@@ -25,7 +25,7 @@ where Component: PatternMatch {
   ///   - contents: The combined contents of all the components.
   @inlinable public init(components: [Component], contents: Searched.SubSequence) {
     self.components = components
-    self._contents = contents
+    self.contents = contents
   }
 
   // MARK: - Properties
@@ -36,11 +36,7 @@ where Component: PatternMatch {
   // MARK: - PatternMatch
 
   public typealias Searched = Component.Searched
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal let _contents: Component.Searched.SubSequence
-  @inlinable public var contents: Component.Searched.SubSequence {
-    return _contents
-  }
+  public let contents: Component.Searched.SubSequence
 }
 
 extension NaryConcatenatedMatch: Sendable

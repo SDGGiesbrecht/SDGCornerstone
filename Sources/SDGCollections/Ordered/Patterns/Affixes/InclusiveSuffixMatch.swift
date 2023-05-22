@@ -30,7 +30,7 @@ where Match: PatternMatch {
       in: searched
     )
     self.exclusiveSuffix = suffixMatch
-    self._contents = searched[match.range.lowerBound..<searched.endIndex]
+    self.contents = searched[match.range.lowerBound..<searched.endIndex]
   }
 
   // MARK: - Properties
@@ -43,11 +43,7 @@ where Match: PatternMatch {
   // MARK: - PatternMatch
 
   public typealias Searched = Match.Searched
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal let _contents: Match.Searched.SubSequence
-  @inlinable public var contents: Match.Searched.SubSequence {
-    return _contents
-  }
+  public let contents: Match.Searched.SubSequence
 }
 
 extension InclusiveSuffixMatch: Sendable

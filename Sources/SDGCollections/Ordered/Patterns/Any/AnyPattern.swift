@@ -53,7 +53,7 @@ where Searchable: SearchableCollection {
         )
       )
     }
-    _wrappedInstance = pattern
+    wrappedInstance = pattern
   }
 
   // MARK: - Properties
@@ -97,9 +97,5 @@ where Searchable: SearchableCollection {
 
   // MARK: - TransparentWrapper
 
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal let _wrappedInstance: Any
-  @inlinable public var wrappedInstance: Any {
-    return _wrappedInstance
-  }
+  public let wrappedInstance: Any
 }

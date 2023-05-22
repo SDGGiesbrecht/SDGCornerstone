@@ -27,7 +27,7 @@ where Searched: SearchableCollection {
   @inlinable public init<MatchType>(_ match: MatchType)
   where MatchType: PatternMatch, MatchType.Searched == Searched {
     self.underlyingMatch = match
-    self._contents = match.contents
+    self.contents = match.contents
   }
 
   // MARK: - Properties
@@ -37,11 +37,7 @@ where Searched: SearchableCollection {
 
   // MARK: - PatternMatch
 
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal let _contents: Searched.SubSequence
-  @inlinable public var contents: Searched.SubSequence {
-    return _contents
-  }
+  public let contents: Searched.SubSequence
 
   // MARK: - TransparentWrapper
 

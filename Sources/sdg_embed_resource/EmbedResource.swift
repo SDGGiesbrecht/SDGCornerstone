@@ -119,7 +119,7 @@ import SDGPersistence
       imports,
       "",
       "extension Resources {",
-      // #workaround(Swift 5.7, Some platforms do not support bundled resources yet.)
+      // #workaround(Swift 5.8, Some platforms do not support bundled resources yet.)
       "  #if os(WASI)",
       "    \(sectionVariables.joined(separator: "\n    "))",
       "    internal static var \(identifier): \(type) {",

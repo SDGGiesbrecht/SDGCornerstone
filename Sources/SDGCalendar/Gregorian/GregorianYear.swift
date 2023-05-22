@@ -226,11 +226,7 @@ public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalend
     year = unsafeRawValue
   }
 
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal static let _validRange: Range<Int>? = nil
-  @inlinable public static var validRange: Range<Int>? {
-    return _validRange
-  }
+  public static let validRange: Range<Int>? = nil
 
   public var rawValue: Int {
     return year
