@@ -64,12 +64,7 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
     day = unsafeRawValue
   }
 
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal static let _validRange: Range<RawValue>? =
-    1..<GregorianMonth.maximumNumberOfDays + 1
-  @inlinable public static var validRange: Range<RawValue>? {
-    return _validRange
-  }
+  public static let validRange: Range<RawValue>? = 1..<GregorianMonth.maximumNumberOfDays + 1
 
   public var rawValue: Int {
     return day

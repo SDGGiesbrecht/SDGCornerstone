@@ -22,7 +22,7 @@ public struct AnyLocalization: Localization, Sendable {
   /// - Parameters:
   ///   - localization: The localization.
   public init<L>(_ localization: L) where L: Localization {
-    self._code = localization.code
+    self.code = localization.code
   }
 
   /// Creates a localization with a code.
@@ -30,7 +30,7 @@ public struct AnyLocalization: Localization, Sendable {
   /// - Parameters:
   ///   - code: The code.
   public init(code: String) {
-    self._code = code
+    self.code = code
   }
 
   // MARK: - Localization
@@ -39,11 +39,7 @@ public struct AnyLocalization: Localization, Sendable {
     self.init(code: code)
   }
 
-  // #workaround(workspace version 0.41.1, Indirection because “let” is not detected as protocol conformance during documentation.)
-  @usableFromInline internal let _code: String
-  @inlinable public var code: String {
-    return _code
-  }
+  public let code: String
 
   public static var fallbackLocalization: AnyLocalization = AnyLocalization(
     ContentLocalization.fallbackLocalization
