@@ -58,7 +58,7 @@ public struct HebrewDay: CodableViaRawRepresentableCalendarComponent,
   public init(unsafeRawValue: RawValue) {
     day = unsafeRawValue
   }
-    
+
   public static let validRange: Range<RawValue>? = 1..<HebrewMonth.maximumNumberOfDays + 1
 
   public var rawValue: RawValue {

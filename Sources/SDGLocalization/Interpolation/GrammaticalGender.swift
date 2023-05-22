@@ -28,9 +28,7 @@ public enum GrammaticalGender: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<
-    GrammaticalGender, String
-  >(
+  public static let codingRepresentations: BijectiveMapping<GrammaticalGender, String> = BijectiveMapping(
     GrammaticalGender.allCases,
     map: { casing in
       switch casing {

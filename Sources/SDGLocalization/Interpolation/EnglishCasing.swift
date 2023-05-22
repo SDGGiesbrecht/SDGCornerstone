@@ -72,9 +72,7 @@ public enum EnglishCasing: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<
-    EnglishCasing, String
-  >(
+  public static let codingRepresentations: BijectiveMapping<EnglishCasing, String> = BijectiveMapping(
     EnglishCasing.allCases,
     map: { casing in
       switch casing {

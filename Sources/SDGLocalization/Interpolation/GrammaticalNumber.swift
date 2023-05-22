@@ -25,9 +25,7 @@ public enum GrammaticalNumber: CodableViaEnumeration, Sendable {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<
-    GrammaticalNumber, String
-  >(
+  public static let codingRepresentations: BijectiveMapping<GrammaticalNumber, String> = BijectiveMapping(
     GrammaticalNumber.allCases,
     map: { casing in
       switch casing {
