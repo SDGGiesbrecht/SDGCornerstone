@@ -128,14 +128,14 @@ where Element: Equatable, Searchable == Self, SubSequence: SearchableCollection 
   /// - Parameters:
   ///   - pattern: The pattern to search for.
   func contains<P>(_ pattern: P) -> Bool where P: Pattern, P.Searchable == Self
-  #if !os(WASI)  // #workaround(Swift 5.7.2, Trips the linker in Carton 0.18.)
+  //#if !os(WASI)  // #warning(Swift 5.7.2, Trips the linker in Carton 0.18.)
     // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
     ///   - pattern: The pattern to search for.
     func contains(_ pattern: Self) -> Bool
-  #endif
+  //#endif
 
   // @documentation(SDGCornerstone.Collection.hasPrefix(_:))
   /// Returns `true` if `self` begins with `pattern`.
