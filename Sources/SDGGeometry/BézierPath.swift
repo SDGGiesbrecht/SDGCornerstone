@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.7.1, Should be “BézierPath.swift” but for Windows bug.)
+// #warning(Swift 5.7.1, Should be “BézierPath.swift” but for Windows bug.)
 
 #if PLATFORM_HAS_COCOA
   #if canImport(AppKit)
