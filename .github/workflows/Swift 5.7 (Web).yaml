@@ -15,7 +15,7 @@ name: Swift 5.7 (Web)
 on: [push, pull_request]
 
 jobs:
-    Swift_5_7_Web:
+  Swift_5_7_Web:
     name: Swift 5.7 (Web)
     runs-on: ubuntu-20.04
     container: ghcr.io/swiftwasm/carton:0.18.0
