@@ -105,7 +105,7 @@ jobs:
   Swift_5_7_Android_II:
     name: Swift 5.7 (Android II)
     runs-on: macos-12
-    needs: Android
+    needs: Swift_5_7_Android
     steps:
     - name: Check out
       uses: actions/checkout@v2
