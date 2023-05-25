@@ -15,9 +15,9 @@
 import SDGMathematics
 import SDGCollections
 
-// #workaround(Swift 5.7.1, Should be “Element: StringFamily” but for Windows compiler crash.)
+// #warning(Swift 5.7.1, Should be “Element: StringFamily” but for Windows compiler crash.)
 
-extension Collection where Element == StrictString {
+extension Collection where Element: StringFamily {
 
   /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
   ///
