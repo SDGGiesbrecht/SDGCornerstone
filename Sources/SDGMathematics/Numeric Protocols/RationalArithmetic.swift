@@ -131,9 +131,11 @@ extension BinaryFloatingPoint where Self.RawSignificand: FixedWidthInteger {
   @inlinable internal static func _random(in range: Range<Self>) -> Self {
     return random(in: range)
   }
-  @inlinable internal static func _random<R>(in range: Range<Self>, using generator: inout R)
-    -> Self where R: RandomNumberGenerator
-  {
+  @inlinable internal static func _random<R>(
+    in range: Range<Self>,
+    using generator: inout R
+  ) -> Self
+  where R: RandomNumberGenerator {
     return random(in: range, using: &generator)
   }
 }
@@ -141,10 +143,21 @@ extension RationalArithmetic
 where Self: BinaryFloatingPoint, Self.RawSignificand: FixedWidthInteger {
   // Disambiguate
 
+  // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+  /// Creates a random value within a particular range.
+  ///
+  /// - Parameters:
+  ///   - range: The allowed range for the random value.
   @inlinable public static func random(in range: Range<Self>) -> Self {
     return _random(in: range)
   }
 
+  // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
+  /// Creates a random value within a particular range using the specified randomizer.
+  ///
+  /// - Parameters:
+  ///   - range: The allowed range for the random value.
+  ///   - generator: The randomizer to use to generate the random value.
   @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self
   where R: RandomNumberGenerator {
     return _random(in: range, using: &generator)

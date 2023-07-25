@@ -44,6 +44,3 @@ configuration.git.additionalGitIgnoreEntries.append(
     "Tests/SDGEmbedResourcesTests/Resources.swift",
   ]
 )
-
-// #workaround(workspace version 0.43.0, Test coverage erroneously flags entire range subscripts.)
-configuration.testing.exemptionTokens.insert(TestCoverageExemptionToken("[...]", scope: .sameLine))

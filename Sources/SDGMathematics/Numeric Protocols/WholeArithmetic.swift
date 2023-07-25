@@ -31,6 +31,12 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric,
   // MARK: - Operations
 
   // Duplicates Subtractable, but makes the compiler prefer the “Self” variant over the “Vector” variant.
+  // #documentation(Subtractable.−)
+  /// Returns the difference of the preceding value minus the following value.
+  ///
+  /// - Parameters:
+  ///   - precedingValue: The starting value.
+  ///   - followingValue: The value to subtract.
   static func − (precedingValue: Self, followingValue: Self) -> Self
 
   // @documentation(WholeArithmetic.×)
