@@ -213,6 +213,11 @@ extension FiniteSet {
     return ¬(precedingValue == followingValue)
   }
 
+  // #documentation(SDGCornerstone.FiniteSet.overlaps(_:))
+  /// Returns `true` if the sets overlap.
+  ///
+  /// - Parameters:
+  ///   - other: The other set.
   @inlinable public func overlaps<S: SetDefinition>(_ other: S) -> Bool
   where S.Element == Self.Element {
     for element in self where element ∈ other {

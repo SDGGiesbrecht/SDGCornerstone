@@ -24,6 +24,7 @@ extension StringProtocol {
 extension SearchableBidirectionalCollection where Self: StringProtocol {
 
   // Disambiguate between StringProtocol and SearchableBidirectionalCollection.
+  /// Returns a Boolean value indicating whether the string ends with the specified suffix.
   @inlinable public func hasSuffix<Suffix>(
     _ suffix: Suffix
   ) -> Bool where Suffix: StringProtocol {

@@ -174,7 +174,7 @@ Some platforms lack certain features. The compilation conditions which appear th
 
 ## Importing
 
-SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).
+SDGCornerstone provides libraries for use with the Swift Package Manager.
 
 Simply add SDGCornerstone as a dependency in `Package.swift` and specify which of the libraries to use:
 
@@ -183,7 +183,6 @@ let package = Package(
   name: "MyPackage",
   dependencies: [
     .package(
-      name: "SDGCornerstone",
       url: "https://github.com/SDGGiesbrecht/SDGCornerstone",
       from: Version(10, 1, 3)
     ),
