@@ -24,11 +24,7 @@ extension StringProtocol {
 extension SearchableBidirectionalCollection where Self: StringProtocol {
 
   // Disambiguate between StringProtocol and SearchableBidirectionalCollection.
-  // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
-  /// Returns `true` if `self` begins with `pattern`.
-  ///
-  /// - Parameters:
-  ///   - pattern: The pattern to try.
+  /// Returns a Boolean value indicating whether the string ends with the specified suffix.
   @inlinable public func hasSuffix<Suffix>(
     _ suffix: Suffix
   ) -> Bool where Suffix: StringProtocol {
