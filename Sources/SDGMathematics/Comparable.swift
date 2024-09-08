@@ -223,3 +223,57 @@ where C: Comparable, D: Comparable, E: Comparable, F: Comparable {
   return compareElements(precedingValue, followingValue, by: comparisonOne)
     ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree, comparisonFour)
 }
+
+/// Compares two values according to some derived sort criteria.
+///
+/// This function uses short‐circuit evaluation.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparisonOne: A closure which returns the first derived value to compare.
+///   - comparisonTwo: A closure which returns the second derived value to compare.
+///   - comparisonThree: A closure which returns the third derived value to compare.
+///   - comparisonFour: A closure which returns the fourth derived value to compare.
+///   - comparisonFive: A closure which returns the fifth derived value to compare.
+@inlinable public func compare<T, C, D, E, F, G>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparisonOne: (_ valueOne: T) -> C,
+  _ comparisonTwo: (_ valueTwo: T) -> D,
+  _ comparisonThree: (_ valueThree: T) -> E,
+  _ comparisonFour: (_ valueFour: T) -> F,
+  _ comparisonFive: (_ valueFive: T) -> G
+) -> Bool
+where C: Comparable, D: Comparable, E: Comparable, F: Comparable, G: Comparable {
+  return compareElements(precedingValue, followingValue, by: comparisonOne)
+    ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree, comparisonFour, comparisonFive)
+}
+
+/// Compares two values according to some derived sort criteria.
+///
+/// This function uses short‐circuit evaluation.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparisonOne: A closure which returns the first derived value to compare.
+///   - comparisonTwo: A closure which returns the second derived value to compare.
+///   - comparisonThree: A closure which returns the third derived value to compare.
+///   - comparisonFour: A closure which returns the fourth derived value to compare.
+///   - comparisonFive: A closure which returns the fifth derived value to compare.
+///   - comparisonSix: A closure which returns the sixth derived value to compare.
+@inlinable public func compare<T, C, D, E, F, G, H>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparisonOne: (_ valueOne: T) -> C,
+  _ comparisonTwo: (_ valueTwo: T) -> D,
+  _ comparisonThree: (_ valueThree: T) -> E,
+  _ comparisonFour: (_ valueFour: T) -> F,
+  _ comparisonFive: (_ valueFive: T) -> G,
+  _ comparisonSix: (_ valueFive: T) -> H
+) -> Bool
+where C: Comparable, D: Comparable, E: Comparable, F: Comparable, G: Comparable, H: Comparable {
+  return compareElements(precedingValue, followingValue, by: comparisonOne)
+    ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree, comparisonFour, comparisonFive, comparisonSix)
+}
