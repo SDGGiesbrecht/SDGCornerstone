@@ -185,7 +185,10 @@ class APITests: TestCase {
     testRealArithmeticConformance(of: Float.self)
     #if !PLATFORM_LACKS_SWIFT_FLOAT_16
       if #available(tvOS 14, iOS 14, watchOS 7, *) {
-        testRealArithmeticConformance(of: Float16.self)
+        // #workaround(Swift 4.8, Compiler bug produces nonsense.)
+        #if !(compiler(>=5.8) && (os(tvOS) || os(iOS) || os(watchOS)))
+          testRealArithmeticConformance(of: Float16.self)
+        #endif
       }
     #endif
 
