@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2023 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2024 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -185,7 +185,14 @@ class APITests: TestCase {
     testRealArithmeticConformance(of: Float.self)
     #if !PLATFORM_LACKS_SWIFT_FLOAT_16
       if #available(tvOS 14, iOS 14, watchOS 7, *) {
-        testRealArithmeticConformance(of: Float16.self)
+        // #workaround(Swift 4.8, Compiler bug produces nonsense.)
+        #if compiler(>=5.8) && (os(tvOS) || os(iOS) || os(watchOS))
+          _ = Float16.log(1)
+          _ = (1 as Float16).floatingPointApproximation
+          _ = (1 as Float16) ≈ 1
+        #else
+          testRealArithmeticConformance(of: Float16.self)
+        #endif
       }
     #endif
 
